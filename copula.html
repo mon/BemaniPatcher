@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>IIDX Copula DLL Modder</title>
+        <link rel="stylesheet" href="css/style.css">
+        <!-- don't hate -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/FileSaver.min.js"></script>
+        <script type="text/javascript" src="js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function() {
+                DllPatcher("bm2dx", [
+                    {
+                     name : "Timer Freeze",
+                     shortname : "freeze",
+                     patches : [{offset : 0x8F98E, off: [0x74], on : [0xEB]}]
+                    },
+                    {
+                     name : "Premium Free",
+                     shortname : "pfree",
+                     patches : [{offset : 0x562BA, off: [0x75], on : [0xEB]}]
+                    },
+                    {
+                     name : "Premium Free Timer Freeze",
+                     shortname : "pfreeze",
+                     patches : [{offset : 0x4F8FD, off: [0x48], on : [0x90]}]
+                    },
+                    {
+                     name : "Unlock All Songs",
+                     shortname : "unlock",
+                     patches : [{offset : 0x4FD84, off: [0x74, 0x16], on : [0x90, 0x90]}]
+                    },
+                    {
+                     name : "12 Unlocked",
+                     shortname : "12",
+                     patches : [{offset : 0x4FE35, off: [0x83, 0xFF, 0x02, 0x74, 0x0B, 0x83, 0xFF, 0x05, 0x74, 0x06, 0xB0, 0x01],
+                                                   on : [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+                    },
+                    {
+                     name : "Cursor Lock",
+                     shortname : "cursor",
+                     patches : [{offset : 0x63722, off: [0x74, 0x23], on : [0x90, 0x90]}]
+                    },
+                    {
+                     name : "CS-Style Song Start Delay",
+                     shortname : "delay",
+                     patches : [{offset : 0x6F3FF, off: [0x7C], on : [0xEB]}]
+                    },
+                    {
+                     name : "Song Name in Ticket Text",
+                     shortname : "ticket",
+                     patches : [{offset : 0x1379A, off: [0x88, 0x3D, 0x11, 0x10], on : [0x54, 0x1D, 0x42, 0x11]}]
+                    },
+                    {
+                     name : "No FREE PLAY text",
+                     shortname : "nofreetext",
+                     patches : [{offset : 0x1379A, off: [0x88], on : [0x87]}]
+                    },
+                    {
+                     name : "Dark Mode",
+                     shortname : "dark",
+                     patches : [{offset : 0x68833, off: [0x74, 0x32], on : [0x90, 0x90]}]
+                    },
+                    {
+                     name : "Volume Bug Fix",
+                     shortname : "vol",
+                     patches : [{offset : 0xCB2B9, off: [0x00], on : [0x01]}]
+                    },
+                ]);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>IIDX Copula DLL Modder</h1>
+        <input class="fileInput" type="file" name="files[]" id="file" />
+        <label for="file"><strong>Choose a file</strong> or drag and drop.</label>
+        <div id="success"></div>
+        <div id="error"></div>
+        <div id="patches"></div>
+        <button id="save" onclick="saveDll();">Save DLL</button>
+    </body>
+</html>

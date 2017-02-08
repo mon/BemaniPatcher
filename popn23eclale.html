@@ -105,6 +105,11 @@
                      shortname : "audiofix",
                      patches : [{offset : 0x11812C, off: [0x85, 0xC0, 0x75, 0x96], on : [0x90, 0x90, 0x90, 0x90]}]
                     },
+                    {
+                     name : "Boot to event mode",
+                     shortname : "event",
+                     patches : [{offset : 0xF0D30, off: [0x8B, 0x00, 0xC3, 0xCC], on : [0x31, 0xC0, 0x40, 0xC3]}]
+                    },
                 ]);
             });
         </script>

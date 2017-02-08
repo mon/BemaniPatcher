@@ -2,16 +2,28 @@
     display: none
 }
 
-#error {
+.fileLabel {
+    cursor: pointer;
+}
+
+.error {
     color: red;
 }
 
-#success {
+.success {
     color: DarkGreen;
 }
 
-#success.hidden {
+.success.hidden {
     display: none;
+}
+
+.patchContainer {
+    background-color: white;
+}
+
+.dragover {
+    background-color: rgb(200,200,200);
 }
 
 body {

@@ -10,7 +10,7 @@
         <script type="text/javascript" src="js/dllpatcher.js"></script>
         <script type="text/javascript">
             window.addEventListener("load", function() {
-                DllPatcher("popn22", [
+                new DllPatcher("popn23", [
                     {
                      name : "Song/EX unlock",
                      shortname : "unlock",
@@ -111,11 +111,5 @@
     </head>
     <body>
         <h1>pop'n music éclale DLL Modder</h1>
-        <input class="fileInput" type="file" name="files[]" id="file" />
-        <label for="file"><strong>Choose a file</strong> or drag and drop.</label>
-        <div id="success"></div>
-        <div id="error"></div>
-        <div id="patches"></div>
-        <button id="save" onclick="saveDll();">Save DLL</button>
     </body>
 </html>

@@ -1,12 +1,10 @@
-dllFile = null;
-mods = null;
-filename = null;
-errorLog = "";
+(function(window, document) {
+"use strict";
 
 // Each unique kind of patch should have createUI, validatePatch, applyPatch,
 // updateUI
 
-StandardPatch = function(options) {
+var StandardPatch = function(options) {
     this.name = options.name;
     this.shortname = options.shortname;
     this.patches = options.patches;
@@ -37,7 +35,7 @@ StandardPatch.prototype.validatePatch = function(file) {
 };
 
 StandardPatch.prototype.applyPatch = function(file) {
-    id = this.shortname;
+    var id = this.shortname;
     var enabled = document.getElementById(id).checked;
     this.replaceAll(file, enabled);
     return enabled ? this.shortname : "";
@@ -77,7 +75,7 @@ StandardPatch.prototype.checkPatchBytes = function(file) {
 // updateUI
 
 // The DEFAULT state is always the 1st element in the patches array
-UnionPatch = function(options) {
+var UnionPatch = function(options) {
     this.name = options.name;
     this.shortname = options.shortname;
     this.offset = options.offset;
@@ -133,84 +131,135 @@ UnionPatch.prototype.getSelected = function() {
     return null;
 }
 
-DllPatcher = function(fname, args) {
-    mods = [];
+var DllPatcher = function(fname, args) {
+    this.mods = [];
     for(var i = 0; i < args.length; i++) {
-        mod = args[i];
+        var mod = args[i];
         if(mod.type) {
             if(mod.type == "union") {
-                mods.push(new UnionPatch(mod));
+                this.mods.push(new UnionPatch(mod));
             }
         } else { // standard patch
-            mods.push(new StandardPatch(mod));
+            this.mods.push(new StandardPatch(mod));
         }
     }
-    filename = fname;
-    loadPatchUI();
+    this.filename = fname;
+    this.createUI();
+    this.loadPatchUI();
 };
 
-loadFile = function(file) {
-    var reader = new FileReader();
+DllPatcher.prototype.createUI = function() {
+    var self = this;
+    var container = $("<div>", {"class": "patchContainer"});
+    container.html('<h3>' + this.filename + '.dll</h3>');
+    
+    container.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    })
+    .on('drop', function(e) {
+        var files = e.originalEvent.dataTransfer.files;
+        if(files && files.length > 0)
+            self.loadFile(files[0]);
+    })
+    .on('dragover dragenter', function() {
+        container.addClass('dragover');
+    })
+    .on('dragleave dragend drop', function() {
+        container.removeClass('dragover');
+    });
+    
+    this.fileInput = $("<input>",
+        {"class": "fileInput",
+         "id" : this.filename + '-file',
+         "type" : 'file'});
+    var label = $("<label>", {"class": "fileLabel", "for": this.filename + '-file'});
+    label.html('<strong>Choose a file</strong> or drag and drop.');
+    
+    this.fileInput.on('change', function(e) {
+        if(this.files && this.files.length > 0)
+            self.loadFile(this.files[0]);
+    });
+    
+    this.successDiv = $("<div>", {"class": "success"});
+    this.errorDiv = $("<div>", {"class": "error"});
+    this.patchDiv = $("<div>", {"class": "patches"});
+    
+    var saveButton = $("<button>");
+    saveButton.text('Save DLL');
+    saveButton.on('click', this.saveDll.bind(this));
+    
+    container.append(this.fileInput);
+    container.append(label);
+    container.append(this.successDiv);
+    container.append(this.errorDiv);
+    container.append(this.patchDiv);
+    container.append(saveButton);
+    $('body').append(container);
+}
 
+DllPatcher.prototype.loadFile = function(file) {
+    var reader = new FileReader();
+    var self = this;
+    
     reader.onload = function(e) {
-        dllFile = new Uint8Array(e.target.result);
-        if(validatePatches()) {
-            $("#success").removeClass("hidden");
-            $("#success").html("DLL loaded successfully!");
+        self.dllFile = new Uint8Array(e.target.result);
+        if(self.validatePatches()) {
+            self.successDiv.removeClass("hidden");
+            self.successDiv.html("DLL loaded successfully!");
         } else {
-            $("#success").addClass("hidden");
+            self.successDiv.addClass("hidden");
         }
-        $('#error').html(errorLog);
-        updatePatchUI();
+        self.errorDiv.html(self.errorLog);
+        self.updatePatchUI();
     };
 
     reader.readAsArrayBuffer(file);
 };
 
-saveDll = function() {
-    if(!dllFile || !mods || !filename)
+DllPatcher.prototype.saveDll = function() {
+    if(!this.dllFile || !this.mods || !this.filename)
         return;
-    var fname = filename;
+    var fname = this.filename;
     
-    for(var i = 0; i < mods.length; i++) {
-        var enabledStr = mods[i].applyPatch(dllFile);
+    for(var i = 0; i < this.mods.length; i++) {
+        var enabledStr = this.mods[i].applyPatch(this.dllFile);
         if(enabledStr) {
             fname += '-' + enabledStr;
         }
     }
     fname += '.dll';
     
-    var blob = new Blob([dllFile], {type: "application/octet-stream"});
+    var blob = new Blob([this.dllFile], {type: "application/octet-stream"});
     saveAs(blob, fname);
 }
 
-loadPatchUI = function() {
-    var patchDiv = $('#patches');
-    for(var i = 0; i < mods.length; i++) {
-        mods[i].createUI(patchDiv);
+DllPatcher.prototype.loadPatchUI = function() {
+    for(var i = 0; i < this.mods.length; i++) {
+        this.mods[i].createUI(this.patchDiv);
     }
 }
 
-updatePatchUI = function() {
-    for(var i = 0; i < mods.length; i++) {
-        mods[i].updateUI(dllFile);
+DllPatcher.prototype.updatePatchUI = function() {
+    for(var i = 0; i < this.mods.length; i++) {
+        this.mods[i].updateUI(this.dllFile);
     }
 }
 
-validatePatches = function() {
-    errorLog = "";
-    success = true;
-    for(var i = 0; i < mods.length; i++) {
-        var error = mods[i].validatePatch(dllFile);
+DllPatcher.prototype.validatePatches = function() {
+    this.errorLog = "";
+    var success = true;
+    for(var i = 0; i < this.mods.length; i++) {
+        var error = this.mods[i].validatePatch(this.dllFile);
         if(error) {
-            errorLog += error + "<br/>";
+            this.errorLog += error + "<br/>";
             success = false;
         }
     }
     return success;
 }
 
-bytesMatch = function(buffer, offset, bytes) {
+var bytesMatch = function(buffer, offset, bytes) {
     for(var i = 0; i < bytes.length; i++) {
         if(buffer[offset+i] != bytes[i])
             return false;
@@ -218,13 +267,13 @@ bytesMatch = function(buffer, offset, bytes) {
     return true;
 };
 
-replace = function(buffer, offset, bytes) {
+var replace = function(buffer, offset, bytes) {
     for(var i = 0; i < bytes.length; i++) {
         buffer[offset+i] = bytes[i];
     }
 }
 
-whichBytesMatch = function(buffer, offset, bytesArray) {
+var whichBytesMatch = function(buffer, offset, bytesArray) {
     for(var i = 0; i < bytesArray.length; i++) {
         if(bytesMatch(buffer, offset, bytesArray[i]))
             return i;
@@ -232,19 +281,6 @@ whichBytesMatch = function(buffer, offset, bytesArray) {
     return -1;
 }
 
-$( document ).ready(function() {
-    $('html').on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-    })
-    .on('drop', function(e) {
-        var files = e.originalEvent.dataTransfer.files;
-        if(files && files.length > 0)
-            loadFile(files[0]);
-    });
-    
-    $('#file').on('change', function(e) {
-        if(this.files && this.files.length > 0)
-            loadFile(this.files[0]);
-    });
-});
+window.DllPatcher = DllPatcher;
+
+})(window, document);

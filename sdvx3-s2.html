@@ -48,6 +48,14 @@
                                     off : [0x8B, 0x83, 0x78, 0x0A, 0x00, 0x00, 0x8D, 0x48, 0x01, 0x83, 0xF9, 0x03, 0x56, 0x57, 0x7F, 0x52],
                                       on : [0xB8, 0x01, 0x00, 0x00, 0x00, 0x89, 0x83, 0x78, 0x0A, 0x00, 0x00, 0x90, 0x56, 0x57, 0x90, 0x90]}]
                     },
+                    {// 12 hours of mon
+                     name : "Levels up to 99 (use with modified music_db.xml for SDVX IV difficulties)",
+                     shortname : "nocap",
+                     patches : [{offset : 0x188E46, off : [0x74, 0x03], on : [0x90, 0x90]},
+                                {offset : 0x1889C4, off : [0x0F], on : [0x62]},
+                                {offset : 0x186BD7, off : [0x10], on : [0x63]},
+                                {offset : 0x157F08, off : [0x7F, 0x3A], on : [0x90, 0x90]}]
+                    },
                     {
                         type : "union",
                         name : "Score",

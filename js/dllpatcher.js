@@ -29,7 +29,6 @@ StandardPatch.prototype.validatePatch = function(file) {
     } else if(status == "off") {
         console.log('"' + this.name + '"', "is disabled!");
     } else {
-        success = false;
         return '"' + this.name + '" is neither on nor off! Have you got the right dll?';
     }
 };

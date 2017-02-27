@@ -57,6 +57,29 @@
                                 {offset : 0x157F08, off : [0x7F, 0x3A], on : [0x90, 0x90]}]
                     },
                     {// Created by mon
+                     name : "Level folders from 5-20 (default 1-16, combine with above)",
+                     shortname : "fold20",
+                     patches : [{offset : 0x9D082, off : [0x07], on : [0x03]}, // offset
+                                {offset : 0x9D09A, off : [0x10], on : [0x14]}, // bounds
+                                // strings
+                                {offset : 0x285e1c, off : [0x31, 0x36], on: [0x32, 0x30]},
+                                {offset : 0x285e29, off : [0x35]      , on: [0x39]},
+                                {offset : 0x285e35, off : [0x34]      , on: [0x38]},
+                                {offset : 0x285e41, off : [0x33]      , on: [0x37]},
+                                {offset : 0x285e4d, off : [0x32]      , on: [0x36]},
+                                {offset : 0x285e59, off : [0x31]      , on: [0x35]},
+                                {offset : 0x285e65, off : [0x30]      , on: [0x34]},
+                                {offset : 0x285e70, off : [0x30, 0x39], on: [0x31, 0x33]},
+                                {offset : 0x285e7c, off : [0x30, 0x38], on: [0x31, 0x32]},
+                                {offset : 0x285e88, off : [0x30, 0x37], on: [0x31, 0x31]},
+                                {offset : 0x285e94, off : [0x30, 0x36], on: [0x31, 0x30]},
+                                {offset : 0x285ea1, off : [0x35]      , on: [0x39]},
+                                {offset : 0x285ead, off : [0x34]      , on: [0x38]},
+                                {offset : 0x285eb9, off : [0x33]      , on: [0x37]},
+                                {offset : 0x285ec5, off : [0x32]      , on: [0x36]},
+                                {offset : 0x285ed1, off : [0x31]      , on: [0x35]}]
+                    },
+                    {// Created by mon
                      name : "Hispeed values from 0.1 to 20.0 (default 0.5-7.0)",
                      shortname : "hispeed",
                      patches : [{offset : 0x1193C5, off : [0xDD, 0x05, 0xF8, 0x05, 0x28, 0x10], // load float 20.0 instead of double 7.0

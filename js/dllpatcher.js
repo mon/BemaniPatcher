@@ -184,9 +184,10 @@ DllPatcher.prototype.createUI = function() {
     this.errorDiv = $("<div>", {"class": "error"});
     this.patchDiv = $("<div>", {"class": "patches"});
     
-    var saveButton = $("<button>");
-    saveButton.text('Save DLL');
+    var saveButton = $("<button disabled>");
+    saveButton.text('Load DLL First');
     saveButton.on('click', this.saveDll.bind(this));
+    this.saveButton = saveButton;
     
     container.append(this.fileInput);
     container.append(label);
@@ -209,6 +210,9 @@ DllPatcher.prototype.loadFile = function(file) {
         } else {
             self.successDiv.addClass("hidden");
         }
+        // Update save button regardless
+        self.saveButton.prop('disabled', false);
+        self.saveButton.text('Save DLL');
         self.errorDiv.html(self.errorLog);
         self.updatePatchUI();
     };

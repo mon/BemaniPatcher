@@ -225,13 +225,13 @@ DllPatcher.prototype.saveDll = function() {
         return;
     var fname = this.filename;
     
-    /* disabled as it can get kinda hectic with many patches
     for(var i = 0; i < this.mods.length; i++) {
         var enabledStr = this.mods[i].applyPatch(this.dllFile);
+        /* disabled as it can get kinda hectic with many patches
         if(enabledStr) {
             fname += '-' + enabledStr;
-        }
-    } */
+        } */
+    }
     fname += '.dll';
     
     var blob = new Blob([this.dllFile], {type: "application/octet-stream"});

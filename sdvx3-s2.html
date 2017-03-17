@@ -90,6 +90,10 @@
                      patches : [{offset : 0x1193C5, off : [0xDD, 0x05, 0xF8, 0x05, 0x28, 0x10], // load float 20.0 instead of double 7.0
                                                     on  : [0xD9, 0x05, 0xA0, 0x07, 0x28, 0x10]},
                                 {offset : 0x1193DE, off : [0xDD, 0x05, 0x00, 0x06, 0x28, 0x10], // load float 0.1 instead of double 0.5
+                                                    on  : [0xD9, 0x05, 0xE4, 0x04, 0x28, 0x10]},
+                                {offset : 0x118CAB, off : [0xDD, 0x05, 0xF8, 0x05, 0x28, 0x10], // and again for red # restore
+                                                    on  : [0xD9, 0x05, 0xA0, 0x07, 0x28, 0x10]},
+                                {offset : 0x118CA5, off : [0xDD, 0x05, 0x00, 0x06, 0x28, 0x10],
                                                     on  : [0xD9, 0x05, 0xE4, 0x04, 0x28, 0x10]},]
                     },
                     {
@@ -143,6 +147,6 @@
     </head>
     <body>
         <h1>SDVX III Season 2 DLL Modder</h1>
-        <p>Note: Difficulty unlock was updated to work offline. Ignore warning and reapply.</p>
+        <p>Note: Ignore warnings and reapply for Difficulty unlock and Hispeed patches. They have been updated</p>
     </body>
 </html>

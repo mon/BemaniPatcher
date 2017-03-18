@@ -16,6 +16,11 @@
                      shortname : "notut",
                      patches : [{offset : 0x81F79, off: [0x0F, 0x85, 0xC7], on : [0xE9, 0xC6, 0x01]}]
                     },
+                    {
+                     name : "SELECT MUSIC timer lock"
+                     shortname : "selectlock"
+                     patches : [{offset : 0x16E64D, off : [0x75], on : [0xEB]}]
+                    },
                 ]);
                 new DllPatcher("music_db", [
                     {

@@ -53,16 +53,6 @@
                      patches : [{offset : 0x6F3E6, off: [0x5E, 0xE9, 0x24, 0xFF, 0xFF, 0xFF], on : [0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}]
                     },
                     {
-                     name : "Song Name in Ticket Text",
-                     shortname : "ticket",
-                     patches : [{offset : 0x1379A, off: [0x88, 0x3D, 0x11, 0x10], on : [0x54, 0x1D, 0x42, 0x11]}]
-                    },
-                    {
-                     name : "No FREE PLAY text",
-                     shortname : "nofreetext",
-                     patches : [{offset : 0x1379A, off: [0x88], on : [0x87]}]
-                    },
-                    {
                      name : "Dark Mode",
                      shortname : "dark",
                      patches : [{offset : 0x68833, off: [0x74, 0x32], on : [0x90, 0x90]}]
@@ -71,6 +61,29 @@
                      name : "Volume Bug Fix",
                      shortname : "vol",
                      patches : [{offset : 0xCB2B9, off: [0x00], on : [0x01]}]
+                    },
+                    {
+                     type : "union",
+                     name : "FREE PLAY text",
+                     shortname : "freetext",
+                     offset : 0x1379A,
+                     patches : [
+                         {
+                          name : "On",
+                          shortname : "default",
+                          patch : [0x88, 0x3D, 0x11, 0x10],
+                         },
+                         {
+                          name : "Off",
+                          shortname : "off",
+                          patch : [0x87, 0x3D, 0x11, 0x10],
+                         },
+                         {
+                          name : "Replace with song name",
+                          shortname : "song",
+                          patch : [0x54, 0x1D, 0x42, 0x11],
+                         },
+                     ]
                     },
                 ]);
             });

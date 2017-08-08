@@ -21,6 +21,14 @@
                      shortname : "pfree",
                      patches : [{offset : 0x562BA, off: [0x75], on : [0xEB]}]
                     },
+                    // By mon - modifies a few more bytes than needed but whatever
+                    {
+                     name : "Premium Free (2 player mode)",
+                     shortname : "pfree2",
+                     patches : [{offset : 0x56424, off: [0x74, 0x2f], on : [0x90, 0x90]},
+                                {offset : 0x56435, off: [0x0f, 0x85, 0x3b], on : [0xe9, 0x3c, 0xff]},
+                                {offset : 0x5643a, off: [0xff], on : [0x90]}]
+                    },
                     {
                      name : "Premium Free Timer Freeze",
                      shortname : "pfreeze",

@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Beatstream 2 DLL Modder</title>
+        <link rel="stylesheet" href="css/style.css">
+        <!-- don't hate -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/FileSaver.min.js"></script>
+        <script type="text/javascript" src="js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function() {
+                new DllPatcher("beatstream", [
+                    {
+                     name : "E: drive fix",
+                     shortname : "efix",
+                     patches : [{offset : 0x8645FC, off: [0x65, 0x3A, 0x2F], on : [0x64, 0x65, 0x76]}]
+                    },
+                    {
+                     name : "Nightmare difficulty unlock",
+                     shortname : "diffunlock",
+                     patches : [{offset : 0x16EADE, off: [0x8B, 0xCB, 0xE8, 0xDB, 0xB4, 0x0E],
+                                                    on : [0xB0, 0x01, 0xE9, 0xAD, 0x00, 0x00]}]
+                    },
+                ]);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Beatstream 2 DLL modder</h1>
+    </body>
+</html>

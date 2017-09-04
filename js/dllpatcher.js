@@ -94,7 +94,12 @@ UnionPatch.prototype.createUI = function(parent) {
         var patch = this.patches[i];
         var id = this.shortname + '-' + patch.shortname;
         var label = patch.name;
-        container.append('<div class="patch"><input type="radio" id="' + id + '" name="' + this.shortname + '"><label for="' + id + '">' + label + '</label></div>');
+        var patchDiv = $('<div>', {'class' : 'patch'});
+        patchDiv.append('<input type="radio" id="' + id + '" name="' + this.shortname + '"><label for="' + id + '">' + label + '</label>');
+        if(patch.tooltip) {
+            patchDiv.append('<span class="tooltip">' + patch.tooltip + '</div>');
+        }
+        container.append(patchDiv);
     }
     parent.append(container);
 };

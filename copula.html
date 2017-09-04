@@ -40,7 +40,7 @@
                      patches : [{offset : 0x4FD84, off: [0x74, 0x16], on : [0x90, 0x90]}]
                     },
                     {
-                     name : "level 12 Unlocked",
+                     name : "Level 12 Unlocked",
                      shortname : "12",
                      patches : [{offset : 0x4FE35, off: [0x83, 0xFF, 0x02, 0x74, 0x0B, 0x83, 0xFF, 0x05, 0x74, 0x06, 0xB0, 0x01],
                                                    on : [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
@@ -53,11 +53,13 @@
                     {
                      name : "CS-Style Song Start Delay",
                      shortname : "delay",
+                     tooltip : "Holding Start will pause the song at the beginning until you release it",
                      patches : [{offset : 0x6F3FF, off: [0x7C], on : [0xEB]}]
                     },
                     {
                      name : "Disable HCN Tutorial",
                      shortname : "hcntut",
+                     tooltip : "Don't show tutorial for Hell Charge Notes",
                      patches : [{offset : 0x6F3E6, off: [0x5E, 0xE9, 0x24, 0xFF, 0xFF, 0xFF], on : [0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}]
                     },
                     {
@@ -68,6 +70,7 @@
                     {
                      name : "Volume Bug Fix",
                      shortname : "vol",
+                     tooltip : "If your volume gets forced to max, turn this on",
                      patches : [{offset : 0xCB2B9, off: [0x00], on : [0x01]}]
                     },
                     {

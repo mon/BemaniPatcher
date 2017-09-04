@@ -8,12 +8,18 @@ var StandardPatch = function(options) {
     this.name = options.name;
     this.shortname = options.shortname;
     this.patches = options.patches;
+    this.tooltip = options.tooltip;
 };
 
 StandardPatch.prototype.createUI = function(parent) {
     var id = this.shortname;
     var label = this.name;
-    parent.append('<div class="patch"><input type="checkbox" id="' + id + '"><label for="' + id + '">' + label + '</label></div>');
+    var patch = $('<div>', {'class' : 'patch'});
+    patch.append('<input type="checkbox" id="' + id + '"><label for="' + id + '">' + label + '</label>');
+    if(this.tooltip) {
+        patch.append('<span class="tooltip">' + this.tooltip + '</div>');
+    }
+    parent.append(patch);
 };
 
 StandardPatch.prototype.updateUI = function(file) {

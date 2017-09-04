@@ -26,6 +26,28 @@
     background-color: rgb(200,200,200);
 }
 
+.tooltip {
+    visibility: hidden;
+    font-size: 14px;
+    margin-left: 6px;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.tooltip:hover, .tooltip:focus, .tooltip:active{
+    visibility: visible;
+}
+
+.tooltip:before {
+    visibility: visible;
+    content: ' ? ';
+    font-size: 20px;
+    margin-right: 10px;
+    background: #ddd;
+    border-radius: 10px;
+}
+
 body {
     margin: 40px auto;
     max-width: 650px;

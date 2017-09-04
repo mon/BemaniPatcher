@@ -24,17 +24,20 @@
                     {
                      name : "All songs \"Safe\"",
                      shortname : "safe",
+                     tooltip : "Failing early won't drop you out of your session",
                      patches : [{offset : 0x1554F7, off: [0x32, 0xC0], on : [0xB0, 0x01]}]
                     },
                     {
                      // Created by mon
                      name : "No \"Safe\" banner on jackets",
                      shortname : "nobanner",
+                     tooltip : "Remove visual clutter",
                      patches : [{offset : 0x28F4AC, off: [0x73], on : [0x00]}]
                     },
                     {
                      name : "Prevent Windows volume change on boot",
                      shortname : "vol",
+                     tooltip : "If your volume gets forced to max, turn this on",
                      patches : [{offset : 0x1F556A, off : [0xE8, 0x21, 0x03, 0x00, 0x00],
                                                       on : [0x90, 0x90, 0x90, 0x90, 0x90]}]
                     },
@@ -47,13 +50,15 @@
                      // Ported from the S1 PFree by mon
                      name : "PFree (Unlimited plays)",
                      shortname : "pfree",
+                     tooltip : "Song clears/scores only, mission progress and custom settings do not save",
                      patches : [{offset : 0x196BDF, off : [0x00], on : [0x02]},
                                 {offset : 0x196C66,
                                     off : [0x8B, 0x83, 0x78, 0x0A, 0x00, 0x00, 0x8D, 0x48, 0x01, 0x83, 0xF9, 0x03, 0x56, 0x57, 0x7F, 0x52],
                                       on : [0xB8, 0x01, 0x00, 0x00, 0x00, 0x89, 0x83, 0x78, 0x0A, 0x00, 0x00, 0x90, 0x56, 0x57, 0x90, 0x90]}]
                     },
                     {// 12 hours of mon
-                     name : "Levels up to 99 (use with modified music_db.xml for SDVX IV difficulties)",
+                     name : "Levels up to 99",
+                     tooltip : "Use with modified music_db.xml for SDVX IV difficulties",
                      shortname : "nocap",
                      patches : [{offset : 0x188E46, off : [0x74, 0x03], on : [0x90, 0x90]},
                                 {offset : 0x1889C4, off : [0x0F], on : [0x62]},
@@ -61,7 +66,8 @@
                                 {offset : 0x157F08, off : [0x7F, 0x3A], on : [0x90, 0x90]}]
                     },
                     {// Created by mon
-                     name : "Level folders from 5-20 (default 1-16, combine with above)",
+                     name : "Level folders from 5-20",
+                     tooltip : "Default 1-16. Requires 'Levels up to 99'",
                      shortname : "fold20",
                      patches : [{offset : 0x9D082, off : [0x07], on : [0x03]}, // offset
                                 {offset : 0x9D09A, off : [0x10], on : [0x14]}, // bounds
@@ -85,7 +91,8 @@
                                 {offset : 0x285ed1, off : [0x31]      , on: [0x35]}]
                     },
                     {// Created by mon
-                     name : "Hispeed values from 0.1 to 20.0 (default 0.5-7.0)",
+                     name : "Hispeed values from 0.1 to 20.0",
+                     tooltip : "Default 0.5-7.0",
                      shortname : "hispeed",
                      patches : [{offset : 0x1193C5, off : [0xDD, 0x05, 0xF8, 0x05, 0x28, 0x10], // load float 20.0 instead of double 7.0
                                                     on  : [0xD9, 0x05, 0xA0, 0x07, 0x28, 0x10]},
@@ -103,7 +110,8 @@
                         offset : 0x1FBD9,
                         patches : [
                             {
-                             name : "Default (NEAR+CRITICAL add to score from 0)",
+                             name : "Default",
+                             tooltip : "NEAR+CRITICAL add to score from 0",
                              shortname : "default",
                              patch : [0x8B, 0x85, 0x50, 0x01, 0x00, 0x00, 0x8B, 0x9D, 0x48, 0x01, 0x00, 0x00, 0x8B, 0x8D, 0x54, 0x01,
                                       0x00, 0x00, 0x8B, 0x95, 0x4C, 0x01, 0x00, 0x00, 0x56, 0x57, 0x3B, 0xC3, 0x75, 0x08, 0x3B, 0xCA,
@@ -116,7 +124,8 @@
                             },
                             {
                              // Created by mon
-                             name : "Subtractive (NEAR+ERROR subtract score from 10,000,000)",
+                             name : "Subtractive",
+                             tooltip : "NEAR+ERROR subtract score from 10,000,000",
                              shortname : "subtract",
                              patch : [0x56, 0x57, 0x52, 0x51, 0xBE, 0x90, 0x71, 0x7C, 0x18, 0x8B, 0x46, 0x5C, 0x6A, 0x00, 0x99, 0x6A,
                                       0x02, 0x52, 0x50, 0xE8, 0x3F, 0xC4, 0x21, 0x00, 0x8B, 0xC8, 0x8B, 0x46, 0x58, 0x8B, 0xFA, 0x99,
@@ -128,7 +137,8 @@
                             },
                             {
                              // Created by mon
-                             name : "Average (Osu style % display)",
+                             name : "Average",
+                             tooltip : "Osu style % display",
                              shortname : "avg",
                              patch : [0x56, 0x57, 0x52, 0x51, 0xBE, 0x90, 0x71, 0x7C, 0x18, 0x8B, 0x46, 0x54, 0x99, 0x6A, 0x00, 0x6A,
                                       0x02, 0x52, 0x50, 0xE8, 0x3F, 0xC4, 0x21, 0x00, 0x8B, 0xC8, 0x8B, 0xFA, 0x8B, 0x46, 0x58, 0x99,
@@ -147,6 +157,5 @@
     </head>
     <body>
         <h1>SDVX III Season 2 DLL Modder</h1>
-        <p>Note: Ignore warnings and reapply for Difficulty unlock and Hispeed patches. They have been updated</p>
     </body>
 </html>

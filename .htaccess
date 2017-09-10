@@ -1,8 +1,0 @@
-IndexOptions IgnoreCase NameWidth=* DescriptionWidth=* SuppressHTMLPreamble
-IndexOrderDefault Ascending Name
-IndexIgnore header.html footer.html css js
-
-HeaderName header.html
-ReadmeName footer.html
-
-Options +Indexes

@@ -79,8 +79,12 @@
     content: ' ? ';
     font-size: 20px;
     margin-right: 10px;
-    background: #ddd;
+    background: #eee;
     border-radius: 10px;
+}
+
+.tooltip:hover:before, .tooltip:focus:before, .tooltip:active:before{
+    background: inherit;
 }
 
 body {

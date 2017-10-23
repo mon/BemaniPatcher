@@ -10,11 +10,11 @@
         <script type="text/javascript" src="js/dllpatcher.js"></script>
         <script type="text/javascript">
             window.addEventListener("load", function() {
-                new DllPatcher("DDR 2014", [
+                new DllPatcher("mdxja_", [
                     {// Created by Renard1911
                      name : "Premium Free",
                      shortname : "pfree",
-                     tooltip: "Song clears/scores only. Profile progress and custom settings do not save.",
+                     tooltip: "Song clears/scores only. Profile progress and custom settings do not save. Reboot game to re-query for scores.",
                      patches : [{offset : 0x23C5, off: [0xFF, 0x80, 0xE4, 0x16, 0x00, 0x00], on : [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
                     },
                 ]);

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>DDR 2014 DLL Modder</title>
+        <link rel="stylesheet" href="css/style.css">
+        <!-- don't hate -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/FileSaver.min.js"></script>
+        <script type="text/javascript" src="js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function() {
+                new DllPatcher("DDR 2014", [
+                    {// Created by Renard1911
+                     name : "Premium Free HACK",
+                     shortname : "pfree",
+                     tooltip: "Song clears/scores only. Profile progress and custom settings do not save. This is a stage 1 hack. Reboot game to re-query for scores.",
+                     patches : [{offset : 0x23C5, off: [0xFF, 0x80, 0xE4, 0x16, 0x00, 0x00], on : [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+                    },
+                ]);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>DDR 2014 DLL modder</h1>
+    </body>
+</html>

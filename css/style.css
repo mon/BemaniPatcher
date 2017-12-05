@@ -1,32 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+
 .icons {
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
+}
+
+.gameicon,
+.patchContainer {
+    border-radius: 2px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    color: inherit;
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    background: #fff;
 }
 
 .gameicon {
-    border-radius:18px;
-    box-shadow:0px 0px 10px 2px #888888;
-    float: left;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    color: inherit;
     text-decoration: none;
-    margin: 5px;
-    width: 150px;
+    margin: 15px;
+    width: 144px;
+    padding: 10px;
+    justify-content: center;
 }
 
-.gameicon:hover {
-    box-shadow:0px 0px 10px 1px #000000;
+.gameicon:hover,
+.dragover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .gameicon img {
-    margin: 10px;
-    border-radius: 18px;
-    width:128px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    width: 128px;
     height: 128px;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, .24), 0 0px 1px rgba(0, 0, 0, 0.48);
+    align-self: center;
+    margin-top: 5px;
+}
+
+.gameicon>div>div {
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .tagline {
@@ -55,52 +74,193 @@
 
 .patchContainer {
     background-color: white;
-}
-
-.dragover {
-    background-color: rgb(200,200,200);
+    padding: 20px;
+    max-width: 650px;
+    margin: 0 auto 2em;
+    position: relative;
+    /*! display: flex; */
+    /*! flex-direction: column; */
+    /*! flex-flow: column; */
+    /*! align-items: left; */
+    /*! align-content: left; */
 }
 
 .tooltip {
     visibility: hidden;
     font-size: 14px;
-    margin-left: 6px;
-    padding: 5px;
-    border: 1px solid black;
+    margin-left: 8px;
+    padding: 8px;
     border-radius: 4px;
+    position: relative;
+    background: grey;
+    white-space: nowrap;
+    cursor: pointer;
 }
 
-.tooltip:hover, .tooltip:focus, .tooltip:active{
+.tooltip:hover,
+.tooltip:focus,
+.tooltip:active {
     visibility: visible;
+    color: white;
+    border: none;
+    margin-top: 0px;
+    /*! margin-bottom: 2px; */
+    /*! top: -2px; */
+    position: absolute;
+    padding: 3px 16px;
 }
 
 .tooltip:before {
     visibility: visible;
-    content: ' ? ';
-    font-size: 20px;
-    margin-right: 10px;
-    background: #eee;
-    border-radius: 10px;
+    content: '?';
+    font-size: 18px;
+    margin-right: 8px;
+    background: gray;
+    border-radius: 50%;
+    /*! border: 1px solid black; */
+    padding: 2px 9px;
+    /*! line-height: 23px; */
+    /*! position: relative; */
+    /*! top: -1px; */
+    /*! font-weight: 500; */
+    margin-left: -8px;
+    /*! box-shadow: 0 1px 1px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.12); */
+    color: white;
+    cursor: pointer;
 }
 
-.tooltip:hover:before, .tooltip:focus:before, .tooltip:active:before{
-    background: inherit;
+.tooltip:hover:before,
+.tooltip:focus:before,
+.tooltip:active:before {
+    color: black;
+    display: none;
 }
 
 body {
     margin: 40px auto;
-    max-width: 650px;
+    max-width: 900px;
     line-height: 1.6;
     font-size: 18px;
-    color: #444;
+    color: #000;
     padding: 0 10px;
+    background: #e2e1e0;
+    font-family: 'PT Sans', 'Source Sans Pro', Helvetica, Arial, sans-serif;
 }
 
-h1,h2,h3{
+h1,
+h2,
+h3 {
     line-height: 1.2;
 }
 
-h1 a{
+h1 a {
     color: inherit;
     text-decoration: inherit;
+}
+
+button {
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.25, 0.5, 0.5, 1);
+    position: relative;
+    padding: 0 16px;
+    height: 36px;
+    border: none;
+    border-radius: 2px;
+    outline: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    line-height: 2.25rem;
+    color: rgba(0, 0, 0, 0.73);
+    transition-property: box-shadow, background;
+    background-color: #40b31a;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25), 0px 0px 2px rgba(0, 0, 0, 0.125);
+    color: white;
+}
+
+button:disabled {
+    background-color: rgba(0, 0, 0, 0.12);
+    color: rgba(0, 0, 0, 0.38);
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
+    cursor: default;
+}
+
+button:hover:enabled {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25), 0px 0px 4px rgba(0, 0, 0, 0.125);
+    background-color: #5dbe3c;
+}
+
+.patches {
+    margin: 1em auto;
+}
+
+input[type=checkbox],
+input[type=radio] {
+    vertical-align: middle;
+    position: relative;
+    bottom: 1px;
+}
+
+input[type=radio] {
+    bottom: 2px;
+}
+
+.patches label {
+    margin-left: 4px;
+}
+
+.dragover>* {
+    filter: blur(5px);
+}
+
+.dragover::before {
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(220, 220, 220, 0.75);
+    text-align: center;
+    z-index: 10;
+}
+
+.dragover::after {
+    content: 'Drop DLL here...';
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: calc(50% - 3rem);
+    left: 0;
+    width: 100%;
+    text-align: center;
+    /*! justify-content: center; */
+    /*! vertical-align: -50%; */
+    /*! align-items: center; */
+    z-index: 11;
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.gameicon>div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tooltip:not(:hover) {
+    font-size: 0px;
+}
+
+.tooltip {
+    visibility: hidden;
+    font-size: 14px;
+    margin-left: 8px;
+    padding: 8px;
+    border-radius: 4px;
+    position: relative;
+    background: gray;
+    white-space: nowrap;
+    cursor: pointer;
 }

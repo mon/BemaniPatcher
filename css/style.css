@@ -103,6 +103,7 @@
     padding: 3px 16px;
     white-space: normal;
     max-width: 300px;
+    z-index: 11;
 }
 
 .tooltip:before {
@@ -116,6 +117,7 @@
     margin-left: -8px;
     color: white;
     cursor: pointer;
+    z-index: 10;
 }
 
 .tooltip:hover:before,

@@ -163,21 +163,23 @@ DllPatcher.prototype.createUI = function() {
     var container = $("<div>", {"class": "patchContainer"});
     container.html('<h3>' + this.filename + '.dll</h3>');
 
-    container.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+    $('html').on('dragover dragenter', function() {
+        container.addClass('dragover');
+        return true;
     })
-    .on('drop', function(e) {
+    .on('dragleave dragend drop', function() {
+        container.removeClass('dragover');
+        return true;
+    })
+    .on('dragover dragenter dragleave dragend drop', function(e) {
+        e.preventDefault();
+    });
+    
+    container.on('drop', function(e) {
         var files = e.originalEvent.dataTransfer.files;
         if(files && files.length > 0)
             self.loadFile(files[0]);
     })
-    .on('dragover dragenter', function() {
-        container.addClass('dragover');
-    })
-    .on('dragleave dragend drop', function() {
-        container.removeClass('dragover');
-    });
 
     this.fileInput = $("<input>",
         {"class": "fileInput",

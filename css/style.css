@@ -1,4 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans');
+@font-face {
+  font-family: 'file';
+  src:  url('file.eot?abyff3');
+  src:  url('file.eot?abyff3#iefix') format('embedded-opentype'),
+    url('file.ttf?abyff3') format('truetype'),
+    url('file.woff?abyff3') format('woff'),
+    url('file.svg?abyff3#file') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
 .icons {
     display: flex;
@@ -46,6 +56,12 @@
 .gameicon>div>div {
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.gameicon>div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .tagline {
@@ -167,6 +183,7 @@ button {
     background-color: #40b31a;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25), 0px 0px 2px rgba(0, 0, 0, 0.125);
     color: white;
+    cursor: pointer;
 }
 
 button:disabled {
@@ -212,13 +229,24 @@ input[type=radio] {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(220, 220, 220, 0.75);
     text-align: center;
     z-index: 10;
+    outline: dashed 10px;
 }
 
 .dragover::after {
-    content: 'Drop DLL here...';
+    content: "\e900";
+    font-family: 'file' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
     display: block;
     height: auto;
     position: absolute;
@@ -227,14 +255,7 @@ input[type=radio] {
     width: 100%;
     text-align: center;
     z-index: 11;
-    font-size: 4rem;
-    font-weight: bold;
-}
-
-.gameicon>div {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    font-size: 8rem;
 }
 
 .tooltip:not(:hover) {

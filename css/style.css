@@ -78,11 +78,6 @@
     max-width: 650px;
     margin: 0 auto 2em;
     position: relative;
-    /*! display: flex; */
-    /*! flex-direction: column; */
-    /*! flex-flow: column; */
-    /*! align-items: left; */
-    /*! align-content: left; */
 }
 
 .tooltip {
@@ -104,8 +99,6 @@
     color: white;
     border: none;
     margin-top: 0px;
-    /*! margin-bottom: 2px; */
-    /*! top: -2px; */
     position: absolute;
     padding: 3px 16px;
 }
@@ -117,14 +110,8 @@
     margin-right: 8px;
     background: gray;
     border-radius: 50%;
-    /*! border: 1px solid black; */
     padding: 2px 9px;
-    /*! line-height: 23px; */
-    /*! position: relative; */
-    /*! top: -1px; */
-    /*! font-weight: 500; */
     margin-left: -8px;
-    /*! box-shadow: 0 1px 1px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.12); */
     color: white;
     cursor: pointer;
 }
@@ -235,9 +222,6 @@ input[type=radio] {
     left: 0;
     width: 100%;
     text-align: center;
-    /*! justify-content: center; */
-    /*! vertical-align: -50%; */
-    /*! align-items: center; */
     z-index: 11;
     font-size: 4rem;
     font-weight: bold;

@@ -45,6 +45,23 @@ ga('send', 'pageview');
                      tooltip : "Holding Start will pause the song at the beginning until you release it",
                      patches : [{offset : 0x77cf6, off: [0x7C], on : [0xEB]}]
                     },
+                    {
+                     name : "Cursor lock",
+                     shortname : "cursor",
+                     tooltip : "After song finishes, song select remains on previous song",
+                     patches : [{offset : 0x6BF3A, off: [0x74, 0x23], on : [0x90, 0x90]}]
+                    },
+                    {
+                     name : "Volume Bug Fix",
+                     shortname : "vol",
+                     tooltip : "If your volume gets forced to max, turn this on",
+                     patches : [{offset : 0xD5D09, off: [0x00], on : [0x01]}]
+                    },
+                    {
+                     name : "Replace FREE PLAY text with song name",
+                     shortname : "fp",
+                     patches : [{offset : 0x14C3A, off: [0x90, 0x3F, 0x12, 0x10], on : [0x24, 0xAA, 0x43, 0x11]}]
+                    },
                 ]);
             });
         </script>

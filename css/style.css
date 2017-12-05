@@ -216,7 +216,7 @@ input[type=radio] {
 .dragover::after {
     content: 'Drop DLL here...';
     display: block;
-    height: 100%;
+    height: auto;
     position: absolute;
     top: calc(50% - 3rem);
     left: 0;

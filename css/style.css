@@ -101,6 +101,8 @@
     margin-top: 0px;
     position: absolute;
     padding: 3px 16px;
+    white-space: normal;
+    max-width: 300px;
 }
 
 .tooltip:before {
@@ -235,6 +237,8 @@ input[type=radio] {
 
 .tooltip:not(:hover) {
     font-size: 0px;
+    padding: 0;
+    margin-left: 16px;
 }
 
 .tooltip {
@@ -247,4 +251,5 @@ input[type=radio] {
     background: gray;
     white-space: nowrap;
     cursor: pointer;
+    display: inline-block;
 }

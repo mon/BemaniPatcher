@@ -12,6 +12,11 @@
             window.addEventListener("load", function() {
                 new DllPatcher("bm2dx", [
                     {
+                     name : "Timer Freeze",
+                     shortname : "freeze",
+                     patches : [{offset : 0x9BAEE, off: [0x74], on : [0xEB]}]
+                    },
+                    {
                      name : "Premium Free",
                      shortname : "pfree",
                      patches : [{offset : 0x60A1B, off: [0x75], on : [0xEB]}]

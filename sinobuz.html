@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>IIDX Sinobuz DLL Modder</title>
+        <link rel="stylesheet" href="css/style.css">
+        <!-- don't hate -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/FileSaver.min.js"></script>
+        <script type="text/javascript" src="js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function() {
+                new DllPatcher("bm2dx", [
+                    {
+                     name : "Premium Free",
+                     shortname : "pfree",
+                     patches : [{offset : 0x60A1B, off: [0x75], on : [0xEB]}]
+                    },
+                    {
+                     name : "Premium Free Timer Freeze",
+                     shortname : "pfreeze",
+                     patches : [{offset : 0x5DEAD, off: [0x48], on : [0x90]}]
+                    },
+                    {
+                     name : "Level 12 Unlocked",
+                     shortname : "12",
+                     patches : [{offset : 0x5BB35, off: [0x83, 0xFF, 0x02, 0x74, 0x0B, 0x83, 0xFF, 0x05, 0x74, 0x06, 0xB0, 0x01],
+                                                   on : [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+                    },
+                    {
+                     name : "Unlock All Songs",
+                     shortname : "unlock",
+                     patches : [{offset : 0x5C005, off: [0x74, 0x15], on : [0x90, 0x90]}]
+                    },
+                    {
+                     name : "Cursor lock",
+                     shortname : "cursor",
+                     tooltip : "After song finishes, song select remains on previous song",
+                     patches : [{offset : 0x6C8E5, off: [0x74, 0x23], on : [0x90, 0x90]}]
+                    },
+                    {
+                     name : "CS-Style Song Start Delay",
+                     shortname : "delay",
+                     tooltip : "Holding Start will pause the song at the beginning until you release it",
+                     patches : [{offset : 0x78D52, off: [0x7C], on : [0xEB]}]
+                    },
+                    {
+                     name : "Free play text to LED ticker",
+                     shortname : "fp",
+                     patches : [{offset : 0x150EA, off: [0xE0, 0x8F, 0x12, 0x10], on : [0x64, 0x99, 0x6A, 0x11]}]
+                    },
+                    {
+                     name : "Free play text to LED ticker (Upper left)",
+                     shortname : "fpl",
+                     patches : [{offset : 0xA4615, off: [0x74, 0x32], on : [0x90, 0x90]},
+                                {offset : 0xA4630, off: [0x54, 0x1D, 0x16, 0x10], on : [0x64, 0x99, 0x6A, 0x11]}]
+                    },
+                    {
+                     name : "Debug mode",
+                     shortname : "debug",
+                     tooltip : "Press F1 in-game to open menu",
+                     patches : [{offset : 0x150EA, off: [0x32, 0xC0], on : [0x0C, 0x01]}]
+                    },
+                    {
+                     name : "Skip Card Entry",
+                     shortname : "debug",
+                     tooltip : "Useful for those without service or to prevent login",
+                     patches : [{offset : 0x63E34, off: [0x32], on : [0x20]}]
+                    },
+                ]);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>IIDX Sinobuz DLL Modder</h1>
+    </body>
+</html>

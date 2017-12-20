@@ -50,6 +50,17 @@
                      patches : [{offset : 0x78D52, off: [0x7C], on : [0xEB]}]
                     },
                     {
+                     name : "Dark Mode",
+                     shortname : "dark",
+                     patches : [{offset : 0x71cb7, off: [0x74, 0x3b], on : [0x90, 0x90]}]
+                    },
+                    {
+                     name : "Volume Bug Fix",
+                     shortname : "vol",
+                     tooltip : "If your volume gets forced to max, turn this on",
+                     patches : [{offset : 0xda249, off: [0x00], on : [0x01]}]
+                    },
+                    {
                      name : "Free play text to LED ticker",
                      shortname : "fp",
                      patches : [{offset : 0x150EA, off: [0xE0, 0x8F, 0x12, 0x10], on : [0x64, 0x99, 0x6A, 0x11]}]

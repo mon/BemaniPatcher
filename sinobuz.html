@@ -22,6 +22,13 @@
                      patches : [{offset : 0x60A1B, off: [0x75], on : [0xEB]}]
                     },
                     {
+                     name : "Premium Free (2 player mode)",
+                     shortname : "pfree2",
+                     patches : [{offset : 0x60B94, off: [0x74, 0x2f], on : [0x90, 0x90]},
+                                {offset : 0x60BA5, off: [0x0f, 0x85, 0x3b], on : [0xe9, 0x3c, 0xff]},
+                                {offset : 0x60BAA, off: [0xff], on : [0x90]}]
+                    },
+                    {
                      name : "Premium Free Timer Freeze",
                      shortname : "pfreeze",
                      patches : [{offset : 0x5DEAD, off: [0x48], on : [0x90]}]
@@ -53,6 +60,11 @@
                      name : "Dark Mode",
                      shortname : "dark",
                      patches : [{offset : 0x71cb7, off: [0x74, 0x3b], on : [0x90, 0x90]}]
+                    },
+                    {
+                     name : "Remove Rainbow Banners",
+                     shortname : "rainbows",
+                     patches : [{offset : 0x12C34D, off: [0x5F], on : [0x00]}]
                     },
                     {
                      name : "Volume Bug Fix",

@@ -45,6 +45,12 @@
                      patches : [{offset : 0x5C005, off: [0x74, 0x15], on : [0x90, 0x90]}]
                     },
                     {
+                     name : "Unlock All Daily Bonuses",
+                     shortname : "bonus",
+                     patches : [{offset : 0x5E180, off: [0x56, 0x8B, 0xF1, 0xE8, 0x58, 0x57, 0xFD, 0xFF],
+                                                   on : [0xB8, 0x01, 0x00, 0x00, 0x00, 0xC2, 0x04, 0x00]}]
+                    },
+                    {
                      name : "Cursor lock",
                      shortname : "cursor",
                      tooltip : "After song finishes, song select remains on previous song",

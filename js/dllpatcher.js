@@ -141,7 +141,7 @@ UnionPatch.prototype.getSelected = function() {
     return null;
 }
 
-var DllPatcher = function(fname, args) {
+var DllPatcher = function(fname, args, description) {
     this.mods = [];
     for(var i = 0; i < args.length; i++) {
         var mod = args[i];
@@ -154,6 +154,7 @@ var DllPatcher = function(fname, args) {
         }
     }
     this.filename = fname;
+    this.description = description;
     this.createUI();
     this.loadPatchUI();
 };
@@ -161,7 +162,11 @@ var DllPatcher = function(fname, args) {
 DllPatcher.prototype.createUI = function() {
     var self = this;
     var container = $("<div>", {"class": "patchContainer"});
-    container.html('<h3>' + this.filename + '.dll</h3>');
+    var header = this.filename + '.dll';
+    if(this.description) {
+        header += ' (' + this.description + ')';
+    }
+    container.html('<h3>' + header + '</h3>');
 
     $('html').on('dragover dragenter', function() {
         container.addClass('dragover');

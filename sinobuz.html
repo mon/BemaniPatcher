@@ -68,6 +68,11 @@
                      patches : [{offset : 0x71cb7, off: [0x74, 0x3b], on : [0x90, 0x90]}]
                     },
                     {
+                     name : "Disable Bar Lines",
+                     shortname : "bar",
+                     patches : [{offset : 0x3d540, off: [0x75], on : [0xEB]}]
+                    },
+                    {
                      name : "Remove Rainbow Banners",
                      shortname : "rainbows",
                      patches : [{offset : 0x12C34D, off: [0x5F], on : [0x00]}]
@@ -100,6 +105,12 @@
                      shortname : "skipcard",
                      tooltip : "Useful for those without service or to prevent login",
                      patches : [{offset : 0x63E34, off: [0x32], on : [0x20]}]
+                    },
+                    {
+                     name : "Quick Retry",
+                     shortname : "qr",
+                     tooltip : "Hold VEFX and Effect during a song to restart",
+                     patches : [{offset : 0x4e284, off: [0x8A, 0xC3], on : [0xB0, 0x01]}]
                     },
                 ], "stock");
                 new DllPatcher("bm2dx_omni", [
@@ -148,6 +159,11 @@
                      patches : [{offset : 0x71E57, off: [0x74, 0x3b], on : [0x90, 0x90]}]
                     },
                     {
+                     name : "Disable Bar Lines",
+                     shortname : "bar",
+                     patches : [{offset : 0x3d450, off: [0x75], on : [0xEB]}]
+                    },
+                    {
                      name : "Remove Rainbow Banners",
                      shortname : "rainbows",
                      patches : [{offset : 0x12C355, off: [0x5F], on : [0x00]}]
@@ -167,7 +183,7 @@
                      name : "Free play text to LED ticker (Upper left)",
                      shortname : "fpl",
                      patches : [{offset : 0xA4865, off: [0x74, 0x32], on : [0x90, 0x90]},
-                                {offset : 0xA38C0, off: [0x54, 0x1D, 0x16, 0x10], on : [0x64, 0x99, 0x6A, 0x11]}]
+                                {offset : 0xA4880, off: [0x8c, 0x1D, 0x16, 0x10], on : [0x64, 0x99, 0x6A, 0x11]}]
                     },
                     {
                      name : "Debug mode (disables score saving!)",
@@ -180,6 +196,12 @@
                      shortname : "skipcard",
                      tooltip : "Useful for those without service or to prevent login",
                      patches : [{offset : 0x64014, off: [0x32], on : [0x20]}]
+                    },
+                    {
+                     name : "Quick Retry",
+                     shortname : "qr",
+                     tooltip : "Hold VEFX and Effect during a song to restart",
+                     patches : [{offset : 0x4e154, off: [0x8A, 0xC3], on : [0xB0, 0x01]}]
                     },
                 ], "omnimix");
             });

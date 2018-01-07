@@ -13,14 +13,12 @@
                 new DllPatcher("mdxja_", [
                     {// Created by Renard1911
                      name : "Premium Free",
-                     shortname : "pfree",
                      tooltip: "Song clears/scores only. Profile progress and custom settings do not save. Reboot game to re-query for scores.",
                      patches : [{offset : 0x23C5, off: [0xFF, 0x80, 0xE4, 0x16, 0x00, 0x00], on : [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
                     },
                     // These patches were auto-generated and thus very verbose
                     {
                      name : "Unlock all songs",
-                     shortname : "unlock",
                      patches : [{offset : 0x205c70, off: [0xeb], on : [0x00]},
                                 {offset : 0x205c74, off: [0xf7, 0x01], on : [0x00, 0x00]},
                                 {offset : 0x205c78, off: [0xf5], on : [0x00]},

@@ -1,21 +1,29 @@
 (function(window, document) {
 "use strict";
 
+// form labels often need unique IDs - this can be used to generate some
+window.DllPatcher_uniqueid = 0;
+var createID = function() {
+    window.DllPatcher_uniqueid++;
+    return "dllpatch_" + window.DllPatcher_uniqueid;
+}
+
 // Each unique kind of patch should have createUI, validatePatch, applyPatch,
 // updateUI
 
 var StandardPatch = function(options) {
     this.name = options.name;
-    this.shortname = options.shortname;
     this.patches = options.patches;
     this.tooltip = options.tooltip;
 };
 
 StandardPatch.prototype.createUI = function(parent) {
-    var id = this.shortname;
+    var id = createID();
     var label = this.name;
     var patch = $('<div>', {'class' : 'patch'});
-    patch.append('<input type="checkbox" id="' + id + '"><label for="' + id + '">' + label + '</label>');
+    this.checkbox = $('<input type="checkbox" id="' + id + '">')[0];
+    patch.append(this.checkbox);
+    patch.append('<label for="' + id + '">' + label + '</label>');
     if(this.tooltip) {
         patch.append('<div class="tooltip">' + this.tooltip + '</div>');
     }
@@ -23,9 +31,7 @@ StandardPatch.prototype.createUI = function(parent) {
 };
 
 StandardPatch.prototype.updateUI = function(file) {
-    var id = this.shortname;
-    var elem = document.getElementById(id);
-    elem.checked = this.checkPatchBytes(file) == "on";
+    this.checkbox.checked = this.checkPatchBytes(file) == "on";
 };
 
 StandardPatch.prototype.validatePatch = function(file) {
@@ -40,10 +46,7 @@ StandardPatch.prototype.validatePatch = function(file) {
 };
 
 StandardPatch.prototype.applyPatch = function(file) {
-    var id = this.shortname;
-    var enabled = document.getElementById(id).checked;
-    this.replaceAll(file, enabled);
-    return enabled ? this.shortname : "";
+    this.replaceAll(file, this.checkbox.checked);
 };
 
 StandardPatch.prototype.replaceAll = function(file, featureOn) {
@@ -82,20 +85,26 @@ StandardPatch.prototype.checkPatchBytes = function(file) {
 // The DEFAULT state is always the 1st element in the patches array
 var UnionPatch = function(options) {
     this.name = options.name;
-    this.shortname = options.shortname;
     this.offset = options.offset;
     this.patches = options.patches;
 };
 
 UnionPatch.prototype.createUI = function(parent) {
+    this.radios = [];
+    var radio_id = createID();
+    
     var container = $("<div>", {"class": "patch-union"});
     container.append('<span class="patch-union-title">' + this.name + ':</span>');
     for(var i = 0; i < this.patches.length; i++) {
         var patch = this.patches[i];
-        var id = this.shortname + '-' + patch.shortname;
+        var id = createID();
         var label = patch.name;
         var patchDiv = $('<div>', {'class' : 'patch'});
-        patchDiv.append('<input type="radio" id="' + id + '" name="' + this.shortname + '"><label for="' + id + '">' + label + '</label>');
+        var radio = $('<input type="radio" id="' + id + '" name="' + radio_id + '">')[0];
+        this.radios.push(radio);
+        
+        patchDiv.append(radio);
+        patchDiv.append('<label for="' + id + '">' + label + '</label>');
         if(patch.tooltip) {
             patchDiv.append('<div class="tooltip">' + patch.tooltip + '</div>');
         }
@@ -107,12 +116,12 @@ UnionPatch.prototype.createUI = function(parent) {
 UnionPatch.prototype.updateUI = function(file) {
     for(var i = 0; i < this.patches.length; i++) {
         if(bytesMatch(file, this.offset, this.patches[i].patch)) {
-            document.getElementById(this.shortname + '-' + this.patches[i].shortname).checked = true;
+            this.radios[i].checked = true;
             return;
         }
     }
     // Default fallback
-    document.getElementById(this.shortname + '-' + this.patches[0].shortname).checked = true;
+    this.radios[0].checked = true;
 };
 
 UnionPatch.prototype.validatePatch = function(file) {
@@ -127,14 +136,12 @@ UnionPatch.prototype.validatePatch = function(file) {
 
 UnionPatch.prototype.applyPatch = function(file) {
     var patch = this.getSelected();
-    var name = this.shortname + patch.shortname;
     replace(file, this.offset, patch.patch);
-    return patch.shortname == "default" ? "" : name;
 };
 
 UnionPatch.prototype.getSelected = function() {
     for(var i = 0; i < this.patches.length; i++) {
-        if(document.getElementById(this.shortname + '-' + this.patches[i].shortname).checked) {
+        if(this.radios[i].checked) {
             return this.patches[i];
         }
     }
@@ -244,11 +251,7 @@ DllPatcher.prototype.saveDll = function() {
     var fname = this.filename;
 
     for(var i = 0; i < this.mods.length; i++) {
-        var enabledStr = this.mods[i].applyPatch(this.dllFile);
-        /* disabled as it can get kinda hectic with many patches
-        if(enabledStr) {
-            fname += '-' + enabledStr;
-        } */
+        this.mods[i].applyPatch(this.dllFile);
     }
     fname += '.dll';
 

@@ -6,14 +6,6 @@
         <link rel="stylesheet" href="css/style.css">
         <!-- don't hate -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-45859786-5', 'auto');
-ga('send', 'pageview');
-</script>
         <script type="text/javascript" src="js/FileSaver.min.js"></script>
         <script type="text/javascript" src="js/dllpatcher.js"></script>
         <script type="text/javascript">
@@ -21,45 +13,37 @@ ga('send', 'pageview');
                 new DllPatcher("bm2dx", [
                     {
                      name : "Timer Freeze",
-                     shortname : "freeze",
                      patches : [{offset : 0x9c55e, off: [0x74], on : [0xEB]}]
                     },
                     {
                      name : "Premium Free",
-                     shortname : "pfree",
                      patches : [{offset : 0x5d31b, off: [0x75], on : [0xEB]}]
                     },
                     {
                      name : "Premium Free Timer Freeze",
-                     shortname : "pfreeze",
                      patches : [{offset : 0x563ad, off: [0x48], on : [0x90]}]
                     },
                     {
                      name : "Unlock All Songs",
-                     shortname : "unlock",
                      patches : [{offset : 0x58b3e, off: [0x74, 0x0a], on : [0x90, 0x90]}]
                     },
                     {
                      name : "CS-Style Song Start Delay",
-                     shortname : "delay",
                      tooltip : "Holding Start will pause the song at the beginning until you release it",
                      patches : [{offset : 0x77cf6, off: [0x7C], on : [0xEB]}]
                     },
                     {
                      name : "Cursor lock",
-                     shortname : "cursor",
                      tooltip : "After song finishes, song select remains on previous song",
                      patches : [{offset : 0x6BF3A, off: [0x74, 0x23], on : [0x90, 0x90]}]
                     },
                     {
                      name : "Volume Bug Fix",
-                     shortname : "vol",
                      tooltip : "If your volume gets forced to max, turn this on",
                      patches : [{offset : 0xD5D09, off: [0x00], on : [0x01]}]
                     },
                     {
                      name : "Replace FREE PLAY text with song name",
-                     shortname : "fp",
                      patches : [{offset : 0x14C3A, off: [0x90, 0x3F, 0x12, 0x10], on : [0x24, 0xAA, 0x43, 0x11]}]
                     },
                 ]);

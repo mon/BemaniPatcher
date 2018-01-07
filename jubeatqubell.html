@@ -13,19 +13,16 @@
                 new DllPatcher("jubeat", [
                     {
                      name : "Disable tutorial",
-                     shortname : "notut",
                      patches : [{offset : 0xAAC32, off: [0x75, 0x4A, 0x53, 0x68, 0x00], on : [0xE9, 0x90, 0x00, 0x00, 0x00]}]
                     },
                     {
                      name : "SELECT MUSIC timer lock",
-                     shortname : "selectlock",
                      patches : [{offset : 0x80576, off : [0x75], on : [0xEB]}]
                     },
                 ]);
                 new DllPatcher("music_db", [
                     {
                      name : "Unlock all songs",
-                     shortname : "unlock",
                      patches : [{offset : 0x17DF, off: [0x74, 0x09], on : [0x90, 0x90]}]
                     },
                 ]);

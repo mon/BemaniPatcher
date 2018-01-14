@@ -61,6 +61,12 @@
                                     off : [0x8B, 0x83, 0x78, 0x0A, 0x00, 0x00, 0x8D, 0x48, 0x01, 0x83, 0xF9, 0x03, 0x56, 0x57, 0x7F, 0x52],
                                       on : [0xB8, 0x01, 0x00, 0x00, 0x00, 0x89, 0x83, 0x78, 0x0A, 0x00, 0x00, 0x90, 0x56, 0x57, 0x90, 0x90]}]
                     },
+                    {
+                    // thanks Element4521
+                     name : "Force Alternative Rate System",
+                     tooltip : "When EXCESSIVE GAUGE is depleted, you are switched to EFFECTIVE RATE",
+                     patches : [{offset : 0x1551d4, off : [0x74], on : [0xEB]}]
+                    },
                     {// 12 hours of mon
                      name : "Levels up to 99",
                      tooltip : "Use with modified music_db.xml for SDVX IV difficulties",

@@ -95,6 +95,12 @@
                                 }]
                     },
                     {
+                     name : "Pfree mode",
+                     tooltip: "Game locked to stage 1",
+                     patches : [{offset : 0xF8F20, off: [0xFE, 0x64, 0x0E], on : [0x90, 0x90, 0x90]},
+                                {offset : 0xFDD47, off: [1], on : [0]}]
+                    },
+                    {
                      name : "Unlock Classic 8 EX as a 49",
                      patches : [{offset : 0x2EFE87, off: [0x05], on : [0x07]},
                                 {offset : 0x2EFE95, off: [0x01], on : [0x31]}]

@@ -55,6 +55,11 @@
                      patches : [{offset : 0x6F3E6, off: [0x5E, 0xE9, 0x24, 0xFF, 0xFF, 0xFF], on : [0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}]
                     },
                     {
+                     name : "Quick Retry",
+                     tooltip : "Hold VEFX and Effect during a song to restart",
+                     patches : [{offset : 0x46724, off: [0x8A, 0xC3], on : [0xB0, 0x01]}]
+                    },
+                    {
                      name : "Dark Mode",
                      patches : [{offset : 0x68833, off: [0x74, 0x32], on : [0x90, 0x90]}]
                     },

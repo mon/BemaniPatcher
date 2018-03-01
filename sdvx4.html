@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>SDVX IV DLL Modder</title>
+    <link rel='stylesheet' href='css/style.css'>
+    <!-- don't hate -->
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <script type='text/javascript' src='js/FileSaver.min.js'></script>
+    <script type='text/javascript' src='js/dllpatcher.js'></script>
+    <script type='text/javascript'>
+      window.addEventListener('load', function () {
+        // all patches ported to IV by Zelminar unless specified otherwise
+        // all original patches created by DJH unless specified otherwise
+        new DllPatcher('soundvoltex', [
+          {
+            name: 'All songs/difficulties unlocked',
+            patches: [{offset: 0x152142, off: [0xE8, 0xF9, 0x41, 0x02], on: [0xB8, 0x0D, 0x00, 0x00]},
+              {
+                offset: 0x1B4A31,
+                off: [0x8B, 0x44, 0x24, 0x20, 0xE8, 0xA6, 0xEC, 0xFF, 0xFF],
+                on: [0xB8, 0x03, 0x00, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90]
+              }]
+          },
+          {
+            name: 'All songs "Safe"',
+            tooltip: 'Failing early won\'t drop you out of your session',
+            patches: [{offset: 0x171B07, off: [0x32, 0xC0], on: [0xB0, 0x01]}]
+          },
+          {
+            // Created by mon
+            name: 'No "Safe" banner on jackets',
+            tooltip: 'Remove visual clutter',
+            patches: [{offset: 0x171B07, off: [0x32, 0xC0], on: [0xB0, 0x01]}]
+          },
+          {
+            name: 'Prevent Windows volume change on boot',
+            tooltip: 'If your volume gets forced to max, turn this on',
+            patches: [{offset: 0x196562, off: [0x00], on: [0x01]}]
+          },
+          {
+            name: 'Boot into Event Mode',
+            patches: [{offset: 0x196562, off: [0x00], on: [0x01]}]
+          },
+          {
+            // created by zini
+            name: 'Disable EVENT MODE/FREE PLAY text',
+            patches: [{offset: 0xBC920, off: [0xE8, 0x6B], on: [0xEB, 0x03]}]
+          },
+          {
+            name: 'PFree (Unlimited plays)',
+            tooltip: 'Song clears/scores only, mission progress and custom settings do not save',
+            patches: [{offset: 0x1CAAFF, off: [0x00], on: [0x02]},
+              {
+                offset: 0x1CACC6,
+                off: [0x8B, 0x83, 0x64, 0x10, 0x00, 0x00, 0x8D, 0x48, 0x01, 0x83, 0xF9, 0x04, 0x56, 0x57, 0x7F, 0x52],
+                on: [0xB8, 0x01, 0x00, 0x00, 0x00, 0x89, 0x83, 0x64, 0x10, 0x00, 0x00, 0x90, 0x56, 0x57, 0x90, 0x90]
+              }]
+          },
+          {
+            // Created by mon
+            name: 'Hispeed values from 0.1 to 20.0',
+            patches: [
+              {offset: 0x12198B, off: [0xDD, 0x05, 0xF8, 0x87, 0x2D, 0x10], on: [0xD9, 0x05, 0xA0, 0x89, 0x2D, 0x10]},
+              {offset: 0x1219A0, off: [0xDD, 0x05, 0x00, 0x88, 0x2D, 0x10], on: [0xD9, 0x05, 0xE4, 0x86, 0x2D, 0x10]},
+              {offset: 0x1211C1, off: [0xDD, 0x05, 0xF8, 0x87, 0x2D, 0x10], on: [0xD9, 0x05, 0xA0, 0x89, 0x2D, 0x10]},
+              {offset: 0x1211BB, off: [0xDD, 0x05, 0x00, 0x88, 0x2D, 0x10], on: [0xD9, 0x05, 0xE4, 0x86, 0x2D, 0x10]}
+            ]
+          },
+          {
+            // thanks Element4521
+            name: 'Allow ARS (Alternative Rate System) Option',
+            tooltip: 'At gauge select, go to excessive and press BT-D to enable',
+            patches: [{offset: 0x171274, off: [0x74], on: [0xEB]}]
+          }
+        ])
+      })
+    </script>
+</head>
+<body>
+<h1>SDVX IV DLL Modder</h1>
+</body>
+</html>

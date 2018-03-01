@@ -36,7 +36,7 @@
           {
             name: 'Prevent Windows volume change on boot',
             tooltip: 'If your volume gets forced to max, turn this on',
-            patches: [{offset: 0x196562, off: [0x00], on: [0x01]}]
+            patches: [{offset: 0x2451EA, off: [0xE8, 0x21, 0x03, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90]}]
           },
           {
             name: 'Boot into Event Mode',

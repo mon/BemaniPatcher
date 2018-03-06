@@ -81,7 +81,7 @@
           },
           {
             // Created by runner38
-            name: 'Non-Effective Rate gauges does not recover',
+            name: 'Non-Effective Rate gauges do not recover',
             tooltip: 'This affects all "Hard" Gauge types',
             patches: [{offset: 0x11B14A, off: [0x01, 0x50, 0x48], on: [0x90, 0x90, 0x90]}]
           },
@@ -92,8 +92,8 @@
           },
           {
             // Created by Zelminar
-            name: 'Omega Dimension Matching by Default',
-            tooltip: 'WIP - Replace stock matching scene with Omega Dimension matching - next is to include omega dimension song replacements.',
+            name: 'Omega Dimension Matching scene as default',
+            tooltip: 'Replaces stock matching scene with Omega Dimension matching',
             patches: [{offset: 0x358B40, off: [0xDC, 0x5F, 0x30, 0x10], on: [0x38, 0x54, 0x30, 0x10]}]
           }
         ])

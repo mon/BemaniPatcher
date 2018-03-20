@@ -75,7 +75,7 @@
           },
           {
             // Created by runner38
-            name: 'Non-Effective Rate gauges Start at 0%',
+            name: 'Non-Effective Rate gauges start at 0%',
             tooltip: 'This affects all "Hard" Gauge types',
             patches: [{offset: 0x11ACD0, off: [0x10, 0x27], on: [0x01, 0x00]}]
           },
@@ -95,7 +95,13 @@
             name: 'Omega Dimension Matching scene as default',
             tooltip: 'Replaces stock matching scene with Omega Dimension matching',
             patches: [{offset: 0x358B40, off: [0xDC, 0x5F, 0x30, 0x10], on: [0x38, 0x54, 0x30, 0x10]}]
-          }
+          },
+          {
+            // Created by runner38
+            name: 'Freeze timer in all modes',
+            tooltip: 'Useful to play with Omega Dimension Ex-Track',
+            patches: [{offset: 0x75C1B, off: [0x8B, 0x43, 0x60, 0x85, 0xC0, 0x74, 0x04], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+          },
         ])
       })
     </script>

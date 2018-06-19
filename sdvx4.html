@@ -10,6 +10,42 @@
     <script type='text/javascript' src='js/dllpatcher.js'></script>
     <script type='text/javascript'>
       window.addEventListener('load', function () {
+        new DllPatcher('soundvoltex', [
+          {
+            name: 'All songs/difficulties unlocked',
+            patches: [{offset: 0x1531F2, off: [0xE8, 0x09, 0x43, 0x02], on: [0xB8, 0x0D, 0x00, 0x00]},
+              {
+                offset: 0x1B5F39,
+                off: [0x8B, 0x44, 0x24, 0x20, 0xE8, 0x3E, 0xEB, 0xFF, 0xFF],
+                on: [0xB8, 0x03, 0x00, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90]
+              }]
+          },
+          {
+            name: 'All songs "Safe"',
+            tooltip: 'Failing early won\'t drop you out of your session',
+            patches: [{offset: 0x172CDB, off: [0x32, 0xC0], on: [0xB0, 0x01]}]
+          },
+          {
+            // Created by mon
+            name: 'No "Safe" banner on jackets',
+            tooltip: 'Remove visual clutter',
+            patches: [{offset: 0x2EB3EC, off: [0x73], on: [0x00]}]
+          },
+          {
+            name: 'Boot into Event Mode',
+            patches: [{offset: 0x1977D3, off: [0x00], on: [0x01]}]
+          },
+          {
+            name: 'PFree (Unlimited plays)',
+            tooltip: 'Song clears/scores only, mission progress and custom settings do not save',
+            patches: [{offset: 0x1CC10F, off: [0x00], on: [0x02]},
+              {
+                offset: 0x1CC2D6,
+                off: [0x8B, 0x83, 0x64, 0x10, 0x00, 0x00, 0x8D, 0x48, 0x01, 0x83, 0xF9, 0x04, 0x56, 0x57, 0x7F, 0x52],
+                on: [0xB8, 0x01, 0x00, 0x00, 0x00, 0x89, 0x83, 0x64, 0x10, 0x00, 0x00, 0x90, 0x56, 0x57, 0x90, 0x90]
+              }]
+          },
+        ], "2018-01-16");
         // all patches ported to IV by Zelminar unless specified otherwise
         // all original patches created by DJH unless specified otherwise
         new DllPatcher('soundvoltex', [
@@ -102,7 +138,7 @@
             tooltip: 'Useful to play with Omega Dimension Ex-Track',
             patches: [{offset: 0x75C1B, off: [0x8B, 0x43, 0x60, 0x85, 0xC0, 0x74, 0x04], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
           },
-        ])
+        ], "2017-11-28");
       })
     </script>
 </head>

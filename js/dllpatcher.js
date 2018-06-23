@@ -31,14 +31,14 @@ StandardPatch.prototype.createUI = function(parent) {
 };
 
 StandardPatch.prototype.updateUI = function(file) {
-    this.checkbox.checked = this.checkPatchBytes(file) == "on";
+    this.checkbox.checked = this.checkPatchBytes(file) === "on";
 };
 
 StandardPatch.prototype.validatePatch = function(file) {
     var status = this.checkPatchBytes(file);
-    if(status == "on") {
+    if(status === "on") {
         console.log('"' + this.name + '"', "is enabled!");
-    } else if(status == "off") {
+    } else if(status === "off") {
         console.log('"' + this.name + '"', "is disabled!");
     } else {
         return '"' + this.name + '" is neither on nor off! Have you got the right dll?';
@@ -61,13 +61,13 @@ StandardPatch.prototype.checkPatchBytes = function(file) {
     for(var i = 0; i < this.patches.length; i++) {
         var patch = this.patches[i];
         if(bytesMatch(file, patch.offset, patch.off)) {
-            if(patchStatus == "") {
+            if(patchStatus === "") {
                 patchStatus = "off";
             } else if(patchStatus != "off"){
                 return "on/off mismatch within patch";
             }
         } else if(bytesMatch(file, patch.offset, patch.on)) {
-            if(patchStatus == "") {
+            if(patchStatus === "") {
                 patchStatus = "on";
             } else if(patchStatus != "on"){
                 return "on/off mismatch within patch";
@@ -92,7 +92,7 @@ var UnionPatch = function(options) {
 UnionPatch.prototype.createUI = function(parent) {
     this.radios = [];
     var radio_id = createID();
-    
+
     var container = $("<div>", {"class": "patch-union"});
     container.append('<span class="patch-union-title">' + this.name + ':</span>');
     for(var i = 0; i < this.patches.length; i++) {
@@ -102,7 +102,7 @@ UnionPatch.prototype.createUI = function(parent) {
         var patchDiv = $('<div>', {'class' : 'patch'});
         var radio = $('<input type="radio" id="' + id + '" name="' + radio_id + '">')[0];
         this.radios.push(radio);
-        
+
         patchDiv.append(radio);
         patchDiv.append('<label for="' + id + '">' + label + '</label>');
         if(patch.tooltip) {
@@ -148,62 +148,162 @@ UnionPatch.prototype.getSelected = function() {
     return null;
 }
 
+var DllPatcherContainer = function (patchers) {
+    this.patchers = patchers;
+    this.createUI();
+};
+
+DllPatcherContainer.prototype.getSupportedDLLs = function () {
+    var dlls = [];
+    for (var i = 0; i < this.patchers.length; i++) {
+        var name = this.patchers[i].filename + ".dll";
+        if (dlls.indexOf(name) === -1) {
+            dlls.push(name);
+        }
+    }
+    return dlls;
+};
+
+DllPatcherContainer.prototype.getSupportedVersions = function () {
+    var descriptions = [];
+    for (var i = 0; i < this.patchers.length; i++) {
+        if ($.type(this.patchers[i].description) === "string") {
+            descriptions.push(this.patchers[i].description);
+        }
+    }
+    return descriptions;
+};
+
+DllPatcherContainer.prototype.createUI = function () {
+    var self = this;
+    var container = $("<div>", {"class": "patchContainer"});
+    var header = this.getSupportedDLLs().join(", ");
+    container.html("<h3>" + header + "</h3>");
+
+    var supportedDlls = $("<ul>");
+    var versions = this.getSupportedVersions();
+    for (var i = 0; i < versions.length; i++) {
+        $("<li>").text(versions[i]).appendTo(supportedDlls);
+    }
+
+    $("html").on("dragover dragenter", function () {
+        container.addClass("dragover");
+        return true;
+    })
+        .on("dragleave dragend drop", function () {
+            container.removeClass("dragover");
+            return true;
+        })
+        .on("dragover dragenter dragleave dragend drop", function (e) {
+            e.preventDefault();
+        });
+
+    container.on("drop", function (e) {
+        var files = e.originalEvent.dataTransfer.files;
+        if (files && files.length > 0)
+            self.loadFile(files[0]);
+    });
+
+    this.fileInput = $("<input>",
+        {
+            "class": "fileInput",
+            "id": "any-file",
+            "type": "file",
+        });
+    var label = $("<label>", {"class": "fileLabel", "for": "any-file"});
+    label.html("<strong>Choose a file</strong> or drag and drop.");
+
+    this.fileInput.on("change", function (e) {
+        if (this.files && this.files.length > 0)
+            self.loadFile(this.files[0]);
+    });
+
+    this.successDiv = $("<div>", {"class": "success"});
+    this.errorDiv = $("<div>", {"class": "error"});
+
+    container.append(this.fileInput);
+    container.append(label);
+
+    if (versions.length > 0) {
+        $("<h4>Supported Versions</h4>").appendTo(container);
+    }
+    container.append(supportedDlls);
+    container.append(this.successDiv);
+    container.append(this.errorDiv);
+    $("body").append(container);
+};
+
+DllPatcherContainer.prototype.loadFile = function (file) {
+    var reader = new FileReader();
+    var self = this;
+
+    reader.onload = function (e) {
+        var found = false;
+        // clear logs
+        self.errorDiv.empty();
+        self.successDiv.empty();
+        for (var i = 0; i < self.patchers.length; i++) {
+            var patcher = self.patchers[i];
+            // remove the previous UI to clear the page
+            patcher.destroyUI();
+            // patcher UI elements have to exist to load the file
+            patcher.createUI();
+            patcher.container.hide();
+            patcher.loadBuffer(e.target.result);
+            if (patcher.validatePatches()) {
+                found = true;
+                patcher.loadPatchUI();
+                patcher.updatePatchUI();
+                patcher.container.show();
+                var successStr = patcher.filename + ".dll"
+                if ($.type(this.description) === "string") {
+                    successStr += "(" + patcher.description + ")";
+                }
+                self.successDiv.html(successStr + " loaded successfully!");
+            }
+        }
+
+        if (!found) {
+            self.errorDiv.html("No patches found matching the given DLL.");
+        }
+    };
+
+    reader.readAsArrayBuffer(file);
+};
+
 var DllPatcher = function(fname, args, description) {
     this.mods = [];
     for(var i = 0; i < args.length; i++) {
         var mod = args[i];
         if(mod.type) {
-            if(mod.type == "union") {
+            if(mod.type === "union") {
                 this.mods.push(new UnionPatch(mod));
             }
         } else { // standard patch
             this.mods.push(new StandardPatch(mod));
         }
     }
+
     this.filename = fname;
     this.description = description;
-    this.createUI();
-    this.loadPatchUI();
+    this.multiPatcher = true;
+
+    if (!this.description) {
+        // old style patcher, use the old method to generate the UI
+        this.multiPatcher = false;
+        this.createUI();
+        this.loadPatchUI();
+    }
 };
 
 DllPatcher.prototype.createUI = function() {
     var self = this;
-    var container = $("<div>", {"class": "patchContainer"});
+    this.container = $("<div>", {"class": "patchContainer"});
     var header = this.filename + '.dll';
-    if(this.description) {
+    if($.type(this.description) === "string") {
         header += ' (' + this.description + ')';
     }
-    container.html('<h3>' + header + '</h3>');
-
-    $('html').on('dragover dragenter', function() {
-        container.addClass('dragover');
-        return true;
-    })
-    .on('dragleave dragend drop', function() {
-        container.removeClass('dragover');
-        return true;
-    })
-    .on('dragover dragenter dragleave dragend drop', function(e) {
-        e.preventDefault();
-    });
-    
-    container.on('drop', function(e) {
-        var files = e.originalEvent.dataTransfer.files;
-        if(files && files.length > 0)
-            self.loadFile(files[0]);
-    })
-
-    this.fileInput = $("<input>",
-        {"class": "fileInput",
-         "id" : this.filename + '-file',
-         "type" : 'file'});
-    var label = $("<label>", {"class": "fileLabel", "for": this.filename + '-file'});
-    label.html('<strong>Choose a file</strong> or drag and drop.');
-
-    this.fileInput.on('change', function(e) {
-        if(this.files && this.files.length > 0)
-            self.loadFile(this.files[0]);
-    });
+    this.container.html('<h3>' + header + '</h3>');
 
     this.successDiv = $("<div>", {"class": "success"});
     this.errorDiv = $("<div>", {"class": "error"});
@@ -214,13 +314,65 @@ DllPatcher.prototype.createUI = function() {
     saveButton.on('click', this.saveDll.bind(this));
     this.saveButton = saveButton;
 
-    container.append(this.fileInput);
-    container.append(label);
-    container.append(this.successDiv);
-    container.append(this.errorDiv);
-    container.append(this.patchDiv);
-    container.append(saveButton);
-    $('body').append(container);
+    if (!this.multiPatcher) {
+        $('html').on('dragover dragenter', function() {
+            self.container.addClass('dragover');
+            return true;
+        })
+        .on('dragleave dragend drop', function() {
+            self.container.removeClass('dragover');
+            return true;
+        })
+        .on('dragover dragenter dragleave dragend drop', function(e) {
+            e.preventDefault();
+        });
+
+        this.container.on('drop', function(e) {
+            var files = e.originalEvent.dataTransfer.files;
+            if(files && files.length > 0)
+                self.loadFile(files[0]);
+        })
+
+        this.fileInput = $("<input>",
+            {"class": "fileInput",
+             "id" : this.filename + '-file',
+             "type" : 'file'});
+        var label = $("<label>", {"class": "fileLabel", "for": this.filename + '-file'});
+        label.html('<strong>Choose a file</strong> or drag and drop.');
+
+        this.fileInput.on('change', function(e) {
+            if(this.files && this.files.length > 0)
+                self.loadFile(this.files[0]);
+        });
+
+        this.container.append(this.fileInput);
+        this.container.append(label);
+    }
+
+    this.container.append(this.successDiv);
+    this.container.append(this.errorDiv);
+    this.container.append(this.patchDiv);
+    this.container.append(saveButton);
+    $("body").append(this.container);
+}
+
+DllPatcher.prototype.destroyUI = function () {
+    if (this.hasOwnProperty("container"))
+        this.container.remove();
+};
+
+DllPatcher.prototype.loadBuffer = function(buffer) {
+    this.dllFile = new Uint8Array(buffer);
+    if(this.validatePatches()) {
+        this.successDiv.removeClass("hidden");
+        this.successDiv.html("DLL loaded successfully!");
+    } else {
+        this.successDiv.addClass("hidden");
+    }
+    // Update save button regardless
+    this.saveButton.prop('disabled', false);
+    this.saveButton.text('Save DLL');
+    this.errorDiv.html(this.errorLog);
 }
 
 DllPatcher.prototype.loadFile = function(file) {
@@ -228,18 +380,8 @@ DllPatcher.prototype.loadFile = function(file) {
     var self = this;
 
     reader.onload = function(e) {
-        self.dllFile = new Uint8Array(e.target.result);
-        if(self.validatePatches()) {
-            self.successDiv.removeClass("hidden");
-            self.successDiv.html("DLL loaded successfully!");
-        } else {
-            self.successDiv.addClass("hidden");
-        }
-        // Update save button regardless
-        self.saveButton.prop('disabled', false);
-        self.saveButton.text('Save DLL');
-        self.errorDiv.html(self.errorLog);
-        self.updatePatchUI();
+        self.loadBuffer(e.target.result);
+        this.updatePatchUI();
     };
 
     reader.readAsArrayBuffer(file);
@@ -307,5 +449,6 @@ var whichBytesMatch = function(buffer, offset, bytesArray) {
 }
 
 window.DllPatcher = DllPatcher;
+window.DllPatcherContainer = DllPatcherContainer;
 
 })(window, document);

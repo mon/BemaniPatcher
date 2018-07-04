@@ -46,6 +46,11 @@
                   on: [0xB8, 0x01, 0x00, 0x00, 0x00, 0x89, 0x83, 0x64, 0x10, 0x00, 0x00, 0x90, 0x56, 0x57, 0x90, 0x90]
                 }]
             },
+            {
+              // Created by zini
+              name: 'Hide PASELI text',
+              patches: [{offset: 0xBD3BD, off: [0x0F, 0x84], on: [0x90, 0xE9]}]
+            },
           ], "2018-01-16"),
           new DllPatcher('soundvoltex', [
             {
@@ -100,7 +105,12 @@
               name: 'Freeze timer in all modes',
               tooltip: 'Useful to play with Omega Dimension Ex-Track',
               patches: [{offset: 0x7749B, off: [0x8B, 0x43, 0x60, 0x85, 0xC0, 0x74, 0x04], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
-            }
+            },
+            {
+              // Created by zini
+              name: 'Hide PASELI text',
+              patches: [{offset: 0xBEF2D, off: [0x0F, 0x84], on: [0x90, 0xE9]}]
+            },
           ], "2018-01-16 with Enhanced Continue"),
 
           // all patches ported to IV by Zelminar unless specified otherwise

@@ -205,7 +205,33 @@
               tooltip: 'Useful to play with Omega Dimension Ex-Track',
               patches: [{offset: 0x75C1B, off: [0x8B, 0x43, 0x60, 0x85, 0xC0, 0x74, 0x04], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
             },
-          ], "2017-11-28")
+          ], "2017-11-28"),
+		  
+		  new DllPatcher('soundvoltex', [
+			{
+			  name: 'All Songs "Safe"',
+			  tooltip: 'Failing early won\'t drop you out of your session',
+			  patches: [{offset: 0x178EF3, off: [0x32, 0xC0], on: [0xB0, 0x01]}]
+			},
+			{
+			  name: 'All songs/difficulties unlocked',
+			  patches: [{offset: 0x157F52, off: [0xE8, 0x89, 0x58, 0x02], on: [0xB8, 0x0D, 0x00, 0x00]},
+				{
+				  offset: 0x1BBD59,
+				  off: [0x8B, 0x44, 0x24, 0x20, 0xE8, 0x3E, 0xEB, 0xFF, 0xFF],
+				  on: [0xB8, 0x03, 0x00, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90]
+				}]
+			},
+			{
+              name: 'Prevent Windows volume change on boot',
+              tooltip: 'If your volume gets forced to max, turn this on',
+			  patches: [{offset: 0x2509fa, off: [0xE8, 0x21, 0x03, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90]}]
+			},
+			{
+			  name: 'Boot to event mode',
+			  patches: [{offset: 0x19d563, off: [0x00], on: [0x01]}]
+			}
+		  ], "2018-06-05")
         ]);
       });
     </script>

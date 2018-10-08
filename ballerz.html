@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>IIDX 25 DLL Modder</title>
+    <link rel='stylesheet' href='css/style.css'>
+    <!-- don't hate -->
+    <script src='https://code.jquery.com/jquery-3.3.1.slim.min.js'></script>
+    <script type='text/javascript' src='js/FileSaver.min.js'></script>
+    <script type='text/javascript' src='js/dllpatcher.js'></script>
+    <script type='text/javascript'>
+      window.addEventListener('load', function () {
+        new DllPatcherContainer([
+          // All ported by Xyen
+          new DllPatcher('bm2dx', [
+            {
+              name: 'Song Unlock',
+              tooltip: 'Unlock\'s all songs',
+              patches: [{offset: 0xB60B2, off: [0x74, 0x10], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'Pfree',
+              tooltip: 'Unlocks Pfree when otherwise unavailable',
+              patches: [{offset: 0xDC819, off: [0x75, 0x14], on: [0xEB, 0x14]}]
+            },
+            {
+              name: 'Premium Free Timer Freeze',
+              patches: [{offset: 0xB89BD, off: [0xFF, 0xC8], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'Cursor lock',
+              patches: [{offset: 0xDF93C, off: [0x74, 0x1D], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'CS-Style Song Start Delay',
+              patches: [{offset: 0xF5CAA, off: [0x7D, 0x25], on: [0x90, 0x90]}]
+            },
+          ], "2018-09-19"),
+          new DllPatcher('bm2dx', [
+            {
+              name: 'Song Unlock',
+              tooltip: 'Unlock\'s all songs',
+              patches: [{offset: 0xB61D2, off: [0x74, 0x10], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'Pfree',
+              tooltip: 'Unlocks Pfree when otherwise unavailable',
+              patches: [{offset: 0xDC949, off: [0x75, 0x14], on: [0xEB, 0x14]}]
+            },
+            {
+              name: 'Premium Free Timer Freeze',
+              patches: [{offset: 0xB8ADD, off: [0xFF, 0xC8], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'Cursor lock',
+              patches: [{offset: 0xDFA2C, off: [0x74, 0x1D], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'CS-Style Song Start Delay',
+              patches: [{offset: 0xF5D9A, off: [0x7D, 0x25], on: [0x90, 0x90]}]
+            },
+          ], "2018-07-24"),
+          new DllPatcher('bm2dx', [
+            {
+              name: 'Song Unlock',
+              tooltip: 'Unlock\'s all songs',
+              patches: [{offset: 0xB42D2, off: [0x74, 0x10], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'Pfree',
+              tooltip: 'Unlocks Pfree when otherwise unavailable',
+              patches: [{offset: 0xDA3C9, off: [0x75, 0x14], on: [0xEB, 0x14]}]
+            },
+            {
+              name: 'Premium Free Timer Freeze',
+              patches: [{offset: 0xB682D, off: [0xFF, 0xC8], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'Cursor lock',
+              patches: [{offset: 0xDD4AC, off: [0x74, 0x1D], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'CS-Style Song Start Delay',
+              patches: [{offset: 0xF296A, off: [0x7D, 0x25], on: [0x90, 0x90]}]
+            },
+          ], "2018-06-13"),
+        ]);
+      });
+    </script>
+</head>
+<body>
+<h1>IIDX 25 DLL Modder</h1>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
     <meta charset='utf-8'>
-    <title>IIDX 25 DLL Modder</title>
+    <title>IIDX Cannon Ballers DLL Modder</title>
     <link rel='stylesheet' href='css/style.css'>
     <!-- don't hate -->
     <script src='https://code.jquery.com/jquery-3.3.1.slim.min.js'></script>
@@ -14,13 +14,11 @@
           // All ported by Xyen
           new DllPatcher('bm2dx', [
             {
-              name: 'Song Unlock',
-              tooltip: 'Unlock\'s all songs',
+              name: 'Unlock All Songs',
               patches: [{offset: 0xB60B2, off: [0x74, 0x10], on: [0x90, 0x90]}]
             },
             {
-              name: 'Pfree',
-              tooltip: 'Unlocks Pfree when otherwise unavailable',
+              name: 'Premium Free',
               patches: [{offset: 0xDC819, off: [0x75, 0x14], on: [0xEB, 0x14]}]
             },
             {
@@ -29,22 +27,22 @@
             },
             {
               name: 'Cursor lock',
+              tooltip : "After song finishes, song select remains on previous song",
               patches: [{offset: 0xDF93C, off: [0x74, 0x1D], on: [0x90, 0x90]}]
             },
             {
               name: 'CS-Style Song Start Delay',
+              tooltip : "Holding Start will pause the song at the beginning until you release it",
               patches: [{offset: 0xF5CAA, off: [0x7D, 0x25], on: [0x90, 0x90]}]
             },
           ], "2018-09-19"),
           new DllPatcher('bm2dx', [
             {
-              name: 'Song Unlock',
-              tooltip: 'Unlock\'s all songs',
+              name: 'Unlock All Songs',
               patches: [{offset: 0xB61D2, off: [0x74, 0x10], on: [0x90, 0x90]}]
             },
             {
-              name: 'Pfree',
-              tooltip: 'Unlocks Pfree when otherwise unavailable',
+              name: 'Premium Free',
               patches: [{offset: 0xDC949, off: [0x75, 0x14], on: [0xEB, 0x14]}]
             },
             {
@@ -53,22 +51,22 @@
             },
             {
               name: 'Cursor lock',
+              tooltip : "After song finishes, song select remains on previous song",
               patches: [{offset: 0xDFA2C, off: [0x74, 0x1D], on: [0x90, 0x90]}]
             },
             {
               name: 'CS-Style Song Start Delay',
+              tooltip : "Holding Start will pause the song at the beginning until you release it",
               patches: [{offset: 0xF5D9A, off: [0x7D, 0x25], on: [0x90, 0x90]}]
             },
           ], "2018-07-24"),
           new DllPatcher('bm2dx', [
             {
-              name: 'Song Unlock',
-              tooltip: 'Unlock\'s all songs',
+              name: 'Unlock All Songs',
               patches: [{offset: 0xB42D2, off: [0x74, 0x10], on: [0x90, 0x90]}]
             },
             {
-              name: 'Pfree',
-              tooltip: 'Unlocks Pfree when otherwise unavailable',
+              name: 'Premium Free',
               patches: [{offset: 0xDA3C9, off: [0x75, 0x14], on: [0xEB, 0x14]}]
             },
             {
@@ -77,10 +75,12 @@
             },
             {
               name: 'Cursor lock',
+              tooltip : "After song finishes, song select remains on previous song",
               patches: [{offset: 0xDD4AC, off: [0x74, 0x1D], on: [0x90, 0x90]}]
             },
             {
               name: 'CS-Style Song Start Delay',
+              tooltip : "Holding Start will pause the song at the beginning until you release it",
               patches: [{offset: 0xF296A, off: [0x7D, 0x25], on: [0x90, 0x90]}]
             },
           ], "2018-06-13"),
@@ -89,6 +89,6 @@
     </script>
 </head>
 <body>
-<h1>IIDX 25 DLL Modder</h1>
+<h1>IIDX Cannon Ballers DLL Modder</h1>
 </body>
 </html>

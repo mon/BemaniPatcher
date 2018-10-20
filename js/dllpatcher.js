@@ -381,7 +381,7 @@ DllPatcher.prototype.loadFile = function(file) {
 
     reader.onload = function(e) {
         self.loadBuffer(e.target.result);
-        this.updatePatchUI();
+        self.updatePatchUI();
     };
 
     reader.readAsArrayBuffer(file);

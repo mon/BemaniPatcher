@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>pop'n music うさぎと猫と少年の夢 DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- don't hate -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/FileSaver.min.js"></script>
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function() {
+            new DllPatcher("popn22", [
+                {
+                    name : "E: drive fix",
+                    tooltip: "Fix crash caused by no E: drive",
+                    patches : [{offset : 0x25A5D0, off: [0x65, 0x3A, 0x2F], on : [0x64, 0x65, 0x76]}]
+                },
+            ]);
+        });
+    </script>
+</head>
+<body>
+    <h1>pop'n music うさぎと猫と少年の夢 DLL Modder</h1>
+</body>
+</html>

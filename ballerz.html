@@ -11,29 +11,112 @@
     <script type='text/javascript'>
       window.addEventListener('load', function () {
         new DllPatcherContainer([
-          // All ported by Xyen
           new DllPatcher('bm2dx', [
             {
+                // ported by Xyen
               name: 'Unlock All Songs',
               patches: [{offset: 0xB60B2, off: [0x74, 0x10], on: [0x90, 0x90]}]
             },
             {
-              name: 'Premium Free',
+                // ported by a machine
+              name: 'Unlock All 12s',
+              patches: [{offset: 0xB5FB0, off: [0x83, 0xFF, 0x02, 0x74, 0x05, 0x83, 0xFF, 0x05], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+            },
+            {
+                // ported by Xyen
+              name: '1P Premium Free',
               patches: [{offset: 0xDC819, off: [0x75, 0x14], on: [0xEB, 0x14]}]
             },
             {
+                // ported by a machine
+              name: '2P Premium Free',
+              patches: [{offset: 0xDC9B2, off: [0x74, 0x6C], on: [0x90, 0x90]}, 
+                        {offset: 0xDC9C8, off: [0x74, 0x56], on: [0x90, 0x90]}]
+            },
+            {
+                // ported by Xyen
               name: 'Premium Free Timer Freeze',
               patches: [{offset: 0xB89BD, off: [0xFF, 0xC8], on: [0x90, 0x90]}]
             },
             {
+                // ported by Zelminar
+              name: 'Standard/Menu Timer Freeze',
+              patches: [{offset: 0x1237E7, off: [0x74], on: [0xEB]}]
+            },
+            {
+                // ported by Zelminar
+              name: '90sec Music Select Timer',
+              tooltip : "Make sure your Select Time option is set to \"45 SEC\" in the Game Options for this to work!",
+              patches: [{offset: 0x5DDA5, off: [0x2D], on: [0x5A]}]
+            },
+            {
+                // ported by Xyen
               name: 'Cursor lock',
               tooltip : "After song finishes, song select remains on previous song",
               patches: [{offset: 0xDF93C, off: [0x74, 0x1D], on: [0x90, 0x90]}]
             },
             {
+                // ported by Xyen
               name: 'CS-Style Song Start Delay',
               tooltip : "Holding Start will pause the song at the beginning until you release it",
               patches: [{offset: 0xF5CAA, off: [0x7D, 0x25], on: [0x90, 0x90]}]
+            },
+            {
+                // ported by Zelminar
+              name: 'Free play text to LED ticker (Bottom Right)',
+              tooltip : "Song Title/Ticker information will display instead of FREEPLAY",
+              patches: [{offset: 0x640BF, off: [0x05, 0xB7, 0x15, 0x00], on: [0xD9, 0x68, 0x44, 0x02]}]
+            },
+            {
+                // ported by Zelminar
+              name: 'LED Ticker (Top Left)',
+              tooltip : "This does NOT require FREEPLAY on",
+              patches: [{offset: 0x10A800, off: [0x1C, 0x73, 0x15, 0x00], on: [0x98, 0x01, 0x3A, 0x02]}, 
+                        {offset: 0x10A9D8, off: [0x74, 0x3C], on: [0x90, 0x90]}]
+            },
+            {
+                // ported by Zelminar
+              name: 'Dark Mode',
+              tooltip : "Removes frame assets from playfield during song",
+              patches: [{offset: 0xEB231, off: [0x74, 0x4B], on: [0x90, 0x90]}]
+            },
+            {
+                // ported by Zelminar
+                // discovered by dogelition_man
+              name: 'Disable Bar Lines',
+              tooltip : "Removes white measure bars during song. Great with Dark Mode.",
+              patches: [{offset: 0x8AE8B, off: [0x75], on: [0xEB]}]
+            },
+            {
+                // ported by Zelminar
+              name: 'Remove Song Select Color Banners',
+              patches: [{offset: 0x1C5395, off: [0x5F], on: [0x00]}, 
+                        {offset: 0x1C53A5, off: [0x5F], on: [0x00]},
+                        {offset: 0x1C53B5, off: [0x5F], on: [0x00]},
+                        {offset: 0x1C53C5, off: [0x5F], on: [0x00]}]
+            },
+            {
+                // ported by Zelminar
+              name: 'Quick Retry',
+              tooltip : "Guest or non-VIP Card Players - Hold VEFX and Effect during a song to quick restart",
+              patches: [{offset: 0xA3FFF, off: [0x32, 0xC0], on: [0xB0, 0x01]}]
+            },
+            {
+                // ported by Zelminar
+              name: 'Debug Mode',
+              tooltip : "While in game, press F1 to enable menu",
+              patches: [{offset: 0x660D0, off: [0x32, 0xC0], on: [0x0C, 0x01]}]
+            },
+            {
+                // ported by Zelminar
+              name: 'Skip Card Entry',
+              tooltip : "Useful for those without service or wish to prevent login",
+              patches: [{offset: 0xC06EF, off: [0x32], on: [0x20]}]
+            },
+            {
+                // ported by Zelminar
+              name: 'Expert Course Force Open (In offline or local mode)',
+              patches: [{offset: 0xDC953, off: [0x75], on: [0xEB]}]
             },
           ], "2018-09-19"),
           new DllPatcher('bm2dx', [

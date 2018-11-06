@@ -23,6 +23,11 @@
               patches: [{offset: 0xB5FB0, off: [0x83, 0xFF, 0x02, 0x74, 0x05, 0x83, 0xFF, 0x05], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
             },
             {
+                // ported by Iemnok?
+              name: 'Skip CAMERA DEVICE ERROR prompt',
+              patches: [{offset: 0x10C5FB, off: [0x84], on: [0x85]}]
+            },
+            {
                 // ported by Xyen
               name: '1P Premium Free',
               patches: [{offset: 0xDC819, off: [0x75, 0x14], on: [0xEB, 0x14]}]

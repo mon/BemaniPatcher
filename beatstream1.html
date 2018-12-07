@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Beatstream 2 DLL Modder</title>
+        <title>BeatStream 1 DLL Modder</title>
         <link rel="stylesheet" href="css/style.css">
         <!-- don't hate -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -10,26 +10,18 @@
         <script type="text/javascript" src="js/dllpatcher.js"></script>
         <script type="text/javascript">
             window.addEventListener("load", function() {
-                new DllPatcher("beatstream2", [
+                new DllPatcher("beatstream1", [
                     {
                         name: "E: drive fix",
                         tooltip: "Fix crash caused by no E: drive",
-                        patches: [{offset: 0x8645FC, off: [0x65, 0x3A, 0x2F], on: [0x64, 0x65, 0x76]}]
+                        patches: [{offset: 0xB6A994, off: [0x65, 0x3A, 0x2F], on: [0x64, 0x65, 0x76]}]
                     },
                     {
                         name: "Unlock all songs",
                         patches: [{
-                            offset: 0x16CCB1, 
-                            off: [0x48, 0x83, 0xFD, 0x10, 0x72, 0x03, 0x48, 0x8B, 0x09, 0x41],
-                            on: [0xBE, 0x00, 0x00, 0x00, 0x00, 0xE9, 0x3A, 0x01, 0x00, 0x00]
-                        }]
-                    },
-                    {
-                        name: "NIGHTMARE difficulty unlock",
-                        patches: [{
-                            offset: 0x16EADE, 
-                            off: [0x8B, 0xCB, 0xE8, 0xDB, 0xB4, 0x0E],
-                            on: [0xB0, 0x01, 0xE9, 0xAD, 0x00, 0x00]
+                            offset: 0x1740B6, 
+                            off: [0x48, 0x83, 0xFD, 0x10, 0x72, 0x09, 0x48, 0x8B, 0x79, 0x08],
+                            on: [0xBB, 0x00, 0x00, 0x00, 0x00, 0xE9, 0xAE, 0x01, 0x00, 0x00]
                         }]
                     },
                 ]);
@@ -37,6 +29,6 @@
         </script>
     </head>
     <body>
-        <h1>BeatStream 2 アニムトライヴ DLL Modder</h1>
+        <h1>BeatStream 1 DLL Modder</h1>
     </body>
 </html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>DDR A DLL Modder</title>
+    <link rel='stylesheet' href='css/style.css'>
+    <!-- don't hate -->
+    <script src='https://code.jquery.com/jquery-3.3.1.slim.min.js'></script>
+    <script type='text/javascript' src='js/FileSaver.min.js'></script>
+    <script type='text/javascript' src='js/dllpatcher.js'></script>
+    <script type='text/javascript'>
+      window.addEventListener('load', function () {
+        new DllPatcherContainer([
+          new DllPatcher('gamemdx', [
+            {
+              name: 'Force enable fast/slow',
+              patches: [{offset: 0x84EC0, off: [0x8B, 0x41, 0x44], on: [0x31, 0xC0, 0x40]}]
+            },
+            {
+              name: 'Force background judgement',
+              patches: [{offset: 0x84EB0, off: [0x8B, 0x41, 0x40], on: [0x31, 0xC0, 0x40]}]
+            },
+            {
+              name: 'Force darkest background',
+              patches: [
+                {offset: 0x84E84, off: [0xCC, 0xCC, 0xCC, 0xCC, 0xCC], on: [0x31, 0xC0, 0xB0, 0x03, 0xC3]},
+                {offset: 0x1AE383, off: [0x40, 0xDF, 0x0D, 0x10], on: [0x84, 0x5A, 0x08, 0x10]}
+              ]
+            },
+            {
+              name: 'Unlock region',
+              patches: [{offset: 0x1AE578, off: [0x77], on: [0x78]}]
+            },
+            {
+              name: 'Unlock all songs',
+              patches: [{offset: 0x1AE58C, off: [0x6C], on: [0x66]}]
+            },
+          ], "2018-04-23"),
+        ]);
+      });
+    </script>
+</head>
+<body>
+<h1>DDR A DLL Modder</h1>
+</body>
+</html>

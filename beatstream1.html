@@ -10,20 +10,22 @@
         <script type="text/javascript" src="js/dllpatcher.js"></script>
         <script type="text/javascript">
             window.addEventListener("load", function() {
-                new DllPatcher("beatstream1", [
-                    {
-                        name: "E: drive fix",
-                        tooltip: "Fix crash caused by no E: drive",
-                        patches: [{offset: 0xB6A994, off: [0x65, 0x3A, 0x2F], on: [0x64, 0x65, 0x76]}]
-                    },
-                    {
-                        name: "Unlock all songs",
-                        patches: [{
-                            offset: 0x1740B6, 
-                            off: [0x48, 0x83, 0xFD, 0x10, 0x72, 0x09, 0x48, 0x8B, 0x79, 0x08],
-                            on: [0xBB, 0x00, 0x00, 0x00, 0x00, 0xE9, 0xAE, 0x01, 0x00, 0x00]
-                        }]
-                    },
+                new DllPatcherContainer([
+                    new DllPatcher("beatstream1", [
+                        {
+                            name: "E: drive fix",
+                            tooltip: "Fix crash caused by no E: drive",
+                            patches: [{offset: 0xB6A994, off: [0x65, 0x3A, 0x2F], on: [0x64, 0x65, 0x76]}]
+                        },
+                        {
+                            name: "Unlock all songs",
+                            patches: [{
+                                offset: 0x1740B6, 
+                                off: [0x48, 0x83, 0xFD, 0x10, 0x72, 0x09, 0x48, 0x8B, 0x79, 0x08],
+                                on: [0xBB, 0x00, 0x00, 0x00, 0x00, 0xE9, 0xAE, 0x01, 0x00, 0x00]
+                            }]
+                        },
+                    ], "2015-12-01"),
                 ]);
             });
         </script>

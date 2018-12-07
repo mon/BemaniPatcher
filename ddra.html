@@ -13,7 +13,7 @@
         new DllPatcherContainer([
           new DllPatcher('gamemdx', [
             {
-              name: 'Force Enable fast/slow',
+              name: 'Force enable fast/slow',
               patches: [{offset: 0x84EC0, off: [0x8B, 0x41, 0x44], on: [0x31, 0xC0, 0x40]}]
             },
             {

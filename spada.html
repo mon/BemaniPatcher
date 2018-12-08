@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>IIDX SPADA DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- don't hate -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/FileSaver.min.js"></script>
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            new DllPatcherContainer([
+                new DllPatcher("bm2dx", [
+                    {
+                        name: "Timer Freeze",
+                        patches: [{offset: 0x9150E, off: [0x74], on: [0xEB]}]
+                    },
+                    {
+                        name: "Unlock all songs",
+                        patches: [{offset: 0x48C3D, off: [0x75, 0x09], on: [0x90, 0x90]}]
+                    },
+                    {
+                         name: "CS-Style Song Start Delay",
+                         tooltip: "Holding Start will pause the song at the beginning until you release it",
+                         patches: [{offset: 0x6A046, off: [0x7C], on: [0xEB]}]
+                    },
+                    {
+                        name: "Premium Free",
+                        patches: [{offset: 0x4F2DA, off: [0x75], on: [0xEB]}]
+                    },
+                    {
+                        name: "Premium Free Timer Freeze",
+                        patches: [{offset: 0x4882D, off: [0x48], on: [0x90]}]
+                    },
+                    {
+                        name: "Hide FREE PLAY text",
+                        patches: [{offset: 0x13E8A, off: [0xEC, 0x0B, 0x15], on: [0x14, 0xC8, 0xC7]}]
+                    },
+                    {
+                        name: "Cursor lock",
+                        tooltip: "After song finishes, song select remains on previous song",
+                        patches: [{offset: 0x5C3EE, off: [0x74, 0x22], on: [0x90, 0x90]}]
+                    },
+                    {
+                        name: "Volume Bug Fix",
+                        tooltip: "If your volume gets forced to max, turn this on",
+                        patches: [{offset: 0xCA369, off: [0x00], on: [0x01]}]
+                    },
+                    {
+                        name: "Debug mode (disables score saving!)",
+                        tooltip: "Press F1 in-game to open menu",
+                        patches: [{offset: 0x9E090, off: [0x32, 0xC0], on: [0x0C, 0x01]}]
+                    },
+                    {
+                        name: "Free play text to LED ticker",
+                        patches: [{offset: 0x13E8A, off: [0xEC, 0x0B, 0x15, 0x10], on: [0xF4, 0xAE, 0x41, 0x11]}]
+                    },
+                ], "2014-07-16"),
+            ]);
+        });
+    </script>
+</head>
+<body>
+    <h1>IIDX SPADA DLL Modder</h1>
+</body>
+</html>

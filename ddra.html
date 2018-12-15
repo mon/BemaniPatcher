@@ -24,12 +24,8 @@
                         name: "Force darkest background",
                         patches: [
                             {offset: 0x84E84, off: [0xCC, 0xCC, 0xCC, 0xCC, 0xCC], on: [0x31, 0xC0, 0xB0, 0x03, 0xC3]},
-                            {offset: 0x1AE383, off: [0x40, 0xDF, 0x0D, 0x10], on: [0x84, 0x5A, 0x08, 0x10]}
+                            {offset: 0x1AE838, off: [0x40, 0xDF, 0x0D, 0x10], on: [0x84, 0x5A, 0x08, 0x10]}
                         ]
-                    },
-                    {
-                        name: "Unlock region",
-                        patches: [{offset: 0x1AE578, off: [0x77], on: [0x78]}]
                     },
                     {
                         name: "Unlock all songs",

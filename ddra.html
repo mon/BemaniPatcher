@@ -39,6 +39,16 @@
                         name: "Timer Freeze",
                         patches: [{offset: 0x23127, off: [0x74], on: [0xEB]}]
                     },
+                    {
+                        name: "Unlock options",
+                        patches: [{offset: 0x73E52, off: [0x75], on: [0xEB]}]
+                    },
+                    {
+                        name: "Force Extra Stage/Extra Encore Stage",
+                        patches: [
+                            {offset: 0x547A7, off: [0x8B, 0x0D, 0xEC, 0xA2, 0x1D, 0x10], on: [0xB9, 0x04, 0x00, 0x00, 0x00, 0x90]}
+                        ]
+                    },
                 ], "2018-04-23"),
             ]);
         });

@@ -75,6 +75,15 @@
               patches: [{offset: 0xF5CAA, off: [0x7D, 0x25], on: [0x90, 0x90]}]
             },
             {
+              // discovered by dogeilition_man with some help from zelminar
+              name: 'Play video preview on all songs',
+              tooltip : "By default, only some songs in the beginner folder show a BGA preview on the music select screen. This edit extends this function to every song in any folder.",
+              patches: [
+                {offset: 0x75422, off: [0x74, 0x15], on: [0x90, 0x90]},
+                {offset: 0x7243C, off: [0x0F, 0xB6], on: [0xEB, 0x2F]}
+              ]
+            },
+            {
               name: 'Hide INSERT COIN[S] text',
               patches: [{offset : 0x64389, off: [0x1B], on: [0x1A]}]
             },

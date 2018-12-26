@@ -11,6 +11,81 @@
     <script type='text/javascript'>
       window.addEventListener('load', function () {
         new DllPatcherContainer([
+          new DllPatcher('soundvoltex', [
+            {
+              name: 'All songs/difficulties unlocked',
+              patches: [
+                {offset: 0x158052, off: [0xE8, 0x89, 0x5C, 0x02], on: [0xB8, 0x0D, 0x00, 0x00]},
+                {
+                  offset: 0x1BE669,
+                  off: [0x8B, 0x44, 0x24, 0x20, 0xE8, 0x3E, 0xEB, 0xFF, 0xFF],
+                  on: [0xB8, 0x03, 0x00, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90]
+                }
+              ]
+            },
+            {
+              name: 'All Songs "Safe"',
+              tooltip: 'Failing early won\'t drop you out of your session',
+              patches: [{offset: 0x179393, off: [0x32, 0xC0], on: [0xB0, 0x01]}]
+            },
+            {
+              // Ported by kbh
+              // Created by mon
+              name: 'No "Safe" banner on jackets',
+              tooltip: 'Remove visual clutter',
+              patches: [{offset: 0x2FA1A8, off: [0x73], on: [0x00]}]
+            },
+            {
+              name: 'Prevent Windows volume change on boot',
+              tooltip: 'If your volume gets forced to max, turn this on',
+              patches: [{offset: 0x2540BA, off: [0xE8, 0x21, 0x03, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90]}]
+            },
+            {
+              name: 'Boot into Event Mode',
+              patches: [{offset: 0x19DC52, off: [0x00], on: [0x01]}]
+            },
+            {
+              name: 'PFree (Unlimited plays)',
+              tooltip: 'Song clears/scores only, mission progress and custom settings do not save',
+              patches: [
+                // Augmented by mon to work offline too
+                {offset: 0x1D5BCF, off: [0x00], on: [0x02]},
+                {
+                  offset: 0x1D5DB6,
+                  off: [0x8B, 0x83, 0x64, 0x10, 0x00, 0x00, 0x8D, 0x48, 0x01, 0x83, 0xF9, 0x04, 0x56, 0x57, 0x7F, 0x52],
+                  on: [0xB8, 0x01, 0x00, 0x00, 0x00, 0x89, 0x83, 0x64, 0x10, 0x00, 0x00, 0x90, 0x56, 0x57, 0x90, 0x90]
+                }
+              ]
+            },
+            {
+              // Ported by someone
+              // Created by mon
+              name: 'Allow ARS (Alternative Rate System) Option',
+              tooltip: 'At gauge select, go to excessive and press BT-D to enable',
+              patches: [{offset: 0x178AA4, off: [0x74], on: [0xEB]}]
+            },
+            {
+              // Ported by someone
+              // Created by runner38
+              name: 'Freeze timer in all modes',
+              tooltip: 'Useful to play with Omega Dimension Ex-Track',
+              patches: [{offset: 0x776EB, off: [0x8B, 0x43, 0x60, 0x85, 0xC0, 0x74, 0x04], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+            },
+            {
+              // Ported by someone
+              // Created by runner38
+              name: 'Non-Effective Rate gauges start at 0%',
+              tooltip: 'This affects all "Hard" Gauge types',
+              patches: [{offset: 0x11FE30, off: [0x10, 0x27], on: [0x01, 0x00]}]
+            },
+            {
+              // Ported by someone
+              // Created by runner38
+              name: 'Non-Effective Rate gauges do not recover',
+              tooltip: 'This affects all "Hard" Gauge types',
+              patches: [{offset: 0x1202AA, off: [0x01, 0x50, 0x48], on: [0x90, 0x90, 0x90]}]
+            },
+          ], "2018-08-21 (01)"),
 
           new DllPatcher('soundvoltex', [
             {

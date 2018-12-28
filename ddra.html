@@ -46,9 +46,21 @@
                         patches: [{offset: 0x73E52, off: [0x75], on: [0xEB]}]
                     },
                     {
-                        name: "Force Extra Stage/Extra Encore Stage",
+                        name: "Force Extra Stage/Extra Encore Stage (fixed)",
                         patches: [
-                            {offset: 0x547A7, off: [0x8B, 0x0D, 0xEC, 0xA2, 0x1D, 0x10], on: [0xB9, 0x04, 0x00, 0x00, 0x00, 0x90]}
+                            {offset: 0x5483B, off: [0x0F, 0x85], on: [0x90, 0xE9]},
+                            {offset: 0x549C0, off: [0x0F, 0x85], on: [0x90, 0xE9]},
+                        ]
+                    },
+                    {
+                        name: "Disable Credit Consumption",
+                        tooltip: "Similar to FREE PLAY, but allows premium credit options",
+                        patches: [
+                            {offset: 0x8B8A, off: [0x74, 0x0B], on: [0xEB, 0x09]},
+                            {offset: 0x8BEC, off: [0x74, 0x0B], on: [0xEB, 0x09]},
+                            {offset: 0x8C4C, off: [0x74, 0x0B], on: [0xEB, 0x09]},
+                            {offset: 0x8BC9, off: [0x74, 0x2E], on: [0xEB, 0x2C]},
+                            {offset: 0x8C29, off: [0x74, 0x2E], on: [0xEB, 0x2C]},
                         ]
                     },
                 ], "2018-04-23"),

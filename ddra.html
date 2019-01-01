@@ -28,9 +28,21 @@
                         ]
                     },
                     {
-                        name: "Unlock all songs",
-                        tooltip: "May have negative effects, recommended to manually unlock songs in music database",
+                        name: "Unlock all songs (old)",
+                        tooltip: "Do not use this anymore. It's only here to toggle off.",
                         patches: [{offset: 0x1AE58C, off: [0x6C], on: [0x66]}]
+                    },
+                    {
+                        name: "Unlock all songs",
+                        tooltip: "Unlocks all e-amusement songs, event mode songs, ACES FOR ACES and ENDYMION",
+                        patches: [
+                            //e-amusement
+                            {offset: 0x86CD8, off: [0x32, 0xC0], on: [0xB0, 0x01]},
+                            //event mode 
+                            {offset: 0x7DEFE, off: [0x75], on: [0xEB]},
+                            //ACES FOR ACES, ENDYMION
+                            {offset: 0x7DF3E, off: [0x32, 0xC0], on: [0xB0, 0x01]},
+                        ]
                     },
                     {
                         name: "Tutorial Skip",
@@ -54,7 +66,7 @@
                     },
                     {
                         name: "Disable Credit Consumption",
-                        tooltip: "Similar to FREE PLAY, but allows premium credit options",
+                        tooltip: "Similar to FREE PLAY, but allows premium credit options. Requires 1 credit.",
                         patches: [
                             {offset: 0x8B8A, off: [0x74, 0x0B], on: [0xEB, 0x09]},
                             {offset: 0x8BEC, off: [0x74, 0x0B], on: [0xEB, 0x09]},

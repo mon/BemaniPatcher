@@ -159,6 +159,10 @@ h3 {
     line-height: 1.2;
 }
 
+h1 {
+    text-align: center;
+}
+
 h1 a {
     color: inherit;
     text-decoration: inherit;

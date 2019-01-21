@@ -12,7 +12,7 @@
       window.addEventListener('load', function () {
         new DllPatcherContainer([
           new DllPatcher('soundvoltex', [
-			{
+            {
               name: 'All songs/difficulties unlocked',
               patches: [
                 {
@@ -32,7 +32,7 @@
               tooltip: 'Failing early won\'t drop you out of your session',
               patches: [{offset : 0x179393, off: [0x32, 0xC0], on: [0xB0, 0x01]}]
             },
-			{
+            {
               name: 'No "Safe" banner on jackets',
               tooltip: 'Remove visual clutter',
               patches: [{offset: 0x2FA1A8, off: [0x73], on: [0x00]}]
@@ -46,7 +46,7 @@
               name: 'Boot into Event Mode',
               patches: [{offset: 0x19DC52, off: [0x00], on: [0x01]}]
             },
-			{
+            {
               name: 'Disable EVENT MODE/FREE PLAY text',
               patches: [{offset: 0xBF3A0, off: [0xE8, 0x0b], on: [0xEB, 0x03]}]
             },
@@ -66,7 +66,7 @@
                 }
               ]
             },
-			{
+            {
               name: 'Allow ARS (Alternative Rate System) Option',
               tooltip: 'At gauge select, go to excessive and press BT-D to enable',
               patches: [{offset : 0x178AA4, off: [0x74], on : [0xEB]}]
@@ -76,12 +76,12 @@
               tooltip: 'Useful to play with Omega Dimension Ex-Track',
               patches: [{offset: 0x776EB, off: [0x8B, 0x43, 0x60, 0x85, 0xC0, 0x74, 0x04], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
             },
-			{
+            {
               name: 'Non-Effective Rate gauges start at 0%',
               tooltip: 'This affects all "Hard" Gauge types',
               patches: [{offset: 0x11FE30, off: [0x10, 0x27], on: [0x01, 0x00]}]
             },
-			{
+            {
               name: 'Non-Effective Rate gauges do not recover',
               tooltip: 'This affects all "Hard" Gauge types',
               patches: [{offset: 0x1202AA, off: [0x01, 0x50, 0x48], on: [0x90, 0x90, 0x90]}]
@@ -118,7 +118,7 @@
             ]
            },
           ], "2018-10-23"),
-		  new DllPatcher('soundvoltex', [
+          new DllPatcher('soundvoltex', [
             {
               name: 'All songs/difficulties unlocked',
               patches: [

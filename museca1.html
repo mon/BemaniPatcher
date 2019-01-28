@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Museca 1 DLL Modder</title>
+        <link rel="stylesheet" href="css/style.css">
+        <!-- don't hate -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script type="text/javascript" src="js/FileSaver.min.js"></script>
+        <script type="text/javascript" src="js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function () {
+                new DllPatcherContainer([
+                    new DllPatcher("museca", [
+                        {
+                         //Discovered by Cammy - ported by Zelminar
+                         name: "Song 1 Lock",
+                         tooltip: "Song clears/scores only. Profile progress and custom settings do not save. Reboot game to re-query for scores.",
+                         patches: [{offset: 0x27E0C7, off: [0xFF, 0x83, 0x8C, 0x09, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+                        },
+                    ], true),
+                ]);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Museca 1 DLL Modder</h1>
+    </body>
+</html>

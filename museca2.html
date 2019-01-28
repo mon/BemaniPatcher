@@ -13,16 +13,18 @@
             new DllPatcherContainer([
                 new DllPatcher("museca", [
                     {
-                        name: "Infinite 1st layer",
+                        name: "Infinite 1st layer", //Created by Cammy
                         patches: [{offset: 0x17E947, off: [0xFF, 0x83, 0x48, 0x14, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
                     },
-                ], "2017-12-25"),
+                ], "2016-07-13 -- 2017-12-25"),
                 new DllPatcher("museca", [
                     {
-                        name: "Infinite 1st layer",
+                        name: "Infinite 1st layer", //Created by Cammy
                         patches: [{offset: 0x17E587, off: [0xFF, 0x83, 0x48, 0x14, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
                     },
                 ], "2018-07-30"),
+				
+				
             ]);
         });
     </script>

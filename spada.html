@@ -13,6 +13,21 @@
             new DllPatcherContainer([
                 new DllPatcher("bm2dx", [
                     {
+                        //by nibs
+                        name: "Shorter monitor check",
+                        tooltip: "Runs for 300 frames (5 seconds) instead of 1200 (20 seconds), recommended only if you have a very stable framerate",
+                        patches: [{offset: 0x6B4AA, off: [0xB0, 0x04], on: [0x2C, 0x01]}]
+                    },
+                    {
+                        //by nibs
+                        name: "6 digits in monitor check",
+                        tooltip: "Purely visual, does not affect anything besides the FPS display",
+                        //changes the FPS = %2.4f string to FPS = %2.6f
+                        patches: [{offset: 0x160B05, off: [0x34], on: [0x36]}]
+                    },
+                ], "2013-10-02"),
+                new DllPatcher("bm2dx", [
+                    {
                         name: "Timer Freeze",
                         patches: [{offset: 0x9150E, off: [0x74], on: [0xEB]}]
                     },
@@ -55,6 +70,19 @@
                     {
                         name: "Free play text to LED ticker",
                         patches: [{offset: 0x13E8A, off: [0xEC, 0x0B, 0x15, 0x10], on: [0xF4, 0xAE, 0x41, 0x11]}]
+                    },
+                    {
+                        //by nibs
+                        name: "Shorter monitor check",
+                        tooltip: "Runs for 300 frames (5 seconds) instead of 1200 (20 seconds), recommended only if you have a very stable framerate",
+                        patches: [{offset: 0x721BA, off: [0xB0, 0x04], on: [0x2C, 0x01]}]
+                    },
+                    {
+                        //by nibs
+                        name: "6 digits in monitor check",
+                        tooltip: "Purely visual, does not affect anything besides the FPS display",
+                        //changes the FPS = %2.4f string to FPS = %2.6f
+                        patches: [{offset: 0x192175, off: [0x34], on: [0x36]}]
                     },
                 ], "2014-07-16"),
             ]);

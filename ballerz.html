@@ -172,6 +172,19 @@
               name: 'Expert Course Force Open (in offline or local mode)',
               patches: [{offset: 0xDC953, off: [0x75], on: [0xEB]}]
             },
+            {
+                //by nibs
+                name: "Shorter monitor check",
+                tooltip: "Runs for 300 frames (5 seconds) instead of 1200 (20 seconds), recommended only if you have a very stable framerate",
+                patches: [{offset: 0x104305, off: [0xB0, 0x04], on: [0x2C, 0x01]}]
+            },
+            {
+                //by nibs
+                name: "6 digits in monitor check",
+                tooltip: "Purely visual, does not affect anything besides the FPS display",
+                //changes the FPS = %2.4f string to FPS = %2.6f
+                patches: [{offset: 0x25FD41, off: [0x34], on: [0x36]}]
+            },
           ], "2018-09-19"),
           new DllPatcher('bm2dx', [
             {

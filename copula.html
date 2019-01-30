@@ -10,83 +10,98 @@
         <script type="text/javascript" src="js/dllpatcher.js"></script>
         <script type="text/javascript">
             window.addEventListener("load", function() {
-                new DllPatcher("bm2dx", [
-                    {
-                     name : "Timer Freeze",
-                     patches : [{offset : 0x8F98E, off: [0x74], on : [0xEB]}]
-                    },
-                    {
-                     name : "Premium Free",
-                     patches : [{offset : 0x562BA, off: [0x75], on : [0xEB]}]
-                    },
-                    // By mon - modifies a few more bytes than needed but whatever
-                    {
-                     name : "Premium Free (2 player mode)",
-                     patches : [{offset : 0x56424, off: [0x74, 0x2f], on : [0x90, 0x90]},
-                                {offset : 0x56435, off: [0x0f, 0x85, 0x3b], on : [0xe9, 0x3c, 0xff]},
-                                {offset : 0x5643a, off: [0xff], on : [0x90]}]
-                    },
-                    {
-                     name : "Premium Free Timer Freeze",
-                     patches : [{offset : 0x4F8FD, off: [0x48], on : [0x90]}]
-                    },
-                    {
-                     name : "Unlock All Songs",
-                     patches : [{offset : 0x4FD84, off: [0x74, 0x16], on : [0x90, 0x90]}]
-                    },
-                    {
-                     name : "Level 12 Unlocked",
-                     patches : [{offset : 0x4FE35, off: [0x83, 0xFF, 0x02, 0x74, 0x0B, 0x83, 0xFF, 0x05, 0x74, 0x06, 0xB0, 0x01],
-                                                   on : [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
-                    },
-                    {
-                     name : "Cursor lock",
-                     tooltip : "After song finishes, song select remains on previous song",
-                     patches : [{offset : 0x63722, off: [0x74, 0x23], on : [0x90, 0x90]}]
-                    },
-                    {
-                     name : "CS-Style Song Start Delay",
-                     tooltip : "Holding Start will pause the song at the beginning until you release it",
-                     patches : [{offset : 0x6F3FF, off: [0x7C], on : [0xEB]}]
-                    },
-                    {
-                     name : "Disable HCN Tutorial",
-                     tooltip : "Don't show tutorial for Hell Charge Notes",
-                     patches : [{offset : 0x6F3E6, off: [0x5E, 0xE9, 0x24, 0xFF, 0xFF, 0xFF], on : [0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}]
-                    },
-                    {
-                     name : "Quick Retry",
-                     tooltip : "Hold VEFX and Effect during a song to restart",
-                     patches : [{offset : 0x46724, off: [0x8A, 0xC3], on : [0xB0, 0x01]}]
-                    },
-                    {
-                     name : "Dark Mode",
-                     patches : [{offset : 0x68833, off: [0x74, 0x32], on : [0x90, 0x90]}]
-                    },
-                    {
-                     name : "Volume Bug Fix",
-                     tooltip : "If your volume gets forced to max, turn this on",
-                     patches : [{offset : 0xCB2B9, off: [0x00], on : [0x01]}]
-                    },
-                    {
-                     type : "union",
-                     name : "FREE PLAY text",
-                     offset : 0x1379A,
-                     patches : [
-                         {
-                          name : "On",
-                          patch : [0x88, 0x3D, 0x11, 0x10],
-                         },
-                         {
-                          name : "Off",
-                          patch : [0x87, 0x3D, 0x11, 0x10],
-                         },
-                         {
-                          name : "Replace with song name",
-                          patch : [0x54, 0x1D, 0x42, 0x11],
-                         },
-                     ]
-                    },
+                new DllPatcherContainer([
+                    new DllPatcher("bm2dx", [
+                        {
+                         name : "Timer Freeze",
+                         patches : [{offset : 0x8F98E, off: [0x74], on : [0xEB]}]
+                        },
+                        {
+                         name : "Premium Free",
+                         patches : [{offset : 0x562BA, off: [0x75], on : [0xEB]}]
+                        },
+                        // By mon - modifies a few more bytes than needed but whatever
+                        {
+                         name : "Premium Free (2 player mode)",
+                         patches : [{offset : 0x56424, off: [0x74, 0x2f], on : [0x90, 0x90]},
+                                    {offset : 0x56435, off: [0x0f, 0x85, 0x3b], on : [0xe9, 0x3c, 0xff]},
+                                    {offset : 0x5643a, off: [0xff], on : [0x90]}]
+                        },
+                        {
+                         name : "Premium Free Timer Freeze",
+                         patches : [{offset : 0x4F8FD, off: [0x48], on : [0x90]}]
+                        },
+                        {
+                         name : "Unlock All Songs",
+                         patches : [{offset : 0x4FD84, off: [0x74, 0x16], on : [0x90, 0x90]}]
+                        },
+                        {
+                         name : "Level 12 Unlocked",
+                         patches : [{offset : 0x4FE35, off: [0x83, 0xFF, 0x02, 0x74, 0x0B, 0x83, 0xFF, 0x05, 0x74, 0x06, 0xB0, 0x01],
+                                                       on : [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+                        },
+                        {
+                         name : "Cursor lock",
+                         tooltip : "After song finishes, song select remains on previous song",
+                         patches : [{offset : 0x63722, off: [0x74, 0x23], on : [0x90, 0x90]}]
+                        },
+                        {
+                         name : "CS-Style Song Start Delay",
+                         tooltip : "Holding Start will pause the song at the beginning until you release it",
+                         patches : [{offset : 0x6F3FF, off: [0x7C], on : [0xEB]}]
+                        },
+                        {
+                         name : "Disable HCN Tutorial",
+                         tooltip : "Don't show tutorial for Hell Charge Notes",
+                         patches : [{offset : 0x6F3E6, off: [0x5E, 0xE9, 0x24, 0xFF, 0xFF, 0xFF], on : [0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}]
+                        },
+                        {
+                         name : "Quick Retry",
+                         tooltip : "Hold VEFX and Effect during a song to restart",
+                         patches : [{offset : 0x46724, off: [0x8A, 0xC3], on : [0xB0, 0x01]}]
+                        },
+                        {
+                         name : "Dark Mode",
+                         patches : [{offset : 0x68833, off: [0x74, 0x32], on : [0x90, 0x90]}]
+                        },
+                        {
+                         name : "Volume Bug Fix",
+                         tooltip : "If your volume gets forced to max, turn this on",
+                         patches : [{offset : 0xCB2B9, off: [0x00], on : [0x01]}]
+                        },
+                        {
+                         type : "union",
+                         name : "FREE PLAY text",
+                         offset : 0x1379A,
+                         patches : [
+                             {
+                              name : "On",
+                              patch : [0x88, 0x3D, 0x11, 0x10],
+                             },
+                             {
+                              name : "Off",
+                              patch : [0x87, 0x3D, 0x11, 0x10],
+                             },
+                             {
+                              name : "Replace with song name",
+                              patch : [0x54, 0x1D, 0x42, 0x11],
+                             },
+                         ]
+                        },
+                        {
+                            //by nibs
+                            name: "Shorter monitor check",
+                            tooltip: "Runs for 300 frames (5 seconds) instead of 1200 (20 seconds), recommended only if you have a very stable framerate",
+                            patches: [{offset: 0x77DAA, off: [0xB0, 0x04], on: [0x2C, 0x01]}]
+                        },
+                        {
+                            //by nibs
+                            name: "6 digits in monitor check",
+                            tooltip: "Purely visual, does not affect anything besides the FPS display",
+                            //changes the FPS = %2.4f string to FPS = %2.6f
+                            patches: [{offset: 0x13E429, off: [0x34], on: [0x36]}]
+                        },
+                    ], "2016-08-31"),
                 ]);
             });
         </script>

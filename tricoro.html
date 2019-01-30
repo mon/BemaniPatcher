@@ -13,6 +13,21 @@
             new DllPatcherContainer([
                 new DllPatcher("bm2dx", [
                     {
+                        //by nibs
+                        name: "Shorter monitor check",
+                        tooltip: "Runs for 300 frames (5 seconds) instead of 1200 (20 seconds), recommended only if you have a very stable framerate",
+                        patches: [{offset: 0x66C0D, off: [0xB0, 0x04], on: [0x2C, 0x01]}]
+                    },
+                    {
+                        //by nibs
+                        name: "6 digits in monitor check",
+                        tooltip: "Purely visual, does not affect anything besides the FPS display",
+                        //changes the FPS = %2.4f string to FPS = %2.6f
+                        patches: [{offset: 0x143C45, off: [0x34], on: [0x36]}]
+                    },
+                ], "2012-09-19"),
+                new DllPatcher("bm2dx", [
+                    {
                         name: "Premium Free",
                         patches: [{offset: 0x49CAC, off: [0x75], on: [0xEB]}]
                     },
@@ -37,6 +52,19 @@
                     {
                         name: "Unlock All Songs",
                         patches: [{offset: 0x4921D, off: [0x75, 0x09], on: [0x90, 0x90]}]
+                    },
+                    {
+                        //by nibs
+                        name: "Shorter monitor check",
+                        tooltip: "Runs for 300 frames (5 seconds) instead of 1200 (20 seconds), recommended only if you have a very stable framerate",
+                        patches: [{offset: 0x6D07A, off: [0xB0, 0x04], on: [0x2C, 0x01]}]
+                    },
+                    {
+                        //by nibs
+                        name: "6 digits in monitor check",
+                        tooltip: "Purely visual, does not affect anything besides the FPS display",
+                        //changes the FPS = %2.4f string to FPS = %2.6f
+                        patches: [{offset: 0x16BDD5, off: [0x34], on: [0x36]}]
                     },
                 ], "2013-09-09"),
             ]);

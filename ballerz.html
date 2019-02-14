@@ -185,6 +185,12 @@
                 //changes the FPS = %2.4f string to FPS = %2.6f
                 patches: [{offset: 0x25FD41, off: [0x34], on: [0x36]}]
             },
+            {
+              // by aixxe
+              name: 'Skip decide screen',
+              tooltip : "Immediately loads into chart after selection.",
+              patches: [{offset: 0x72775, off: [0xE8, 0x66, 0x00, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90]}]
+            },
           ], "2018-09-19"),
           new DllPatcher('bm2dx', [
             {

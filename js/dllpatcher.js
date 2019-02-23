@@ -182,8 +182,18 @@ DllPatcherContainer.prototype.createUI = function () {
 
     var supportedDlls = $("<ul>");
     var versions = this.getSupportedVersions();
+    this.forceLoadTexts = [];
+    this.forceLoadButtons = [];
     for (var i = 0; i < versions.length; i++) {
-        $("<li>").text(versions[i]).appendTo(supportedDlls);
+        var listItem = $("<li>");
+        $('<span>').text(versions[i]).appendTo(listItem);
+        var matchPercent = $('<span>').addClass('matchPercent');
+        this.forceLoadTexts.push(matchPercent);
+        matchPercent.appendTo(listItem);
+        var forceButton = $('<button>').text('Force load?').hide();
+        this.forceLoadButtons.push(forceButton);
+        forceButton.appendTo(listItem);
+        listItem.appendTo(supportedDlls);
     }
 
     $("html").on("dragover dragenter", function () {
@@ -233,6 +243,18 @@ DllPatcherContainer.prototype.createUI = function () {
     $("body").append(container);
 };
 
+// DRY
+var loadPatch = function(_this, self, patcher) {
+    patcher.loadPatchUI();
+    patcher.updatePatchUI();
+    patcher.container.show();
+    var successStr = patcher.filename + ".dll"
+    if ($.type(_this.description) === "string") {
+        successStr += "(" + patcher.description + ")";
+    }
+    self.successDiv.html(successStr + " loaded successfully!");
+}
+
 DllPatcherContainer.prototype.loadFile = function (file) {
     var reader = new FileReader();
     var self = this;
@@ -252,19 +274,33 @@ DllPatcherContainer.prototype.loadFile = function (file) {
             patcher.loadBuffer(e.target.result);
             if (patcher.validatePatches()) {
                 found = true;
-                patcher.loadPatchUI();
-                patcher.updatePatchUI();
-                patcher.container.show();
-                var successStr = patcher.filename + ".dll"
-                if ($.type(this.description) === "string") {
-                    successStr += "(" + patcher.description + ")";
-                }
-                self.successDiv.html(successStr + " loaded successfully!");
+                loadPatch(this, self, patcher);
             }
         }
 
         if (!found) {
-            self.errorDiv.html("No patches found matching the given DLL.");
+            // let the user force a match
+            for (var i = 0; i < self.patchers.length; i++) {
+                var patcher = self.patchers[i];
+                
+                var valid = patcher.validPatches;
+                var percent = (valid / patcher.totalPatches * 100).toFixed(1);
+                
+                self.forceLoadTexts[i].text(' ' + valid + ' of ' + patcher.totalPatches + ' patches matched (' + percent + '%) ');
+                self.forceLoadButtons[i].show();
+                self.forceLoadButtons[i].off('click');
+                self.forceLoadButtons[i].click(function(i) {
+                    // reset old text
+                    for(var j = 0; j < self.patchers.length; j++) {
+                        self.forceLoadButtons[j].hide();
+                        self.forceLoadTexts[j].text('');
+                    }
+                    
+                    
+                    loadPatch(this, self, self.patchers[i]);
+                }.bind(this, i));
+            }
+            self.errorDiv.html("No patch set was a 100% match.");
         }
     };
 
@@ -416,11 +452,15 @@ DllPatcher.prototype.updatePatchUI = function() {
 DllPatcher.prototype.validatePatches = function() {
     this.errorLog = "";
     var success = true;
+    this.validPatches = 0;
+    this.totalPatches = this.mods.length;
     for(var i = 0; i < this.mods.length; i++) {
         var error = this.mods[i].validatePatch(this.dllFile);
         if(error) {
             this.errorLog += error + "<br/>";
             success = false;
+        } else {
+            this.validPatches++;
         }
     }
     return success;

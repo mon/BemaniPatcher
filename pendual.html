@@ -10,42 +10,72 @@
         <script type="text/javascript" src="js/dllpatcher.js"></script>
         <script type="text/javascript">
             window.addEventListener("load", function() {
-                new DllPatcher("bm2dx", [
-                    {
-                     name : "Timer Freeze",
-                     patches : [{offset : 0x9c55e, off: [0x74], on : [0xEB]}]
-                    },
-                    {
-                     name : "Premium Free",
-                     patches : [{offset : 0x5d31b, off: [0x75], on : [0xEB]}]
-                    },
-                    {
-                     name : "Premium Free Timer Freeze",
-                     patches : [{offset : 0x563ad, off: [0x48], on : [0x90]}]
-                    },
-                    {
-                     name : "Unlock All Songs",
-                     patches : [{offset : 0x58b3e, off: [0x74, 0x0a], on : [0x90, 0x90]}]
-                    },
-                    {
-                     name : "CS-Style Song Start Delay",
-                     tooltip : "Holding Start will pause the song at the beginning until you release it",
-                     patches : [{offset : 0x77cf6, off: [0x7C], on : [0xEB]}]
-                    },
-                    {
-                     name : "Cursor lock",
-                     tooltip : "After song finishes, song select remains on previous song",
-                     patches : [{offset : 0x6BF3A, off: [0x74, 0x23], on : [0x90, 0x90]}]
-                    },
-                    {
-                     name : "Volume Bug Fix",
-                     tooltip : "If your volume gets forced to max, turn this on",
-                     patches : [{offset : 0xD5D09, off: [0x00], on : [0x01]}]
-                    },
-                    {
-                     name : "Replace FREE PLAY text with song name",
-                     patches : [{offset : 0x14C3A, off: [0x90, 0x3F, 0x12, 0x10], on : [0x24, 0xAA, 0x43, 0x11]}]
-                    },
+                new DllPatcherContainer([
+                    new DllPatcher("bm2dx", [
+                        {
+                            //by nibs
+                            name: "Shorter monitor check",
+                            tooltip: "Runs for 300 frames (5 seconds) instead of 1200 (20 seconds), recommended only if you have a very stable framerate",
+                            patches: [{offset: 0x6D5EA, off: [0xB0, 0x04], on: [0x2C, 0x01]}]
+                        },
+                        {
+                            //by nibs
+                            name: "6 digits in monitor check",
+                            tooltip: "Purely visual, does not affect anything besides the FPS display",
+                            //changes the FPS = %2.4f string to FPS = %2.6f
+                            patches: [{offset: 0x14E2AD, off: [0x34], on: [0x36]}]
+                        },
+                    ], "2014-09-17"),
+                    new DllPatcher("bm2dx", [
+                        {
+                            name: "Timer Freeze",
+                            patches: [{offset: 0x9c55e, off: [0x74], on: [0xEB]}]
+                        },
+                        {
+                            name: "Premium Free",
+                            patches: [{offset: 0x5d31b, off: [0x75], on: [0xEB]}]
+                        },
+                        {
+                            name: "Premium Free Timer Freeze",
+                            patches: [{offset: 0x563ad, off: [0x48], on: [0x90]}]
+                        },
+                        {
+                            name: "Unlock All Songs",
+                            patches: [{offset: 0x58b3e, off: [0x75, 0x0a], on: [0x90, 0x90]}]
+                        },
+                        {
+                            name: "CS-Style Song Start Delay",
+                            tooltip: "Holding Start will pause the song at the beginning until you release it",
+                            patches: [{offset: 0x77cf6, off: [0x7C], on: [0xEB]}]
+                        },
+                        {
+                            name: "Cursor lock",
+                            tooltip: "After song finishes, song select remains on previous song",
+                            patches: [{offset: 0x6BF3A, off: [0x74, 0x23], on: [0x90, 0x90]}]
+                        },
+                        {
+                            name: "Volume Bug Fix",
+                            tooltip: "If your volume gets forced to max, turn this on",
+                            patches: [{offset: 0xD5D09, off: [0x00], on: [0x01]}]
+                        },
+                        {
+                            name: "Replace FREE PLAY text with song name",
+                            patches: [{offset: 0x14C3A, off: [0x90, 0x3F, 0x12, 0x10], on: [0x24, 0xAA, 0x43, 0x11]}]
+                        },
+                        {
+                            //by nibs
+                            name: "Shorter monitor check",
+                            tooltip: "Runs for 300 frames (5 seconds) instead of 1200 (20 seconds), recommended only if you have a very stable framerate",
+                            patches: [{offset: 0x8065A, off: [0xB0, 0x04], on: [0x2C, 0x01]}]
+                        },
+                        {
+                            //by nibs
+                            name: "6 digits in monitor check",
+                            tooltip: "Purely visual, does not affect anything besides the FPS display",
+                            //changes the FPS = %2.4f string to FPS = %2.6f
+                            patches: [{offset: 0x16E911, off: [0x34], on: [0x36]}]
+                        },
+                    ], "2015-08-05"),
                 ]);
             });
         </script>

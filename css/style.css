@@ -159,12 +159,16 @@ h3 {
     line-height: 1.2;
 }
 
+h1 {
+    text-align: center;
+}
+
 h1 a {
     color: inherit;
     text-decoration: inherit;
 }
 
-button {
+button, .fileLabel > strong {
     transition-duration: 0.2s;
     transition-timing-function: cubic-bezier(0.25, 0.5, 0.5, 1);
     position: relative;
@@ -192,9 +196,21 @@ button:disabled {
     cursor: default;
 }
 
-button:hover:enabled {
+button:hover:enabled, .fileLabel > strong:hover {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25), 0px 0px 4px rgba(0, 0, 0, 0.125);
     background-color: #5dbe3c;
+}
+
+.matchPercent {
+    font-size: 15px;
+    font-style: italic;
+    color: red;
+}
+
+li > button {
+    height: 24px;
+    padding: 0 7px;
+    line-height: 0;
 }
 
 .patches {

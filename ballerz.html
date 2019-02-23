@@ -13,6 +13,12 @@
         new DllPatcherContainer([
           new DllPatcher('bm2dx', [
             {
+              // discovered by GHYAKIMA
+              name: 'SSE4.2 Fix',
+              tooltip : "This will allow the game to run on processors which do not support the SSE4.2 instruction set. If you can successfully boot the game, do NOT check this.",
+              patches: [{offset: 0x169667, off: [0xF3, 0x45, 0x0F], on: [0x90, 0x90, 0x90]}]
+            },
+            {
               // ported by Xyen
               name: 'Unlock All Songs',
               patches: [{offset: 0xB60B2, off: [0x74, 0x10], on: [0x90, 0x90]}]
@@ -25,7 +31,7 @@
             {
               // ported by Iemnok?
               name: 'Skip CAMERA DEVICE ERROR prompt',
-              patches: [{offset: 0x10C5FB, off: [0x84], on: [0x85]}]
+              patches: [{offset: 0x10C5FB, off: [0x84], on: [0x81]}]
             },
             {
               // ported by Xyen
@@ -67,6 +73,15 @@
               name: 'CS-Style Song Start Delay',
               tooltip : "Holding Start will pause the song at the beginning until you release it",
               patches: [{offset: 0xF5CAA, off: [0x7D, 0x25], on: [0x90, 0x90]}]
+            },
+            {
+              // discovered by dogelition_man with some help from zelminar
+              name: 'Play video preview on all songs',
+              tooltip : "By default, only some songs in the beginner folder show a BGA preview on the music select screen. This edit extends this function to every song in any folder.",
+              patches: [
+                {offset: 0x75422, off: [0x74, 0x15], on: [0x90, 0x90]},
+                {offset: 0x7243C, off: [0x0F, 0xB6], on: [0xEB, 0x2F]}
+              ]
             },
             {
               name: 'Hide INSERT COIN[S] text',
@@ -156,6 +171,25 @@
               // ported by Zelminar
               name: 'Expert Course Force Open (in offline or local mode)',
               patches: [{offset: 0xDC953, off: [0x75], on: [0xEB]}]
+            },
+            {
+                //by nibs
+                name: "Shorter monitor check",
+                tooltip: "Runs for 300 frames (5 seconds) instead of 1200 (20 seconds), recommended only if you have a very stable framerate",
+                patches: [{offset: 0x104305, off: [0xB0, 0x04], on: [0x2C, 0x01]}]
+            },
+            {
+                //by nibs
+                name: "6 digits in monitor check",
+                tooltip: "Purely visual, does not affect anything besides the FPS display",
+                //changes the FPS = %2.4f string to FPS = %2.6f
+                patches: [{offset: 0x25FD41, off: [0x34], on: [0x36]}]
+            },
+            {
+              // by aixxe
+              name: 'Skip decide screen',
+              tooltip : "Immediately loads into chart after selection.",
+              patches: [{offset: 0x72775, off: [0xE8, 0x66, 0x00, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90]}]
             },
           ], "2018-09-19"),
           new DllPatcher('bm2dx', [

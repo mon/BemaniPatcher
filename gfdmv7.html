@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>GuitarFreaks & DrumMania V5 Rock to Infinity DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- don't hate -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/FileSaver.min.js"></script>
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+          new DllPatcherContainer([
+            new DllPatcher("game", [
+                {
+                    name: "Force unlock SECRET folder",
+                    patches: [
+                        {offset: 0xBA187, off: [0x74, 0x04, 0xC6, 0x46], on: [0x90, 0x90, 0xC6, 0x46]} 
+                        ]
+                }
+            ], true),
+            new DllPatcher("boot", [
+                {
+                    name: "GF's volume fix",
+                    patches: [
+                      {offset: 0x1A31, off: [0x00, 0x00], on: [0x01, 0x00]},
+                      {offset: 0x1A39, off: [0x01], on: [0x03]},
+                      {offset: 0x1A41, off: [0x02], on: [0x03]},
+                    ]
+                }
+            ], true),
+            new DllPatcher("libshare-pj", [
+                {
+                    name: "Let the game can access e-amuemu which IP is 192.168.*.*",
+                    patches: [
+                        {offset: 0x16B99, off: [0x01, 0x5B], on: [0x00, 0x5B]}
+                        ]
+                }
+            ], true),
+            new DllPatcher("libsytem", [
+                {
+                    name: "White screen freeze fix",
+                    patches: [{offset: 0x2DFC, off: [0x53, 0x53, 0xA3, 0xCC], on: [0x33, 0xC0, 0xA3, 0xCC]}]
+                }
+            ], true)
+          ]);
+        });
+    </script>
+</head>
+<body>
+    <h1>GuitarFreaks & DrumMania V7 DLL Modder</h1>
+</body>
+</html>

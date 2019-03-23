@@ -13,6 +13,36 @@
             new DllPatcherContainer([
                 new DllPatcher("gamemdx", [
                     {
+                        name: "Unlock all songs",
+                        tooltip: "Unlocks all e-amusement songs, event mode songs, ACES FOR ACES and ENDYMION",
+                        patches: [
+                            //e-amusement
+                            {offset: 0x8ED83, off: [0x32, 0xC0], on: [0xB0, 0x01]},
+                            //event mode 
+                            {offset: 0x8463B, off: [0x75], on: [0xEB]},
+                            //ACES FOR ACES, ENDYMION, ???
+                            {offset: 0x78179, off: [0x32, 0xC0], on: [0xB0, 0x01]},
+                        ]
+                    },
+                    {
+                        name: "Timer Freeze",
+                        patches: [{offset: 0x24667, off: [0x74], on: [0xEB]}]
+                    },
+                    {
+                        name: "Unlock options",
+                        tooltip: "Unlocks e-amusement exclusive options such as ARROW COLOR",
+                        patches: [{offset: 0x7A6A2, off: [0x75], on: [0xEB]}]
+                    },
+                    {
+                        name: "Force Extra Stage/Extra Encore Stage (fixed)",
+                        patches: [
+                            {offset: 0x5AC77, off: [0x0F, 0x85], on: [0x90, 0xE9]},
+                            {offset: 0x5ADD2, off: [0x0F, 0x85], on: [0x90, 0xE9]},
+                        ]
+                    },
+                ], "2018-10-22"),
+                new DllPatcher("gamemdx", [
+                    {
                         name: "Force enable fast/slow",
                         patches: [{offset: 0x84EC0, off: [0x8B, 0x41, 0x44], on: [0x31, 0xC0, 0x40]}]
                     },

@@ -13,6 +13,14 @@
             new DllPatcherContainer([
                 new DllPatcher("gamemdx", [
                     {
+                        name: "Force enable fast/slow",
+                        patches: [{offset: 0x8CA60, off: [0x8B, 0x41, 0x44], on: [0x31, 0xC0, 0x40]}]
+                    },
+                    {
+                        name: "Force background judgement",
+                        patches: [{offset: 0x8CA50, off: [0x8B, 0x41, 0x40], on: [0x31, 0xC0, 0x40]}]
+                    },
+                    {
                         name: "Unlock all songs",
                         tooltip: "Unlocks all e-amusement songs, event mode songs, ACES FOR ACES and ENDYMION",
                         patches: [
@@ -21,8 +29,12 @@
                             //event mode 
                             {offset: 0x8463B, off: [0x75], on: [0xEB]},
                             //ACES FOR ACES, ENDYMION, ???
-                            {offset: 0x78179, off: [0x32, 0xC0], on: [0xB0, 0x01]},
+                            {offset: 0x846D1, off: [0x32, 0xC0], on: [0xB0, 0x01]},
                         ]
+                    },
+                    {
+                        name: "Tutorial Skip",
+                        patches: [{offset: 0x45704, off: [0x74], on: [0xEB]}]
                     },
                     {
                         name: "Timer Freeze",
@@ -39,6 +51,11 @@
                             {offset: 0x5AC77, off: [0x0F, 0x85], on: [0x90, 0xE9]},
                             {offset: 0x5ADD2, off: [0x0F, 0x85], on: [0x90, 0xE9]},
                         ]
+                    },
+                    {
+                        name: "Enable DDR SELECTION",
+                        tooltip: "Even works in offline/local mode!",
+                        patches: [{offset: 0x75774, off: [0xE8, 0xC7, 0x71, 0x01], on: [0xB8, 0x01, 0x00, 0x00]}]
                     },
                 ], "2018-10-22"),
                 new DllPatcher("gamemdx", [

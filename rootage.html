@@ -18,19 +18,19 @@
               patches: [{offset: 0x16C372, off: [0x74, 0x10], on: [0x90, 0x90]}]
             },
             {
-              // ported by UngluedBike
+              // new 2 byte version discovered by dogelition_man
               name: 'Unlock All 12s',
-              patches: [{offset: 0x16C220, off: [0x83, 0xFF, 0x02, 0x74, 0x05, 0x83, 0xFF, 0x05], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+              patches: [{offset: 0x16C220, off: [0x83, 0xFF], on: [0xEB, 0x5F]}]
             },
             {
               // ported by UngluedBike
               name: 'Skip CAMERA DEVICE ERROR prompt',
-              patches: [{offset: 0x36BB0A, off: [0x84], on: [0x81]}]
+              patches: [{offset: 0x36BB0B, off: [0x84], on: [0x81]}]
             },
             {
               // ported by dogelition_man
               name: '1P Premium Free',
-              patches: [{offset: 0x32CFC7, off: [0x75, 0x14], on: [0xEB, 0x14]}]
+              patches: [{offset: 0x32CFC7, off: [0x75], on: [0xEB]}]
             },
             {
               // ported by a dogelition_man
@@ -39,6 +39,11 @@
                 {offset: 0x32D165, off: [0x74, 0x55], on: [0x90, 0x90]},
                 {offset: 0x32D17B, off: [0x74, 0x3F], on: [0x90, 0x90]}
               ]
+            },
+			{
+              // discovered on accident by dogelition_man
+              name: 'Offline Arena Mode',
+              patches: [{offset: 0x32D191, off: [0xE8, 0x6A, 0x5B, 0xE3], on: [0xE9, 0x3F, 0xFF, 0xFF]}]
             },
             {
               // ported by UngluedBike
@@ -54,7 +59,7 @@
               // ported by UngluedBike
               name: '90sec Music Select Timer',
               tooltip : "Make sure your Select Time option is set to \"45 SEC\" in the Game Options for this to work!",
-              patches: [{offset: 0xFD204, off: [0x2D], on: [0x5A]}]
+              patches: [{offset: 0xFD205, off: [0x2D], on: [0x5A]}]
             },
             {
               // ported by UngluedBike
@@ -107,7 +112,8 @@
               name: 'Hide PASELI: ****** text',
               patches: [{offset: 0x1066CB, off: [0xF1], on: [0xF0]}]
             },
-          ], "2019-04-18"),
+			
+          ], "2019-04-23"),
         ]);
       });
     </script>

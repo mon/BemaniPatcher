@@ -265,6 +265,11 @@ DllPatcherContainer.prototype.loadFile = function (file) {
         // clear logs
         self.errorDiv.empty();
         self.successDiv.empty();
+        // reset old text
+        for(var j = 0; j < self.patchers.length; j++) {
+            self.forceLoadButtons[j].hide();
+            self.forceLoadTexts[j].text('');
+        }
         for (var i = 0; i < self.patchers.length; i++) {
             var patcher = self.patchers[i];
             // remove the previous UI to clear the page

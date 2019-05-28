@@ -156,7 +156,7 @@ var DllPatcherContainer = function (patchers) {
 DllPatcherContainer.prototype.getSupportedDLLs = function () {
     var dlls = [];
     for (var i = 0; i < this.patchers.length; i++) {
-        var name = this.patchers[i].filename + ".dll";
+        var name = this.patchers[i].filename + (this.patchers[i].exe == true ? ".exe" : ".dll");
         if (dlls.indexOf(name) === -1) {
             dlls.push(name);
         }
@@ -200,7 +200,7 @@ DllPatcherContainer.prototype.createUI = function () {
         container.addClass("dragover");
         return true;
     })
-    
+
     .on("dragleave dragend drop", function () {
         container.removeClass("dragover");
         return true;
@@ -249,9 +249,9 @@ var loadPatch = function(_this, self, patcher) {
     patcher.loadPatchUI();
     patcher.updatePatchUI();
     patcher.container.show();
-    var successStr = patcher.filename + ".dll"
-    if ($.type(_this.description) === "string") {
-        successStr += "(" + patcher.description + ")";
+    var successStr = patcher.filename + (patcher.exe == true ? '.exe' : '.dll');
+    if ($.type(patcher.description) === "string") {
+        successStr += " (" + patcher.description + ")";
     }
     self.successDiv.html(successStr + " loaded successfully!");
 }
@@ -308,7 +308,7 @@ DllPatcherContainer.prototype.loadFile = function (file) {
     reader.readAsArrayBuffer(file);
 };
 
-var DllPatcher = function(fname, args, description) {
+var DllPatcher = function(fname, args, description, exe) {
     this.mods = [];
     for(var i = 0; i < args.length; i++) {
         var mod = args[i];
@@ -323,6 +323,7 @@ var DllPatcher = function(fname, args, description) {
 
     this.filename = fname;
     this.description = description;
+    this.exe = exe;
     this.multiPatcher = true;
 
     if (!this.description) {
@@ -336,7 +337,7 @@ var DllPatcher = function(fname, args, description) {
 DllPatcher.prototype.createUI = function() {
     var self = this;
     this.container = $("<div>", {"class": "patchContainer"});
-    var header = this.filename + '.dll';
+    var header = this.filename + (this.exe == true ? '.exe' : '.dll');
     if($.type(this.description) === "string") {
         header += ' (' + this.description + ')';
     }
@@ -402,13 +403,12 @@ DllPatcher.prototype.loadBuffer = function(buffer) {
     this.dllFile = new Uint8Array(buffer);
     if(this.validatePatches()) {
         this.successDiv.removeClass("hidden");
-        this.successDiv.html("DLL loaded successfully!");
     } else {
         this.successDiv.addClass("hidden");
     }
     // Update save button regardless
     this.saveButton.prop('disabled', false);
-    this.saveButton.text('Save DLL');
+    this.saveButton.text(this.exe ? 'Save EXE' : 'Save DLL');
     this.errorDiv.html(this.errorLog);
 }
 
@@ -432,7 +432,7 @@ DllPatcher.prototype.saveDll = function() {
     for(var i = 0; i < this.mods.length; i++) {
         this.mods[i].applyPatch(this.dllFile);
     }
-    fname += '.dll';
+    fname += (this.exe == true ? '.exe' : '.dll');
 
     var blob = new Blob([this.dllFile], {type: "application/octet-stream"});
     saveAs(blob, fname);

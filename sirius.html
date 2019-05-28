@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>IIDX SIRIUS EXE Modder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- don't hate -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/FileSaver.min.js"></script>
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            new DllPatcherContainer([
+                new DllPatcher("bm2dx", [
+                    {
+                        name: "Enable display types C, D, E, F",
+                        patches: [{offset: 0x3D798, off: [0x02], on: [0x06]}]
+                    },
+                ], "2010-07-12", true),
+            ]);
+        });
+    </script>
+</head>
+<body>
+    <h1>IIDX SIRIUS EXE Modder</h1>
+</body>
+</html>

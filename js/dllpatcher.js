@@ -41,7 +41,7 @@ StandardPatch.prototype.validatePatch = function(file) {
     } else if(status === "off") {
         console.log('"' + this.name + '"', "is disabled!");
     } else {
-        return '"' + this.name + '" is neither on nor off! Have you got the right dll?';
+        return '"' + this.name + '" is neither on nor off! Have you got the right file?';
     }
 };
 
@@ -245,7 +245,7 @@ DllPatcherContainer.prototype.createUI = function () {
 };
 
 // DRY
-var loadPatch = function(_this, self, patcher) {
+var loadPatch = function(_this, self, patcher, error) {
     patcher.loadPatchUI();
     patcher.updatePatchUI();
     patcher.container.show();
@@ -253,7 +253,11 @@ var loadPatch = function(_this, self, patcher) {
     if ($.type(patcher.description) === "string") {
         successStr += " (" + patcher.description + ")";
     }
-    self.successDiv.html(successStr + " loaded successfully!");
+    
+    if (error)
+    	self.errorDiv.html(successStr + " loaded with errors.");
+    else
+    	self.successDiv.html(successStr + " loaded successfully!");
 }
 
 DllPatcherContainer.prototype.loadFile = function (file) {
@@ -303,7 +307,7 @@ DllPatcherContainer.prototype.loadFile = function (file) {
                     }
                     
                     
-                    loadPatch(this, self, self.patchers[i]);
+                    loadPatch(this, self, self.patchers[i], true);
                 }.bind(this, i));
             }
             self.errorDiv.html("No patch set was a 100% match.");

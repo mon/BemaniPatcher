@@ -200,13 +200,14 @@ DllPatcherContainer.prototype.createUI = function () {
         container.addClass("dragover");
         return true;
     })
-        .on("dragleave dragend drop", function () {
-            container.removeClass("dragover");
-            return true;
-        })
-        .on("dragover dragenter dragleave dragend drop", function (e) {
-            e.preventDefault();
-        });
+    
+    .on("dragleave dragend drop", function () {
+        container.removeClass("dragover");
+        return true;
+    })
+    .on("dragover dragenter dragleave dragend drop", function (e) {
+        e.preventDefault();
+    });
 
     container.on("drop", function (e) {
         var files = e.originalEvent.dataTransfer.files;

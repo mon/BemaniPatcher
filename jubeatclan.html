@@ -22,6 +22,11 @@
                           name : "SELECT MUSIC Timer Lock",
                           patches: [{offset: 0xA5899, off: [0x75], on: [0xEB]}]
                         },
+                        // Patch by Ash
+                        {
+                          name: "Online Matching Skip",
+                          patches: [{offset: 0xBCCAE, off: [0x7D], on: [0xEB]}]
+                        },
                         // Translation by Cammy
                         {
                           name: "English Concierge Menu Text",

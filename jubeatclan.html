@@ -14,13 +14,18 @@
                     new DllPatcher("jubeat", [
                         // Ported by Felix
                         {
-                          name : "Disable tutorial",
-                          patches : [{offset : 0xCFE67, off: [0x75, 0x4A, 0x57, 0x68, 0x00], on : [0xE9, 0x90, 0x00, 0x00, 0x00]}]
+                          name : "Disable Tutorial",
+                          patches: [{offset: 0xCFE67, off: [0x75, 0x4A, 0x57, 0x68, 0x00], on: [0xE9, 0x90, 0x00, 0x00, 0x00]}]
                         },
                         // Ported by Felix and Cammy
                         {
-                          name : "SELECT MUSIC timer lock",
-                          patches : [{offset : 0xA5899, off : [0x75], on : [0xEB]}]
+                          name : "SELECT MUSIC Timer Lock",
+                          patches: [{offset: 0xA5899, off: [0x75], on: [0xEB]}]
+                        },
+                        // Patch by Ash
+                        {
+                          name: "Online Matching Skip",
+                          patches: [{offset: 0xBCCAE, off: [0x7D], on: [0xEB]}]
                         },
                         // Translation by Cammy
                         {
@@ -53,12 +58,22 @@
                     ], "2018-08-14"),
                     new DllPatcher("jubeat", [
                         {
-                          name : "Disable tutorial",
-                          patches : [{offset : 0xCFFC7, off: [0x75, 0x4A, 0x57, 0x68, 0x00], on : [0xE9, 0x90, 0x00, 0x00, 0x00]}]
+                          name: "Disable Tutorial",
+                          patches: [{offset: 0xCFFC7, off: [0x75, 0x4A, 0x57, 0x68, 0x00], on: [0xE9, 0x90, 0x00, 0x00, 0x00]}]
                         },
                         {
-                          name : "SELECT MUSIC timer lock",
-                          patches : [{offset : 0xA5A49, off : [0x75], on : [0xEB]}]
+                          name: "SELECT MUSIC Timer Lock",
+                          patches: [{offset: 0xA5A49, off: [0x75], on: [0xEB]}]
+                        },
+                        {
+                          name: "Expert Options Lock",
+                          tooltip: "As soon as you toggle on expert option, every subsequent play will keep it on.",
+                          patches: [{offset: 0xD4699, off: [0x89, 0x1D], on: [0xEB, 0x0B]}]
+                        },
+                        // Patch by Ash
+                        {
+                          name: "Online Matching Skip",
+                          patches: [{offset: 0xBCDCE, off: [0x7D], on: [0xEB]}]
                         },
                         // Translation by Cammy
                         {

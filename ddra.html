@@ -50,8 +50,20 @@
                     {
                         // by nibs & dogelition_man
                         name: "Force Cabinet Type 6",
-                        tooltip: "This will cause the game to load a different theme, some assets may not work with this forced code.",
+                        tooltip: "This will cause the game to load a different theme, some assets (such as menu background) may not work with this forced code.",
                         patches: [{offset: 0xDE18, off: [0xFF, 0x24], on: [0xEB, 0x71]}]
+                    },
+                    {
+                        // by nibs
+                        name: "Force ENDYMION menu background",
+                        tooltip: "This will force the game to use the red cloud background instead of the default one.",
+                        patches: [{offset: 0x1F98D, off: [0xEC], on: [0xF0]}]
+                    },
+                    {
+                        // by nibs & dogelition_man
+                        name: "Skip A20 menu background loading",
+                        tooltip: "This skips the check for the golden menu background completely, and instead will load the default",
+                        patches: [{offset: 0x1F944, off: [0x75], on: [0xEB]}]
                     },
                 ], "2019-04-22"),
                 new DllPatcher("gamemdx", [

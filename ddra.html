@@ -14,15 +14,15 @@
                 new DllPatcher("gamemdx", [
                     {
                         name: "Force enable fast/slow",
-                        patches: [{offset: 0x97c60, off: [0x8B, 0x41, 0x44], on: [0x31, 0xC0, 0x40]}]
+                        patches: [{offset: 0x97C60, off: [0x8B, 0x41, 0x44], on: [0x31, 0xC0, 0x40]}]
                     },
                     {
                         name: "Force background judgement",
-                        patches: [{offset: 0x97c50, off: [0x8B, 0x41], on: [0x31, 0xC0]}]
+                        patches: [{offset: 0x97C50, off: [0x8B, 0x41], on: [0x31, 0xC0]}]
                     },
                     {
                         name: "Force darkest background",
-                        patches: [{offset: 0x98a0e, off: [0x75, 0x03, 0x33, 0xC0], on: [0x33, 0xC0, 0xB0, 0x03]}]
+                        patches: [{offset: 0x98A0E, off: [0x75, 0x03, 0x33, 0xC0], on: [0x33, 0xC0, 0xB0, 0x03]}]
                     },
                     {
                         name: "Song Unlock (Incomplete)",
@@ -30,24 +30,25 @@
                         patches: [
                             //Event Mode unlocks A4A here
                             {offset: 0x846D1, off: [0x45, 0xF4], on: [0x90, 0xE9]},
-							//A20+ Songs
-                            {offset: 0x8d007, off: [0x32, 0xC0], on: [0xB0, 0x01]},
+                            //A20+ Songs
+                            {offset: 0x8D007, off: [0x32, 0xC0], on: [0xB0, 0x01]},
                         ]
                     },
                     {
                         name: "Tutorial Skip",
-                        patches: [{offset: 0x49d33, off: [0x75], on: [0xEB]}]
+                        patches: [{offset: 0x49D33, off: [0x75], on: [0xEB]}]
                     },
                     {
                         name: "Timer Freeze",
-                        patches: [{offset: 0x275d7, off: [0x74], on: [0xEB]}]
+                        patches: [{offset: 0x275D7, off: [0x74], on: [0xEB]}]
                     },
                     {
                         name: "Unlock options",
                         tooltip: "Unlocks e-amusement exclusive options such as ARROW COLOR",
                         patches: [{offset: 0x82733, off: [0x75], on: [0xEB]}]
                     },
-					{
+                    {
+                        // by nibs & dogelition_man
                         name: "Force Cabinet Type 6",
                         tooltip: "This will cause the game to load a different theme, some assets may not work with this forced code.",
                         patches: [{offset: 0xDE18, off: [0xFF, 0x24], on: [0xEB, 0x71]}]

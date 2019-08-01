@@ -10,6 +10,7 @@
     <script type="text/javascript" src="js/dllpatcher.js"></script>
     <script type="text/javascript">
         window.addEventListener("load", function () {
+          new DllPatcherContainer([
             new DllPatcher("game", [
               {
                 name: "Timer Freeze",
@@ -17,10 +18,17 @@
               },
               {
                 name: "Stage Freeze",
+                tooltip: "NOT COMPATIBLE FOR USE ON NETWORKS",
                 patches: [{offset: 0x14B551, off: [0x0F, 0x85, 0xFB, 0x01, 0x00, 0x00], on: [0xE9, 0xFC, 0x01, 0x00, 0x00, 0x90]}]
               },
               {
+                name: "Cursor Hold",
+                tooltip: "Use it with Timer&Stage Freeze for PFree like experience",
+                patches: [{offset: 0x9A4EC, off: [0x85], on: [0x8D]}]
+              },
+              {
                 name: "Unlock all songs",
+                tooltip: "Unlocks all e-amusement songs",
                 patches: [
                   {offset: 0x1D6C4A, off: [0x5B, 0x00], on: [0x4D, 0x01]},
                   {offset: 0x1D6C62, off: [0x5D, 0x00], on: [0x4D, 0x01]},
@@ -30,7 +38,23 @@
               {
                 name: "Enable Long Music",
                 patches: [{offset: 0x153A44, off: [0x75, 0x03], on: [0x90, 0x90]}]
+              },
+              {
+                name: "Auto Play",
+                tooltip: "JUST FOR FUN,DO NOT USE IT ON NETWORKS",
+                patches: [
+                  {offset: 0x75191, off: [0x75], on: [0xEB]},
+                  {offset: 0x756CB, off: [0x85], on: [0x8D]},
+                  {offset: 0x75704, off: [0x75], on: [0xEB]},
+                ]
               }
+            ], true),
+            new DllPatcher("libshare-pj", [
+              {
+                name: "Fix IP change error",
+                patches: [{offset: 0x22CE5, off: [0x74], on: [0xEB]}]
+              }
+            ], true)
           ]);
         });
     </script>

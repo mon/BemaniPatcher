@@ -18,7 +18,13 @@
               },
               {
                 name: "Stage Freeze",
+                tooltip: "NOT COMPATIBLE FOR USE ON NETWORKS",
                 patches: [{offset: 0x1595E1, off: [0x0F, 0x85, 0xFB, 0x01, 0x00, 0x00], on: [0xE9, 0xFC, 0x01, 0x00, 0x00, 0x90]}]
+              },
+              {
+                name: "Cursor Hold",/*Credits to sizuku*/
+                tooltip: "Use it with Timer&Stage Freeze for PFree like experience",
+                patches: [{offset: 0xAF603, off: [0x85], on: [0x8D]}]
               },
               {
                 name: "Unlock all songs",
@@ -32,6 +38,15 @@
               {
                 name: "Enable Long Music",
                 patches: [{offset: 0x163134, off: [0x75, 0x03], on: [0x90, 0x90]}]
+              },
+              {
+                name: "Auto Play",/*Credits to sizuku*/
+                tooltip: "JUST FOR FUN,DO NOT USE IT ON NETWORKS",
+                patches: [
+                  {offset: 0x8A745, off: [0x75], on: [0xEB]},
+                  {offset: 0x8AC83, off: [0x85], on: [0x8D]},
+                  {offset: 0x8CCBF, off: [0x75], on: [0xEB]},
+                ]
               }
             ], true),
             new DllPatcher("libshare-pj", [

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>pop'n music peace DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- don't hate -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/FileSaver.min.js"></script>
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            new DllPatcherContainer([
+                new DllPatcher("popn22", [
+                    {
+                        name: "E: drive fix",
+                        tooltip: "Fix crash caused by no E: drive",
+                        patches: [{offset : 0x273C38, off: [0x65, 0x3A, 0x2F], on: [0x64, 0x65, 0x76]}]
+                    },
+                    {
+                        name: "HDMI audio fix",
+                        patches: [{offset : 0x1307EC, off: [0x85, 0xC0, 0x75, 0x96], on: [0x90, 0x90, 0x90, 0x90]}]
+                    },
+                    {
+                        name: "Prevent Windows volume change on boot",
+                        tooltip: "If your volume gets forced to max, turn this on",
+                        patches: [{offset: 0x1333F0, off: [0x83], on: [0xC3]}]
+                    },
+                    {
+                        name: "Boot to event mode",
+                        patches: [{offset: 0x105280, off: [0x8B, 0x00, 0xC3, 0xCC], on: [0x31, 0xC0, 0x40, 0xC3]}]
+                    },
+                ], "2019-04-23"),
+            ]);
+        });
+    </script>
+</head>
+<body>
+    <h1>pop'n music peace DLL Modder</h1>
+</body>
+</html>

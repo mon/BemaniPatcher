@@ -13,22 +13,34 @@
             new DllPatcherContainer([
                 new DllPatcher("popn22", [
                     {
-                        name: "E: drive fix",
+                        name: "E: Drive Fix",
                         tooltip: "Fix crash caused by no E: drive",
-                        patches: [{offset : 0x273C38, off: [0x65, 0x3A, 0x2F], on: [0x64, 0x65, 0x76]}]
+                        patches: [{ offset: 0x273C38, off: [0x65, 0x3A, 0x2F], on: [0x64, 0x65, 0x76] }],
                     },
                     {
-                        name: "HDMI audio fix",
-                        patches: [{offset : 0x1307EC, off: [0x85, 0xC0, 0x75, 0x96], on: [0x90, 0x90, 0x90, 0x90]}]
+                        name: "HDMI Audio Fix",
+                        patches: [{ offset: 0x1307EC, off: [0x85, 0xC0, 0x75, 0x96], on: [0x90, 0x90, 0x90, 0x90] }],
                     },
                     {
                         name: "Prevent Windows volume change on boot",
                         tooltip: "If your volume gets forced to max, turn this on",
-                        patches: [{offset: 0x1333F0, off: [0x83], on: [0xC3]}]
+                        patches: [{ offset: 0x1333F0, off: [0x83], on: [0xC3] }],
                     },
                     {
-                        name: "Boot to event mode",
-                        patches: [{offset: 0x105280, off: [0x8B, 0x00, 0xC3, 0xCC], on: [0x31, 0xC0, 0x40, 0xC3]}]
+                        name: "Boot to Event Mode",
+                        patches: [{ offset: 0x105280, off: [0x8B, 0x00, 0xC3, 0xCC], on: [0x31, 0xC0, 0x40, 0xC3] }],
+                    },
+                    {
+                        name: "Remove Timer",
+                        patches: [{ offset: 0xDF09C, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip Menu and Long Note Tutorials",
+                        patches: [
+                            { offset: 0x28BCB, off: [0x74], on: [0xEB] },
+                            { offset: 0x28BA7, off: [0x75], on: [0xEB] },
+                            { offset: 0x875C1, off: [0x75], on: [0xEB] },
+                        ],
                     },
                 ], "2019-04-23"),
             ]);

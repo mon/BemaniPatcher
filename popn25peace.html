@@ -42,6 +42,15 @@
                             { offset: 0x875C1, off: [0x75], on: [0xEB] },
                         ],
                     },
+                    {
+                        name: "Unlock All Songs",
+                        patches: [
+                            { offset: 0x10974D, off: [0x74], on: [0xEB] },
+                            { offset: 0x109766, off: [0x75, 0x46], on: [0x90, 0x90] },
+                            { offset: 0x109772, off: [0x74, 0x3A], on: [0x90, 0x90] },
+                            { offset: 0x10977E, off: [0x84, 0xC0], on: [0xB0, 0x01] },
+                        ],
+                    },
                 ], "2019-04-23"),
             ]);
         });

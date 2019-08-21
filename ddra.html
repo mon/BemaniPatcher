@@ -116,6 +116,11 @@
                         tooltip: "Even works in offline/local mode!",
                         patches: [{offset: 0x75774, off: [0xE8, 0xC7, 0x71, 0x01], on: [0xB8, 0x01, 0x00, 0x00]}]
                     },
+                    {
+                        name: "Premium Free",
+                        tooltip: "Song clears/scores only. Profile progress and custom settings do not save. Reboot game to re-query for scores.",
+                        patches: [{offset: 0x1f0a6, off: [0x01], on: [0x00]}]
+                    },
                 ], "2018-10-22"),
                 new DllPatcher("gamemdx", [
                     {

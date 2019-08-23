@@ -63,10 +63,6 @@
     flex-direction: column;
 }
 
-.tagline {
-    float: right;
-}
-
 .fileInput {
     display: none
 }

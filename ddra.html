@@ -26,12 +26,14 @@
                     },
                     {
                         name: "Song Unlock (Incomplete)",
-                        tooltip: "Unlocks all event mode songs, ACES FOR ACES and ENDYMION, A20, but still requires a musicdb edit to remove all restrictions.",
+                        tooltip: "Unlocks all event mode songs, ACES FOR ACES and ENDYMION, A20 (including ORCA), but still requires a musicdb edit to remove all restrictions.",
                         patches: [
-                            //Event Mode unlocks A4A here
+                            // Event Mode unlocks A4A here
                             {offset: 0x846D1, off: [0x45, 0xF4], on: [0x90, 0xE9]},
-                            //A20+ Songs
+                            // A20+ Songs
                             {offset: 0x8D007, off: [0x32, 0xC0], on: [0xB0, 0x01]},
+                            // ORCA unlock (by Flipend0)
+                            {offset: 0x8E5B9, off: [0x74], on: [0xEB]}
                         ]
                     },
                     {
@@ -65,6 +67,22 @@
                         tooltip: "This skips the check for the golden menu background completely, and instead will load the default",
                         patches: [{offset: 0x1F944, off: [0x75], on: [0xEB]}]
                     },
+                    {
+                        // by cube, ported by Azlekayn
+                        name: "Opaque background for darkest background option",
+                        tooltip: "This makes the background for the darkest background option be 99% opaque, hiding the background dancers and videos.",
+                        patches: [{offset: 0x1C9F6C, off: [0xA4, 0x70, 0x7D, 0x3F], on: [0x33, 0x33, 0x33, 0x3F]}]
+                    },
+                    {
+                        // by naryu
+                        name: "Enable cabinet lights for Cabinet Type 6",
+                        tooltip: "This enables the use of cabinet lighting for Cabinet Type 6",
+                        patches: [
+                            {offset: 0xBCD1, off: [0xE8, 0x1A, 0x21], on: [0xB8, 0x00, 0x00]},
+                            {offset: 0x2CB8A, off: [0xE8, 0x61, 0x12, 0xFE, 0xFF], on: [0xB8, 0x00, 0x00, 0x00, 0x00]},
+                            {offset: 0x2D0AE, off: [0xE8, 0x3D, 0x0D, 0xFE, 0xFF], on: [0xB8, 0x00, 0x00, 0x00, 0x00]},
+                        ]
+                    }
                 ], "2019-04-22"),
                 new DllPatcher("gamemdx", [
                     {

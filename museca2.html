@@ -16,11 +16,41 @@
                         name: "Infinite 1st layer", //Created by Cammy
                         patches: [{offset: 0x17E947, off: [0xFF, 0x83, 0x48, 0x14, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
                     },
+                    {
+                        name: "Auto Event Mode Toggled (Freeplay (Coin Options) muse be \"ON\" for this to work efficiently", //Created by Akubits
+                        patches: [
+                            {
+                                offset: 0x196431,
+                                off: [0x89],
+                                on: [0xC7]
+                            },
+                            {
+                                offset: 0x196433,
+                                off: [0x88, 0x41, 0x10, 0xC7, 0x41, 0x14, 0x01, 0x00, 0x00, 0x00, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC],
+                                on: [0x01, 0x00, 0x00, 0x00, 0x88, 0x41, 0x10, 0xC7, 0x41, 0x14, 0x01, 0x00, 0x00, 0x00, 0xC3]
+                            }
+                        ]
+                    },
                 ], "2017-06-28 -- 2017-12-25"),
                 new DllPatcher("museca", [
                     {
                         name: "Infinite 1st layer", //Created by Cammy
                         patches: [{offset: 0x17E587, off: [0xFF, 0x83, 0x48, 0x14, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+                    },
+                    {
+                        name: "Auto Event Mode Toggled (Freeplay (Coin Options) muse be \"ON\" for this to work efficiently", //Created by Akubits
+                        patches: [
+                            {
+                                offset: 0x196431,
+                                off: [0x89],
+                                on: [0xC7]
+                            },
+                            {
+                                offset: 0x196433,
+                                off: [0x88, 0x41, 0x10, 0xC7, 0x41, 0x14, 0x01, 0x00, 0x00, 0x00, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC],
+                                on: [0x01, 0x00, 0x00, 0x00, 0x88, 0x41, 0x10, 0xC7, 0x41, 0x14, 0x01, 0x00, 0x00, 0x00, 0xC3]
+                            }
+                        ]
                     },
                 ], "2018-07-30"),
             ]);

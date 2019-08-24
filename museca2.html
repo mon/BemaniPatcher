@@ -20,12 +20,12 @@
                         name: "Auto Event Mode Toggled (Freeplay (Coin Options) muse be \"ON\" for this to work efficiently", //Created by Akubits
                         patches: [
                             {
-                                offset: 0x196431,
+                                offset: 0x196BB1,
                                 off: [0x89],
                                 on: [0xC7]
                             },
                             {
-                                offset: 0x196433,
+                                offset: 0x196BB3,
                                 off: [0x88, 0x41, 0x10, 0xC7, 0x41, 0x14, 0x01, 0x00, 0x00, 0x00, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC],
                                 on: [0x01, 0x00, 0x00, 0x00, 0x88, 0x41, 0x10, 0xC7, 0x41, 0x14, 0x01, 0x00, 0x00, 0x00, 0xC3]
                             }

@@ -13,11 +13,13 @@
             new DllPatcherContainer([
                 new DllPatcher("museca", [
                     {
-                        name: "Infinite 1st layer", //Created by Cammy
+                        name: "Disable this - replaced by the Infinite Final Layer mod.", //Created by Cammy
+                        tooltip: "Infinite 1st Layer",
                         patches: [{offset: 0x17E947, off: [0xFF, 0x83, 0x48, 0x14, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
                     },
                     {
                         name: "Infinite Final layer", //Created by Akubits
+                        tooltip: "Play at least 3 songs to activate",
                         patches: [{offset: 0x17E89F, off: [0x7F, 0x08], on: [0x90, 0x90]}]
                     },
                     {
@@ -38,11 +40,13 @@
                 ], "2017-06-28 -- 2017-12-25"),
                 new DllPatcher("museca", [
                     {
-                        name: "Infinite 1st layer", //Created by Cammy
+                        name: "Disable this - replaced by the Infinite Final Layer mod.", //Created by Cammy
+                        tooltip: "Infinite 1st Layer",
                         patches: [{offset: 0x17E587, off: [0xFF, 0x83, 0x48, 0x14, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
                     },
                     {
                         name: "Infinite Final layer", //Created by Akubits
+                        tooltip: "Play at least 3 songs to activate",
                         patches: [{offset: 0x17E4DF, off: [0x7F, 0x08], on: [0x90, 0x90]}]
                     },
                     {

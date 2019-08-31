@@ -23,6 +23,22 @@
                         patches: [{offset: 0x17E89F, off: [0x7F, 0x08], on: [0x90, 0x90]}]
                     },
                     {
+                        name: "Start on Final layer", //Created by Akubits
+                        tooltip: "Use together with Infinite Final Layer for better pfreepanic compatibility",
+                        patches: [
+                            {
+                                offset: 0x17E060,
+                                off: [0x8B, 0x81, 0x48, 0x14],
+                                on: [0xB8, 0x03, 0x00, 0x00]
+                            },
+                            {
+                                offset: 0x17E065,
+                                off: [0x00, 0xC3],
+                                on: [0xC3, 0xCC]
+                            }
+                        ]
+                    },
+                    {
                         name: "Auto Event Mode Toggled (Freeplay (Coin Options) muse be \"ON\" for this to work efficiently)", //Created by Akubits
                         patches: [
                             {
@@ -48,6 +64,22 @@
                         name: "Infinite Final layer", //Created by Akubits
                         tooltip: "Play at least 3 songs to activate",
                         patches: [{offset: 0x17E4DF, off: [0x7F, 0x08], on: [0x90, 0x90]}]
+                    },
+                    {
+                        name: "Start on Final layer", //Created by Akubits
+                        tooltip: "Use together with Infinite Final Layer for better pfreepanic compatibility",
+                        patches: [
+                            {
+                                offset: 0x17E420,
+                                off: [0x8B, 0x81, 0x48, 0x14],
+                                on: [0xB8, 0x03, 0x00, 0x00]
+                            },
+                            {
+                                offset: 0x17E425,
+                                off: [0x00, 0xC3],
+                                on: [0xC3, 0xCC]
+                            }
+                        ]
                     },
                     {
                         name: "Auto Event Mode Toggled (Freeplay (Coin Options) muse be \"ON\" for this to work efficiently)", //Created by Akubits

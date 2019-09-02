@@ -13,86 +13,64 @@
             new DllPatcherContainer([
                 new DllPatcher("museca", [
                     {
-                        name: "Disable this - replaced by the Infinite Final Layer mod.", //Created by Cammy
-                        tooltip: "Infinite 1st Layer",
-                        patches: [{offset: 0x17E947, off: [0xFF, 0x83, 0x48, 0x14, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
-                    },
-                    {
-                        name: "Infinite Final layer", //Created by Akubits
-                        tooltip: "Play at least 3 songs to activate",
-                        patches: [{offset: 0x17E89F, off: [0x7F, 0x08], on: [0x90, 0x90]}]
-                    },
-                    {
-                        name: "Start on Final layer", //Created by Akubits
-                        tooltip: "Use together with Infinite Final Layer for better pfreepanic compatibility",
+                        name: "Infinite Final Layer", //Created by Akubits & Cammy
                         patches: [
                             {
-                                offset: 0x17E060,
-                                off: [0x8B, 0x81, 0x48, 0x14],
-                                on: [0xB8, 0x03, 0x00, 0x00]
+                                offset: 0x17E947, //Kill the song counter
+                                off: [0xFF, 0x83, 0x48, 0x14, 0x00, 0x00],
+                                on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]
                             },
                             {
-                                offset: 0x17E065,
-                                off: [0x00],
-                                on: [0x90]
+                                offset: 0x17E89F, //Prevent final layer from ending the game
+                                off: [0x7F, 0x08],
+                                on: [0x90, 0x90]
+                            },
+                            {
+                                offset: 0x17E420, //Start on final layer
+                                off: [0x8B, 0x81, 0x48, 0x14, 0x00, 0x00],
+                                on: [0xB8, 0x03, 0x00, 0x00, 0x00, 0x90]
                             }
                         ]
                     },
                     {
-                        name: "Auto Event Mode Toggled (Freeplay (Coin Options) muse be \"ON\" for this to work efficiently)", //Created by Akubits
+                        name: "Auto Event Mode Toggled (Freeplay (Coin Options) must be \"ON\" for this to work efficiently)", //Created by Akubits
                         patches: [
                             {
                                 offset: 0x196BB1,
-                                off: [0x89],
-                                on: [0xC7]
-                            },
-                            {
-                                offset: 0x196BB3,
-                                off: [0x88, 0x41, 0x10, 0xC7, 0x41, 0x14, 0x01, 0x00, 0x00, 0x00, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC],
-                                on: [0x01, 0x00, 0x00, 0x00, 0x88, 0x41, 0x10, 0xC7, 0x41, 0x14, 0x01, 0x00, 0x00, 0x00, 0xC3]
+                                off: [0x89, 0x01, 0x88, 0x41, 0x10, 0xC7, 0x41, 0x14, 0x01, 0x00, 0x00, 0x00, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC],
+                                on: [0xC7, 0x01, 0x01, 0x00, 0x00, 0x00, 0x88, 0x41, 0x10, 0xC7, 0x41, 0x14, 0x01, 0x00, 0x00, 0x00, 0xC3]
                             }
                         ]
                     },
                 ], "2017-06-28 -- 2017-12-25"),
                 new DllPatcher("museca", [
                     {
-                        name: "Disable this - replaced by the Infinite Final Layer mod.", //Created by Cammy
-                        tooltip: "Infinite 1st Layer",
-                        patches: [{offset: 0x17E587, off: [0xFF, 0x83, 0x48, 0x14, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
-                    },
-                    {
-                        name: "Infinite Final layer", //Created by Akubits
-                        tooltip: "Play at least 3 songs to activate",
-                        patches: [{offset: 0x17E4DF, off: [0x7F, 0x08], on: [0x90, 0x90]}]
-                    },
-                    {
-                        name: "Start on Final layer", //Created by Akubits
-                        tooltip: "Use together with Infinite Final Layer for better pfreepanic compatibility",
+                        name: "Infinite Final Layer", //Created by Akubits & Cammy
                         patches: [
                             {
-                                offset: 0x17E420,
-                                off: [0x8B, 0x81, 0x48, 0x14],
-                                on: [0xB8, 0x03, 0x00, 0x00]
+                                offset: 0x17E587, //Kill the song counter
+                                off: [0xFF, 0x83, 0x48, 0x14, 0x00, 0x00],
+                                on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]
                             },
                             {
-                                offset: 0x17E425,
-                                off: [0x00],
-                                on: [0x90]
+                                offset: 0x17E4DF, //Prevent the final layer from ending the game
+                                off: [0x7F, 0x08],
+                                on: [0x90, 0x90]
+                            },
+                            {
+                                offset: 0x17E060, //Start on final layer
+                                off: [0x8B, 0x81, 0x48, 0x14, 0x00, 0x00],
+                                on: [0xB8, 0x03, 0x00, 0x00, 0x00, 0x90]
                             }
                         ]
                     },
                     {
-                        name: "Auto Event Mode Toggled (Freeplay (Coin Options) muse be \"ON\" for this to work efficiently)", //Created by Akubits
+                        name: "Auto Event Mode Toggled (Freeplay (Coin Options) must be \"ON\" for this to work efficiently)", //Created by Akubits
                         patches: [
                             {
                                 offset: 0x196431,
-                                off: [0x89],
-                                on: [0xC7]
-                            },
-                            {
-                                offset: 0x196433,
-                                off: [0x88, 0x41, 0x10, 0xC7, 0x41, 0x14, 0x01, 0x00, 0x00, 0x00, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC],
-                                on: [0x01, 0x00, 0x00, 0x00, 0x88, 0x41, 0x10, 0xC7, 0x41, 0x14, 0x01, 0x00, 0x00, 0x00, 0xC3]
+                                off: [0x89, 0x01, 0x88, 0x41, 0x10, 0xC7, 0x41, 0x14, 0x01, 0x00, 0x00, 0x00, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC],
+                                on: [0xC7, 0x01, 0x01, 0x00, 0x00, 0x00, 0x88, 0x41, 0x10, 0xC7, 0x41, 0x14, 0x01, 0x00, 0x00, 0x00, 0xC3]
                             }
                         ]
                     },

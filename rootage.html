@@ -13,6 +13,50 @@
         new DllPatcherContainer([
           new DllPatcher('bm2dx', [
             {
+              name: 'Unlock All Songs',
+              patches: [{offset: 0x1609C2, off: [0x74, 0x10], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'Premium Free',
+              patches: [{offset: 0x31DB97, off: [0x75, 0x14], on: [0xEB, 0x14]}]
+            },
+            {
+              name: 'Premium Free Timer Freeze',
+              patches: [{offset: 0x16294D, off: [0xFF, 0xC8], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'Cursor lock',
+              tooltip : "After song finishes, song select remains on previous song",
+              patches: [{offset: 0x322DC4, off: [0x74, 0x1D], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'CS-Style Song Start Delay',
+              tooltip : "Holding Start will pause the song at the beginning until you release it",
+              patches: [{offset: 0x33DF5A, off: [0x7D, 0x25], on: [0x90, 0x90]}]
+            },
+          ], "2019-01-23"),
+          new DllPatcher('bm2dx', [
+            {
+              name: 'Unlock All Songs',
+              patches: [{offset: 0x161462, off: [0x74, 0x10], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'Premium Free Timer Freeze',
+              patches: [{offset: 0x16366D, off: [0xFF, 0xC8], on: [0x90, 0x90]}]
+            },
+          ], "2019-02-20"),
+          new DllPatcher('bm2dx', [
+            {
+              name: 'Unlock All Songs',
+              patches: [{offset: 0x16C412, off: [0x74, 0x10], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'Premium Free Timer Freeze',
+              patches: [{offset: 0x16E6ED, off: [0xFF, 0xC8], on: [0x90, 0x90]}]
+            },
+          ], "2019-06-03"),
+          new DllPatcher('bm2dx', [
+            {
               name: 'SSE4.2 Fix',
               tooltip : "This will allow the game to run on processors which do not support the SSE4.2 instruction set. If you can successfully boot the game, do NOT check this.",
               patches: [{offset: 0x3F8C77, off: [0xF3, 0x45, 0x0F], on: [0x90, 0x90, 0x90]}]

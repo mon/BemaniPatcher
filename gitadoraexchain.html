@@ -13,7 +13,7 @@
           new DllPatcherContainer([
             new DllPatcher("libshare-pj", [
               {
-                name: 'Fix "IP CHANGE ERROR" on boot',
+                name: 'Fix "IP CHANGE ERROR"',
                 patches: [{offset: 0x23305, off: [0x74], on: [0xEB]}]
               }
             ], true)

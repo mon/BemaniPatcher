@@ -165,6 +165,11 @@
               tooltip: "Runs for 120 frames (2 seconds) instead of 1200 (20 seconds), recommended only if you have a very stable framerate",
               patches: [{offset: 0x366DEC, off: [0xB0, 0x04], on: [0x78, 0x00]}]
             },
+            {
+              name: "Shorter Arena timeout",
+              tooltip: "Reduce time before CPUs fill empty slots in online lobbies from 1m5s to 30s. Only takes effect if you are the host.",
+              patches: [{offset: 0x37FE54, off: [0x3C, 0x0F], on: [0x08, 0x07]}]
+            },
           ], "2019-09-02"),
           new DllPatcher('bm2dx', [
             {

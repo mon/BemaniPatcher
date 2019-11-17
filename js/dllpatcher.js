@@ -372,7 +372,7 @@ class Patcher {
         this.patchDiv = $("<div>", {"class": "patches"});
 
         var saveButton = $("<button disabled>");
-        saveButton.text('Load DLL First');
+        saveButton.text('Load file First');
         saveButton.on('click', this.saveDll.bind(this));
         this.saveButton = saveButton;
 
@@ -427,7 +427,7 @@ class Patcher {
         this.dllFile = new Uint8Array(buffer);
         if(this.validatePatches()) {
             this.successDiv.removeClass("hidden");
-            this.successDiv.html("DLL loaded successfully!");
+            this.successDiv.html("File loaded successfully!");
         } else {
             this.successDiv.addClass("hidden");
         }

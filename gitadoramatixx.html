@@ -10,8 +10,7 @@
     <script type="text/javascript" src="js/dllpatcher.js"></script>
     <script type="text/javascript">
         window.addEventListener("load", function () {
-          new DllPatcherContainer([
-            new DllPatcher("game", [
+            new Patcher("game.dll", "", [
               {
                 name: "Timer Freeze",
                 patches: [{offset: 0xBC37, off: [0x0F, 0x85, 0xAA, 0x01, 0x00, 0x00], on: [0xE9, 0xAB, 0x01, 0x00, 0x00, 0x90]}]
@@ -33,14 +32,13 @@
                 name: "Enable Long Music",
                 patches: [{offset: 0x163134, off: [0x75, 0x03], on: [0x90, 0x90]}]
               }
-            ], true),
-            new DllPatcher("libshare-pj", [
+            ]);
+            new Patcher("libshare-pj.dll", "", [
               {
                 name: "Fix IP change error",
                 patches: [{offset: 0x23375, off: [0x74], on: [0xEB]}]
               }
-            ], true)
-          ]);
+            ]);
         });
     </script>
 </head>

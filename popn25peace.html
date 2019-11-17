@@ -10,8 +10,8 @@
     <script type="text/javascript" src="js/dllpatcher.js"></script>
     <script type="text/javascript">
         window.addEventListener("load", function () {
-            new DllPatcherContainer([
-                new DllPatcher("popn22", [
+            new PatchContainer([
+                new Patcher("popn22.dll", "2019-04-23", [
                     {
                         name: "E: Drive Fix",
                         tooltip: "Fix crash caused by no E: drive",
@@ -51,7 +51,7 @@
                             { offset: 0x10977E, off: [0x84, 0xC0], on: [0xB0, 0x01] },
                         ],
                     },
-                ], "2019-04-23"),
+                ]),
             ]);
         });
     </script>

@@ -10,16 +10,15 @@
     <script type="text/javascript" src="js/dllpatcher.js"></script>
     <script type="text/javascript">
         window.addEventListener("load", function () {
-          new DllPatcherContainer([
-            new DllPatcher("game", [
+            new Patcher("game.dll", "", [
                 {
                     name: "Force unlock SECRET folder",
                     patches: [
-                        {offset: 0xBA187, off: [0x74, 0x04, 0xC6, 0x46], on: [0x90, 0x90, 0xC6, 0x46]} 
+                        {offset: 0xBA187, off: [0x74, 0x04, 0xC6, 0x46], on: [0x90, 0x90, 0xC6, 0x46]}
                         ]
                 }
-            ], true),
-            new DllPatcher("boot", [
+            ]);
+            new Patcher("boot.dll", "", [
                 {
                     name: "GF's volume fix",
                     patches: [
@@ -28,22 +27,21 @@
                       {offset: 0x1A41, off: [0x02], on: [0x03]},
                     ]
                 }
-            ], true),
-            new DllPatcher("libshare-pj", [
+            ]);
+            new Patcher("libshare-pj.dll", "", [
                 {
                     name: "Let the game can access e-amuemu which IP is 192.168.*.*",
                     patches: [
                         {offset: 0x16B99, off: [0x01, 0x5B], on: [0x00, 0x5B]}
                         ]
                 }
-            ], true),
-            new DllPatcher("libsytem", [
+            ]);
+            new Patcher("libsystem.dll", "", [
                 {
                     name: "White screen freeze fix",
                     patches: [{offset: 0x2DFC, off: [0x53, 0x53, 0xA3, 0xCC], on: [0x33, 0xC0, 0xA3, 0xCC]}]
                 }
-            ], true)
-          ]);
+            ]);
         });
     </script>
 </head>

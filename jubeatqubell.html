@@ -10,8 +10,8 @@
         <script type="text/javascript" src="js/dllpatcher.js"></script>
         <script type="text/javascript">
             window.addEventListener("load", function() {
-                new DllPatcherContainer([
-                    new DllPatcher("jubeat", [
+                new PatchContainer([
+                    new Patcher("jubeat.dll", "2017-06-20", [
                         {
                          name : "Disable tutorial",
                          patches : [{offset : 0xAAC32, off: [0x75, 0x4A, 0x53, 0x68, 0x00], on : [0xE9, 0x90, 0x00, 0x00, 0x00]}]
@@ -20,9 +20,9 @@
                          name : "SELECT MUSIC timer lock",
                          patches : [{offset : 0x80576, off : [0x75], on : [0xEB]}]
                         },
-                    ],  "2017-06-20"),
+                    ]),
 
-                    new DllPatcher("jubeat", [
+                    new Patcher("jubeat.dll", "2017-04-15", [
                         {
                          name : "Disable tutorial",
                          patches : [{offset : 0xAA462, off: [0x75, 0x4A, 0x53, 0x68, 0x00], on : [0xE9, 0x90, 0x00, 0x00, 0x00]}]
@@ -31,14 +31,14 @@
                          name : "SELECT MUSIC timer lock",
                          patches : [{offset : 0x802D0, off : [0x75], on : [0xEB]}]
                         },
-                    ],  "2017-04-15"),
+                    ]),
 
-                    new DllPatcher("music_db", [
+                    new Patcher("music_db.dll", "music_db.dll", [
                         {
                          name : "Unlock all songs",
                          patches : [{offset : 0x17DF, off: [0x74, 0x09], on : [0x90, 0x90]}]
                         },
-                    ], true)
+                    ])
                 ]);
             });
         </script>

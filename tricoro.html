@@ -10,8 +10,8 @@
     <script type="text/javascript" src="js/dllpatcher.js"></script>
     <script type="text/javascript">
         window.addEventListener("load", function () {
-            new DllPatcherContainer([
-                new DllPatcher("bm2dx", [
+            new PatchContainer([
+                new Patcher('bm2dx.dll', "2012-09-19", [
                     {
                         //by nibs
                         name: "Shorter monitor check",
@@ -25,26 +25,26 @@
                         //changes the FPS = %2.4f string to FPS = %2.6f
                         patches: [{offset: 0x143C45, off: [0x34], on: [0x36]}]
                     },
-                ], "2012-09-19"),
-                new DllPatcher("bm2dx", [
+                ]),
+                new Patcher('bm2dx.dll', "2012-10-09", [
                     {
                         name: "Premium Free",
                         patches: [{offset: 0x49CAC, off: [0x75], on: [0xEB]}]
                     },
-                ], "2012-10-09"),
-                new DllPatcher("bm2dx", [
+                ]),
+                new Patcher('bm2dx.dll', "2012-12-07", [
                     {
                         name: "Premium Free",
                         patches: [{offset: 0x4C47C, off: [0x75], on: [0xEB]}]
                     },
-                ], "2012-12-07"),
-                new DllPatcher("bm2dx", [
+                ]),
+                new Patcher('bm2dx.dll', "2013-03-05", [
                     {
                         name: "Premium Free",
                         patches: [{offset: 0x4E6CC, off: [0x75], on: [0xEB]}]
                     },
-                ], "2013-03-05"),
-                new DllPatcher("bm2dx", [
+                ]),
+                new Patcher('bm2dx.dll', "2013-09-09", [
                     {
                         name: "Premium Free",
                         patches: [{offset: 0x4F2DC, off: [0x75], on: [0xEB]}]
@@ -66,7 +66,7 @@
                         //changes the FPS = %2.4f string to FPS = %2.6f
                         patches: [{offset: 0x16BDD5, off: [0x34], on: [0x36]}]
                     },
-                ], "2013-09-09"),
+                ]),
             ]);
         });
     </script>

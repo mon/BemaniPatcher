@@ -10,7 +10,7 @@
         <script type="text/javascript" src="js/dllpatcher.js"></script>
         <script type="text/javascript">
             window.addEventListener("load", function() {
-                new DllPatcher("popn22", [
+                new Patcher("popn22.dll", "", [
                     {
                      name : "Song/EX unlock",
                      patches : [{offset : 0x59508, off: [0xF6, 0xD8, 0x1A, 0xC0, 0x24, 0x02], on : [0xB0, 0x02, 0x90, 0x90, 0x90, 0x90]},

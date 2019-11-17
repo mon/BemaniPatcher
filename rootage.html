@@ -10,8 +10,8 @@
     <script type='text/javascript' src='js/dllpatcher.js'></script>
     <script type='text/javascript'>
       window.addEventListener('load', function () {
-        new DllPatcherContainer([
-          new DllPatcher('bm2dx', [
+        new PatchContainer([
+          new Patcher('bm2dx.dll', "2019-01-23", [
             {
               name: 'Unlock All Songs',
               patches: [{offset: 0x1609C2, off: [0x74, 0x10], on: [0x90, 0x90]}]
@@ -34,8 +34,8 @@
               tooltip : "Holding Start will pause the song at the beginning until you release it",
               patches: [{offset: 0x33DF5A, off: [0x7D, 0x25], on: [0x90, 0x90]}]
             },
-          ], "2019-01-23"),
-          new DllPatcher('bm2dx', [
+          ]),
+          new Patcher('bm2dx.dll', "2019-02-20", [
             {
               name: 'Unlock All Songs',
               patches: [{offset: 0x161462, off: [0x74, 0x10], on: [0x90, 0x90]}]
@@ -44,8 +44,8 @@
               name: 'Premium Free Timer Freeze',
               patches: [{offset: 0x16366D, off: [0xFF, 0xC8], on: [0x90, 0x90]}]
             },
-          ], "2019-02-20"),
-          new DllPatcher('bm2dx', [
+          ]),
+          new Patcher('bm2dx.dll', "2019-06-03", [
             {
               name: 'Unlock All Songs',
               patches: [{offset: 0x16C412, off: [0x74, 0x10], on: [0x90, 0x90]}]
@@ -54,8 +54,8 @@
               name: 'Premium Free Timer Freeze',
               patches: [{offset: 0x16E6ED, off: [0xFF, 0xC8], on: [0x90, 0x90]}]
             },
-          ], "2019-06-03"),
-          new DllPatcher('bm2dx', [
+          ]),
+          new Patcher('bm2dx.dll', "2019-09-02", [
             {
               name: 'SSE4.2 Fix',
               tooltip : "This will allow the game to run on processors which do not support the SSE4.2 instruction set. If you can successfully boot the game, do NOT check this.",
@@ -170,8 +170,8 @@
               tooltip: "Reduce time before CPUs fill empty slots in online lobbies from 1m5s to 30s. Only takes effect if you are the host.",
               patches: [{offset: 0x37FE54, off: [0x3C, 0x0F], on: [0x08, 0x07]}]
             },
-          ], "2019-09-02"),
-          new DllPatcher('bm2dx', [
+          ]),
+          new Patcher('bm2dx.dll', "2019-10-07", [
             {
               name: 'SSE4.2 Fix',
               tooltip : "This will allow the game to run on processors which do not support the SSE4.2 instruction set. If you can successfully boot the game, do NOT check this.",
@@ -281,7 +281,7 @@
               tooltip: "Runs for 120 frames (2 seconds) instead of 1200 (20 seconds), recommended only if you have a very stable framerate",
               patches: [{offset: 0x366E6C, off: [0xB0, 0x04], on: [0x78, 0x00]}]
             },
-          ], "2019-10-07"),
+          ]),
         ]);
       });
     </script>

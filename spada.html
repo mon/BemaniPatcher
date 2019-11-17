@@ -10,8 +10,8 @@
     <script type="text/javascript" src="js/dllpatcher.js"></script>
     <script type="text/javascript">
         window.addEventListener("load", function () {
-            new DllPatcherContainer([
-                new DllPatcher("bm2dx", [
+            new PatchContainer([
+                new Patcher('bm2dx.dll', "2013-10-02", [
                     {
                         //by nibs
                         name: "Shorter monitor check",
@@ -25,8 +25,8 @@
                         //changes the FPS = %2.4f string to FPS = %2.6f
                         patches: [{offset: 0x160B05, off: [0x34], on: [0x36]}]
                     },
-                ], "2013-10-02"),
-                new DllPatcher("bm2dx", [
+                ]),
+                new Patcher('bm2dx.dll', "2014-07-16", [
                     {
                         name: "Timer Freeze",
                         patches: [{offset: 0x9150E, off: [0x74], on: [0xEB]}]
@@ -84,7 +84,7 @@
                         //changes the FPS = %2.4f string to FPS = %2.6f
                         patches: [{offset: 0x192175, off: [0x34], on: [0x36]}]
                     },
-                ], "2014-07-16"),
+                ]),
             ]);
         });
     </script>

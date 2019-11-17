@@ -10,8 +10,8 @@
     <script type="text/javascript" src="js/dllpatcher.js"></script>
     <script type="text/javascript">
         window.addEventListener("load", function () {
-            new DllPatcherContainer([
-                new DllPatcher("gamemdx", [
+            new PatchContainer([
+                new Patcher("gamemdx.dll", "2019-04-22", [
                     {
                         name: "Force enable fast/slow",
                         patches: [{offset: 0x97C60, off: [0x8B, 0x41, 0x44], on: [0x31, 0xC0, 0x40]}]
@@ -83,8 +83,8 @@
                             {offset: 0x2D0AE, off: [0xE8, 0x3D, 0x0D, 0xFE, 0xFF], on: [0xB8, 0x00, 0x00, 0x00, 0x00]},
                         ]
                     }
-                ], "2019-04-22"),
-                new DllPatcher("gamemdx", [
+                ]),
+                new Patcher("gamemdx.dll", "2018-10-22", [
                     {
                         name: "Force enable fast/slow",
                         patches: [{offset: 0x8CA60, off: [0x8B, 0x41, 0x44], on: [0x31, 0xC0, 0x40]}]
@@ -103,7 +103,7 @@
                         patches: [
                             //e-amusement
                             {offset: 0x8ED83, off: [0x32, 0xC0], on: [0xB0, 0x01]},
-                            //event mode 
+                            //event mode
                             {offset: 0x8463B, off: [0x75], on: [0xEB]},
                             //ACES FOR ACES, ENDYMION, ???
                             {offset: 0x846D1, off: [0x32, 0xC0], on: [0xB0, 0x01]},
@@ -139,8 +139,8 @@
                         tooltip: "Song clears/scores only. Profile progress and custom settings do not save. Reboot game to re-query for scores.",
                         patches: [{offset: 0x1f0a6, off: [0x01], on: [0x00]}]
                     },
-                ], "2018-10-22"),
-                new DllPatcher("gamemdx", [
+                ]),
+                new Patcher("gamemdx.dll", "2018-04-23", [
                     {
                         name: "Force enable fast/slow",
                         patches: [{offset: 0x84EC0, off: [0x8B, 0x41, 0x44], on: [0x31, 0xC0, 0x40]}]
@@ -167,7 +167,7 @@
                         patches: [
                             //e-amusement
                             {offset: 0x86CD8, off: [0x32, 0xC0], on: [0xB0, 0x01]},
-                            //event mode 
+                            //event mode
                             {offset: 0x7DEFE, off: [0x75], on: [0xEB]},
                             //ACES FOR ACES, ENDYMION
                             {offset: 0x7DF3E, off: [0x32, 0xC0], on: [0xB0, 0x01]},
@@ -204,7 +204,7 @@
                             {offset: 0x8C29, off: [0x74, 0x2E], on: [0xEB, 0x2C]},
                         ]
                     },
-                ], "2018-04-23"),
+                ]),
             ]);
         });
     </script>

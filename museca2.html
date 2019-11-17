@@ -10,8 +10,8 @@
     <script type="text/javascript" src="js/dllpatcher.js"></script>
     <script type="text/javascript">
         window.addEventListener("load", function () {
-            new DllPatcherContainer([
-                new DllPatcher("museca", [
+            new PatchContainer([
+                new Patcher("museca.dll", "2017-06-28 -- 2017-12-25", [
                     {
                         name: "Infinite Final Layer", //Created by Akubits & Cammy
                         patches: [
@@ -42,8 +42,8 @@
                             }
                         ]
                     },
-                ], "2017-06-28 -- 2017-12-25"),
-                new DllPatcher("museca", [
+                ]),
+                new Patcher("museca.dll", "2018-07-30", [
                     {
                         name: "Infinite Final Layer", //Created by Akubits & Cammy
                         patches: [
@@ -74,7 +74,7 @@
                             }
                         ]
                     },
-                ], "2018-07-30"),
+                ]),
             ]);
         });
     </script>

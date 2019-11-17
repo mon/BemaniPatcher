@@ -10,8 +10,8 @@
         <script type="text/javascript" src="js/dllpatcher.js"></script>
         <script type="text/javascript">
             window.addEventListener("load", function() {
-                new DllPatcherContainer([
-                    new DllPatcher("beatstream", [
+                new PatchContainer([
+                    new Patcher("beatstream.dll", "2015-12-01", [
                         {
                             name: "E: drive fix",
                             tooltip: "Fix crash caused by no E: drive",
@@ -20,12 +20,12 @@
                         {
                             name: "Unlock all songs",
                             patches: [{
-                                offset: 0x1740B6, 
+                                offset: 0x1740B6,
                                 off: [0x48, 0x83, 0xFD, 0x10, 0x72, 0x09, 0x48, 0x8D, 0x79, 0x08],
                                 on: [0xBB, 0x00, 0x00, 0x00, 0x00, 0xE9, 0xAE, 0x01, 0x00, 0x00]
                             }]
                         },
-                    ], "2015-12-01"),
+                    ]),
                 ]);
             });
         </script>

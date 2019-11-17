@@ -10,14 +10,12 @@
     <script type="text/javascript" src="js/dllpatcher.js"></script>
     <script type="text/javascript">
         window.addEventListener("load", function () {
-          new DllPatcherContainer([
-            new DllPatcher("libshare-pj", [
+            new Patcher("libshare-pj.dll", "", [
               {
                 name: 'Fix "IP CHANGE ERROR"',
                 patches: [{offset: 0x23305, off: [0x74], on: [0xEB]}]
               }
-            ], true)
-          ]);
+            ])
         });
     </script>
 </head>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>CHUNITHM AMAZON Modder</title>
+        <link rel="stylesheet" href="css/style.css">
+        <!-- don't hate -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script type="text/javascript" src="js/FileSaver.min.js"></script>
+        <script type="text/javascript" src="js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function () {
+                new Patcher("chuniApp.exe", "", [
+                    {
+                        // mon
+                        name: "Allow 127.0.0.1/localhost as the network server",
+                        patches: [
+                        {offset: 0x8BC180, off: [0x55, 0x8B, 0xEC], on: [0x31, 0xC0, 0xC3]},
+                        {offset: 0x164D0E0, off: [0x31, 0x32, 0x37, 0x2F], on: [0x30, 0x2F, 0x38, 0x00]}
+                        ]
+                    },
+                ]);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>CHUNITHM AMAZON Modder</h1>
+    </body>
+</html>

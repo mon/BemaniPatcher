@@ -64,7 +64,7 @@ class StandardPatch {
         } else if(status === "off") {
             console.log('"' + this.name + '"', "is disabled!");
         } else {
-            return '"' + this.name + '" is neither on nor off! Have you got the right dll?';
+            return '"' + this.name + '" is neither on nor off! Have you got the right file?';
         }
     }
 
@@ -156,7 +156,7 @@ class UnionPatch {
                 return;
             }
         }
-        return '"' + this.name + '" doesn\'t have a valid patch! Have you got the right dll?';
+        return '"' + this.name + '" doesn\'t have a valid patch! Have you got the right file?';
     }
 
     applyPatch(file) {

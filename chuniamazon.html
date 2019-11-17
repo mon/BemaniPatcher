@@ -15,9 +15,17 @@
                         // mon
                         name: "Allow 127.0.0.1/localhost as the network server",
                         patches: [
-                        {offset: 0x8BC180, off: [0x55, 0x8B, 0xEC], on: [0x31, 0xC0, 0xC3]},
-                        {offset: 0x164D0E0, off: [0x31, 0x32, 0x37, 0x2F], on: [0x30, 0x2F, 0x38, 0x00]}
+                            {offset: 0x8BC180, off: [0x55, 0x8B, 0xEC], on: [0x31, 0xC0, 0xC3]},
+                            {offset: 0x164D0E0, off: [0x31, 0x32, 0x37, 0x2F], on: [0x30, 0x2F, 0x38, 0x00]}
                         ]
+                    },
+                    {
+                        // mon
+                        name: "Disable shop close lockout",
+                        tooltip: "Around midnight JST the game won't let you play any more.",
+                        patches: [
+                            {offset: 0x8E3DD3, off: [0x74], on: [0xEB]},
+                        ],
                     },
                 ]);
             });

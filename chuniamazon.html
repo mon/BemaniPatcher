@@ -28,6 +28,13 @@
                         ],
                     },
                     {
+                        // mon
+                        name: "Disable update check (faster boot)",
+                        patches: [
+                            {offset: 0x8AE690, off: [0xA1, 0x54, 0x88], on: [0x31, 0xC0, 0xC3]},
+                        ],
+                    },
+                    {
                         // somewhatlurker
                         name: "Force shared audio mode, system audio samplerate must be 48000",
                         tooltip: "Improves compatibility but may increase latency",

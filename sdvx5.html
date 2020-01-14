@@ -30,7 +30,11 @@
               tooltip: 'Remove visual clutter',
               patches: [{offset: 0x72E560, off: [0x73], on: [0x00]}]
             },
-            // this one maybe needs some further looking, as it needs all songs are safe
+            {
+              name: 'Boot into Event Mode',
+              patches: [{offset: 0x50FCF0, off: [0x33, 0xC0, 0xC7, 0x41, 0x08, 0x64, 0x05, 0x00, 0x00, 0x48, 0x89, 0x01, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC], on: [0x31, 0xC0, 0x67, 0x8D, 0x40, 0x01, 0xC7, 0x41, 0x08, 0x64, 0x05, 0x00, 0x00, 0x48, 0x89, 0x01, 0xC3]}]
+            },
+            // PFree needs some further looking, as it needs all songs are safe
             // if they are not set as safe, it simply crashes.
             {
               name: 'PFree (Unlimited plays)',
@@ -45,6 +49,16 @@
               name: 'Freeze timer in all modes',
               tooltip: 'Useful to play with Omega Dimension Ex-Track',
               patches: [{offset: 0x458124, off: [0x8B, 0x83, 0xA0, 0x00, 0x00, 0x00, 0x85, 0xC0, 0x74, 0x08], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+            },
+            {
+              name: 'Non-Effective Rate gauges start at 0%',
+              tooltip: 'This affects all "Hard" Gauge types',
+              patches: [{offset: 0x57AF0E, off: [0x10, 0x27], on: [0x01, 0x00]}]
+            },
+            {
+              name: 'Non-Effective Rate gauges do not recover',
+              tooltip: 'This affects all "Hard" Gauge types',
+              patches: [{offset: 0x57B9B3, off: [0x41, 0x01, 0x41, 0x68], on: [0x90, 0x90, 0x90, 0x90]}]
             }
           ])
         ]);

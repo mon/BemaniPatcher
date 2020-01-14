@@ -25,6 +25,8 @@
               tooltip: 'Failing early won\'t drop you out of your session',
               patches: [{offset: 0x630140, off: [0x32, 0xC0], on: [0xB0, 0x01]}]
             },
+            // this one maybe needs some further looking, as it needs all songs are safe
+            // if they are not set as safe, SDVX V crashes.
             {
               name: 'PFree (Unlimited plays)',
               tooltip: 'Requires All Songs "Safe". Song clears/scores only, mission progress and custom settings do not save',

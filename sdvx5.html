@@ -56,6 +56,11 @@
               tooltip: 'Useful to play with Omega Dimension Ex-Track',
               patches: [{offset: 0x458124, off: [0x8B, 0x83, 0xA0, 0x00, 0x00, 0x00, 0x85, 0xC0, 0x74, 0x08], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
             },
+            // credits to G3ORGE
+            {
+              name: 'Unlock all Nemsys Crew',
+              patches: [{offset: 0x52597B, off: [0x95], on: [0x91]}]
+            },
             {
               name: 'Non-Effective Rate gauges start at 0%',
               tooltip: 'This affects all "Hard" Gauge types',

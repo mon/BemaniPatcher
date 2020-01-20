@@ -11,6 +11,34 @@
     <script type='text/javascript'>
       window.addEventListener('load', function () {
         new PatchContainer([
+          // taken from ＧＨＹＡＫＩＭＡ at /1cc/, added to bemanipatcher by JeDaYoshi
+          new Patcher('soundvoltex.dll', "2019-07-09", [
+            {
+              name: 'SSE4.2 Fix',
+              tooltip: 'This will allow the game to run on processors which do not support the SSE4.2 instruction set. If you can successfully boot the game, do NOT check this.',
+              patches: [
+                {offset: 0x203B2D, off: [0xF3, 0x45, 0x0F, 0xB8, 0xC8], on: [0x67, 0x45, 0x8D, 0x48, 0xFF]},
+                {offset: 0x21DFD6, off: [0xF3, 0x45, 0x0F, 0xB8, 0xCA], on: [0x44, 0x8D, 0x4E, 0x02, 0x90]}
+              ]
+            },
+            {
+              name: 'All songs/difficulties unlocked',
+              patches: [
+                {offset: 0x46D895, off: [0x8B, 0x4C, 0x24, 0x34, 0xE8, 0xD2, 0x09, 0x00, 0x00], on: [0xB8, 0x03, 0x00, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90]},
+                {offset: 0x4F1432, off: [0xE8, 0xF9, 0x45, 0x08, 0x00], on: [0xB8, 0x0D, 0x00, 0x00, 0x00]}
+              ]
+            },
+            {
+              name: 'All songs "Safe"',
+              tooltip: 'Failing early won\'t drop you out of your session',
+              patches: [{offset: 0x5724A0, off: [0x32, 0xC0], on: [0xB0, 0x01]}]
+            },
+            {
+              name: 'PFree (Unlimited plays)',
+              tooltip: 'If you crash, you will finish your session unless you use \'All songs "Safe"\'. Song clears/scores only, mission progress and custom settings do not save',
+              patches: [{offset: 0x4845DA, off: [0x48, 0x63, 0x81, 0xC8, 0x11, 0x00, 0x00, 0x48, 0x8B, 0xF2, 0x48, 0x8B, 0xF9, 0x83, 0xF8, 0x04, 0x0F, 0x8D, 0xE4, 0x01, 0x00, 0x00], on: [0x48, 0xC7, 0xC0, 0x01, 0x00, 0x00, 0x00, 0x48, 0x89, 0x81, 0xC8, 0x11, 0x00, 0x00, 0x48, 0x89, 0xD6, 0x48, 0x89, 0xCF, 0x90, 0x90]}]
+            }
+          ]),
           // taken from IrotoI at /1cc/, added to bemanipatcher by JeDaYoshi
           new Patcher('soundvoltex.dll', "2019-10-31 (CN ver.)", [
             {

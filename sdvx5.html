@@ -11,7 +11,7 @@
     <script type='text/javascript'>
       window.addEventListener('load', function () {
         new PatchContainer([
-          // taken from ＧＨＹＡＫＩＭＡ at /1cc/, added to bemanipatcher by JeDaYoshi
+          // taken from ＧＨＹＡＫＩＭＡ and IrotoI at /1cc/, added to bemanipatcher by JeDaYoshi
           new Patcher('soundvoltex.dll', "2019-07-09", [
             {
               name: 'SSE4.2 Fix',
@@ -34,9 +34,115 @@
               patches: [{offset: 0x5724A0, off: [0x32, 0xC0], on: [0xB0, 0x01]}]
             },
             {
+              name: 'No "Safe" banner on jackets',
+              tooltip: 'Remove visual clutter',
+              patches: [{offset: 0x664058, off: [0x73], on: [0x00]}]
+            },
+            {
+              name: 'Boot into Event Mode',
+              patches: [{offset: 0x45F4E0, off: [0x33, 0xC0, 0xC7, 0x41, 0x08, 0x64, 0x05, 0x00, 0x00, 0x48, 0x89, 0x01, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC], on: [0x31, 0xC0, 0x67, 0x8D, 0x40, 0x01, 0xC7, 0x41, 0x08, 0x64, 0x05, 0x00, 0x00, 0x48, 0x89, 0x01, 0xC3]}]
+            },
+            {
               name: 'PFree (Unlimited plays)',
               tooltip: 'If you crash, you will finish your session unless you use \'All songs "Safe"\'. Song clears/scores only, mission progress and custom settings do not save',
               patches: [{offset: 0x4845DA, off: [0x48, 0x63, 0x81, 0xC8, 0x11, 0x00, 0x00, 0x48, 0x8B, 0xF2, 0x48, 0x8B, 0xF9, 0x83, 0xF8, 0x04, 0x0F, 0x8D, 0xE4, 0x01, 0x00, 0x00], on: [0x48, 0xC7, 0xC0, 0x01, 0x00, 0x00, 0x00, 0x48, 0x89, 0x81, 0xC8, 0x11, 0x00, 0x00, 0x48, 0x89, 0xD6, 0x48, 0x89, 0xCF, 0x90, 0x90]}]
+            },
+            {
+              name: 'Allow ARS (Alternative Rate System) Option',
+              patches: [{offset: 0x56F5BF, off: [0x74], on: [0xEB]}]
+            },
+            {
+              name: 'Freeze timer in all modes',
+              tooltip: 'Useful to play with Omega Dimension Ex-Track',
+              patches: [{offset: 0x3B0E14, off: [0x8B, 0x83, 0xA0, 0x00, 0x00, 0x00, 0x85, 0xC0, 0x74, 0x08], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+            },
+            {
+              name: 'Unlock all Nemsys Crew',
+              patches: [
+                {offset: 0x472F0B, off: [0x95], on: [0x91]},
+                {offset: 0x4F41BE, off: [0x01], on: [0x99]}
+              ]
+            },
+            {
+              name: 'Non-Effective Rate gauges start at 0%',
+              tooltip: 'This affects all "Hard" Gauge types',
+              patches: [{offset: 0x4C3009, off: [0x10, 0x27], on: [0x01, 0x00]}]
+            },
+            {
+              name: 'Non-Effective Rate gauges do not recover',
+              tooltip: 'This affects all "Hard" Gauge types',
+              patches: [{offset: 0x4C3A73, off: [0x41, 0x01, 0x41, 0x68], on: [0x90, 0x90, 0x90, 0x90]}]
+            },
+            {
+              name: 'Skip global matching screen',
+              patches: [{offset: 0x6AA778, off: [0x4D], on: [0x4E]}]
+            }
+          ]),
+          // taken from ＧＨＹＡＫＩＭＡ and IrotoI at /1cc/, added to bemanipatcher by JeDaYoshi
+          new Patcher('soundvoltex.dll', "2019-10-08", [
+            {
+              name: 'SSE4.2 Fix',
+              tooltip: 'This will allow the game to run on processors which do not support the SSE4.2 instruction set. If you can successfully boot the game, do NOT check this.',
+              patches: [
+                {offset: 0x25647D, off: [0xF3, 0x45, 0x0F, 0xB8, 0xC8], on: [0x67, 0x45, 0x8D, 0x48, 0xFF]},
+                {offset: 0x270936, off: [0xF3, 0x45, 0x0F, 0xB8, 0xCA], on: [0x44, 0x8D, 0x4E, 0x02, 0x90]}
+              ]
+            },
+            {
+              name: 'All songs/difficulties unlocked',
+              patches: [
+                {offset: 0x4CDC75, off: [0x8B, 0x4C, 0x24, 0x34, 0xE8, 0xD2, 0x09, 0x00, 0x00], on: [0xB8, 0x03, 0x00, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90]},
+                {offset: 0x558862, off: [0xE8, 0xC9, 0x8C, 0x08, 0x00], on: [0xB8, 0x0D, 0x00, 0x00, 0x00]}
+              ]
+            },
+            {
+              name: 'All songs "Safe"',
+              tooltip: 'Failing early won\'t drop you out of your session',
+              patches: [{offset: 0x5DD9F0, off: [0x32, 0xC0], on: [0xB0, 0x01]}]
+            },
+            {
+              name: 'No "Safe" banner on jackets',
+              tooltip: 'Remove visual clutter',
+              patches: [{offset: 0x6D9AC0, off: [0x73], on: [0x00]}]
+            },
+            {
+              name: 'Boot into Event Mode',
+              patches: [{offset: 0x4BF810, off: [0x33, 0xC0, 0xC7, 0x41, 0x08, 0x64, 0x05, 0x00, 0x00, 0x48, 0x89, 0x01, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC], on: [0x31, 0xC0, 0x67, 0x8D, 0x40, 0x01, 0xC7, 0x41, 0x08, 0x64, 0x05, 0x00, 0x00, 0x48, 0x89, 0x01, 0xC3]}]
+            },
+            {
+              name: 'PFree (Unlimited plays)',
+              tooltip: 'If you crash, you will finish your session unless you use \'All songs "Safe"\'. Song clears/scores only, mission progress and custom settings do not save',
+              patches: [{offset: 0x4E4F9A, off: [0x48, 0x63, 0x81, 0xE8, 0x11, 0x00, 0x00, 0x48, 0x8B, 0xF2, 0x48, 0x8B, 0xF9, 0x83, 0xF8, 0x04, 0x0F, 0x8D, 0xFB, 0x01, 0x00, 0x00], on: [0x48, 0xC7, 0xC0, 0x01, 0x00, 0x00, 0x00, 0x48, 0x89, 0x81, 0xE8, 0x11, 0x00, 0x00, 0x48, 0x89, 0xD6, 0x48, 0x89, 0xCF, 0x90, 0x90]}]
+            },
+            {
+              name: 'Allow ARS (Alternative Rate System) Option',
+              patches: [{offset: 0x5DAAAF, off: [0x74], on: [0xEB]}]
+            },
+            {
+              name: 'Freeze timer in all modes',
+              tooltip: 'Useful to play with Omega Dimension Ex-Track',
+              patches: [{offset: 0x405B44, off: [0x8B, 0x83, 0xA0, 0x00, 0x00, 0x00, 0x85, 0xC0, 0x74, 0x08], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+            },
+            {
+              name: 'Unlock all Nemsys Crew',
+              patches: [
+                {offset: 0x4D378B, off: [0x95], on: [0x91]},
+                {offset: 0x55B91F, off: [0x01], on: [0x99]}
+              ]
+            },
+            {
+              name: 'Non-Effective Rate gauges start at 0%',
+              tooltip: 'This affects all "Hard" Gauge types',
+              patches: [{offset: 0x528C7E, off: [0x10, 0x27], on: [0x01, 0x00]}]
+            },
+            {
+              name: 'Non-Effective Rate gauges do not recover',
+              tooltip: 'This affects all "Hard" Gauge types',
+              patches: [{offset: 0x529723, off: [0x41, 0x01, 0x41, 0x68], on: [0x90, 0x90, 0x90, 0x90]}]
+            },
+            {
+              name: 'Skip global matching screen',
+              patches: [{offset: 0x720808, off: [0x4D], on: [0x4E]}]
             }
           ]),
           // taken from IrotoI at /1cc/, added to bemanipatcher by JeDaYoshi

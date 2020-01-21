@@ -143,6 +143,10 @@
             {
               name: 'Skip global matching screen',
               patches: [{offset: 0x720808, off: [0x4D], on: [0x4E]}]
+            },
+            {
+              name: 'Bypass Camera',
+              patches: [{offset: 0x617D80, off: [0x74, 0x21], on: [0x90, 0x90]}]
             }
           ]),
           // taken from IrotoI at /1cc/, added to bemanipatcher by JeDaYoshi

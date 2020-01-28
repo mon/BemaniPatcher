@@ -58,6 +58,14 @@
                             {offset: 0x19B0AB7, off: [0x43, 0x61, 0x6E, 0x63, 0x65, 0x6C, 0x51, 0x75, 0x65, 0x72, 0x79], on: [0x51, 0x75, 0x65, 0x72, 0x79, 0x5F, 0x41, 0x00, 0x00, 0x00, 0x00]},
                         ],
                     },
+                    {
+                        // lybxlpsv
+                        name: "Disable Song Select Timer",
+                        tooltip: "May only work when playing with card.",
+                        patches: [
+                            {offset: 0x6FFC62, off: [0x74], on: [0xEB]},
+                        ],
+                    },
                 ]);
             });
         </script>

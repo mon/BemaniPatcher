@@ -66,6 +66,13 @@
                             {offset: 0x6FFC62, off: [0x74], on: [0xEB]},
                         ],
                     },
+                    {
+                        // esterTion
+                        name: "Set All Timers to 999",
+                        patches: [
+                            {offset: 0x5C30E0, off: [0x8B, 0x44, 0x24, 0x04, 0x69, 0xC0, 0xE8, 0x03, 0x00, 0x00], on: [0xB8, 0x58, 0x3E, 0x0F, 0x00, 0x90, 0x90, 0x90, 0x90, 0x90]},
+                        ],
+                    },
                 ]);
             });
         </script>

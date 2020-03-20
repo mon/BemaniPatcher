@@ -94,26 +94,26 @@
                             },
                         ]
                     },
-					{
-						name: "Increase default coloris from 30k to 100k", // Created by dogelition_man
-						patches: [
-							{
-								offset: 0x27459E,
-								off: [0x30, 0x75, 0x00],
-								on: [0xA0, 0x86, 0x01]
-							},
-						]
-					},
-					{
-						name: "Remove 20191231 date limit for charts", // Created by dogelition_man
-						patches: [
-							{
-								offset: 0xA4F30,
-								off: [0x8D, 0x81, 0xFB],
-								on: [0xB0, 0x01, 0xC3]
-							},
-						]
-					},
+                    {
+                        name: "Increase default coloris from 30k to 100k", // Created by dogelition_man
+                        patches: [
+                            {
+                                offset: 0x27459E,
+                                off: [0x30, 0x75, 0x00],
+                                on: [0xA0, 0x86, 0x01]
+                            },
+                        ]
+                    },
+                    {
+                        name: "Remove 20191231 date limit for charts", // Created by dogelition_man
+                        patches: [
+                            {
+                                offset: 0xA4F30,
+                                off: [0x8D, 0x81, 0xFB],
+                                on: [0xB0, 0x01, 0xC3]
+                            },
+                        ]
+                    },
                 ]),
             ]);
         });

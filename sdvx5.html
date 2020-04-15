@@ -230,6 +230,102 @@
               tooltip: 'Only replaces the first audio device init attempt',
               patches: [{offset: 0x6833E2, off: [0xBA, 0x03, 0x00, 0x00, 0x00], on: [0xBA, 0x00, 0x00, 0x00, 0x00]}]
             }
+          ]),
+          //taken from http://www.bemani.guide/games/sdvx5/hexedits/, added to bemanipatcher by Gladuin
+          new Patcher('soundvoltex.dll', "2020-01-15", [
+            {
+              name: 'SSE4.2 Fix',
+              tooltip: 'This will allow the game to run on processors which do not support the SSE4.2 instruction set. If you can successfully boot the game, do NOT check this.',
+              patches: [
+                {offset: 0x25280D, off: [0xF3, 0x45, 0x0F, 0xB8, 0xC8], on: [0x67, 0x45, 0x8D, 0x48, 0xFF]},
+                {offset: 0x26CCC6, off: [0xF3, 0x45, 0x0F, 0xB8, 0xCA], on: [0x44, 0x8D, 0x4E, 0x02, 0x90]}
+              ]
+            },
+            {
+              name: 'All songs/difficulties unlocked',
+              tooltip: 'Do not use when connected to online servers, will break automation paradise favoriting',
+              patches: [
+                {offset: 0x4D2D75, off: [0x8B, 0x4C, 0x24, 0x34, 0xE8, 0xC2, 0x09, 0x00, 0x00], on: [0xB8, 0x03, 0x00, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90]},
+                {offset: 0x55F4A2, off: [0xE8, 0xC9, 0xA2, 0x08, 0x00], on: [0xB8, 0x0D, 0x00, 0x00, 0x00]}
+              ]
+            },
+            {
+              name: 'All songs "Safe"',
+              tooltip: 'Failing early won\'t drop you out of your session',
+              patches: [
+                {offset: 0x5E2424, off: [0x06], on: [0x13]},
+                {offset: 0x5E2433, off: [0xA4], on: [0x00]},
+              ]
+            },
+            {
+              name: 'No "Safe" banner on jackets',
+              tooltip: 'Remove visual clutter',
+              patches: [{offset: 0x4FFF2B, off: [0x07], on: [0x45]}]
+            },
+            {
+              name: 'Boot into Event Mode',
+              tooltip: 'Not compatible with premium free mode',
+              patches: [{offset: 0x4C4830, off: [0x33, 0xC0, 0xC7, 0x41, 0x08, 0x64, 0x05, 0x00, 0x00, 0x48, 0x89, 0x01, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC], on: [0x31, 0xC0, 0x67, 0x8D, 0x40, 0x01, 0xC7, 0x41, 0x08, 0x64, 0x05, 0x00, 0x00, 0x48, 0x89, 0x01, 0xC3]}]
+            },
+            {
+              name: 'Enable ARS (Alternative Rate System) in Light Start',
+              patches: [{offset: 0x2FB684, off: [0x48], on: [0x00]}]
+            },
+            {
+              name: 'All crew unlocked',
+              patches: [{offset: 0x4D890B, off: [0x95], on: [0x91]}]
+            },
+            {
+              name: 'Skip Global Matching Screen',
+              patches: [{offset: 0x726A30, off: [0x4D], on: [0x4E]}]
+            },
+            {
+              name: 'All Appeal Cards Unlocked',
+              patches: [{offset: 0x4D7E22, off: [0x16], on: [0x00]}]
+            },
+            {
+              name: 'Shared mode WASAPI',
+              tooltip: 'Only replaces the first audio device init attempt',
+              patches: [{offset: 0x638EC5, off: [0xBA, 0x03, 0x00, 0x00, 0x00], on: [0xBA, 0x00, 0x00, 0x00, 0x00]}]
+            },
+            {
+              name: 'Bypass Camera',
+              patches: [{offset: 0x61FBF0, off: [0x74, 0x21], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'Freeze timer in all modes',
+              tooltip: 'Useful to play with Omega Dimension Ex-Track',
+              patches: [{offset: 0x406C94, off: [0xFF, 0xCA], on: [0x90, 0x90]}]
+            },
+            // created by Xyen
+            {
+              name: 'Infinite Premium Time',
+              tooltip: 'Locks the timer, can still exit with key combo',
+              patches: [{offset: 0x2F4A15, off: [0xFF, 0x15, 0x6D, 0x5B, 0x38, 0x00, 0x48, 0x8B, 0x44, 0x24, 0x30], on: [0x48, 0xC7, 0xC0, 0x01, 0x00, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90]}]
+            },
+            {
+              type : "union",
+              name : "Premium Time Length",
+              offset : 0x5030F7,
+              patches : [
+                {
+                  name : "Default (10 Minutes)",
+                  patch : [0x00, 0x70, 0xC9, 0xB2, 0x8B, 0x00, 0x00, 0x00],
+                },
+                {
+                  name : "20 Minutes",
+                  patch : [0x00, 0xE0, 0x92, 0x65, 0x17, 0x01, 0x00, 0x00],
+                },
+                {
+                  name : "30 Minutes",
+                  patch : [0x00, 0x50, 0x5C, 0x18, 0xA3, 0x01, 0x00, 0x00],
+                },
+                {
+                  name : "1 Hour",
+                  patch : [0x00, 0xA0, 0xB8, 0x30, 0x46, 0x03, 0x00, 0x00],
+                },
+              ]
+            }
           ])
         ]);
       });

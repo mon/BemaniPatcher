@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DDR A20 DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- don't hate -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/FileSaver.min.js"></script>
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            new PatchContainer([
+                new Patcher("gamemdx.dll", "2020-02-03", [
+                    {
+                        name: "Force enable fast/slow",
+                        patches: [{offset: 0xA0D40, off: [0x8B, 0x41, 0x44], on: [0x31, 0xC0, 0x40]}]
+                    },
+                    {
+                        name: "Force background judgement",
+                        patches: [{offset: 0xA0D30, off: [0x8B, 0x41], on: [0x31, 0xC0]}]
+                    },
+                    {
+                        name: "Force darkest background",
+                        patches: [{offset: 0xA1AEE, off: [0x75, 0x03, 0x33, 0xC0], on: [0x33, 0xC0, 0xB0, 0x03]}]
+                    },
+                    {
+                        name: "Song Unlock",
+                        patches: [
+                            {offset: 0x952C6, off: [0x75, 0x08, 0x5F, 0x32, 0xC0], on: [0x90, 0x90, 0x5F, 0xB0, 0x01]},
+                            {offset: 0x969A3, off: [0x0F, 0x85], on: [0x90, 0xE9]},
+                            {offset: 0x1CEC24, off: [0x65], on: [0x62]},
+                            {offset: 0x1CEC2C, off: [0x72], on: [0x62]},
+                            {offset: 0x1CEC34, off: [0x6C], on: [0x62]},
+                            {offset: 0x1CEC40, off: [0x6C], on: [0x62]},
+                        ]
+                    },
+                    {
+                        name: "Tutorial Skip",
+                        patches: [{offset: 0x4AD33, off: [0x75], on: [0xEB]}]
+                    },
+                    {
+                        name: "Timer Freeze",
+                        patches: [{offset: 0x28545, off: [0x74], on: [0xEB]}]
+                    },
+                    {
+                        name: "Unlock options",
+                        tooltip: "Unlocks e-amusement exclusive options such as ARROW COLOR",
+                        patches: [{offset: 0x8ACF3, off: [0x75], on: [0xEB]}]
+                    },
+                    {
+                        name: "Enable DDR SELECTION",
+                        tooltip: "Even works in offline/local mode!",
+                        patches: [{offset: 0x85314, off: [0xE8, 0xA7, 0xAA, 0x01], on: [0xB8, 0x01, 0x00, 0x00]}]
+                    },
+                    {
+                        name: "Premium Free",
+                        patches: [{offset: 0x1F788, off: [0x01], on: [0x00]}]
+                    },
+                    {
+                        name: 'Mute announcer',
+                        tooltip: 'Also mutes crowd cheering and booing during gameplay',
+                        patches: [
+                            {offset: 0x2B698, off: [0x0F, 0x84], on: [0x90, 0xE9]},
+                            {offset: 0x1C16F3, off: [0x76], on: [0x62]},
+                            {offset: 0x1C170F, off: [0x76], on: [0x62]},
+                        ]
+                    },
+                    {
+                        name: 'Force DDR SELECTION theme everywhere',
+                        tooltip: 'Skips intro and enables the skin selected below on all songs',
+                        patches: [
+                            {offset: 0x27431, off: [0x0F, 0x84], on: [0x90, 0xE9]},
+                            {offset: 0x9F92D, off: [0x75, 0x49], on: [0x90, 0x90]},
+                            {offset: 0x9F93A, off: [0x77, 0x3C], on: [0x90, 0x90]},
+                            {offset: 0x9F93C, off: [0xFF, 0x24], on: [0xEB, 0x11]},
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Choose forced theme",
+                        offset : 0x9F950,
+                        patches : [
+                            {
+                                name : "1st",
+                                patch : [0x01],
+                            },
+                            {
+                                name : "EXTREME",
+                                patch : [0x02],
+                            },
+                            {
+                                name : "SuperNOVA2",
+                                patch : [0x03],
+                            },
+                            {
+                                name : "X2",
+                                patch : [0x04],
+                            },
+                            {
+                                name : "2013",
+                                patch : [0x05],
+                            },
+                        ]
+                    }
+                ]),
+            ]);
+        });
+    </script>
+</head>
+<body>
+    <h1>DDR A20 DLL Modder</h1>
+</body>
+</html>

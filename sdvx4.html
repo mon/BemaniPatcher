@@ -143,6 +143,15 @@
               tooltip: 'Automatically skips the screen between song select and gameplay',
               patches: [{offset: 0x315600, off: [0x4D], on: [0x4E]}]
             },
+            {
+              // created by aixxe
+              name: 'Force Enable Headphones',
+              tooltip: 'Overrides headphone detection to always be enabled. Useful for cabinets.',
+              patches: [
+                {offset: 0x20B418, off: [0x74, 0x05], on: [0x90, 0x90]},
+                {offset: 0x20B41F, off: [0x89, 0x5E, 0x48], on: [0x90, 0x90, 0x90]},
+              ]
+            },
           ]),
           new Patcher('soundvoltex.dll', "2018-10-23", [
             {

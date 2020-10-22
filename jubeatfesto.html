@@ -1,116 +1,116 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" />
         <title>jubeat festo DLL Modder</title>
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/style.css" />
         <!-- don't hate -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script type="text/javascript" src="js/FileSaver.min.js"></script>
         <script type="text/javascript" src="js/dllpatcher.js"></script>
         <script type="text/javascript">
-            window.addEventListener("load", function() {
+            window.addEventListener("load", function () {
                 new PatchContainer([
-                                                                                new Patcher("jubeat.dll", "20200916", [
-                                                {
-                          name: "SELECT MUSIC Timer Lock",
-                          patches: [{offset: 0xA0632, off: [0x75], on: [0xEB]}]
+                    new Patcher("jubeat.dll", "2020-09-16", [
+                        {
+                            name: "SELECT MUSIC Timer Lock",
+                            patches: [{ offset: 0xa0632, off: [0x75], on: [0xeb] }],
                         },
                         {
-                          name: "Skip CATEGORY SELECT",
-                          patches: [{offset: 0xB95F7, off: [0x04], on: [0x07]}]
+                            name: "Skip CATEGORY SELECT",
+                            patches: [{ offset: 0xb95f7, off: [0x04], on: [0x07] }],
                         },
                     ]),
-                                                            new Patcher("jubeat.dll", "2020-06-11", [
-                                                {
-                          name: "SELECT MUSIC Timer Lock",
-                          patches: [{offset: 0xA0632, off: [0x75], on: [0xEB]}]
+                    new Patcher("jubeat.dll", "2020-06-11", [
+                        {
+                            name: "SELECT MUSIC Timer Lock",
+                            patches: [{ offset: 0xa0632, off: [0x75], on: [0xeb] }],
                         },
                         {
-                          name: "Skip CATEGORY SELECT",
-                          patches: [{offset: 0xA09B7, off: [0x04], on: [0x07]}]
+                            name: "Skip CATEGORY SELECT",
+                            patches: [{ offset: 0xa09b7, off: [0x04], on: [0x07] }],
                         },
                     ]),
-                                        new Patcher("jubeat.dll", "2020-06-30", [
+                    new Patcher("jubeat.dll", "2020-06-30", [
                         {
-                          name: "SELECT MUSIC Timer Lock",
-                          patches: [{offset: 0xA06E2, off: [0x75], on: [0xEB]}]
+                            name: "SELECT MUSIC Timer Lock",
+                            patches: [{ offset: 0xa06e2, off: [0x75], on: [0xeb] }],
                         },
                         {
-                          name : "Skip CATEGORY SELECT",
-                          patches: [{offset: 0xA0A67, off: [0x04], on: [0x07]}]
+                            name: "Skip CATEGORY SELECT",
+                            patches: [{ offset: 0xa0a67, off: [0x04], on: [0x07] }],
                         },
                     ]),
                     new Patcher("jubeat.dll", "2020-02-19", [
                         {
-                          name: "SELECT MUSIC Timer Lock",
-                          patches: [{offset: 0xA0272, off: [0x75], on: [0xEB]}]
+                            name: "SELECT MUSIC Timer Lock",
+                            patches: [{ offset: 0xa0272, off: [0x75], on: [0xeb] }],
                         },
                         {
-                          name : "Skip CATEGORY SELECT",
-                          patches: [{offset: 0xA05F7, off: [0x04], on: [0x07]}]
+                            name: "Skip CATEGORY SELECT",
+                            patches: [{ offset: 0xa05f7, off: [0x04], on: [0x07] }],
                         },
                     ]),
                     new Patcher("jubeat.dll", "2019-09-03", [
                         {
-                          name: "Disable Tutorial",
-                          patches: [{offset: 0xC0047, off: [0x0F, 0x85, 0xD6, 0x01, 0x00, 0x00], on: [0xE9, 0xD7, 0x01, 0x00, 0x00, 0x90]}]
+                            name: "Disable Tutorial",
+                            patches: [{ offset: 0xc0047, off: [0x0f, 0x85, 0xd6, 0x01, 0x00, 0x00], on: [0xe9, 0xd7, 0x01, 0x00, 0x00, 0x90] }],
                         },
                         {
-                          name: "SELECT MUSIC Timer Lock",
-                          patches: [{offset: 0xA72E7, off: [0x75], on: [0xEB]}]
+                            name: "SELECT MUSIC Timer Lock",
+                            patches: [{ offset: 0xa72e7, off: [0x75], on: [0xeb] }],
                         },
                         {
-                          name : "Skip CATEGORY SELECT",
-                          patches: [{offset: 0xA7663, off: [0x04], on: [0x07]}]
+                            name: "Skip CATEGORY SELECT",
+                            patches: [{ offset: 0xa7663, off: [0x04], on: [0x07] }],
                         },
                     ]),
                     new Patcher("jubeat.dll", "2019-06-25", [
                         {
-                          name: "SELECT MUSIC Timer Lock",
-                          patches: [{offset: 0xA7227, off: [0x75], on: [0xEB]}]
+                            name: "SELECT MUSIC Timer Lock",
+                            patches: [{ offset: 0xa7227, off: [0x75], on: [0xeb] }],
                         },
                         {
-                          name: "Online Matching Skip",
-                          patches: [{offset: 0xBBD0B, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
+                            name: "Online Matching Skip",
+                            patches: [{ offset: 0xbbd0b, off: [0x0f, 0x8d, 0x72, 0x01], on: [0xe9, 0x73, 0x01, 0x00] }],
                         },
                     ]),
                     new Patcher("jubeat.dll", "2019-04-22", [
                         {
-                          name: "Disable Tutorial",
-                          patches: [{offset: 0xBFC97, off: [0x0F, 0x85, 0xD6, 0x01, 0x00, 0x00], on: [0xE9, 0xD7, 0x01, 0x00, 0x00, 0x90]}]
+                            name: "Disable Tutorial",
+                            patches: [{ offset: 0xbfc97, off: [0x0f, 0x85, 0xd6, 0x01, 0x00, 0x00], on: [0xe9, 0xd7, 0x01, 0x00, 0x00, 0x90] }],
                         },
                         {
-                          name: "SELECT MUSIC Timer Lock",
-                          patches: [{offset: 0xA6EB7, off: [0x75], on: [0xEB]}]
+                            name: "SELECT MUSIC Timer Lock",
+                            patches: [{ offset: 0xa6eb7, off: [0x75], on: [0xeb] }],
                         },
                         {
-                          name : "Skip CATEGORY SELECT",
-                          patches: [{offset: 0xA7233, off: [0x04], on: [0x07]}]
+                            name: "Skip CATEGORY SELECT",
+                            patches: [{ offset: 0xa7233, off: [0x04], on: [0x07] }],
                         },
                     ]),
-                    new Patcher("jubeat.dll",  "2018-11-27", [
+                    new Patcher("jubeat.dll", "2018-11-27", [
                         // Ported by Cammy
                         {
-                          name : "Disable Tutorial",
-                          patches: [{offset: 0xBE5B7, off: [0x0F, 0x85, 0xD6, 0x01, 0x00, 0x00], on: [0xE9, 0xD7, 0x01, 0x00, 0x00, 0x90]}]
+                            name: "Disable Tutorial",
+                            patches: [{ offset: 0xbe5b7, off: [0x0f, 0x85, 0xd6, 0x01, 0x00, 0x00], on: [0xe9, 0xd7, 0x01, 0x00, 0x00, 0x90] }],
                         },
                         // Ported by Cammy
                         {
-                          name : "SELECT MUSIC Timer Lock",
-                          patches: [{offset: 0xA5672, off: [0x75], on: [0xEB]}]
+                            name: "SELECT MUSIC Timer Lock",
+                            patches: [{ offset: 0xa5672, off: [0x75], on: [0xeb] }],
                         },
                         {
-                          name : "Skip CATEGORY SELECT",
-                          patches: [{offset: 0xA59F5, off: [0x04], on: [0x07]}]
+                            name: "Skip CATEGORY SELECT",
+                            patches: [{ offset: 0xa59f5, off: [0x04], on: [0x07] }],
                         },
                     ]),
                     new Patcher("music_db.dll", "music_db.dll", [
                         {
-                         name : "Unlock all songs",
-                         patches : [{offset : 0x2363, off: [0x74, 0x14], on : [0x90, 0x90]}]
+                            name: "Unlock all songs",
+                            patches: [{ offset: 0x2363, off: [0x74, 0x14], on: [0x90, 0x90] }],
                         },
-                    ])
+                    ]),
                 ]);
             });
         </script>

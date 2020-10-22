@@ -11,6 +11,36 @@
         <script type="text/javascript">
             window.addEventListener("load", function() {
                 new PatchContainer([
+                                                                                new Patcher("jubeat.dll", "20200916", [
+                                                {
+                          name: "SELECT MUSIC Timer Lock",
+                          patches: [{offset: 0xA0632, off: [0x75], on: [0xEB]}]
+                        },
+                        {
+                          name: "Skip CATEGORY SELECT",
+                          patches: [{offset: 0xB95F7, off: [0x04], on: [0x07]}]
+                        },
+                    ]),
+                                                            new Patcher("jubeat.dll", "2020-06-11", [
+                                                {
+                          name: "SELECT MUSIC Timer Lock",
+                          patches: [{offset: 0xA0632, off: [0x75], on: [0xEB]}]
+                        },
+                        {
+                          name: "Skip CATEGORY SELECT",
+                          patches: [{offset: 0xA09B7, off: [0x04], on: [0x07]}]
+                        },
+                    ]),
+                                        new Patcher("jubeat.dll", "2020-06-30", [
+                        {
+                          name: "SELECT MUSIC Timer Lock",
+                          patches: [{offset: 0xA06E2, off: [0x75], on: [0xEB]}]
+                        },
+                        {
+                          name : "Skip CATEGORY SELECT",
+                          patches: [{offset: 0xA0A67, off: [0x04], on: [0x07]}]
+                        },
+                    ]),
                     new Patcher("jubeat.dll", "2020-02-19", [
                         {
                           name: "SELECT MUSIC Timer Lock",

@@ -71,7 +71,7 @@
                         // by cube, ported by Azlekayn
                         name: "Opaque background for darkest background option",
                         tooltip: "This makes the background for the darkest background option be 99% opaque, hiding the background dancers and videos.",
-                        patches: [{offset: 0x1C9F6C, off: [0xA4, 0x70, 0x7D, 0x3F], on: [0x33, 0x33, 0x33, 0x3F]}]
+                        patches: [{offset: 0x1C9F6C, off: [0x33, 0x33, 0x33, 0x3F], on: [0xA4, 0x70, 0x7D, 0x3F]}]
                     },
                     {
                         // by naryu
@@ -81,6 +81,61 @@
                             {offset: 0xBCD1, off: [0xE8, 0x1A, 0x21], on: [0xB8, 0x00, 0x00]},
                             {offset: 0x2CB8A, off: [0xE8, 0x61, 0x12, 0xFE, 0xFF], on: [0xB8, 0x00, 0x00, 0x00, 0x00]},
                             {offset: 0x2D0AE, off: [0xE8, 0x3D, 0x0D, 0xFE, 0xFF], on: [0xB8, 0x00, 0x00, 0x00, 0x00]},
+                        ]
+                    },
+                    {
+                        name: "Enable DDR SELECTION",
+                        tooltip: "Even works in offline/local mode!",
+                        patches: [{offset: 0x7CEB7, off: [0xE8, 0xF4, 0x9F, 0x01], on: [0xB8, 0x01, 0x00, 0x00]}]
+                    },
+                    {
+                        name: "Premium Free",
+                        patches: [{offset: 0x1F0A6, off: [0x01], on: [0x00]}]
+                    },
+                    {
+                        name: 'Mute announcer',
+                        tooltip: 'Also mutes crowd cheering and booing during gameplay',
+                        patches: [
+                            {offset: 0x2A468, off: [0x0F, 0x84], on: [0x90, 0xE9]},
+                            {offset: 0x1B78BB, off: [0x76], on: [0x62]},
+                            {offset: 0x1B78D7, off: [0x76], on: [0x62]},
+                        ]
+                    },
+                    {
+                        name: 'Force DDR SELECTION theme everywhere',
+                        tooltip: 'Skips intro and enables the skin selected below on all songs',
+                        patches: [
+                            {offset: 0x26871, off: [0x0F, 0x84], on: [0x90, 0xE9]},
+                            {offset: 0x96A1D, off: [0x75, 0x49], on: [0x90, 0x90]},
+                            {offset: 0x96A2A, off: [0x77, 0x3C], on: [0x90, 0x90]},
+                            {offset: 0x96A2C, off: [0xFF, 0x24], on: [0xEB, 0x11]},
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Choose forced theme",
+                        offset : 0x96A40,
+                        patches : [
+                            {
+                                name : "1st",
+                                patch : [0x01],
+                            },
+                            {
+                                name : "EXTREME",
+                                patch : [0x02],
+                            },
+                            {
+                                name : "SuperNOVA2",
+                                patch : [0x03],
+                            },
+                            {
+                                name : "X2",
+                                patch : [0x04],
+                            },
+                            {
+                                name : "2013",
+                                patch : [0x05],
+                            },
                         ]
                     }
                 ]),
@@ -137,7 +192,7 @@
                     {
                         name: "Premium Free",
                         tooltip: "Song clears/scores only. Profile progress and custom settings do not save. Reboot game to re-query for scores.",
-                        patches: [{offset: 0x1f0a6, off: [0x01], on: [0x00]}]
+                        patches: [{offset: 0x1C9DF, off: [0x01], on: [0x00]}]
                     },
                 ]),
                 new Patcher("gamemdx.dll", "2018-04-23", [

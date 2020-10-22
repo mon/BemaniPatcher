@@ -11,7 +11,17 @@
         <script type="text/javascript">
             window.addEventListener("load", function() {
                 new PatchContainer([
-                    new Patcher("jubeat", "2019-09-03", [
+                    new Patcher("jubeat.dll", "2020-02-19", [
+                        {
+                          name: "SELECT MUSIC Timer Lock",
+                          patches: [{offset: 0xA0272, off: [0x75], on: [0xEB]}]
+                        },
+                        {
+                          name : "Skip CATEGORY SELECT",
+                          patches: [{offset: 0xA05F7, off: [0x04], on: [0x07]}]
+                        },
+                    ]),
+                    new Patcher("jubeat.dll", "2019-09-03", [
                         {
                           name: "Disable Tutorial",
                           patches: [{offset: 0xC0047, off: [0x0F, 0x85, 0xD6, 0x01, 0x00, 0x00], on: [0xE9, 0xD7, 0x01, 0x00, 0x00, 0x90]}]
@@ -25,7 +35,17 @@
                           patches: [{offset: 0xA7663, off: [0x04], on: [0x07]}]
                         },
                     ]),
-                    new Patcher("jubeat", "2019-04-22", [
+                    new Patcher("jubeat.dll", "2019-06-25", [
+                        {
+                          name: "SELECT MUSIC Timer Lock",
+                          patches: [{offset: 0xA7227, off: [0x75], on: [0xEB]}]
+                        },
+                        {
+                          name: "Online Matching Skip",
+                          patches: [{offset: 0xBBD0B, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
+                        },
+                    ]),
+                    new Patcher("jubeat.dll", "2019-04-22", [
                         {
                           name: "Disable Tutorial",
                           patches: [{offset: 0xBFC97, off: [0x0F, 0x85, 0xD6, 0x01, 0x00, 0x00], on: [0xE9, 0xD7, 0x01, 0x00, 0x00, 0x90]}]

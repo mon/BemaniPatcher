@@ -38,8 +38,14 @@
               patches: [{offset: 0x5FBCC7, off: [0x83, 0x78, 0x08, 0x02], on: [0x83, 0x78, 0x08, 0x05]}]
             },
             {
-              name: 'Skip Decide Screen',
+              name: 'Skip decide screen',
+              tooltip : 'Immediately loads into chart after selection',
               patches: [{offset: 0x2D6160, off: [0xE8, 0x6B, 0x00, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90]}]
+            },
+            {
+              name: 'Cursor lock',
+              tooltip : "After song finishes, song select remains on previous song",
+              patches: [{offset: 0x551D98, off: [0x84, 0xC0], on: [0x90, 0x90]}]
             },
             {
               name: 'Unlock All Songs',

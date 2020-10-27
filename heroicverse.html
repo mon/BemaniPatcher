@@ -42,6 +42,47 @@
               patches: [{offset: 0x2D6160, off: [0xE8, 0x6B, 0x00, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90]}]
             },
             {
+              name: 'Unlock All Songs',
+              patches: [{offset: 0x353E90, off: [0x75, 0x24], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'Unlock All 12s',
+              patches: [{offset: 0x353CD0, off: [0x83, 0xFF, 0x03, 0x74, 0x05, 0x83, 0xFF, 0x08], on:[0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}],
+            },
+            {
+              name: 'Skip CAMERA DEVICE ERROR prompt',
+              tooltip: 'Prevents the CAMERA DEVICE ERROR message from popping up on boot',
+              patches: [{offset: 0x59962B, off: [0x84], on: [0x81]}]
+            },
+            {
+              name: 'Premium Free (1 Player Mode)',
+              patches: [{offset: 0x54B667, off: [0x75], on: [0xEB]}]
+            },
+            {
+              name: 'Premium Free (2 Player Mode)',
+              patches: [
+                {offset: 0x54B805, off: [0x74, 0x55], on: [0x90, 0x90]},
+                {offset: 0x54B81B, off: [0x74, 0x3F], on: [0x90, 0x90]}
+              ]
+            },
+            {
+              name: 'Premium Free Timer Freeze',
+              tooltip: 'Freezes the timer in PREMIUM FREE mode, allowing unlimited play until exit',
+              patches: [{offset: 0x356BBD, off: [0x7E], on: [0xEB]}]
+            },
+            {
+              name: 'Standard/Menu Timer Freeze',
+              tooltip: 'Freezes the timer in STANDARD and in-game menus such as song select',
+              patches: [{offset: 0x5BDCA7, off: [0x74], on: [0xEB]}]
+            },
+            {
+              name: 'Enable Lightning Mode',
+              patches: [
+                {offset: 0x5FBCCE, off: [0x0F, 0x84, 0x8D, 0x00, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]},
+                {offset: 0x63B0E4, off: [0x0F, 0x84], on: [0x90, 0xE9]},
+                {offset: 0x63B850, off: [0x7C, 0xE5], on: [0x0C, 0xDE]}
+              ]
+            },
               name: 'Hide "EXTRA PASELI: %d"',
               patches: [{
                 offset: 0x2BD1B1, 

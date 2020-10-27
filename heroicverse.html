@@ -51,6 +51,7 @@
             },
             {
               name: 'Skip CAMERA DEVICE ERROR prompt',
+              tooltip: 'Prevents the CAMERA DEVICE ERROR message from popping up on boot',
               patches: [{offset: 0x59962B, off: [0x84], on: [0x81]}]
             },
             {
@@ -66,10 +67,12 @@
             },
             {
               name: 'Premium Free Timer Freeze',
+              tooltip: 'Freezes the timer in PREMIUM FREE mode, allowing unlimited play until exit',
               patches: [{offset: 0x356BBD, off: [0x7E], on: [0xEB]}]
             },
             {
               name: 'Standard/Menu Timer Freeze',
+              tooltip: 'Freezes the timer in STANDARD and in-game menus such as song select'
               patches: [{offset: 0x5BDCA7, off: [0x74], on: [0xEB]}]
             },
             {

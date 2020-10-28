@@ -82,7 +82,7 @@
               patches: [{offset: 0x5BDCA7, off: [0x74], on: [0xEB]}]
             },
             {
-              name: 'Enable Lightning Mode',
+              name: 'Shim Lightning Mode IO (for spicetools)',
               patches: [
                 {offset: 0x5FBCCE, off: [0x0F, 0x84, 0x8D, 0x00, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]},
                 {offset: 0x63B0E4, off: [0x0F, 0x84], on: [0x90, 0xE9]},

@@ -108,6 +108,11 @@
               name: 'Hide "CREDIT: %s"',
               patches: [{offset: 0x2BD0D6, off: [0xFF, 0x15, 0x44, 0x91, 0x4E, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
             },
+            {
+              name: 'SSE4.2 Fix',
+              tooltip : "This will allow the game to run on processors which do not support the SSE4.2 instruction set. If you can successfully boot the game, do NOT check this.",
+              patches: [{offset: 0x2677C4, off: [0xF3, 0x45, 0x0F], on: [0x90, 0x90, 0x90]}]
+            },
           ]),
         ]);
       });

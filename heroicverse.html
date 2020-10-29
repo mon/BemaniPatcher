@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>IIDX HEROIC VERSE DLL Modder</title>
+    <link rel='stylesheet' href='css/style.css'>
+    <!-- don't hate -->
+    <script src='https://code.jquery.com/jquery-3.3.1.slim.min.js'></script>
+    <script type='text/javascript' src='js/FileSaver.min.js'></script>
+    <script type='text/javascript' src='js/dllpatcher.js'></script>
+    <script type='text/javascript'>
+      window.addEventListener('load', function () {
+        new PatchContainer([
+          new Patcher('bm2dx.dll', "2020-09-29", [
+            {
+              name: 'Disable TDJ check for exclusive songs',
+              patches: [
+                {offset: 0x352EA9, off: [0x75, 0x19], on: [0x90, 0x90]},
+                {offset: 0x352F19, off: [0x75, 0x15], on: [0x90, 0x90]},
+              ]
+            },
+            {
+              name: 'Disable TDJ check for lightning category',
+              patches: [
+                {offset: 0x33718D, off: [0x75, 0x0A], on: [0x90, 0x90]},
+              ]
+            },
+            {
+              name: 'Force 120hz timing and adapter mode in LDJ (Experimental)',
+              patches: [
+                {offset: 0x2FBBA3, off: [0x75], on: [0xEB]},
+                {offset: 0x621169, off: [0x74, 0x03], on: [0x90, 0x90]},
+                {offset: 0x620F7E, off: [0x3C], on: [0x78]},
+              ]
+            },
+            {
+              name: 'Force LDJ software video decoder for all boot modes',
+              patches: [{offset: 0x5FBCC7, off: [0x83, 0x78, 0x08, 0x02], on: [0x83, 0x78, 0x08, 0x05]}]
+            },
+            {
+              name: 'Skip decide screen',
+              tooltip : 'Immediately loads into chart after selection',
+              patches: [{offset: 0x2D6160, off: [0xE8, 0x6B, 0x00, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90]}]
+            },
+            {
+              name: 'Cursor lock',
+              tooltip : "After song finishes, song select remains on previous song",
+              patches: [{offset: 0x551D98, off: [0x84, 0xC0], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'Unlock All Songs',
+              patches: [{offset: 0x353E90, off: [0x75, 0x24], on: [0x90, 0x90]}]
+            },
+            {
+              name: 'Unlock All 12s',
+              patches: [{offset: 0x353CD0, off: [0x83, 0xFF, 0x03, 0x74, 0x05, 0x83, 0xFF, 0x08], on:[0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}],
+            },
+            {
+              name: 'Skip CAMERA DEVICE ERROR prompt',
+              tooltip: 'Prevents the CAMERA DEVICE ERROR message from popping up on boot',
+              patches: [{offset: 0x59962B, off: [0x84], on: [0x81]}]
+            },
+            {
+              name: 'Premium Free (1 Player Mode)',
+              patches: [{offset: 0x54B667, off: [0x75], on: [0xEB]}]
+            },
+            {
+              name: 'Premium Free (2 Player Mode)',
+              patches: [
+                {offset: 0x54B805, off: [0x74, 0x55], on: [0x90, 0x90]},
+                {offset: 0x54B81B, off: [0x74, 0x3F], on: [0x90, 0x90]}
+              ]
+            },
+            {
+              name: 'Premium Free Timer Freeze',
+              tooltip: 'Freezes the timer in PREMIUM FREE mode, allowing unlimited play until exit',
+              patches: [{offset: 0x356BBD, off: [0x7E], on: [0xEB]}]
+            },
+            {
+              name: 'Standard/Menu Timer Freeze',
+              tooltip: 'Freezes the timer in STANDARD and in-game menus such as song select',
+              patches: [{offset: 0x5BDCA7, off: [0x74], on: [0xEB]}]
+            },
+            {
+              name: 'Shim Lightning Mode IO (for spicetools)',
+              patches: [
+                {offset: 0x5FBCCE, off: [0x0F, 0x84, 0x8D, 0x00, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]},
+                {offset: 0x63B0E4, off: [0x0F, 0x84], on: [0x90, 0xE9]},
+                {offset: 0x63B850, off: [0x7C, 0xE5], on: [0x0C, 0xDE]}
+              ]
+            },
+            {
+              name: 'Hide "EXTRA PASELI: %d"',
+              patches: [{
+                offset: 0x2BD1B1,
+                off: [0x7F, 0x12, 0x44, 0x8B, 0xCB, 0x4C, 0x8D, 0x05, 0xF3, 0xD8, 0x4E, 0x00 ],
+                on: [0x90, 0xe9, 0x22, 0x00, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]
+              }]
+            },
+            {
+              name: 'Hide "INSERT COIN[S]"',
+              patches: [{offset: 0x2BD56B, off: [0xE8, 0x50, 0xAA, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90]}]
+            },
+            {
+              name: 'Hide "PASELI: *****"',
+              patches: [{offset: 0x2BD3BB, off: [0xFF, 0x15, 0x5F, 0x8E, 0x4E, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+            },
+            {
+              name: 'Hide "PASELI: NO ACCOUNT"',
+              patches: [{offset: 0x2BD459, off: [0xFF, 0x15, 0xC1, 0x8D, 0x4E, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+            },
+            {
+              name: 'Hide "CREDIT: %s"',
+              patches: [{offset: 0x2BD0D6, off: [0xFF, 0x15, 0x44, 0x91, 0x4E, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+            },
+            {
+              name: 'SSE4.2 Fix',
+              tooltip : "This will allow the game to run on processors which do not support the SSE4.2 instruction set. If you can successfully boot the game, do NOT check this.",
+              patches: [{offset: 0x2677C4, off: [0xF3, 0x45, 0x0F], on: [0x90, 0x90, 0x90]}]
+            },
+          ]),
+        ]);
+      });
+    </script>
+</head>
+<body>
+<h1>IIDX HEROIC VERSE DLL Modder</h1>
+</body>
+</html>

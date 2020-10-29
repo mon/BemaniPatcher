@@ -297,6 +297,14 @@
               tooltip: 'Useful to play with Omega Dimension Ex-Track',
               patches: [{offset: 0x406C94, off: [0xFF, 0xCA], on: [0x90, 0x90]}]
             },
+            {
+              // created by aixxe
+              name: 'Force Enable Headphones',
+              tooltip: 'Overrides headphone detection to always be enabled. Useful for cabinets.',
+              patches: [
+                {offset: 0x618978, off: [0x89, 0x8B, 0x90, 0x00, 0x00, 0x00, 0x84, 0xC9, 0x74, 0x08], on: [0xC7, 0x83, 0x90, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00]},
+              ]
+            },
             // created by Xyen
             {
               name: 'Infinite Premium Time',

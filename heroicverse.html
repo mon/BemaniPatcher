@@ -134,6 +134,14 @@
               tooltip : "This will allow the game to run on processors which do not support the SSE4.2 instruction set. If you can successfully boot the game, do NOT check this.",
               patches: [{offset: 0x2677C4, off: [0xF3, 0x45, 0x0F], on: [0x90, 0x90, 0x90]}]
             },
+            {
+              name: 'Always show FAST/SLOW total',
+              tooltip : "Toggles the 'FA/SL' judge text to show by default instead of requiring VEFX to be held.",
+              patches: [
+                {offset: 0x5667F0, off: [0x74], on: [0x75]},
+                {offset: 0x5665D3, off: [0x74], on: [0x75]},
+              ]
+            },
           ]),
         ]);
       });

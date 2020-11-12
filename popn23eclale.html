@@ -95,6 +95,10 @@
                                 }]
                     },
                     {
+                     name: "Remove Timer",
+                     patches: [{ offset: 0xCC836, off: [0x0F, 0x85], on: [0x90, 0xE9] }]
+                    },
+                    {
                      name : "Unlock Classic 8 EX as a 49",
                      patches : [{offset : 0x2EFE87, off: [0x05], on : [0x07]},
                                 {offset : 0x2EFE95, off: [0x01], on : [0x31]}]

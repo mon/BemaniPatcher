@@ -242,6 +242,7 @@ class PatchContainer {
             })
             .on("dragover dragenter dragleave dragend drop", function (e) {
                 e.preventDefault();
+                e.stopPropagation();
             });
 
         container.on("drop", function (e) {

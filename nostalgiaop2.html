@@ -23,6 +23,17 @@
               patches: [{offset: 0x21A6FA, off: [0x1E], on: [0x00]}]
             },
           ]),
+          new Patcher('nostalgia.dll', "2019-10-02", [
+            {
+              name: 'Menu Timer Freeze',
+              patches: [{offset: 0x303D33, off: [0x41, 0xFF, 0xC8], on: [0x90, 0x90, 0x90]}]
+            },
+            {
+              name: 'Shorter Monitor Check',
+              tooltip : "Similar to Rootage, recommended only if you have a stable framerate",
+              patches: [{offset: 0x21A6FA, off: [0x1E], on: [0x00]}]
+            },
+          ])
         ]);
       });
     </script>

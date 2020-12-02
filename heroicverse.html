@@ -153,6 +153,11 @@
               name: 'Free play text to LED ticker (Bottom Right)',
               tooltip : "Song Title/Ticker information will display instead of FREEPLAY",
               patches: [{offset: 0x2BD26F, off: [0xE5, 0xD7, 0x4E, 0x00], on: [0x49, 0x7F, 0x50, 0x04]}]
+            },
+            {
+              name: 'Unscramble touch screen keypad in TDJ',
+              tooltip: 'Disable randomization of keypad layout when carding in',
+              patches: [{offset: 0x614855, off: [0x4D, 0x03, 0xC8, 0x49, 0xF7, 0xF1], on:[0xBA, 0x0C, 0x00, 0x00, 0x00, 0x90]}]
             }
           ]),
         ]);

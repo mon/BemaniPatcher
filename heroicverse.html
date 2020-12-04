@@ -158,6 +158,10 @@
               name: 'Unscramble touch screen keypad in TDJ',
               tooltip: 'Disable randomization of keypad layout when carding in',
               patches: [{offset: 0x614855, off: [0x4D, 0x03, 0xC8, 0x49, 0xF7, 0xF1], on:[0xBA, 0x0C, 0x00, 0x00, 0x00, 0x90]}]
+            },
+            {
+              name: 'Always display EX score instead of money score',
+              patches: [{offset: 0x5ca12e, off: [0x33, 0xc0], on:[0xeb, 0xf4]}]
             }
           ]),
         ]);

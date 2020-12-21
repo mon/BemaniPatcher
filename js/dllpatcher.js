@@ -205,13 +205,7 @@ class PatchContainer {
     getSupportedVersions() {
         var descriptions = [];
         for (var i = 0; i < this.patchers.length; i++) {
-            // Concat description if it is an array of datecodes, push if it is
-            // just a string
-            if (typeof this.patchers[i].description === 'object') {
-                descriptions = descriptions.concat(this.patchers[i].description);
-            } else {
-                descriptions.push(this.patchers[i].description);
-            }
+            descriptions.push(this.patchers[i].description);
         }
         return descriptions;
     }

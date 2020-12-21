@@ -12,7 +12,7 @@
       window.addEventListener('load', function () {
         new PatchContainer([
           // Patches found by Arm1stice
-          new Patcher('nostalgia.dll', ["2019-11-27", "2019-10-02"], [
+          new Patcher('nostalgia.dll', "2019-10-02 / 2019-11-27", [
             {
               name: 'Menu Timer Freeze',
               patches: [{offset: 0x303D33, off: [0x41, 0xFF, 0xC8], on: [0x90, 0x90, 0x90]}]

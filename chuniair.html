@@ -46,6 +46,14 @@
                         ],
                     },
                     {
+                        name: "Patch for Windows 7",
+                        tooltip: "May not be able to connect to the server",
+                        patches: [
+                            {offset: 0x17fd7c4, off: [0x45, 0x78], on: [0x5F, 0x41]},
+                            {offset: 0x17fd7cd, off: [0x43, 0x61, 0x6E, 0x63, 0x65, 0x6C, 0x51, 0x75, 0x65, 0x72, 0x79], on: [0x51, 0x75, 0x65, 0x72, 0x79, 0x5F, 0x41, 0x00, 0x00, 0x00, 0x00]},
+                        ],
+                    },
+                    {
                         // lybxlpsv AIR
                         name: "Disable Song Select Timer",
                         tooltip: "May only work when playing with card.",
@@ -101,6 +109,14 @@
                         name: "Force 2 channel audio output",
                         patches: [
                             {offset: 0xC5FD51, off: [0x75, 0x3F], on: [0x90, 0x90]},
+                        ],
+                    },
+                    {
+                        name: "Patch for Windows 7",
+                        tooltip: "May not be able to connect to the server",
+                        patches: [
+                            {offset: 0x1892050, off: [0x45, 0x78], on: [0x5F, 0x41]},
+                            {offset: 0x1892059, off: [0x43, 0x61, 0x6E, 0x63, 0x65, 0x6C, 0x51, 0x75, 0x65, 0x72, 0x79], on: [0x51, 0x75, 0x65, 0x72, 0x79, 0x5F, 0x41, 0x00, 0x00, 0x00, 0x00]},
                         ],
                     },
                     {

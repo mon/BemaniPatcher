@@ -90,7 +90,15 @@
                         patches: [
                             {offset: 0xBF6177, off: [0x8A, 0x5D, 0x14], on: [0xB3, 0xFE, 0x90]},
                         ],
-                    }
+                    },
+                    {
+                        // esterTion
+                        name: "Free Play",
+                        tooltip: "Increase credit counter when consuming",
+                        patches: [
+                            {offset: 0xBF6595, off: [0x28], on: [0x00]},
+                        ],
+                    },
                 ]),
                 new Patcher("chuniApp.exe", "(1.30.00) AMAZON", [
                     {
@@ -169,7 +177,15 @@
                         patches: [
                             {offset: 0xBC4B37, off: [0x8A, 0x5D, 0x14], on: [0xB3, 0xFE, 0x90]},
                         ],
-                    }
+                    },
+                    {
+                        // esterTion
+                        name: "Free Play",
+                        tooltip: "Increase credit counter when consuming",
+                        patches: [
+                            {offset: 0xBC4F55, off: [0x28], on: [0x00]},
+                        ],
+                    },
                 ])
             ]);
             });

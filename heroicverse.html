@@ -37,6 +37,11 @@
               name: 'Force LDJ software video decoder for all boot modes',
               patches: [{offset: 0x5FBCC7, off: [0x83, 0x78, 0x08, 0x02], on: [0x83, 0x78, 0x08, 0x05]}]
             },
+            { // mon
+              name: 'Force shared audio',
+              tooltip : 'If it doesn\'t work, set your device to 44100Hz 16bit',
+              patches: [{offset: 0x2678B1, off: [0x01], on: [0x00]}]
+            },
             {
               name: 'Skip decide screen',
               tooltip : 'Immediately loads into chart after selection',

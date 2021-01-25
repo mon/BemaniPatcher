@@ -37,6 +37,10 @@
               name: 'Force LDJ software video decoder for all boot modes',
               patches: [{offset: 0x5FBCC7, off: [0x83, 0x78, 0x08, 0x02], on: [0x83, 0x78, 0x08, 0x05]}]
             },
+            {
+              name: 'Bypass lightning monitor error',
+              patches: [{offset: 0x58C681, off: [0x0F, 0x85], on: [0x90, 0xE9]}]
+            },
             { // mon
               name: 'Force shared audio',
               tooltip : 'If it doesn\'t work, set your device to 44100Hz 16bit',
@@ -151,6 +155,75 @@
             {
               name: 'Always display EX score instead of money score',
               patches: [{offset: 0x5ca12e, off: [0x33, 0xc0], on:[0xeb, 0xf4]}]
+            },
+            {
+              name: 'Debug Mode',
+              tooltip : "While in game, press F1 to enable menu.  (Disables Profile/Score saving)",
+              patches: [{offset: 0x59A450, off: [0x32, 0xC0], on:[0xB0, 0x01]}]
+            },
+            {
+              name: 'QC Mode',
+              tooltip : "Hidden test menu. Press SW4 to navigate right/left",
+              patches: [
+                {offset: 0x5E3171, off: [0x74, 0x4F], on:[0x90, 0x90]},
+                {offset: 0x5E3199, off: [0x74], on: [0xEB]},
+              ]
+            },
+            {
+              name: 'Increase "All Factory Settings" buffer',
+              tooltip : "Enable this if the option below is not default",
+              patches: [
+                {offset: 0x5C359E, off: [0x40, 0x01, 0x00, 0x00], on:[0x22, 0x61, 0x14, 0x00]},
+                {offset: 0x78E62A, off: [0x40, 0x01, 0x00, 0x00], on:[0x22, 0x61, 0x14, 0x00]},
+              ]
+            },
+            {
+              type : 'union',
+              name : 'Reroute "All Factory Settings" test menu',
+              offset : 0x5C35B5,
+              patches : [
+                {
+                    name : "TestAllFactorySettingsScene",
+                    tooltip : "Default",
+                    patch : [0x17, 0x88, 0x01, 0x00],
+                },
+                {
+                    name : "AfpViewerScene",
+                    patch : [0x57, 0x72, 0xD4, 0xFF],
+                },
+                {
+                    name : "QproViewerScene",
+                    patch : [0x07, 0x03, 0xD5, 0xFF],
+                },
+                {
+                    name : "SoundViewerScene",
+                    patch : [0x37, 0x69, 0xD5, 0xFF],
+                },
+              ]
+            },
+            {
+              type : "union",
+              name : "Reroute 'I/O Check -> Camera Check -> 2D Code check' test menu",
+              offset : 0x5C3A55,
+              patches : [
+                {
+                    name : "TestIOCheckQrCheckScene",
+                    tooltip : "Default",
+                    patch : [0xA7, 0x49, 0x01, 0x00],
+                },
+                {
+                    name : "CustomizeViewerScene",
+                    patch : [0x87, 0x92, 0xD4, 0xFF],
+                },
+                {
+                    name : "SoundRankingViewerScene",
+                    patch : [0x47, 0x2B, 0xD5, 0xFF],
+                },
+                {
+                    name : "SystemSoundViewerScene",
+                    patch : [0x47, 0x9E, 0xD5, 0xFF],
+                },
+              ]
             }
           ]),
         ]);

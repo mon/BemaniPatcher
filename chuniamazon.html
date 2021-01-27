@@ -99,6 +99,14 @@
                             {offset: 0xBF6595, off: [0x28], on: [0x08]},
                         ],
                     },
+                    {
+                        // esterTion
+                        name: "Dummy LED",
+                        tooltip: "Skip LED board check",
+                        patches: [
+                            {offset: 0x2499C7, off: [0x00], on: [0x01]},
+                        ],
+                    },
                 ]),
                 new Patcher("chuniApp.exe", "(1.30.00) AMAZON", [
                     {
@@ -184,6 +192,14 @@
                         tooltip: "Endless credits",
                         patches: [
                             {offset: 0xBC4F55, off: [0x28], on: [0x08]},
+                        ],
+                    },
+                    {
+                        // esterTion
+                        name: "Dummy LED",
+                        tooltip: "Skip LED board check",
+                        patches: [
+                            {offset: 0x244AE7, off: [0x00], on: [0x01]},
                         ],
                     },
                 ])

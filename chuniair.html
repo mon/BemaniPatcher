@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>CHUNITHM AIR Modder</title>
+        <link rel="stylesheet" href="css/style.css">
+        <!-- don't hate -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script type="text/javascript" src="js/FileSaver.min.js"></script>
+        <script type="text/javascript" src="js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function () {
+			new PatchContainer([
+				
+//AIR
+                new Patcher("chuniApp.exe", "(1.10.00) AIR", [
+                    {
+                        // mon AIR
+                        name: "Allow 127.0.0.1 as the network server",
+                        patches: [
+                            {offset: 0x7EBFA0, off: [0x55, 0x8B, 0xEC], on: [0x31, 0xC0, 0xC3]},
+                            {offset: 0x14C1C5C, off: [0x31, 0x32, 0x37, 0x2F], on: [0x30, 0x2F, 0x38, 0x00]}
+                        ]
+                    },
+                    {
+                        // mon AIR
+                        name: "Disable shop close lockout",
+                        tooltip: "Disables ~12-8am lockout. Does not disable maint lockout from 6:30-7am JST",
+                        patches: [
+                            {offset: 0x813BB3, off: [0x74], on: [0xEB]},
+                        ],
+                    },
+                    {
+                        // somewhatlurker AIR
+                        name: "Force shared audio mode, system audio samplerate must be 48000",
+                        tooltip: "Improves compatibility but may increase latency",
+                        patches: [
+                            {offset: 0xC02FFA, off: [0x01], on: [0x00]},
+                        ],
+                    },
+                    {
+                        // somewhatlurker AIR
+                        name: "Force 2 channel audio output",
+                        patches: [
+                            {offset: 0xC030D1, off: [0x75, 0x3F], on: [0x90, 0x90]},
+                        ],
+                    },
+                    {
+                        name: "Patch for Windows 7",
+                        tooltip: "May not be able to connect to the server",
+                        patches: [
+                            {offset: 0x17fd7c4, off: [0x45, 0x78], on: [0x5F, 0x41]},
+                            {offset: 0x17fd7cd, off: [0x43, 0x61, 0x6E, 0x63, 0x65, 0x6C, 0x51, 0x75, 0x65, 0x72, 0x79], on: [0x51, 0x75, 0x65, 0x72, 0x79, 0x5F, 0x41, 0x00, 0x00, 0x00, 0x00]},
+                        ],
+                    },
+                    {
+                        // lybxlpsv AIR
+                        name: "Disable Song Select Timer",
+                        tooltip: "May only work when playing with card.",
+                        patches: [
+                            {offset: 0x639AF2, off: [0x74], on: [0xEB]},
+                        ],
+                    },
+                    {
+                        // esterTion AIR
+                        name: "Set All Timers to 999",
+                        patches: [
+                            {offset: 0x531130, off: [0x8B, 0x44, 0x24, 0x04, 0x69, 0xC0, 0xE8, 0x03, 0x00, 0x00], on: [0xB8, 0x58, 0x3E, 0x0F, 0x00, 0x90, 0x90, 0x90, 0x90, 0x90]},
+                        ],
+                    },
+                    {
+                        // lin714093880 & esterTion AIR
+                        name: "Better patch for head-to-head play",
+                        tooltip: "Fix infinite sync while trying to connect to head to head play.",
+                        patches: [
+                            {offset: 0x410293, off: [0x01], on: [0x00]},
+                        ]
+                    }
+                ]),
+				
+//AIR PLUS
+                new Patcher("chuniApp.exe", "(1.15.00) AIR PLUS", [
+                    {
+                        // mon AIRPLUS
+                        name: "Allow 127.0.0.1 as the network server",
+                        patches: [
+                            {offset: 0x81BFD0, off: [0x55, 0x8B, 0xEC], on: [0x31, 0xC0, 0xC3]},
+                            {offset: 0x1546034, off: [0x31, 0x32, 0x37, 0x2F], on: [0x30, 0x2F, 0x38, 0x00]}
+                        ]
+                    },
+                    {
+                        // mon AIRPLUS
+                        name: "Disable shop close lockout",
+                        tooltip: "Disables ~12-8am lockout. Does not disable maint lockout from 6:30-7am JST",
+                        patches: [
+                            {offset: 0x843C03, off: [0x74], on: [0xEB]},
+                        ],
+                    },
+                    {
+                        // somewhatlurker AIRPLUS
+                        name: "Force shared audio mode, system audio samplerate must be 48000",
+                        tooltip: "Improves compatibility but may increase latency",
+                        patches: [
+                            {offset: 0xC5FC7A, off: [0x01], on: [0x00]},
+                        ],
+                    },
+                    {
+                        // somewhatlurker AIRPLUS
+                        name: "Force 2 channel audio output",
+                        patches: [
+                            {offset: 0xC5FD51, off: [0x75, 0x3F], on: [0x90, 0x90]},
+                        ],
+                    },
+                    {
+                        name: "Patch for Windows 7",
+                        tooltip: "May not be able to connect to the server",
+                        patches: [
+                            {offset: 0x1892050, off: [0x45, 0x78], on: [0x5F, 0x41]},
+                            {offset: 0x1892059, off: [0x43, 0x61, 0x6E, 0x63, 0x65, 0x6C, 0x51, 0x75, 0x65, 0x72, 0x79], on: [0x51, 0x75, 0x65, 0x72, 0x79, 0x5F, 0x41, 0x00, 0x00, 0x00, 0x00]},
+                        ],
+                    },
+                    {
+                        // lybxlpsv AIRPLUS
+                        name: "Disable Song Select Timer",
+                        tooltip: "May only work when playing with card.",
+                        patches: [
+                            {offset: 0x664602, off: [0x74], on: [0xEB]},
+                        ],
+                    },
+                    {
+                        // esterTion AIRPLUS
+                        name: "Set All Timers to 999",
+                        patches: [
+                            {offset: 0x548960, off: [0x8B, 0x44, 0x24, 0x04, 0x69, 0xC0, 0xE8, 0x03, 0x00, 0x00], on: [0xB8, 0x58, 0x3E, 0x0F, 0x00, 0x90, 0x90, 0x90, 0x90, 0x90]},
+                        ],
+                    },
+                    {
+                        // lin714093880 & esterTion AIRPLUS
+                        name: "Better patch for head-to-head play",
+                        tooltip: "Fix infinite sync while trying to connect to head to head play.",
+                        patches: [
+                            {offset: 0x41F843, off: [0x01], on: [0x00]},
+                        ]
+                    }
+                ]),
+                ]);
+            });
+        </script>
+		
+		<script type="text/javascript">
+            window.addEventListener("load", function () {
+			new PatchContainer([
+			
+//AIR&AIRPLUS			
+                new Patcher("aimeReaderHost.exe", "(1.10.00) AIR & (1.15.00) AIR PLUS", [
+				{
+                      name: "Change domain obfuscation to be compatible with segatools",
+                      tooltip: "(Scene Release Only) Patches 'aime.anbzvarg.wc' to 'nvzr.anbzvarg.wc' for Aime server check to work correctly.",
+                      patches: [
+                          {offset: 0xA83C4, off: [0x61, 0x69, 0x6D, 0x65, 0x2E, 0x61, 0x6E, 0x62, 0x7A, 0x76, 0x61, 0x72, 0x67, 0x2E, 0x77, 0x63], on: [0x6E, 0x76, 0x7A, 0x72, 0x2E, 0x61, 0x6E, 0x62, 0x7A, 0x76, 0x61, 0x72, 0x67, 0x2E, 0x77, 0x63]},
+                      ]
+                }
+                ]),
+                ]);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>CHUNITHM AIR Modder</h1>
+    </body>
+</html>

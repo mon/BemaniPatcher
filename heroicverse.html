@@ -13,6 +13,15 @@
         new PatchContainer([
              new Patcher('bm2dx.dll', "2020-10-28　(LDJ:K:C:A)", [
             {
+              name: 'Bypass lightning monitor error',
+              patches: [{offset: 0x58C681, off: [0x0F, 0x85], on: [0x90, 0xE9]}]
+            },
+            { // mon
+              name: 'Force shared audio',
+              tooltip : 'If it doesn\'t work, set your device to 44100Hz 16bit',
+              patches: [{offset: 0x2678B1, off: [0x01], on: [0x00]}]
+            },
+            {
               name: 'Skip decide screen',
               tooltip : 'Immediately loads into chart after selection',
               patches: [{offset: 0x2745E0, off: [0xE8, 0x6B, 0x00, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90]}]
@@ -26,6 +35,7 @@
               tooltip: 'Freezes the timer in PREMIUM FREE mode, allowing unlimited play until exit',
               patches: [{offset: 0x356BBD, off: [0x7E], on: [0xEB]}]
             },
+
           ]),
          
       });

@@ -65,6 +65,29 @@
                         patches: [
                             {offset: 0x464DB3, off: [0x01], on: [0x00]},
                         ]
+                    },
+                    {
+                        // ikaros14
+                        name: "Increase max credits to 254",
+                        patches: [
+                            {offset: 0xC204B7, off: [0x8A, 0x5D, 0x14], on: [0xB3, 0xFE, 0x90]},
+                        ],
+                    },
+                    {
+                        // ikaros14
+                        name: "Free Play",
+                        tooltip: "Endless credits",
+                        patches: [
+                            {offset: 0xC208D5, off: [0x28], on: [0x08]},
+                        ],
+                    },
+                    {
+                        // ikaros14
+                        name: "Dummy LED",
+                        tooltip: "Skip LED board check",
+                        patches: [
+                            {offset: 0x2499D7, off: [0x00], on: [0x01]},
+                        ],
                     }
                 ]);
             });

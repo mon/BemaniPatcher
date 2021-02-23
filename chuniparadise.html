@@ -75,6 +75,13 @@
                         ],
                     },
                     {
+                        // ikaros14
+                        name: "Increase max credits to 254",
+                        patches: [
+                            {offset: 0xCB28D7, off: [0x8A, 0x5D, 0x14], on: [0xB3, 0xFE, 0x90]},
+                        ],
+                    },
+                    {
                         // esterTion
                         name: "Free Play",
                         tooltip: "Endless credits",
@@ -92,12 +99,14 @@
                     },
                     {
                         name: "No Encryption",
+                        tooltip: "Title server workaround",
                         patches: [
                             {offset: 0x3E2832, off: [0x39], on: [0xC3]},
                         ]
                     },
                     {
                         name: "No TLS",
+                        tooltip: "Title server workaround",
                         patches: [
                             {offset: 0xD04D09, off: [0x81, 0xE3, 0x00, 0x00, 0x80, 0x00], on: [0x31, 0xDB, 0x90, 0x90, 0x90, 0x90]},
                         ]

@@ -251,13 +251,14 @@ class PatchContainer {
                 self.loadFile(files[0]);
         });
 
+        var filepickerId = createID();
         this.fileInput = $("<input>",
             {
                 "class": "fileInput",
-                "id": "any-file",
+                "id": filepickerId,
                 "type": "file",
             });
-        var label = $("<label>", {"class": "fileLabel", "for": "any-file"});
+        var label = $("<label>", {"class": "fileLabel", "for": filepickerId});
         label.html("<strong>Choose a file</strong> or drag and drop.");
 
         this.fileInput.on("change", function (e) {
@@ -396,11 +397,12 @@ class Patcher {
                     self.loadFile(files[0]);
             });
 
+            var filepickerId = createID();
             this.fileInput = $("<input>",
                 {"class": "fileInput",
-                 "id" : this.filename + '-file',
+                 "id" : filepickerId,
                  "type" : 'file'});
-            var label = $("<label>", {"class": "fileLabel", "for": this.filename + '-file'});
+            var label = $("<label>", {"class": "fileLabel", "for": filepickerId});
             label.html('<strong>Choose a file</strong> or drag and drop.');
 
             this.fileInput.on('change', function(e) {

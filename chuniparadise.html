@@ -52,11 +52,47 @@
                         ],
                     },
                     {
+                        // lin714093880 & esterTion
+                        name: "Patch for head-to-head play",
+                        tooltip: "Fix infinite sync while trying to connect to head to head play.",
+                        patches: [
+                            {offset: 0x48C9B3, off: [0x01], on: [0x00]},
+                        ]
+                    },
+                    {
                         name: "AutoPlay",
                         patches: [
                             {offset: 0x747369, off: [0x00], on: [0x01]},
                         ],
                     },
+                    {
+                        // esterTion
+                        name: "Free Play",
+                        tooltip: "Endless credits",
+                        patches: [
+                            {offset: 0xCB2CF5, off: [0x28], on: [0x08]},
+                        ],
+                    },
+                    {
+                        // esterTion
+                        name: "Dummy LED",
+                        tooltip: "Skip LED board check",
+                        patches: [
+                            {offset: 0x24A5E7, off: [0x00], on: [0x01]},
+                        ],
+                    },
+                    {
+                        name: "No Encryption",
+                        patches: [
+                            {offset: 0x3E2832, off: [0x39], on: [0xC3]},
+                        ]
+                    },
+                    {
+                        name: "No TLS",
+                        patches: [
+                            {offset: 0xD04D09, off: [0x81, 0xE3, 0x00, 0x00, 0x80, 0x00], on: [0x31, 0xDB, 0x90, 0x90, 0x90, 0x90]},
+                        ]
+                    }
                 ]);
             });
         </script>

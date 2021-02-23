@@ -155,6 +155,12 @@ h3 {
     line-height: 1.2;
 }
 
+h4,
+h5 {
+    line-height: 1;
+    margin: 10px auto;
+}
+
 h1 {
     text-align: center;
 }
@@ -257,7 +263,7 @@ input[type=radio] {
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    
+
     display: block;
     height: auto;
     position: absolute;
@@ -286,4 +292,17 @@ input[type=radio] {
     white-space: nowrap;
     cursor: pointer;
     display: inline-block;
+}
+
+.patchPreviewLabel {
+    cursor: pointer;
+}
+.patchPreviewToggle {
+    display: none;
+}
+.patchPreview {
+    display: none;
+}
+input[type=checkbox]:checked + .patchPreview {
+    display: block;
 }

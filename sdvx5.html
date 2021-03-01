@@ -339,6 +339,75 @@
                 },
               ]
             }
+          ]),
+          new Patcher('soundvoltex.dll', "2020-12-22", [
+            {
+              name: 'SSE4.2 Fix',
+              tooltip: 'This will allow the game to run on processors which do not support the SSE4.2 instruction set. If you can successfully boot the game, do NOT check this.',
+              patches: [
+                {offset: 0x26CD4D, off: [0xF3, 0x45, 0x0F, 0xB8, 0xC8], on: [0x67, 0x45, 0x8D, 0x48, 0xFF]},
+                {offset: 0x287206, off: [0xF3, 0x45, 0x0F, 0xB8, 0xCA], on: [0x44, 0x8D, 0x4E, 0x02, 0x90]}
+              ]
+            },
+            {
+              name: 'All songs/difficulties unlocked',
+              tooltip: 'Do not use when connected to online servers, will break automation paradise favoriting',
+              patches: [
+                {offset: 0x4C94C5, off: [0x8B, 0x4C, 0x24, 0x34, 0xE8, 0xC2, 0x09, 0x00, 0x00], on: [0xB8, 0x03, 0x00, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90]},
+                {offset: 0x5577D2, off: [0xE8, 0x89, 0xC5, 0x08, 0x00], on: [0xB8, 0x0D, 0x00, 0x00, 0x00]},
+                //additional patch created by giz for server unlock override.
+                {offset: 0x4BF080, off: [0x44, 0x0F, 0xB6, 0x74, 0x24, 0x30], on: [0x41, 0xBE, 0x03, 0x00, 0x00, 0x00]}
+              ]
+            },
+            {
+              name: 'All songs "Safe"',
+              tooltip: 'Failing early won\'t drop you out of your session',
+              patches: [
+                {offset: 0x5DC704, off: [0x06], on: [0x13]},
+                {offset: 0x5DC713, off: [0xA4], on: [0x00]},
+              ]
+            },
+            {
+              name: 'Boot into Event Mode',
+              tooltip: 'Not compatible with premium free mode',
+              patches: [{offset: 0x4BABE0, off: [0x33, 0xC0, 0xC7, 0x41, 0x08, 0x64, 0x05, 0x00, 0x00, 0x48, 0x89, 0x01, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC], on: [0x31, 0xC0, 0x67, 0x8D, 0x40, 0x01, 0xC7, 0x41, 0x08, 0x64, 0x05, 0x00, 0x00, 0x48, 0x89, 0x01, 0xC3]}]
+            },
+            {
+              name: 'All crew unlocked',
+              patches: [{offset: 0x4CF06B, off: [0x95], on: [0x91]}]
+            },
+            {
+              name: 'Skip Global Matching Screen',
+              patches: [{offset: 0x7234A0, off: [0x4D], on: [0x4E]}]
+            },
+            {
+              name: 'All Appeal Cards Unlocked',
+              patches: [{offset: 0x4CE572, off: [0x19], on: [0x00]}]
+            },
+            {
+              name: 'Shared mode WASAPI',
+              tooltip: 'Only replaces the first audio device init attempt. Set output to 44100Hz 16bit if it doesn\'t work.',
+              patches: [{offset: 0x636355, off: [0xBA, 0x03, 0x00, 0x00, 0x00], on: [0xBA, 0x00, 0x00, 0x00, 0x00]}]
+            },
+            {
+              name: 'Freeze timer in all modes',
+              tooltip: 'Useful to play with Omega Dimension Ex-Track',
+              patches: [{offset: 0x3FBDE4, off: [0xFF, 0xCA], on: [0x90, 0x90]}]
+            },
+            {
+              // created by aixxe
+              name: 'Force Enable Headphones',
+              tooltip: 'Overrides headphone detection to always be enabled. Useful for cabinets.',
+              patches: [
+                {offset: 0x6171F8, off: [0x89, 0x8B, 0x90, 0x00, 0x00, 0x00, 0x84, 0xC9, 0x74, 0x08], on: [0xC7, 0x83, 0x90, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00]},
+              ]
+            },
+            // created by Xyen
+            {
+              name: 'Infinite Premium Time',
+              tooltip: 'Locks the timer, can still exit with key combo',
+              patches: [{offset: 0x308C1D, off: [0xFF, 0x15, 0x65, 0x19, 0x37, 0x00, 0x48, 0x8B, 0x44, 0x24, 0x30], on: [0x48, 0xC7, 0xC0, 0x01, 0x00, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90]}]
+            }
           ])
         ]);
       });

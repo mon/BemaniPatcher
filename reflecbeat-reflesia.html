@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Reflec Beat The Reflesia of Eternity DLL Modder</title>
+        <link rel="stylesheet" href="css/style.css">
+        <!-- don't hate -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script type="text/javascript" src="js/FileSaver.min.js"></script>
+        <script type="text/javascript" src="js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function() {
+                new PatchContainer([
+                    new Patcher("reflecbeat.dll", "2018-12-11", [
+                        {
+                            name: "E: drive fix",
+                            tooltip: "Fix crash caused by no E: drive",
+                            patches: [{
+                                       offset: 0x28B0FC,
+                                       off: [0x65, 0x3A, 0x2F],
+                                       on: [0x64, 0x65, 0x76]
+                            }]
+                        }
+                    ]),
+                ]);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Reflec Beat The Reflesia of Eternity DLL Modder</h1>
+    </body>
+</html>

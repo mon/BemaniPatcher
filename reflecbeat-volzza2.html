@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Reflec Beat VOLZZA 2 DLL Modder</title>
+        <link rel="stylesheet" href="css/style.css">
+        <!-- don't hate -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script type="text/javascript" src="js/FileSaver.min.js"></script>
+        <script type="text/javascript" src="js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function() {
+                new PatchContainer([
+                    new Patcher("reflecbeat.dll", "2016-10-04", [
+                        {
+                            name: "E: drive fix",
+                            tooltip: "Fix crash caused by no E: drive",
+                            patches: [{
+                                       offset: 0x292D34,
+                                       off: [0x65, 0x3A, 0x2F],
+                                       on: [0x64, 0x65, 0x76]
+                            }]
+                        },
+                        {
+                            name: "Unlock all songs",
+                            patches: [{
+                                       offset: 0x85E83,
+                                       off: [0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC],
+                                       on: [0xC7, 0x40, 0x0C, 0x02, 0x00, 0x00, 0x00, 0xE9, 0x2C, 0x01, 0x00, 0x00]
+                                      },
+                                      {
+                                       offset: 0x85F74,
+                                       off: [0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC],
+                                       on: [0xC7, 0x40, 0x08, 0x0F, 0x00, 0x00, 0x00, 0xE9, 0x03, 0xFF, 0xFF, 0xFF]
+                                      },
+                                      {
+                                       offset: 0x85FAC,
+                                       off: [0x89, 0x50, 0x08, 0x89, 0x50, 0x0C, 0x88, 0x50, 0x14, 0x88, 0x50, 0x15, 0x89, 0x50, 0x10],
+                                       on: [0x88, 0x50, 0x14, 0x88, 0x50, 0x15, 0x89, 0x18, 0x89, 0x70, 0x04, 0xEB, 0xBB, 0x90, 0x90]
+                                      },
+                                      {
+                                       offset: 0xAB862,
+                                       off: [0x74],
+                                       on: [0xEB]
+                                      }
+                            ]
+                        },
+                    ]),
+                ]);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Reflec Beat VOLZZA 2 DLL Modder</h1>
+    </body>
+</html>

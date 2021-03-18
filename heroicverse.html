@@ -161,6 +161,10 @@
               patches: [{offset: 0x5ca12e, off: [0x33, 0xc0], on:[0xeb, 0xf4]}]
             },
             {
+              name: 'Auto Play',
+              patches: [{offset: 0x323F29, off: [0x00], on:[0x01]}]
+            },
+            {
               name: 'Debug Mode',
               tooltip : "While in game, press F1 to enable menu.  (Disables Profile/Score saving)",
               patches: [{offset: 0x59A450, off: [0x32, 0xC0], on:[0xB0, 0x01]}]

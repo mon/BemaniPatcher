@@ -209,6 +209,12 @@ button:hover:enabled, .fileLabel > strong:hover {
     color: red;
 }
 
+.matchSuccess {
+    font-size: 15px;
+    font-style: italic;
+    color: green;
+}
+
 li > button {
     height: 24px;
     padding: 0 7px;

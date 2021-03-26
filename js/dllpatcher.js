@@ -320,8 +320,7 @@ class PatchContainer {
                     loadPatch(this, self, patcher);
                     // show patches matched for 100% - helps identify which version is loaded
                     var valid = patcher.validPatches;
-                    var percent = (valid / patcher.totalPatches * 100).toFixed(1);
-                    self.matchSuccessText[i].text(' ' + valid + ' of ' + patcher.totalPatches + ' patches matched (' + percent + '%) ');
+                    self.matchSuccessText[i].text(' ' + valid + ' of ' + valid + ' patches matched (100%) ');
                 }
             }
 

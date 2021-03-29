@@ -228,6 +228,13 @@
                     patch : [0x47, 0x9E, 0xD5, 0xFF],
                 },
               ]
+            },
+            {
+              name: 'Disable News Sound',
+              tooltip : "Disables the sound played when news banners appear.",
+              patches: [
+                {offset: 0x88D1C0, off: [0x10], on:[0x00]},
+              ]
             }
           ]),
         ]);

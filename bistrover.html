@@ -14,6 +14,16 @@
                 //LDJ-2021042600
                 new Patcher("bm2dx.dll", "2021-04-26", [
                     {
+                        name: "SSE4.2 Fix",
+                        patches: [
+                            { offset: 0x20A454, off: [0xF3, 0x45, 0x0F], on: [0x90, 0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        name: "Skip Camera Error",
+                        patches: [{ offset: 0x6B2318, off: [0x84], on: [0x81] }],
+                    },
+                    {
                         name: "Force 120hz timing and adapter mode in LDJ (Experimental)",
                         patches: [
                             { offset: 0x3C6063, off: [0x75], on: [0xeb] },
@@ -31,6 +41,12 @@
                             },
                             { offset: 0x78BFE4, off: [0x0f, 0x84], on: [0x90, 0xe9] },
                             { offset: 0x78C750, off: [0x9c, 0xe4], on: [0x3c, 0xdd] },
+                        ],
+                    },
+                    {
+                        name: "Bypass lightning monitor error",
+                        patches: [
+                            { offset: 0x6A4D91, off: [0x0f, 0x85], on: [0x90, 0xe9] },
                         ],
                     },
                     {
@@ -53,9 +69,18 @@
                             },
                         ],
                     },
-
                     {
-                        name: "pfree unlock p2",
+                        name: "1P Premium Free",
+                        patches: [
+                            {
+                                offset: 0x65BD64,
+                                off: [0x75],
+                                on: [0xEB],
+                            },
+                        ],
+                    },
+                    {
+                        name: "2P Premium Free",
                         patches: [
                             {
                                 offset: 0x65BF15,
@@ -67,20 +92,10 @@
                         ],
                     },
                     {
-                        name: "pfree unlock",
-                        patches: [
-                            {
-                                offset: 0x65BD64,
-                                off: [0x75],
-                                on: [0xEB],
-                            },
-                        ],
-                    },
-                    {
-                        name: "Bypass lightning monitor error",
-                        patches: [
-                            { offset: 0x6A4D91, off: [0x0f, 0x85], on: [0x90, 0xe9] },
-                        ],
+                        name: "Premium Free Timer Freeze",
+                        tooltip:
+                            "Freezes the timer in PREMIUM FREE mode, allowing unlimited play until exit",
+                        patches: [{ offset: 0x42E5DD, off: [0x7e], on: [0xeb] }],
                     },
                     {
                         name: "Unlock All Songs",
@@ -120,16 +135,17 @@
                         ],
                     },
                     {
-                        name: "Skip Camera Error",
-                        patches: [{ offset: 0x6B2318, off: [0x84], on: [0x81] }],
-                    },
-                    {
                         name: "Cursor Lock",
                         patches: [
                             { offset: 0x662ECF, off: [0x74, 0x1f], on: [0x90, 0x90] },
                         ],
                     },
-
+                    {
+                        name: "Quick Retry",
+                        patches: [
+                            { offset: 0x40E36F, off: [0x32, 0xC0], on: [0xB0, 0x01] },
+                        ],
+                    },
                     {
                         name: "Standard/Menu Timer Freeze",
                         patches: [{ offset: 0x6D6B77, off: [0x74], on: [0xeb] }],
@@ -139,10 +155,11 @@
                         patches: [{ offset: 0x20A541, off: [0x01], on: [0x00] }],
                     },
                     {
-                        name: "Premium Free Timer Freeze",
-                        tooltip:
-                            "Freezes the timer in PREMIUM FREE mode, allowing unlimited play until exit",
-                        patches: [{ offset: 0x42E5DD, off: [0x7e], on: [0xeb] }],
+                        name: "Always show FAST/SLOW total",
+                        patches: [
+                            { offset: 0x678863, off: [0x74], on: [0x75] },
+                            { offset: 0x678A80, off: [0x74], on: [0x75] },
+                        ],
                     },
                     {
                         name: "Hide all bottom text",

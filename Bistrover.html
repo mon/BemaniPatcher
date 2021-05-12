@@ -53,6 +53,18 @@
                 },
               ],
             },
+
+                       {
+              name: "pfree unlock p2",
+              patches: [
+                {
+                  offset: 0x65BF15,
+                  off: [0x74,0x55],
+                  on: [0x90,0x90], },
+                { offset: 0x65BF2B, off: [0x74, 0x3F], on: [0x90,0x90] },
+               
+              ],
+            },
            {
               name: "pfree unlock",
               patches: [

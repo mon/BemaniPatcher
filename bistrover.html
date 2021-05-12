@@ -109,6 +109,16 @@
                         ],
                     },
                     {
+                        name: "CS-style song start delay",
+                        patches: [
+                            {
+                                offset: 0x68D453,
+                                off: [0x7d, 0x4d],
+                                on: [0x90, 0x90],
+                            },
+                        ],
+                    },
+                    {
                         name: "Skip Camera Error",
                         patches: [{ offset: 0x6B2318, off: [0x84], on: [0x81] }],
                     },

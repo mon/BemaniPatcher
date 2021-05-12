@@ -53,6 +53,16 @@
                 },
               ],
             },
+           {
+              name: "pfree unlock",
+              patches: [
+                {
+                  offset: 0x65BD64,
+                  off: [0x75],
+                  on: [0xEB],
+                },
+              ],
+            },
             {
               name: "Bypass lightning monitor error",
               patches: [

@@ -20,7 +20,7 @@
                               off: [0x75], on: [0xEB]},
                         ],
                     },
-					{
+		    {
                         name: "Disable monitor change", //patch by Xyen
 						tooltip: "Prevents monitor setting changes on startup",
                         patches: [
@@ -28,12 +28,19 @@
                               off: [0x75], on: [0xEB]},
                         ],
                     },
-					{
+		    {
                         name: "Shared mode WASAPI",
 						tooltip: "Only replaces the first audio device init attempt. Set output to 44100Hz 16bit if it doesn\'t work.",
                         patches: [
                             { offset: 0x42B089,
                               off: [0x04], on: [0x00]},
+                        ],
+                    },
+		    {
+                        name: "Timer freeze", // ikaros14
+                        patches: [
+                            { offset: 0x71166,
+                              off: [0x84], on: [0x85]},
                         ],
                     },
                 ]),

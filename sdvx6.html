@@ -33,6 +33,14 @@
               patches: [{ offset: 0x71166, off: [0x84], on: [0x85] }],
             },
             {
+              name: "Allow non E004 cards",
+              tooltip: "Allows cards that do not have E004 card IDs (such as mifare cards) to work.",
+              patches: [
+                { offset: 0xA4B, off: [0x75, 0x12], on: [0x90, 0x90] },
+                { offset: 0xA53, off: [0x74], on: [0xEB] }
+              ],
+            },
+            {
               type: "union",
               name: "Premium Time Length",
               offset: 0x297996,

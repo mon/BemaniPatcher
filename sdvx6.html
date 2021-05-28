@@ -75,15 +75,15 @@
               tooltip: "Prevents monitor setting changes on startup",
               patches: [{ offset: 0x1ecdab, off: [0x75], on: [0xeb] }],
             },
-	    {
-	      name: "Valkryie Model Support",
-	      tooltip: "Will only work with <spec __type="str">F</spec> changed to either G or H, in ea3-config.xml."
-	      patches: [{ offset: 0x3f1bd5, off: [0x87, 0x05], on: [0x47, 0x0c] }],	
-	    },
-	    {
-	      name: "120Hz Support",
-	      patches: [{ offset: 0x6fc0be, off: [0x4e], on: [0x5e] }],
-	    },
+	        {
+	          name: "Valkryie Model Support",
+	          tooltip: "Will only work with <spec __type="str">F</spec> changed to either G or H, in ea3-config.xml."
+	          patches: [{ offset: 0x3f1bd5, off: [0x87, 0x05], on: [0x47, 0x0c] }],	
+	        },
+	        {
+	          name: "120Hz Support",
+	          patches: [{ offset: 0x6fc0be, off: [0x4e], on: [0x5e] }],
+	        },
             {
               name: "Shared mode WASAPI",
               tooltip:
@@ -126,4 +126,3 @@
     <h1>SDVX VI DLL Modder</h1>
   </body>
 </html>
-

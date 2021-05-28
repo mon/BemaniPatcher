@@ -77,9 +77,8 @@
             },
 	    {
 	      name: "Valkryie Model Support",
-	      tooltip:
-                "Will only work with <spec __type="str">F</spec> changed to either G or H, in ea3-config.xml."
-	      patches: [{ offset: 0x3f1bd5, off: [0x87, 0x05], on: [0x47, 0x0c] }],
+	      tooltip: "Will only work with <spec __type="str">F</spec> changed to either G or H, in ea3-config.xml."
+	      patches: [{ offset: 0x3f1bd5, off: [0x87, 0x05], on: [0x47, 0x0c] }],	
 	    },
 	    {
 	      name: "120Hz Support",
@@ -90,8 +89,7 @@
               tooltip:
                 "Only replaces the first audio device init attempt. Set output to 44100Hz 16bit if it doesn't work.",
               patches: [{ offset: 0x42d009, off: [0x04], on: [0x00] }],
-            },
-			
+            },	
             {
               name: "Timer freeze", // ikaros14
               patches: [{ offset: 0x713d6, off: [0x84], on: [0x85] }],

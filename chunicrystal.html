@@ -161,6 +161,18 @@
                             patches: [
                                 {offset: 0x2499D7, off: [0x00], on: [0x01]},
                             ],
+                        },
+                        {
+                            name: "No Title Server Encryption",
+                            patches: [
+                                {offset: 0x3D4372, off: [0x39], on: [0xC3]},
+                            ],
+                        },
+                        {
+                            name: "No Title Server TLS",
+                            patches: [
+                                {offset: 0xCE5479, off: [0x81, 0xE3, 0x00, 0x00, 0x80, 0x00], on: [0x31, 0xDB, 0x90, 0x90, 0x90, 0x90]},
+                            ],
                         }
                     ])
                 ]);

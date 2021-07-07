@@ -123,7 +123,11 @@
               patches: [{offset: 0x2BD459, off: [0xFF, 0x15, 0xC1, 0x8D, 0x4E, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
             },
             {
-              name: 'Hide "CREDIT: %s"',
+              name: 'Hide "PASELI: NOT AVAILABLE"',
+              patches: [{offset: 0x2BD2B4, off: [0x48, 0x8D, 0x05, 0xDD, 0xD7, 0x4E, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+            },
+            {
+              name: 'Hide "CREDIT: %d"',
               patches: [{offset: 0x2BD0D6, off: [0xFF, 0x15, 0x44, 0x91, 0x4E, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
             },
             {
@@ -231,6 +235,13 @@
                     name : "SystemSoundViewerScene",
                     patch : [0x47, 0x9E, 0xD5, 0xFF],
                 },
+              ]
+            },
+            {
+              name: 'Disable News Sound',
+              tooltip : "Disables the sound played when news banners appear.",
+              patches: [
+                {offset: 0x88D1C0, off: [0x10], on:[0x00]},
               ]
             }
           ]),

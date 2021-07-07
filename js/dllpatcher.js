@@ -211,6 +211,7 @@ class PatchContainer {
         var supportedDlls = $("<ul>");
         this.forceLoadTexts = [];
         this.forceLoadButtons = [];
+        this.matchSuccessText = [];
         for (var i = 0; i < this.patchers.length; i++) {
             var checkboxId = createID();
 
@@ -223,6 +224,9 @@ class PatchContainer {
             var matchPercent = $('<span>').addClass('matchPercent');
             this.forceLoadTexts.push(matchPercent);
             matchPercent.appendTo(listItem);
+            var matchSuccess = $('<span>').addClass('matchSuccess');
+            this.matchSuccessText.push(matchSuccess);
+            matchSuccess.appendTo(listItem);
             var forceButton = $('<button>').text('Force load?').hide();
             this.forceLoadButtons.push(forceButton);
             forceButton.appendTo(listItem);
@@ -300,6 +304,10 @@ class PatchContainer {
             self.errorDiv.empty();
             self.successDiv.empty();
             for (var i = 0; i < self.patchers.length; i++) {
+                // reset text and buttons
+                self.forceLoadButtons[i].hide();
+                self.forceLoadTexts[i].text('');
+                self.matchSuccessText[i].text('');
                 var patcher = self.patchers[i];
                 // remove the previous UI to clear the page
                 patcher.destroyUI();
@@ -310,6 +318,9 @@ class PatchContainer {
                 if (patcher.validatePatches()) {
                     found = true;
                     loadPatch(this, self, patcher);
+                    // show patches matched for 100% - helps identify which version is loaded
+                    var valid = patcher.validPatches;
+                    self.matchSuccessText[i].text(' ' + valid + ' of ' + valid + ' patches matched (100%) ');
                 }
             }
 

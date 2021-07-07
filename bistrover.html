@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>IIDX BISTROVER DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- don't hate -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/FileSaver.min.js"></script>
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            new PatchContainer([
+                //LDJ-2021042600
+                new Patcher("bm2dx.dll", "2021-04-26", [
+                    {
+                        name: "SSE4.2 Fix",
+                        patches: [
+                            { offset: 0x20A454, off: [0xF3, 0x45, 0x0F], on: [0x90, 0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        name: "Skip Camera Error",
+                        patches: [{ offset: 0x6B231B, off: [0x84], on: [0x81] }],
+                    },
+                    {
+                        name: "Force 120hz timing and adapter mode in LDJ (Experimental)",
+                        patches: [
+                            { offset: 0x3C6063, off: [0x75], on: [0xeb] },
+                            { offset: 0x771A5E, off: [0x3c], on: [0x78] },
+                            { offset: 0x771C49, off: [0x74, 0x03], on: [0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        name: "Shim Lightning Mode IO (for spicetools)",
+                        patches: [
+                            {
+                                offset: 0x715FBE,
+                                off: [0x0f, 0x84, 0x8d, 0x00, 0x00, 0x00],
+                                on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90],
+                            },
+                            { offset: 0x78BFE4, off: [0x0f, 0x84], on: [0x90, 0xe9] },
+                            { offset: 0x78C750, off: [0x9c, 0xe4], on: [0x3c, 0xdd] },
+                        ],
+                    },
+                    {
+                        name: "Bypass lightning monitor error",
+                        patches: [
+                            { offset: 0x6A4D91, off: [0x0f, 0x85], on: [0x90, 0xe9] },
+                        ],
+                    },
+                    {
+                        name: "Force LDJ software video decoder for all boot modes",
+                        patches: [
+                            {
+                                offset: 0x715FB7,
+                                off: [0x83, 0x78, 0x08, 0x02],
+                                on: [0x83, 0x78, 0x08, 0x05],
+                            },
+                        ],
+                    },
+                    {
+                        name: "Unscramble touch screen keypad in TDJ",
+                        patches: [
+                            {
+                                offset: 0x7488F5,
+                                off: [0x4d, 0x03, 0xc8, 0x49, 0xf7, 0xf1],
+                                on: [0xba, 0x0c, 0x00, 0x00, 0x00, 0x90],
+                            },
+                        ],
+                    },
+                    {
+                        name: "1P Premium Free",
+                        patches: [
+                            {
+                                offset: 0x65BD64,
+                                off: [0x75],
+                                on: [0xEB],
+                            },
+                        ],
+                    },
+                    {
+                        name: "2P Premium Free",
+                        patches: [
+                            {
+                                offset: 0x65BF15,
+                                off: [0x74, 0x55],
+                                on: [0x90, 0x90],
+                            },
+                            { offset: 0x65BF2B, off: [0x74, 0x3F], on: [0x90, 0x90] },
+
+                        ],
+                    },
+                    {
+                        name: "Premium Free Timer Freeze",
+                        tooltip:
+                            "Freezes the timer in PREMIUM FREE mode, allowing unlimited play until exit",
+                        patches: [{ offset: 0x42E5DD, off: [0x7e], on: [0xeb] }],
+                    },
+                    {
+                        name: "Unlock All Songs",
+                        patches: [
+                            { offset: 0x429D49, off: [0x75, 0x24], on: [0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        name: "Unlock All 12s",
+                        patches: [
+                            {
+                                offset: 0x429AF0,
+                                off: [0x83, 0xff, 0x03, 0x74, 0x05, 0x83, 0xff, 0x08],
+                                on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90],
+                            },
+                        ],
+                    },
+                    {
+                        name: "Skip Decide Screen",
+                        patches: [
+                            {
+                                offset: 0x348980,
+                                off: [0xe8, 0x6b, 0x00, 0x00, 0x00],
+                                on: [0x90, 0x90, 0x90, 0x90, 0x90],
+                            },
+                        ],
+                    },
+                    {
+                        name: "CS-style song start delay",
+                        tooltip : "Holding Start will pause the song at the beginning until you release it",
+                        patches: [
+                            {
+                                offset: 0x68D453,
+                                off: [0x7d, 0x4d],
+                                on: [0x90, 0x90],
+                            },
+                        ],
+                    },
+                    {
+                        name: "Cursor Lock",
+                        patches: [
+                            { offset: 0x662ECF, off: [0x74, 0x1f], on: [0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        name: "Quick Retry",
+                        patches: [
+                            { offset: 0x40E36F, off: [0x32, 0xC0], on: [0xB0, 0x01] },
+                        ],
+                    },
+                    {
+                        name: "Standard/Menu Timer Freeze",
+                        patches: [{ offset: 0x6D6B77, off: [0x74], on: [0xeb] }],
+                    },
+                    {
+                        name: "WASAPI Shared Mode (with 44100Hz)",
+                        patches: [{ offset: 0x20A541, off: [0x01], on: [0x00] }],
+                    },
+                    {
+                        name: "Always show FAST/SLOW total",
+                        patches: [
+                            { offset: 0x678863, off: [0x74], on: [0x75] },
+                            { offset: 0x678A80, off: [0x74], on: [0x75] },
+                        ],
+                    },
+                    {
+                        name: "Hide all bottom text",
+                        patches: [
+                            { offset: 0x32EA01, off: [0x7F, 0x12, 0x44, 0x8B, 0xCB, 0x4C, 0x8D, 0x05, 0xBB, 0x06, 0x63, 0x00], on: [0x90, 0xE9, 0x22, 0x00, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }, //EXTRA PASELI: %d
+                            { offset: 0x32EDBD, off: [0xE8, 0xAE, 0xAF, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90] }, //INSERT COIN[S]
+                            { offset: 0x32EC0B, off: [0xFF, 0x15, 0xCF, 0xA7, 0x62, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }, //PASELI: ******
+                            { offset: 0x32ECA9, off: [0xFF, 0x15, 0x31, 0xA7, 0x62, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }, //PASELI: NO ACCOUNT
+                            { offset: 0x32EB24, off: [0x48, 0x8D, 0x05, 0x3D, 0x12, 0x77, 0x04], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }, //PASELI: NOT AVAILABLE
+                            { offset: 0x32E926, off: [0xFF, 0x15, 0xB4, 0xAA, 0x62, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }, //CREDIT: %d
+                        ],
+                    },
+                    {
+                        name: "FREE PLAY text to LED ticker",
+                        tooltip: "Song Title/Ticker information will display instead of FREEPLAY",
+                        patches: [
+                            { offset: 0x32EABF, off: [0xAD, 0x05, 0x63, 0x00], on: [0x49, 0x56, 0x00, 0x05] },
+                        ],
+                    },
+                ]),
+            ]);
+        });
+    </script>
+  </head>
+  <body>
+    <h1>IIDX BISTROVER DLL Modder</h1>
+  </body>
+</html>

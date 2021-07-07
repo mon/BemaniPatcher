@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>GITADORA NEX+AGE DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- don't hate -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/FileSaver.min.js"></script>
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            new Patcher("game.dll", "", [
+              {
+                name: "Timer Freeze",
+                patches: [{offset: 0x1035BF, off: [0x0F, 0x85], on: [0x90, 0xE9]}]
+              },
+              {
+                name: "Cursor Hold",
+                patches: [{offset: 0xC62AA, off: [0x0F, 0x85], on: [0x90, 0xE9]}]
+              },
+              {
+                name: "Stage Freeze",
+                patches: [{offset: 0x128D21, off: [0x0F, 0x85], on: [0x90, 0xE9]}]
+              },
+              {
+                name: "Skip Tutorial",
+                patches: [{offset: 0xF50FA, off: [0x0F, 0x87], on: [0x90, 0xE9]}]
+              },
+              {
+                name: "Unlock all songs",
+                patches: [
+                  {offset: 0x1E9402, off: [0x61, 0x00], on: [0x4D, 0x01]},
+                  {offset: 0x1E941A, off: [0x63, 0x00], on: [0x4D, 0x01]},
+                  {offset: 0x13920E, off: [0x75, 0x08], on: [0xEB, 0x11]},
+                ]
+              },
+              {
+                name: "Enable Long Music",
+                patches: [{offset: 0x139324, off: [0x74], on: [0xEB]}]
+              },
+              {
+                name: 'Skip "NOW DATA INITIALIZING" (useful for testing only)',
+                patches: [{offset: 0x36E5D, off: [0x0F, 0x84, 0x74, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+              },
+            ]);
+        });
+    </script>
+</head>
+<body>
+    <h1>GITADORA NEX+AGE DLL Modder</h1>
+</body>
+</html>

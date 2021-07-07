@@ -23,14 +23,23 @@
               patches: [{ offset: 0x1ec5eb, off: [0x75], on: [0xeb] }],
             },
             {
+              name: "Force BIO2 (KFC) IO in Valkyrie mode",
+              tooltip: "Will only work with <spec __type=\"str\">F</spec> changed to either G or H, in ea3-config.xml.",
+              patches: [{ offset: 0x3f02d5, off: [0x87, 0x05], on: [0x47, 0x0c] }],	
+            },
+            {
+              name: "120Hz Support",
+              patches: [{ offset: 0x6f70fe, off: [0x4e], on: [0x5e] }],
+            },
+            {
               name: "Shared mode WASAPI",
               tooltip:
                 "Only replaces the first audio device init attempt. Set output to 44100Hz 16bit if it doesn't work.",
               patches: [{ offset: 0x42b089, off: [0x04], on: [0x00] }],
             },
             {
-              name: "Timer freeze", // ikaros14
-              patches: [{ offset: 0x71166, off: [0x84], on: [0x85] }],
+              name: "Shared mode WASAPI Valkyrie",
+              patches: [{ offset: 0x42AFE7, off: [0x07], on: [0x00] }],
             },
             {
               name: "Allow non E004 cards",
@@ -39,6 +48,23 @@
                 { offset: 0xA4B, off: [0x75, 0x12], on: [0x90, 0x90] },
                 { offset: 0xA53, off: [0x74], on: [0xEB] }
               ],
+            },
+            {
+              name: "Timer freeze", // ikaros14
+              patches: [{ offset: 0x71166, off: [0x84], on: [0x85] }],
+            },
+            {
+              name: 'Premium timer freeze',
+              patches: [
+                { offset: 0x2F1D65, off: [0x0F, 0x85], on: [0x90, 0xE9] }, //during music select
+                { offset: 0x278819, off: [0x0F, 0x84], on: [0x90, 0xE9] }, //during song
+                { offset: 0x1CD098, off: [0x75], on: [0xEB] }, //during result screen
+              ]
+            },
+            {
+              name: "Hide premium guide banner",
+              tooltip : "blpass_ef (rainbow outline on health gauge) is shown instead of pt_sousa_usr",
+              patches: [{ offset: 0x20F9FD, off: [0xE7, 0x25, 0x48], on: [0x17, 0xC7, 0x43] }],
             },
             {
               type: "union",
@@ -91,8 +117,33 @@
               patches: [{ offset: 0x42d009, off: [0x04], on: [0x00] }],
             },
             {
+              name: "Shared mode WASAPI Valkyrie",
+              patches: [{ offset: 0x42CF67, off: [0x07], on: [0x00] }],
+            },
+            {
+              name: "Allow non E004 cards",
+              tooltip: "Allows cards that do not have E004 card IDs (such as mifare cards) to work.",
+              patches: [
+                { offset: 0xA4B, off: [0x75, 0x12], on: [0x90, 0x90] },
+                { offset: 0xA53, off: [0x74], on: [0xEB] }
+              ],
+            },
+            {
               name: "Timer freeze", // ikaros14
               patches: [{ offset: 0x713d6, off: [0x84], on: [0x85] }],
+            },
+            {
+              name: 'Premium timer freeze',
+              patches: [
+                { offset: 0x2F30A5, off: [0x0F, 0x85], on: [0x90, 0xE9] }, //during music select
+                { offset: 0x279C39, off: [0x0F, 0x84], on: [0x90, 0xE9] }, //during song
+                { offset: 0x1CD8C8, off: [0x75], on: [0xEB] }, //during result screen
+              ]
+            },
+            {
+              name: "Hide premium guide banner",
+              tooltip : "blpass_ef (rainbow outline on health gauge) is shown instead of pt_sousa_usr",
+              patches: [{ offset: 0x2101BD, off: [0x27, 0x5F, 0x48], on: [0x87, 0x02, 0x44] }],
             },
             {
               type: "union",
@@ -130,14 +181,48 @@
               patches: [{ offset: 0x1ECF5B, off: [0x75], on: [0xeb] }],
             },
             {
+              name: "Force BIO2 (KFC) IO in Valkyrie mode",
+              tooltip: "Will only work with <spec __type=\"str\">F</spec> changed to either G or H, in ea3-config.xml.",
+              patches: [{ offset: 0x3f37c5, off: [0x87, 0x05], on: [0x47, 0x0c] }],	
+            },
+            {
+              name: "120Hz Support",
+              patches: [{ offset: 0x70085e, off: [0x4e], on: [0x5e] }],
+            },
+            {
               name: "Shared mode WASAPI",
               tooltip:
                 "Only replaces the first audio device init attempt. Set output to 44100Hz 16bit if it doesn't work.",
               patches: [{ offset: 0x42EC39, off: [0x04], on: [0x00] }],
             },
             {
+              name: "Shared mode WASAPI Valkyrie",
+              patches: [{ offset: 0x42EB97, off: [0x07], on: [0x00] }],
+            },
+            {
+              name: "Allow non E004 cards",
+              tooltip: "Allows cards that do not have E004 card IDs (such as mifare cards) to work.",
+              patches: [
+                { offset: 0xA4B, off: [0x75, 0x12], on: [0x90, 0x90] },
+                { offset: 0xA53, off: [0x74], on: [0xEB] }
+              ],
+            },
+            {
               name: "Timer freeze", // ikaros14
               patches: [{ offset: 0x71406, off: [0x84], on: [0x85] }],
+            },
+            {
+              name: 'Premium timer freeze',
+              patches: [
+                { offset: 0x2F44F5, off: [0x0F, 0x85], on: [0x90, 0xE9] }, //during music select
+                { offset: 0x27B009, off: [0x0F, 0x84], on: [0x90, 0xE9] }, //during song
+                { offset: 0x1CDA78, off: [0x75], on: [0xEB] }, //during result screen
+              ],
+            },
+            {
+              name: "Hide premium guide banner",
+              tooltip : "blpass_ef (rainbow outline on health gauge) is shown instead of pt_sousa_usr",
+              patches: [{ offset: 0x21093D, off: [0xEF, 0x97, 0x48], on: [0xBF, 0x3A, 0x44] }],
             },
             {
               type: "union",

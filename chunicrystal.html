@@ -173,7 +173,15 @@
                             patches: [
                                 {offset: 0xCE5479, off: [0x81, 0xE3, 0x00, 0x00, 0x80, 0x00], on: [0x31, 0xDB, 0x90, 0x90, 0x90, 0x90]},
                             ],
-                        }
+                        },
+                        {
+                            name: "Enable Autoplay",
+                            patches: [
+                                {
+                                    offset: 0x72BA69, off: [0x00], on: [0x01]
+                                }
+                            ]
+                        },
                     ])
                 ]);
             });

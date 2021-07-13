@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Hatsune Miku: Project DIVA Arcade Future Tone Modder</title>
+        <link rel="stylesheet" href="css/style.css">
+        <!-- don't hate -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script type="text/javascript" src="js/FileSaver.min.js"></script>
+        <script type="text/javascript" src="js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function () {
+            new PatchContainer([
+                new Patcher("diva.exe", "7.10.00", [
+                    {
+                        name: "DHCP Patch",
+                        patches: [
+                            {offset: 0x392A10, off: [0x40, 0x53, 0x48, 0x83, 0xEC, 0x20], on: [0xB0, 0x01, 0xC3, 0x90, 0x90, 0x90]}
+                        ]
+                    },
+                    {
+                        name: "Location Server Bypass",
+                        patches: [
+                            {offset: 0x6726A2, off: [0x75, 0x1E], on: [0x90, 0x90]},
+                        ],
+                    },
+                    {
+                        name: "Ram folder to game root folder",
+                        patches: [
+                            {offset: 0x670BB1, off: [0x0F, 0x85, 0x21, 0x03, 0x00], on: [0xE9, 0x22, 0x03, 0x00, 0x00]},
+                        ],
+                    },
+                ]),
+                new Patcher("diva.exe", "7.01.00", [
+                    {
+                        name: "DHCP Patch",
+                        patches: [
+                            {offset: 0x6750B0, off: [0x40, 0x53, 0x48, 0x83, 0xEC, 0x20], on: [0xB0, 0x01, 0xC3, 0x90, 0x90, 0x90]}
+                        ]
+                    },
+                    {
+                        name: "Location Server Bypass",
+                        patches: [
+                            {offset: 0x66E712, off: [0x75, 0x1E], on: [0x90, 0x90]},
+                            {offset: 0x6F8570, off: [0x75, 0x1E], on: [0x90, 0x90]}
+                        ],
+                    },
+                    {
+                        name: "Ram folder to game root folder",
+                        patches: [
+                            {offset: 0x668379, off: [0x0F, 0x85, 0xD7], on: [0xE9, 0xD8, 0x00]},
+                        ],
+                    },
+                ]),
+                new Patcher("diva.exe", "6.00.00", [
+                    {
+                        name: "DHCP Patch",
+                        patches: [
+                            {offset: 0x253460, off: [0x40, 0x53, 0x48, 0x83, 0xEC], on: [0xC3, 0x53, 0x48, 0x83, 0xEC]},
+                            {offset: 0x379960, off: [0x40, 0x53, 0x48, 0x83, 0xEC, 0x20], on: [0xB0, 0x01, 0xC3, 0x90, 0x90, 0x90]}
+                        ]
+                    },
+                    {
+                        name: "Location Server Bypass",
+                        patches: [
+                            {offset: 0x64E282, off: [0x75, 0x1E], on: [0x90, 0x90]},
+                        ],
+                    },
+                    {
+                        name: "Ram folder to game root folder",
+                        patches: [
+                            {offset: 0x64C791, off: [0x0F, 0x85, 0x21, 0x03, 0x00], on: [0xE9, 0x22, 0x03, 0x00, 0x00]},
+                        ],
+                    },
+                ]),
+                new Patcher("diva.exe", "5.00.02", [
+                    {
+                        name: "DHCP Patch",
+                        patches: [
+                            {offset: 0x535F60, off: [0x40, 0x53, 0x48, 0x83, 0xEC, 0x20], on: [0xB0, 0x01, 0xC3, 0x90, 0x90, 0x90]}
+                        ]
+                    },
+                    {
+                        name: "Location Server Bypass",
+                        patches: [
+                            {offset: 0x54C542, off: [0x75, 0x1E], on: [0x90, 0x90]},
+                            {offset: 0x6D9D5B, off: [0x75, 0x1E], on: [0x90, 0x90]},
+                            {offset: 0x7250ED, off: [0x75, 0x1E], on: [0x90, 0x90]}
+                        ],
+                    },
+                    {
+                        name: "Ram folder to game root folder",
+                        patches: [
+                            {offset: 0x5459D9, off: [0x0F, 0x85, 0xD7], on: [0xE9, 0xD8, 0x00]},
+                            {offset: 0x54AA41, off: [0x0F, 0x85, 0x21, 0x03, 0x00], on: [0xE9, 0x22, 0x03, 0x00, 0x00]}
+                        ],
+                    },
+                ]),
+                new Patcher("diva.exe", "4.10.00", [
+                    {
+                        name: "DHCP Patch",
+                        patches: [
+                            {offset: 0x26CD00, off: [0x40, 0x53, 0x48, 0x83, 0xEC, 0x20], on: [0xB0, 0x01, 0xC3, 0x90, 0x90, 0x90]}
+                        ]
+                    },
+                    {
+                        name: "Location Server Bypass",
+                        patches: [
+                            {offset: 0x534D22, off: [0x75, 0x1E], on: [0x90, 0x90]},
+                            {offset: 0x70191D, off: [0x75, 0x1E], on: [0x90, 0x90]}
+                        ],
+                    },
+                    {
+                        name: "Ram folder to game root folder",
+                        patches: [
+                            {offset: 0x52E2C9, off: [0x0F, 0x85, 0xD7], on: [0xE9, 0xD8, 0x00]},
+                        ],
+                    },
+                ]),
+                new Patcher("diva.exe", "4.00.00", [
+                    {
+                        name: "DHCP Patch",
+                        patches: [
+                            {offset: 0x25BFF0, off: [0x40, 0x53, 0x48, 0x83, 0xEC, 0x20], on: [0xB0, 0x01, 0xC3, 0x90, 0x90, 0x90]}
+                        ]
+                    },
+                    {
+                        name: "Location Server Bypass",
+                        patches: [
+                            {offset: 0x4E8E52, off: [0x75, 0x1E], on: [0x90, 0x90]},
+                            {offset: 0x6708CB, off: [0x75, 0x1E], on: [0x90, 0x90]}
+                        ],
+                    },
+                    {
+                        name: "Ram folder to game root folder",
+                        patches: [
+                            {offset: 0x4E2409, off: [0x0F, 0x85, 0xD7], on: [0xE9, 0xD8, 0x00]},
+                        ],
+                    },
+                ]),
+              ]);
+          });
+        </script>
+    </head>
+    <body>
+        <h1>Hatsune Miku: Project DIVA Arcade Future Tone Modder</h1>
+    </body>
+</html>
+

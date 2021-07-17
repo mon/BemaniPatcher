@@ -180,6 +180,172 @@
                         ],
                     },
                 ]),
+              //LDJ-2021070500
+                new Patcher("bm2dx.dll", "2021-07-05", [
+                    {
+                        name: "SSE4.2 Fix",
+                        patches: [
+                            { offset: 0x28C714, off: [0xF3, 0x45, 0x0F], on: [0x90, 0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        name: "Skip Camera Error",
+                        patches: [{ offset: 0x752CBB, off: [0x84], on: [0x81] }],
+                    },
+                    {
+                        name: "Force 120hz timing and adapter mode in LDJ (Experimental)",
+                        patches: [
+                            { offset: 0x45ECE3, off: [0x75], on: [0xeb] },
+                            { offset: 0x8537FE, off: [0x3c], on: [0x78] },
+                            { offset: 0x8539E9, off: [0x74, 0x03], on: [0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        name: "Shim Lightning Mode IO (for spicetools)",
+                        patches: [
+                            {
+                                offset: 0x7BB07E,
+                                off: [0x0f, 0x84, 0x8d, 0x00, 0x00, 0x00],
+                                on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90],
+                            },
+                            { offset: 0x86DDA4, off: [0x0f, 0x84], on: [0x90, 0xe9] },
+                            { offset: 0x86E510, off: [0x9c, 0xe4], on: [0x3c, 0xdd] },
+                        ],
+                    },
+                    {
+                        name: "Bypass lightning monitor error",
+                        patches: [
+                            { offset: 0x745A31, off: [0x0f, 0x85], on: [0x90, 0xe9] },
+                        ],
+                    },
+                    {
+                        name: "Force LDJ software video decoder for all boot modes",
+                        patches: [
+                            {
+                                offset: 0x7BB07A,
+                                off: [0x02],
+                                on: [0x05],
+                            },
+                        ],
+                    },
+                    {
+                        name: "Unscramble touch screen keypad in TDJ",
+                        patches: [
+                            {
+                                offset: 0x7FA095,
+                                off: [0x4d, 0x03, 0xc8, 0x49, 0xf7, 0xf1],
+                                on: [0xba, 0x0c, 0x00, 0x00, 0x00, 0x90],
+                            },
+                        ],
+                    },
+                    {
+                        name: "1P Premium Free",
+                        patches: [
+                            {
+                                offset: 0x6FA329,
+                                off: [0x75],
+                                on: [0xEB],
+                            },
+                        ],
+                    },
+                    {
+                        name: "2P Premium Free",
+                        patches: [
+                            {
+                                offset: 0x6FA540,
+                                off: [0x74, 0x56],
+                                on: [0x90, 0x90],
+                            },
+                            { offset: 0x6FA52A, off: [0x74, 0x6c], on: [0x90, 0x90] },
+
+                        ],
+                    },
+					{
+                        name: "2P Force ARENA",
+                        patches: [
+                            { offset: 0x6FA555, off: [0x75, 0x41], on: [0x90, 0x90] },
+
+                        ],
+                    },
+					{
+                        name: "Force BPL Battle",
+                        patches: [
+                            { offset: 0x6FA57A, off: [0x74, 0x1c], on: [0x90, 0x90] },
+
+                        ],
+                    },
+                    {
+                        name: "Premium Free Timer Freeze",
+                        tooltip:
+                            "Freezes the timer in PREMIUM FREE mode, allowing unlimited play until exit",
+                        patches: [{ offset: 0x4CB5ED, off: [0x7e], on: [0xeb] }],
+                    },
+                    {
+                        name: "Unlock All Songs",
+                        patches: [
+                            { offset: 0x4C6108, off: [0x75, 0x2d], on: [0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        name: "Unlock All 12s",
+                        patches: [
+                            {
+                                offset: 0x4C5EA0,
+                                off: [0x83, 0xff, 0x03, 0x74, 0x05, 0x83, 0xff, 0x08],
+                                on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90],
+                            },
+                        ],
+                    },
+                    {
+                        name: "Skip Decide Screen",
+                        patches: [
+                            {
+                                offset: 0x3CD510,
+                                off: [0xe8, 0x6b, 0x00, 0x00, 0x00],
+                                on: [0x90, 0x90, 0x90, 0x90, 0x90],
+                            },
+                        ],
+                    },
+                    {
+                        name: "CS-style song start delay",
+                        tooltip : "Holding Start will pause the song at the beginning until you release it",
+                        patches: [
+                            {
+                                offset: 0x72D503,
+                                off: [0x7d, 0x4d],
+                                on: [0x90, 0x90],
+                            },
+                        ],
+                    },
+                    {
+                        name: "Cursor Lock",
+                        patches: [
+                            { offset: 0x701CFF, off: [0x74, 0x1f], on: [0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        name: "Quick Retry",
+                        patches: [
+                            { offset: 0x4A80BF, off: [0x32, 0xC0], on: [0xB0, 0x01] },
+                        ],
+                    },
+                    {
+                        name: "Standard/Menu Timer Freeze",
+                        patches: [{ offset: 0x779AA7, off: [0x74], on: [0xeb] }],
+                    },
+                    {
+                        name: "WASAPI Shared Mode (with 44100Hz)",
+                        patches: [{ offset: 0x28C801, off: [0x01], on: [0x00] }],
+                    },
+                    {
+                        name: "Always show FAST/SLOW total",
+                        patches: [
+                            { offset: 0x717CA3, off: [0x74], on: [0x75] },
+                            { offset: 0x717EC0, off: [0x74], on: [0x75] },
+                        ],
+                    },
+
+                ]),
             ]);
         });
     </script>

@@ -9,10 +9,9 @@
     <script type="text/javascript" src="js/FileSaver.min.js"></script>
     <script type="text/javascript" src="js/dllpatcher.js"></script>
     <script type="text/javascript">
-
-    // This is a compilation of a bunch of long lost hex edits from various Discord servers and forums for convenience. None of these are mine. - Erodynamics
       window.addEventListener("load", function () {
         new PatchContainer([
+          // This is a compilation of a bunch of long lost hex edits from various Discord servers and forums for convenience. None of these are mine. - Erodynamics
           new Patcher("soundvoltex.dll", "2015-11-16 (Season 1)", [
             {
               name: "All songs unlocked",
@@ -49,8 +48,7 @@
             },
             {
               name: "Prevent Windows volume change on boot",
-              tooltip:
-                "If your volume gets forced to max, turn this on.",
+              tooltip: "If your volume gets forced to max, turn this on.",
               patches: [
                 {
                   offset: 0x1f0e5a,
@@ -93,6 +91,8 @@
               ],
             },
           ]),
+
+          // all patches made by DJH unless specified otherwise
           new Patcher("soundvoltex.dll", "2016-12-12 (Season 2)", [
             {
               name: "All songs unlocked",

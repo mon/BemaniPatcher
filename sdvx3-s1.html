@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SDVX III Season 1 DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- don't hate -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/FileSaver.min.js"></script>
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+    // This is a compilation of a bunch of long lost hex edits from various websites and forums. None of these are mine. - Erodynamics
+      window.addEventListener("load", function () {
+        new PatchContainer([
+          new Patcher("soundvoltex.dll", "2015-11-16", [
+            {
+              name: "Unlock all difficulties",
+              tooltip: "All difficulties are available.",
+              patches: [{
+                offset: 0x12CD65, 
+                off: [0xE8, 0x56, 0x8B, 0x01], 
+                on: [0xB8, 0x0B, 0x00, 0x00]
+              }]
+            },
+            {
+              name: "Force Event Mode", 
+              tooltip: "Forces Event Mode on bootup (Free play, infinite menu time).",
+              patches: [{ 
+                offset: 0x15B3E2, 
+                off: [0x00], 
+                on: [0x01] 
+              }],
+            },
+            {
+              name: "No Fail",
+              tooltip: "All songs are safe, session does not end upon TRACK CRASH.",
+              patches: [{ 
+                offset: 0x1424D6, 
+                off: [0x32, 0xC0], 
+                on: [0xB0, 0x01]
+              }]
+            },
+            {
+              name: "Keep volume in between sessions",
+              tooltip: "The game will not reset its volume upon startup and will keep the volume that was set in the last session by the Windows Volume Mixer.",
+              patches: [
+                {offset: 0x1F0E5A, 
+                  off: [0xE8, 0x21, 0x03, 0x00, 0x00], 
+                  on: [0x90, 0x90, 0x90, 0x90, 0x90]
+                }
+              ]
+            },
+            {
+              name: "Premium Free",
+              tooltip: "Game will loop between Track 2 and Final Track. Keep in mind that story progress, currency and settings will not save when this patch is applied.",
+              patches: [
+                {
+                  offset: 0x17CA4F, 
+                  off: [0x00], 
+                  on: [0x02]
+                },
+                {
+                  offset: 0x17CAD6, 
+                  off: [0x8B, 0x83, 0x78, 0x0A, 0x00, 0x00], 
+                  on:[0xE9, 0x6F, 0xD1, 0x0C, 0x90]
+                },
+                {
+                  offset: 0x249C4A, 
+                  off: [0x00, 0x00, 0x00, 0x00], 
+                  on: [0xC7, 0x83, 0x78, 0x0A]
+                },
+                {
+                  offset: 0x249C50, 
+                  off: [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00], 
+                  on: [0x01, 0x00, 0x00, 0x00, 0x8B, 0x83, 0x78, 0x0A, 0x00, 0x00, 0xE9, 0x7D, 0x2E, 0xF3, 0xFF, 0x00]
+                }
+              ]
+            }
+          ])
+        ]);
+      });
+    </script>
+  </head>
+  <body>
+    <h1>SDVX III S1 DLL Modder</h1>
+  </body>
+</html>

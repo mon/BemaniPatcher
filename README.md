@@ -9,6 +9,12 @@ Live version hosted [on my website](https://mon.im/bemanipatcher/).
 These days, I do not create the patches. Everything is community submitted.
 If you would like new hex edits, make them yourself and make a pull request!
 
+## Patch rules
+- Rhythm games only. Bombergirl is the one exception, it's Konami anyway.
+- No autoplay patches
+  - It is far too easy to accidentally get people banned from their networks
+  - It's mainly used to upload autoplays to YouTube, which is not something I want to be involved with
+
 ## Submitting a new game
 Here is your checklist:
 - Add the new game html, it is easiest to copy an existing game and modify it.

@@ -9,12 +9,13 @@
     <script type="text/javascript" src="js/FileSaver.min.js"></script>
     <script type="text/javascript" src="js/dllpatcher.js"></script>
     <script type="text/javascript">
+
+    // This is a compilation of a bunch of long lost hex edits from various Discord servers and forums for convenience. None of these are mine. - Erodynamics
       window.addEventListener("load", function () {
         new PatchContainer([
           new Patcher("soundvoltex.dll", "2015-11-16 (Season 1)", [
             {
-              name: "Unlock all difficulties",
-              tooltip: "All difficulties are available.",
+              name: "All songs unlocked",
               patches: [
                 {
                   offset: 0x12cd65,
@@ -24,7 +25,7 @@
               ],
             },
             {
-              name: "Force Event Mode",
+              name: "Boot to Event Mode",
               tooltip:
                 "Forces Event Mode on bootup (Free play, infinite menu time).",
               patches: [
@@ -36,9 +37,8 @@
               ],
             },
             {
-              name: "No Fail",
-              tooltip:
-                "All songs are safe, session does not end upon TRACK CRASH.",
+              name: 'All songs "Safe"',
+              tooltip: "Failing early won't drop you out of your session",
               patches: [
                 {
                   offset: 0x1424d6,
@@ -48,9 +48,9 @@
               ],
             },
             {
-              name: "Keep volume in between sessions",
+              name: "Prevent Windows volume change on boot",
               tooltip:
-                "The game will not reset its volume upon startup and will keep the volume that was set in the last session by the Windows Volume Mixer.",
+                "If your volume gets forced to max, turn this on.",
               patches: [
                 {
                   offset: 0x1f0e5a,
@@ -60,9 +60,9 @@
               ],
             },
             {
-              name: "Premium Free",
+              name: "PFree (Unlimited plays)",
               tooltip:
-                "Game will loop between Track 2 and Final Track. Keep in mind that story progress, currency and settings will not save when this patch is applied.",
+                "Song clears/scores only, mission progress and custom settings do not save",
               patches: [
                 {
                   offset: 0x17ca4f,

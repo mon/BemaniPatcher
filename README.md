@@ -10,6 +10,7 @@ These days, I do not create the patches. Everything is community submitted.
 If you would like new hex edits, make them yourself and make a pull request!
 
 ## Patch rules
+- *New*: No n-0 newer than 1 year ago. [Why?](docs/why_no_n_minus_zero.md)
 - Rhythm games only. Bombergirl is the one exception, it's Konami anyway.
 - No autoplay patches
   - It is far too easy to accidentally get people banned from their networks
@@ -34,8 +35,3 @@ multiple commits, I will squash and merge.
 
 Please do not worry about submitting "bad" PRs. If there is something wrong, I
 will tell you how to fix it or I will fix it myself before merging.
-
-Submitting a PR for an n-0 game is frowned upon in the general community and
-might make you disliked. The BemaniPatcher repository does not judge, and **I
-will merge n-0 patches**, but please be mindful that your submission may have
-unintended consequences for you.

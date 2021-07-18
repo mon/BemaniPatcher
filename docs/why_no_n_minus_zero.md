@@ -38,7 +38,7 @@ for some moral soapboxing as to why you should reconsider public n-0.
 
 **Remember: this is my own opinion.** I like to think it's a fairly common one. You are welcome to disagree with me, but it won't change the policy.
 
-Why the year rule? When a new game comes out, why is the n-0 from yesterday
+Why the year rule? When a new game comes out, why is the n-1 from yesterday
 suddenly OK? There are two important aspects to my reasoning: Acting in good
 faith, and preservation.
 

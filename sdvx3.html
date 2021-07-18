@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SDVX III DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- don't hate -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/FileSaver.min.js"></script>
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+      window.addEventListener("load", function () {
+        new PatchContainer([
+          // This is a compilation of a bunch of long lost hex edits from various Discord servers and forums for convenience. None of these are mine. - Erodynamics
+          new Patcher("soundvoltex.dll", "2015-11-16 (Season 1)", [
+            {
+              name: "All songs unlocked",
+              patches: [
+                {
+                  offset: 0x12cd65,
+                  off: [0xe8, 0x56, 0x8b, 0x01],
+                  on: [0xb8, 0x0b, 0x00, 0x00],
+                },
+              ],
+            },
+            {
+              name: "Boot to Event Mode",
+              tooltip:
+                "Forces Event Mode on bootup (Free play, infinite menu time).",
+              patches: [
+                {
+                  offset: 0x15b3e2,
+                  off: [0x00],
+                  on: [0x01],
+                },
+              ],
+            },
+            {
+              name: 'All songs "Safe"',
+              tooltip: "Failing early won't drop you out of your session",
+              patches: [
+                {
+                  offset: 0x1424d6,
+                  off: [0x32, 0xc0],
+                  on: [0xb0, 0x01],
+                },
+              ],
+            },
+            {
+              name: "Prevent Windows volume change on boot",
+              tooltip: "If your volume gets forced to max, turn this on.",
+              patches: [
+                {
+                  offset: 0x1f0e5a,
+                  off: [0xe8, 0x21, 0x03, 0x00, 0x00],
+                  on: [0x90, 0x90, 0x90, 0x90, 0x90],
+                },
+              ],
+            },
+            {
+              name: "PFree (Unlimited plays)",
+              tooltip:
+                "Song clears/scores only, mission progress and custom settings do not save",
+              patches: [
+                {
+                  offset: 0x17ca4f,
+                  off: [0x00],
+                  on: [0x02],
+                },
+                {
+                  offset: 0x17cad6,
+                  off: [0x8b, 0x83, 0x78, 0x0a, 0x00, 0x00],
+                  on: [0xe9, 0x6f, 0xd1, 0x0c, 0x00, 0x90],
+                },
+                {
+                  offset: 0x249c4a,
+                  off: [0x00, 0x00, 0x00, 0x00],
+                  on: [0xc7, 0x83, 0x78, 0x0a],
+                },
+                {
+                  offset: 0x249c50,
+                  off: [
+                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                  ],
+                  on: [
+                    0x01, 0x00, 0x00, 0x00, 0x8b, 0x83, 0x78, 0x0a, 0x00, 0x00,
+                    0xe9, 0x7d, 0x2e, 0xf3, 0xff, 0x00,
+                  ],
+                },
+              ],
+            },
+          ]),
+
+          // all patches made by DJH unless specified otherwise
+          new Patcher("soundvoltex.dll", "2016-12-12 (Season 2)", [
+            {
+              name: "All songs unlocked",
+              patches: [
+                {
+                  offset: 0x13af9b,
+                  off: [0xe8, 0xf0, 0xe2, 0x01],
+                  on: [0xb8, 0x0b, 0x00, 0x00],
+                },
+                // Augmented by mon to work offline too
+                {
+                  offset: 0x187aef,
+                  off: [0x8b, 0x44, 0x24, 0x1c, 0xe8, 0x28, 0xee, 0xff, 0xff],
+                  on: [0xb8, 0x03, 0x00, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90],
+                },
+              ],
+            },
+            {
+              name: 'All songs "Safe"',
+              tooltip: "Failing early won't drop you out of your session",
+              patches: [
+                { offset: 0x1554f7, off: [0x32, 0xc0], on: [0xb0, 0x01] },
+              ],
+            },
+            {
+              // Created by mon
+              name: 'No "Safe" banner on jackets',
+              tooltip: "Remove visual clutter",
+              patches: [{ offset: 0x28f4ac, off: [0x73], on: [0x00] }],
+            },
+            {
+              name: "Prevent Windows volume change on boot",
+              tooltip: "If your volume gets forced to max, turn this on",
+              patches: [
+                {
+                  offset: 0x1f556a,
+                  off: [0xe8, 0x21, 0x03, 0x00, 0x00],
+                  on: [0x90, 0x90, 0x90, 0x90, 0x90],
+                },
+              ],
+            },
+            {
+              name: "Boot to Event Mode",
+              patches: [{ offset: 0x170092, off: [0x00], on: [0x01] }],
+            },
+            {
+              // created by zini
+              name: "Disable EVENT MODE/FREE PLAY text",
+              patches: [
+                { offset: 0x0aa910, off: [0xe8, 0x0b], on: [0xeb, 0x03] },
+              ],
+            },
+            {
+              // created by zini
+              name: "Replace EVENT MODE/FREE PLAY text with player name",
+              patches: [
+                {
+                  offset: 0xaa884,
+                  off: [0x4c, 0x10, 0x29, 0x10],
+                  on: [0xb9, 0x0a, 0x15, 0x18],
+                },
+                {
+                  offset: 0xaa890,
+                  off: [0x58, 0x10, 0x29, 0x10],
+                  on: [0xb9, 0x0a, 0x15, 0x18],
+                },
+              ],
+            },
+            {
+              // Ported from the S1 PFree by mon
+              name: "PFree (Unlimited plays)",
+              tooltip:
+                "Song clears/scores only, mission progress and custom settings do not save",
+              patches: [
+                { offset: 0x196bdf, off: [0x00], on: [0x02] },
+                {
+                  offset: 0x196c66,
+                  off: [
+                    0x8b, 0x83, 0x78, 0x0a, 0x00, 0x00, 0x8d, 0x48, 0x01, 0x83,
+                    0xf9, 0x03, 0x56, 0x57, 0x7f, 0x52,
+                  ],
+                  on: [
+                    0xb8, 0x01, 0x00, 0x00, 0x00, 0x89, 0x83, 0x78, 0x0a, 0x00,
+                    0x00, 0x90, 0x56, 0x57, 0x90, 0x90,
+                  ],
+                },
+              ],
+            },
+            {
+              // thanks Element4521
+              name: "Force Alternative Rate System",
+              tooltip:
+                "When EXCESSIVE GAUGE is depleted, you are switched to EFFECTIVE RATE",
+              patches: [{ offset: 0x1551d3, off: [0x74], on: [0xeb] }],
+            },
+            {
+              // 12 hours of mon
+              name: "Levels up to 99",
+              tooltip:
+                "Use with modified music_db.xml for SDVX IV difficulties",
+              patches: [
+                { offset: 0x188e46, off: [0x74, 0x03], on: [0x90, 0x90] },
+                { offset: 0x1889c4, off: [0x0f], on: [0x62] },
+                { offset: 0x186bd7, off: [0x10], on: [0x63] },
+                { offset: 0x157f08, off: [0x7f, 0x3a], on: [0x90, 0x90] },
+              ],
+            },
+            {
+              // Created by mon
+              name: "Level folders from 5-20",
+              tooltip: "Default 1-16. Requires 'Levels up to 99'",
+              patches: [
+                { offset: 0x9d082, off: [0x07], on: [0x03] }, // offset
+                { offset: 0x9d09a, off: [0x10], on: [0x14] }, // bounds
+                { offset: 0xa2ffe, off: [0x07], on: [0x03] }, // clear calcs offset
+                // strings
+                { offset: 0x285e1c, off: [0x31, 0x36], on: [0x32, 0x30] },
+                { offset: 0x285e29, off: [0x35], on: [0x39] },
+                { offset: 0x285e35, off: [0x34], on: [0x38] },
+                { offset: 0x285e41, off: [0x33], on: [0x37] },
+                { offset: 0x285e4d, off: [0x32], on: [0x36] },
+                { offset: 0x285e59, off: [0x31], on: [0x35] },
+                { offset: 0x285e65, off: [0x30], on: [0x34] },
+                { offset: 0x285e70, off: [0x30, 0x39], on: [0x31, 0x33] },
+                { offset: 0x285e7c, off: [0x30, 0x38], on: [0x31, 0x32] },
+                { offset: 0x285e88, off: [0x30, 0x37], on: [0x31, 0x31] },
+                { offset: 0x285e94, off: [0x30, 0x36], on: [0x31, 0x30] },
+                { offset: 0x285ea1, off: [0x35], on: [0x39] },
+                { offset: 0x285ead, off: [0x34], on: [0x38] },
+                { offset: 0x285eb9, off: [0x33], on: [0x37] },
+                { offset: 0x285ec5, off: [0x32], on: [0x36] },
+                { offset: 0x285ed1, off: [0x31], on: [0x35] },
+              ],
+            },
+            {
+              // Created by mon
+              name: "Hispeed values from 0.1 to 20.0",
+              tooltip: "Default 0.5-7.0",
+              patches: [
+                {
+                  offset: 0x1193c5,
+                  off: [0xdd, 0x05, 0xf8, 0x05, 0x28, 0x10], // load float 20.0 instead of double 7.0
+                  on: [0xd9, 0x05, 0xa0, 0x07, 0x28, 0x10],
+                },
+                {
+                  offset: 0x1193de,
+                  off: [0xdd, 0x05, 0x00, 0x06, 0x28, 0x10], // load float 0.1 instead of double 0.5
+                  on: [0xd9, 0x05, 0xe4, 0x04, 0x28, 0x10],
+                },
+                {
+                  offset: 0x118cab,
+                  off: [0xdd, 0x05, 0xf8, 0x05, 0x28, 0x10], // and again for red # restore
+                  on: [0xd9, 0x05, 0xa0, 0x07, 0x28, 0x10],
+                },
+                {
+                  offset: 0x118ca5,
+                  off: [0xdd, 0x05, 0x00, 0x06, 0x28, 0x10],
+                  on: [0xd9, 0x05, 0xe4, 0x04, 0x28, 0x10],
+                },
+              ],
+            },
+            {
+              type: "union",
+              name: "Score",
+              offset: 0x1fbd9,
+              patches: [
+                {
+                  name: "Default",
+                  tooltip: "NEAR+CRITICAL add to score from 0",
+                  patch: [
+                    0x8b, 0x85, 0x50, 0x01, 0x00, 0x00, 0x8b, 0x9d, 0x48, 0x01,
+                    0x00, 0x00, 0x8b, 0x8d, 0x54, 0x01, 0x00, 0x00, 0x8b, 0x95,
+                    0x4c, 0x01, 0x00, 0x00, 0x56, 0x57, 0x3b, 0xc3, 0x75, 0x08,
+                    0x3b, 0xca, 0x0f, 0x84, 0x86, 0x00, 0x00, 0x00, 0x8b, 0xf8,
+                    0x81, 0xc7, 0x7c, 0x9f, 0x02, 0x00, 0x8b, 0xf1, 0x83, 0xd6,
+                    0x00, 0x3b, 0xd6, 0x7c, 0x1c, 0x7f, 0x04, 0x3b, 0xdf, 0x76,
+                    0x16, 0x05, 0x26, 0x43, 0x00, 0x00, 0x83, 0xd1, 0x00, 0x89,
+                    0x85, 0x50, 0x01, 0x00, 0x00, 0x89, 0x8d, 0x54, 0x01, 0x00,
+                    0x00, 0xeb, 0x59, 0x8b, 0xf8, 0x81, 0xc7, 0x26, 0x43, 0x00,
+                    0x00, 0x8b, 0xf1, 0x83, 0xd6, 0x00, 0x3b, 0xd6, 0x7c, 0x1c,
+                    0x7f, 0x04, 0x3b, 0xdf, 0x76, 0x16, 0x05, 0x62, 0x16, 0x00,
+                    0x00, 0x83, 0xd1, 0x00, 0x89, 0x85, 0x50,
+                  ],
+                },
+                {
+                  // Created by mon
+                  name: "Subtractive",
+                  tooltip: "NEAR+ERROR subtract score from 10,000,000",
+                  patch: [
+                    0x56, 0x57, 0x52, 0x51, 0xbe, 0x90, 0x71, 0x7c, 0x18, 0x8b,
+                    0x46, 0x5c, 0x6a, 0x00, 0x99, 0x6a, 0x02, 0x52, 0x50, 0xe8,
+                    0x3f, 0xc4, 0x21, 0x00, 0x8b, 0xc8, 0x8b, 0x46, 0x58, 0x8b,
+                    0xfa, 0x99, 0x6a, 0x00, 0x01, 0xc1, 0x11, 0xd7, 0x68, 0x80,
+                    0x96, 0x98, 0x00, 0x57, 0x51, 0xe8, 0x25, 0xc4, 0x21, 0x00,
+                    0x8b, 0xfa, 0x8b, 0x56, 0x18, 0x8b, 0xc8, 0x8b, 0x82, 0x80,
+                    0x2c, 0x00, 0x00, 0x01, 0xc0, 0x99, 0x52, 0x50, 0x57, 0x51,
+                    0xe8, 0xac, 0x36, 0x21, 0x00, 0xb9, 0x80, 0x96, 0x98, 0x00,
+                    0xbf, 0x00, 0x00, 0x00, 0x00, 0x29, 0xc1, 0x19, 0xd7, 0x8b,
+                    0xdf, 0x8b, 0xf9, 0x59, 0x5a, 0x8b, 0x45, 0x08, 0x8b, 0x40,
+                    0x04, 0xeb, 0x57,
+                  ],
+                },
+                {
+                  // Created by mon
+                  name: "Average",
+                  tooltip: "Osu style % display",
+                  patch: [
+                    0x56, 0x57, 0x52, 0x51, 0xbe, 0x90, 0x71, 0x7c, 0x18, 0x8b,
+                    0x46, 0x54, 0x99, 0x6a, 0x00, 0x6a, 0x02, 0x52, 0x50, 0xe8,
+                    0x3f, 0xc4, 0x21, 0x00, 0x8b, 0xc8, 0x8b, 0xfa, 0x8b, 0x46,
+                    0x58, 0x99, 0x01, 0xc1, 0x11, 0xd7, 0x6a, 0x00, 0x68, 0x80,
+                    0x96, 0x98, 0x00, 0x57, 0x51, 0xe8, 0x25, 0xc4, 0x21, 0x00,
+                    0x8b, 0xfa, 0x8b, 0xc8, 0x8b, 0x46, 0x54, 0x8b, 0x56, 0x58,
+                    0x01, 0xd0, 0x8b, 0x56, 0x5c, 0x01, 0xd0, 0x01, 0xc0, 0x99,
+                    0x83, 0xf8, 0x00, 0x0f, 0x85, 0x0f, 0x00, 0x00, 0x00, 0xbf,
+                    0x00, 0x00, 0x00, 0x00, 0xbb, 0x00, 0x00, 0x00, 0x00, 0xe9,
+                    0x0d, 0x00, 0x00, 0x00, 0x52, 0x50, 0x57, 0x51, 0xe8, 0x90,
+                    0x36, 0x21, 0x00, 0x8b, 0xf8, 0x8b, 0xda, 0x59, 0x5a, 0x8b,
+                    0x45, 0x08, 0x8b, 0x40, 0x04, 0xeb, 0x49,
+                  ],
+                },
+              ],
+            },
+          ]),
+        ]);
+      });
+    </script>
+  </head>
+  <body>
+    <h1>SDVX III DLL Modder</h1>
+  </body>
+</html>

@@ -25,6 +25,15 @@
                         ],
                     },
                     {
+                        name: "Patch game to run at 144fps (Breaks some Animations)",
+                        patches: [
+                            {offset: 0x9A5030, off: [0x74, 0x5A, 0x05, 0x41], on: [0xE4, 0x38, 0xDE, 0x40]},
+                            {offset: 0x9EBEC4, off: [0x7F, 0xA4, 0x88, 0x3C], on: [0x39, 0x8E, 0x63, 0x3C]},
+                            {offset: 0x9EC07E, off: [0x5E, 0x40], on: [0x62, 0x40]},
+                            {offset: 0x9EC142, off: [0xF0, 0x42], on: [0x10, 0x43]},
+                        ],
+                    },
+                    {
                         name: "Patch Borderless Fullscreen Window to 2560x1440",
                         patches: [
                             {offset: 0x223F2B, off: [0x80, 0x07], on: [0x00, 0x0A]},

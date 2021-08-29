@@ -19,6 +19,12 @@
                         ]
                     },
                     {
+                        name: "Shared audio mode",
+                        patches: [
+                            {offset: 0x551577, off: [0x74], on: [0xEB]},
+                        ],
+                    },
+                    {
                         name: "Disable V-Sync",
                         patches: [
                             {offset: 0x3D5589, off: [0x8B, 0x96, 0x80, 0x00, 0x00], on: [0xBA, 0x00, 0x00, 0x00, 0x00]},

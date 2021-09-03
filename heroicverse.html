@@ -241,8 +241,8 @@
               ]
             },
             {
-              name: 'Louder audio on TDJ',
-              tooltip : "Significantly increase the volume for TDJ.",
+              name: 'Increase game volume',
+              tooltip : "Ignore the in-game volume settings and use the maximum possible volume level. Especially helpful for TDJ which tends to be very quiet.",
               patches: [
                 {offset: 0x63F2E5, off: [0xFF, 0x90, 0x98, 0x00, 0x00, 0x00], on:[0x90, 0x90, 0x90, 0x90, 0x90, 0x90]},
               ]

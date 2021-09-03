@@ -239,6 +239,13 @@
               patches: [
                 {offset: 0x88D1C0, off: [0x10], on:[0x00]},
               ]
+            },
+            {
+              name: 'Louder audio on TDJ',
+              tooltip : "Significantly increase the volume for TDJ.",
+              patches: [
+                {offset: 0x63F2E5, off: [0xFF, 0x90, 0x98, 0x00, 0x00, 0x00], on:[0x90, 0x90, 0x90, 0x90, 0x90, 0x90]},
+              ]
             }
           ]),
         ]);

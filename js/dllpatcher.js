@@ -112,6 +112,7 @@ class UnionPatch {
         this.name = options.name;
         this.offset = options.offset;
         this.patches = options.patches;
+        this.tooltip = options.tooltip;
     }
 
     createUI(parent) {
@@ -119,7 +120,12 @@ class UnionPatch {
         var radio_id = createID();
 
         var container = $("<div>", {"class": "patch-union"});
-        container.append('<span class="patch-union-title">' + this.name + ':</span>');
+        container.append('<span class="patch-union-title">' + this.name + ':');
+        if(this.tooltip) {
+            container.append('<div class="tooltip">' + this.tooltip + '</div>');
+        }
+        container.append('</span>');
+
         for(var i = 0; i < this.patches.length; i++) {
             var patch = this.patches[i];
             var id = createID();
@@ -171,6 +177,81 @@ class UnionPatch {
             }
         }
         return null;
+    }
+}
+
+// Each unique kind of patch should have createUI, validatePatch, applyPatch,
+// updateUI
+class NumberPatch {
+    constructor(options) {
+        this.name = options.name;
+        this.tooltip = options.tooltip;
+
+        this.offset = options.offset;
+        this.size = options.size;
+        this.min = options.min;
+        this.max = options.max;
+    }
+
+    createUI(parent) {
+        var id = createID();
+        var label = this.name;
+        var patch = $('<div>', {'class': 'patch'});
+
+        patch.append('<label for="' + id + '">' + label + ': </label>');
+
+        var minmax = ' ';
+        if (this.min !== null) {
+            minmax += 'min="' + this.min + '" ';
+        }
+        if (this.max) {
+            minmax += 'max="' + this.max + '" ';
+        }
+
+        this.number = $('<input type="number"' + minmax + 'id="' + id + '">')[0];
+        patch.append(this.number);
+
+
+        if (this.tooltip) {
+            patch.append('<div class="tooltip">' + this.tooltip + '</div>');
+        }
+        parent.append(patch)
+
+    }
+
+    updateUI(file) {
+        // This converts bytes from the file to big endian by shifting each
+        // byte `i` bytes to the left then doing a bitwise OR to add the less
+        // significant bytes that were gathered at earlier iterations of loop
+        var val = 0;
+        for (var i = 0; i < this.size; i++) {
+            val = (file[this.offset + i] << (8 * i)) | val;
+        }
+
+        this.number.value = val;
+    }
+
+    validatePatch(file) {
+        return;
+    }
+
+    applyPatch(file) {
+        // Convert user inputted number to little endian
+        const view = new DataView(new ArrayBuffer(this.size * 2));
+        view.setInt32(1, this.number.value, true);
+
+        for (var i = 0; i < this.size; i++) {
+            var val = view.getInt32(1);
+
+            // Shift off less significant bytes
+            val = val >> ((this.size - 1 - i) * 8);
+
+            // Mask off more significant bytes
+            val = val & 0xFF;
+
+            // Write this byte
+            file[this.offset + i] = val;
+        }
     }
 }
 
@@ -362,6 +443,9 @@ class Patcher {
             if(mod.type) {
                 if(mod.type === "union") {
                     this.mods.push(new UnionPatch(mod));
+                }
+                if(mod.type === "number") {
+                    this.mods.push(new NumberPatch(mod));
                 }
             } else { // standard patch
                 this.mods.push(new StandardPatch(mod));

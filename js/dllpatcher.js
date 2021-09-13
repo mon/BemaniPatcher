@@ -103,7 +103,7 @@ class StandardPatch {
     }
 }
 
-class DynamicHexademicalPatch {
+class DynamicHexadecimalPatch {
     constructor(options, mode) {
         this.name = options.name;
         this.patches = options.patches;
@@ -901,10 +901,10 @@ class Patcher {
                     this.mods.push(new DynamicStringPatch(mod, 'all'));
                 }
                 if(mod.type === "dynamicHex") {
-                    this.mods.push(new DynamicHexademicalPatch(mod, 'normal'));
+                    this.mods.push(new DynamicHexadecimalPatch(mod, 'normal'));
                 }
                 if(mod.type === "dynamicHexAll") {
-                    this.mods.push(new DynamicHexademicalPatch(mod, 'all'));
+                    this.mods.push(new DynamicHexadecimalPatch(mod, 'all'));
                 }
             } else { // standard patch
                 this.mods.push(new StandardPatch(mod));

@@ -108,21 +108,20 @@ class DynamicHexadecimalPatch {
         this.name = options.name;
         this.patches = options.patches;
         this.tooltip = options.tooltip;
-        this.ui = $('<div>', {'class' : 'patch'});
         this.mode = mode;
     }
 
     createUI(parent) {
         var id = createID();
         var label = this.name;
-        var patch = this.ui;
+        this.ui = $('<div>', {'class' : 'patch'});
         this.checkbox = $('<input type="checkbox" id="' + id + '">')[0];
-        patch.append(this.checkbox);
-        patch.append('<label for="' + id + '">' + label + '</label>');
+        this.ui.append(this.checkbox);
+        this.ui.append('<label for="' + id + '">' + label + '</label>');
         if(this.tooltip) {
-            patch.append('<div class="tooltip">' + this.tooltip + '</div>');
+            this.ui.append('<div class="tooltip">' + this.tooltip + '</div>');
         }
-        parent.append(patch);
+        parent.append(this.ui);
     }
 
     updateUI(file) {
@@ -336,21 +335,20 @@ class DynamicStringPatch {
         this.name = options.name;
         this.patches = options.patches;
         this.tooltip = options.tooltip;
-        this.ui = $('<div>', {'class' : 'patch'});
         this.mode = mode;
     }
 
     createUI(parent) {
         var id = createID();
         var label = this.name;
-        var patch = this.ui;
+        this.ui = $('<div>', {'class' : 'patch'});
         this.checkbox = $('<input type="checkbox" id="' + id + '">')[0];
-        patch.append(this.checkbox);
-        patch.append('<label for="' + id + '">' + label + '</label>');
+        this.ui.append(this.checkbox);
+        this.ui.append('<label for="' + id + '">' + label + '</label>');
         if(this.tooltip) {
-            patch.append('<div class="tooltip">' + this.tooltip + '</div>');
+            this.ui.append('<div class="tooltip">' + this.tooltip + '</div>');
         }
-        parent.append(patch);
+        parent.append(this.ui);
     }
 
     updateUI(file) {

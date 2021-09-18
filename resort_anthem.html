@@ -38,6 +38,23 @@
                         }
                     ]
                 },
+                {
+                    // by nibs
+                    name: "Skip data errors",
+                    tooltip: "Skips MUSIC DATA, .1, and COURSE DATA errors",
+                    patches: [
+                        { offset: 0x28DBC, off: [0x74], on: [0xEB] }, // MUSIC DATA
+                        { offset: 0x28DFB, off: [0x74], on: [0xEB] }, // .1 DATA
+                        { offset: 0x28E3D, off: [0x74], on: [0xEB] }, // COURSE DATA
+                    ]
+                },
+                {
+                    // by nibs
+                    name: "Shorter Monitor Check",
+                    patches: [
+                        { offset: 0x4DDD6, off: [0x30, 0x0C], on: [0x2C, 0x01] },
+                    ]
+                },
             ]),
         ]);
     });

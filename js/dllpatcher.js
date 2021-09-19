@@ -153,7 +153,7 @@ class DynamicPatch {
         for(var i = 0; i < this.patches.length; i++) {
             if (Array.isArray(this.patches[i].offset)) {
                 this.patches[i].offset.forEach((offset) => {
-                        if (this.target == 'string') {
+                        if (this.target === 'string') {
                             replace(file, offset,
                                 new TextEncoder().encode(featureOn? this.patches[i].on : this.patches[i].off));
                         } else {
@@ -165,7 +165,7 @@ class DynamicPatch {
                     }
                 );
             } else {
-                if (this.target == 'string') {
+                if (this.target === 'string') {
                     replace(file, this.patches[i].offset,
                         new TextEncoder().encode(featureOn? this.patches[i].on : this.patches[i].off));
                 } else {
@@ -191,7 +191,7 @@ class DynamicPatch {
             this.patches[i].offset = offOffset === -1 ? onOffset : offOffset;
             if(offOffset > 0) {
                 if (updateUiFlag) {
-                    if (this.target == 'string') {
+                    if (this.target === 'string') {
                         listUi.append('<li class="patch-off">0x' + offOffset.toString(16) + ' <b>' + patch.off + '</b> will be replaced with <b>'+ patch.on +'</b></li>');
                     } else {
                         listUi.append('<li class="patch-off">0x' + offOffset.toString(16) + ' will be replaced</li>');
@@ -202,7 +202,7 @@ class DynamicPatch {
                 }
             } else if(onOffset > 0) {
                 if (updateUiFlag) {
-                    if (this.target == 'string') {
+                    if (this.target === 'string') {
                         listUi.append('<li class="patch-on">0x' + onOffset.toString(16) + ' <b>' + patch.on + '</b> will be replaced with <b>'+ patch.off +'</b></li>');
                     } else {
                         listUi.append('<li class="patch-on">0x' + onOffset.toString(16) + ' will be replaced</li>');
@@ -258,7 +258,7 @@ class DynamicPatch {
     }
     
     searchPatchOffset(file, search, offset) {
-        if (this.target == 'string') {
+        if (this.target === 'string') {
             var searchBytes = new TextEncoder().encode(search);
         } else {
             var searchBytes = search;
@@ -276,7 +276,7 @@ class DynamicPatch {
             }
         
             for(var i = index, j = 0; j < searchElements.length && i < this.length; i++, j++) {
-                if (this.target != 'string' && searchElements[j] === 'XX') {
+                if (this.target !== 'string' && searchElements[j] === 'XX') {
                     continue;
                 }
                 if(this[i] !== searchElements[j]) {
@@ -310,7 +310,7 @@ class DynamicPatch {
     }
 
     searchPatchOffsetAll(file, search) {
-        if (this.target == 'string') {
+        if (this.target === 'string') {
             var searchBytes = new TextEncoder().encode(search);
         } else {
             var searchBytes = search;
@@ -328,7 +328,7 @@ class DynamicPatch {
             }
         
             for(var i = index, j = 0; j < searchElements.length && i < this.length; i++, j++) {
-                if (this.target != 'string' && searchElements[j] === 'XX') {
+                if (this.target !== 'string' && searchElements[j] === 'XX') {
                     continue;
                 }
                 if(this[i] !== searchElements[j]) {

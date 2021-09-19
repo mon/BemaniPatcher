@@ -103,12 +103,13 @@ class StandardPatch {
     }
 }
 
-class DynamicHexadecimalPatch {
+class DynamicPatch {
     constructor(options, mode) {
         this.name = options.name;
         this.patches = options.patches;
         this.tooltip = options.tooltip;
         this.mode = mode;
+        this.target = options.target;
     }
 
     createUI(parent) {
@@ -152,17 +153,27 @@ class DynamicHexadecimalPatch {
         for(var i = 0; i < this.patches.length; i++) {
             if (Array.isArray(this.patches[i].offset)) {
                 this.patches[i].offset.forEach((offset) => {
-                        this.patches[i].on = this.patches[i].on.map((patch, idx) => patch === 'XX' ? file[offset + idx] : patch);
-                        this.patches[i].off = this.patches[i].off.map((patch, idx) => patch === 'XX' ? file[offset + idx] : patch);
-                        replace(file, offset,
-                            featureOn? this.patches[i].on : this.patches[i].off)
+                        if (this.target == 'string') {
+                            replace(file, offset,
+                                new TextEncoder().encode(featureOn? this.patches[i].on : this.patches[i].off));
+                        } else {
+                            this.patches[i].on = this.patches[i].on.map((patch, idx) => patch === 'XX' ? file[offset + idx] : patch);
+                            this.patches[i].off = this.patches[i].off.map((patch, idx) => patch === 'XX' ? file[offset + idx] : patch);
+                            replace(file, offset,
+                                featureOn? this.patches[i].on : this.patches[i].off)
+                        }
                     }
                 );
             } else {
-                this.patches[i].on = this.patches[i].on.map((patch, idx) => patch === 'XX' ? file[this.patches[i].offset + idx] : patch);
-                this.patches[i].off = this.patches[i].off.map((patch, idx) => patch === 'XX' ? file[this.patches[i].offset + idx] : patch);
-                replace(file, this.patches[i].offset,
-                    featureOn? this.patches[i].on : this.patches[i].off);
+                if (this.target == 'string') {
+                    replace(file, this.patches[i].offset,
+                        new TextEncoder().encode(featureOn? this.patches[i].on : this.patches[i].off));
+                } else {
+                    this.patches[i].on = this.patches[i].on.map((patch, idx) => patch === 'XX' ? file[this.patches[i].offset + idx] : patch);
+                    this.patches[i].off = this.patches[i].off.map((patch, idx) => patch === 'XX' ? file[this.patches[i].offset + idx] : patch);
+                    replace(file, this.patches[i].offset,
+                        featureOn? this.patches[i].on : this.patches[i].off);
+                }
             }
         }
     }
@@ -180,14 +191,22 @@ class DynamicHexadecimalPatch {
             this.patches[i].offset = offOffset === -1 ? onOffset : offOffset;
             if(offOffset > 0) {
                 if (updateUiFlag) {
-                    listUi.append('<li class="patch-off">0x' + offOffset.toString(16) + ' will be replaced</li>');
+                    if (this.target == 'string') {
+                        listUi.append('<li class="patch-off">0x' + offOffset.toString(16) + ' <b>' + patch.off + '</b> will be replaced with <b>'+ patch.on +'</b></li>');
+                    } else {
+                        listUi.append('<li class="patch-off">0x' + offOffset.toString(16) + ' will be replaced</li>');
+                    }
                 }
                 if(patchStatus === "") {
                     patchStatus = "off";
                 }
             } else if(onOffset > 0) {
                 if (updateUiFlag) {
-                    listUi.append('<li class="patch-on">0x' + onOffset.toString(16) + ' will be replaced</li>');
+                    if (this.target == 'string') {
+                        listUi.append('<li class="patch-on">0x' + onOffset.toString(16) + ' <b>' + patch.on + '</b> will be replaced with <b>'+ patch.off +'</b></li>');
+                    } else {
+                        listUi.append('<li class="patch-on">0x' + onOffset.toString(16) + ' will be replaced</li>');
+                    }
                 }
                 if(patchStatus === "") {
                     patchStatus = "on";
@@ -238,7 +257,12 @@ class DynamicHexadecimalPatch {
         return patchStatus;
     }
     
-    searchPatchOffset(file, searchBytes, offset) {
+    searchPatchOffset(file, search, offset) {
+        if (this.target == 'string') {
+            var searchBytes = new TextEncoder().encode(search);
+        } else {
+            var searchBytes = search;
+        }
         
         Uint8Array.prototype.indexOfArr = function(searchElements, fromIndex) {
             fromIndex = fromIndex || 0;
@@ -252,7 +276,7 @@ class DynamicHexadecimalPatch {
             }
         
             for(var i = index, j = 0; j < searchElements.length && i < this.length; i++, j++) {
-                if (searchElements[j] === 'XX') {
+                if (this.target != 'string' && searchElements[j] === 'XX') {
                     continue;
                 }
                 if(this[i] !== searchElements[j]) {
@@ -285,7 +309,13 @@ class DynamicHexadecimalPatch {
         return -1;
     }
 
-    searchPatchOffsetAll(file, searchBytes) {
+    searchPatchOffsetAll(file, search) {
+        if (this.target == 'string') {
+            var searchBytes = new TextEncoder().encode(search);
+        } else {
+            var searchBytes = search;
+        }
+
         Uint8Array.prototype.indexOfArr = function(searchElements, fromIndex) {
             fromIndex = fromIndex || 0;
         
@@ -298,227 +328,9 @@ class DynamicHexadecimalPatch {
             }
         
             for(var i = index, j = 0; j < searchElements.length && i < this.length; i++, j++) {
-                if (searchElements[j] === 'XX') {
+                if (this.target != 'string' && searchElements[j] === 'XX') {
                     continue;
                 }
-                if(this[i] !== searchElements[j]) {
-                    return {
-                        match: false,
-                        index,
-                    };
-                }
-            }
-        
-            return {
-                match: true,
-                index,
-            };
-        };
-
-        var idx = 0; 
-        var foundOffsetArray = [];
-        for (var i = 0; i < file.length; i++) {
-          var result = file.indexOfArr(searchBytes, idx);
-          if (result.match) {
-              foundOffsetArray.push(result.index);
-          } else if (result.index === -1) {
-            break;
-          }
-          idx = result.index + 1;
-        }
-        return foundOffsetArray;
-    }
-}
-
-class DynamicStringPatch {
-    constructor(options, mode) {
-        this.name = options.name;
-        this.patches = options.patches;
-        this.tooltip = options.tooltip;
-        this.mode = mode;
-    }
-
-    createUI(parent) {
-        var id = createID();
-        var label = this.name;
-        this.ui = $('<div>', {'class' : 'patch'});
-        this.checkbox = $('<input type="checkbox" id="' + id + '">')[0];
-        this.ui.append(this.checkbox);
-        this.ui.append('<label for="' + id + '">' + label + '</label>');
-        if(this.tooltip) {
-            this.ui.append('<div class="tooltip">' + this.tooltip + '</div>');
-        }
-        parent.append(this.ui);
-    }
-
-    updateUI(file) {
-        if (this.mode === 'all') {
-            this.checkbox.checked = this.checkPatchStringAll(file, true) === "on";
-        } else {
-            this.checkbox.checked = this.checkPatchString(file, true) === "on";
-        }
-    }
-
-    validatePatch(file) {
-        var status = this.mode === 'all' ? this.checkPatchStringAll(file) : this.checkPatchString(file);
-
-        if(status === "on") {
-            console.log('"' + this.name + '"', "is enabled!");
-        } else if(status === "off") {
-            console.log('"' + this.name + '"', "is disabled!");
-        } else {
-            return '"' + this.name + '" is neither on nor off! Have you got the right file?';
-        }
-    }
-
-    applyPatch(file) {
-        this.replaceAll(file, this.checkbox.checked);
-    }
-
-    replaceAll(file, featureOn) {
-        for(var i = 0; i < this.patches.length; i++) {
-            if (Array.isArray(this.patches[i].offset)) {
-                this.patches[i].offset.forEach((offset) => replace(file, offset,
-                    new TextEncoder().encode(featureOn? this.patches[i].on : this.patches[i].off)));
-            } else {
-                replace(file, this.patches[i].offset,
-                    new TextEncoder().encode(featureOn? this.patches[i].on : this.patches[i].off));
-            }
-        }
-    }
-
-    checkPatchString(file, updateUiFlag = false) {
-        var patchStatus = "";
-        if (updateUiFlag) {
-            var listUi = $('<ul />');
-            this.ui.append(listUi);
-        }
-        for(var i = 0; i < this.patches.length; i++) {
-            var patch = this.patches[i];
-            var offOffset = this.searchPatchOffset(file, patch.off, i);
-            var onOffset = this.searchPatchOffset(file, patch.on, i);
-            this.patches[i].offset = offOffset === -1 ? onOffset : offOffset;
-            if(offOffset > 0) {
-                if (updateUiFlag) {
-                    listUi.append('<li class="patch-off">0x' + offOffset.toString(16) + ' <b>' + patch.off + '</b> will be replaced with <b>'+ patch.on +'</b></li>');
-                }
-                if(patchStatus === "") {
-                    patchStatus = "off";
-                }
-            } else if(onOffset > 0) {
-                if (updateUiFlag) {
-                    listUi.append('<li class="patch-on">0x' + onOffset.toString(16) + ' <b>' + patch.on + '</b> will be replaced with <b>'+ patch.off +'</b></li>');
-                }
-                if(patchStatus === "") {
-                    patchStatus = "on";
-                }
-            } else if (this.mode === 'all') {
-                continue;
-            } else {
-                return "patch string not found";
-            }
-        }
-        return patchStatus;
-    }
-
-    checkPatchStringAll(file, updateUiFlag = false) {
-        var patchStatus = "";
-        if (updateUiFlag) {
-            var listUi = $('<ul />');
-            this.ui.append(listUi);
-        }
-        for(var i = 0; i < this.patches.length; i++) {
-            var patch = this.patches[i];
-            var offOffset = this.searchPatchOffsetAll(file, patch.off);
-            var onOffset = this.searchPatchOffsetAll(file, patch.on);
-            this.patches[i].offset = offOffset.length === 0 ? onOffset : offOffset;
-            
-            if(offOffset.length > 0) {
-                if (updateUiFlag) {
-                    offOffset.forEach((offset) => {
-                        listUi.append('<li class="patch-off">0x' + offset.toString(16) + ' <b>' + patch.off + '</b> will be replaced with <b>'+ patch.on +'</b></li>');
-                    });
-                }
-                if(patchStatus === "") {
-                    patchStatus = "off";
-                }
-            } else if(onOffset.length > 0) {
-                if (updateUiFlag) {
-                    onOffset.forEach((offset) => {
-                        listUi.append('<li class="patch-on">0x' + offset.toString(16) + ' <b>' + patch.on + '</b> will be replaced with <b>'+ patch.off +'</b></li>');
-                    });
-                }
-                if(patchStatus === "") {
-                    patchStatus = "on";
-                }
-            } else {
-                return "patch string not found";
-            }
-        }
-        return patchStatus;
-    }
-    
-    searchPatchOffset(file, searchStr, offset) {
-        var searchBytes = new TextEncoder().encode(searchStr);
-
-        Uint8Array.prototype.indexOfArr = function(searchElements, fromIndex) {
-            fromIndex = fromIndex || 0;
-        
-            var index = Array.prototype.indexOf.call(this, searchElements[0], fromIndex);
-            if(searchElements.length === 1 || index === -1) {
-                return {
-                    match: false,
-                    index: -1,
-                };
-            }
-        
-            for(var i = index, j = 0; j < searchElements.length && i < this.length; i++, j++) {
-                if(this[i] !== searchElements[j]) {
-                    return {
-                        match: false,
-                        index,
-                    };
-                }
-            }
-        
-            return {
-                match: true,
-                index,
-            };
-        };
-
-        var idx = 0; 
-        var foundCount = 0;
-        for (var i = 0; i < file.length; i++) {
-          var result = file.indexOfArr(searchBytes, idx);
-          if (result.match) {
-              if (offset === foundCount) {
-                return result.index;
-              }
-              foundCount++;
-            } else if (result.index === -1) {
-            break;
-            }
-          idx = result.index + 1;
-        }
-        return -1;
-    }
-
-    searchPatchOffsetAll(file, searchStr) {
-        var searchBytes = new TextEncoder().encode(searchStr);
-
-        Uint8Array.prototype.indexOfArr = function(searchElements, fromIndex) {
-            fromIndex = fromIndex || 0;
-        
-            var index = Array.prototype.indexOf.call(this, searchElements[0], fromIndex);
-            if(searchElements.length === 1 || index === -1) {
-                return {
-                    match: false,
-                    index: -1,
-                };
-            }
-        
-            for(var i = index, j = 0; j < searchElements.length && i < this.length; i++, j++) {
                 if(this[i] !== searchElements[j]) {
                     return {
                         match: false,
@@ -892,17 +704,8 @@ class Patcher {
                 if(mod.type === "number") {
                     this.mods.push(new NumberPatch(mod));
                 }
-                if(mod.type === "dynamicString") {
-                    this.mods.push(new DynamicStringPatch(mod, 'normal'));
-                }
-                if(mod.type === "dynamicStringAll") {
-                    this.mods.push(new DynamicStringPatch(mod, 'all'));
-                }
-                if(mod.type === "dynamicHex") {
-                    this.mods.push(new DynamicHexadecimalPatch(mod, 'normal'));
-                }
-                if(mod.type === "dynamicHexAll") {
-                    this.mods.push(new DynamicHexadecimalPatch(mod, 'all'));
+                if(mod.type === "dynamic") {
+                    this.mods.push(new DynamicPatch(mod));
                 }
             } else { // standard patch
                 this.mods.push(new StandardPatch(mod));

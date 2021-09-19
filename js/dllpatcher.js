@@ -104,11 +104,11 @@ class StandardPatch {
 }
 
 class DynamicPatch {
-    constructor(options, mode) {
+    constructor(options) {
         this.name = options.name;
         this.patches = options.patches;
         this.tooltip = options.tooltip;
-        this.mode = mode;
+        this.mode = options.mode;
         this.target = options.target;
     }
 

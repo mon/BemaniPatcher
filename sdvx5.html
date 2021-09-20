@@ -423,6 +423,10 @@
               patches: [{offset: 0x61E470, off: [0x74, 0x21], on: [0x90, 0x90]}]
             },
             {
+              name: 'Uncensor album jackets (for K region only)',
+              patches: [{offset: 0x6F2FA0, off: [0x61], on: [0x75]}]
+            },
+            {
               type : "union",
               name : "Premium Time Length",
               offset : 0x4F9897,

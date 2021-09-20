@@ -312,3 +312,15 @@ input[type=radio] {
 input[type=checkbox]:checked + .patchPreview {
     display: block;
 }
+input[type=checkbox] ~ ul > li.patch-off {
+    display: none;
+}
+input[type=checkbox] ~ ul > li.patch-on {
+    display: list-item;
+}
+input[type=checkbox]:checked ~ ul > li.patch-on {
+    display: none;
+}
+input[type=checkbox]:checked ~ ul > li.patch-off {
+    display: list-item;
+}

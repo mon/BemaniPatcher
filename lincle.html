@@ -48,13 +48,15 @@
                     ]
                 },
                 {
-                    name: "Mixer Bug Fix 1",
+                    name: "Mixer Bug Fix 1",//part 1
+                    tooltip: "if sound card has a large number of unreasonable mixer channels, use it.",
                     patches: [
                         { offset: 0xA165F, off: [0x75], on: [0xEB] },
                     ]
                 },
                 {
-                    name: "Mixer Bug Fix 2",
+                    name: "Mixer Bug Fix 2",//part 2
+                    tooltip: "if sound card has a large number of unreasonable mixer channels, use it.",
                     patches: [
                         { offset: 0xA18CD, off: [0x75], on: [0xEB] },
                     ]

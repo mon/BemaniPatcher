@@ -47,6 +47,18 @@
                         { offset: 0x119ACC, off: [0x66, 0x3A, 0x2F, 0x00, 0x65, 0x3A, 0x2F], on: [0x2E, 0x2F, 0x66, 0x00, 0x2E, 0x2F, 0x65] },
                     ]
                 },
+                {
+                    name: "Mixer Bug Fix 1",
+                    patches: [
+                        { offset: 0xA165F, off: [0x75], on: [0xEB] },
+                    ]
+                },
+                {
+                    name: "Mixer Bug Fix 2",
+                    patches: [
+                        { offset: 0xA18CD, off: [0x75], on: [0xEB] },
+                    ]
+                },
             ]),
         ]);
     });

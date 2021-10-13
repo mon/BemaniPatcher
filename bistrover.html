@@ -182,6 +182,12 @@
                 ]),
                 new Patcher("bm2dx.dll", "2021-09-15", [
                     {
+                        name: "Bypass lightning monitor error",
+                        patches: [
+                            { offset: 0x7464A1, off: [0x0f, 0x85], on: [0x90, 0xe9] },
+                        ],
+                    },
+                    {
                         name: "Shim Lightning Mode IO (for spicetools)",
                         patches: [
                             { offset: 0x86EFD4, off: [0x0F, 0x84], on: [0x90, 0xE9] },

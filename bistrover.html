@@ -237,6 +237,13 @@
                         ],
                     },
                     {
+                        name: "Skip CAMERA DEVICE ERROR prompt",
+                        tooltip: "Prevents the CAMERA DEVICE ERROR message from popping up on boot",
+                        patches: [
+                            { offset: 0x75378B, off: [0x84], on: [0x81] },
+                        ],
+                    },
+                    {
                         name: "1P Premium Free",
                         tooltip: "Forcibly enables Premium Free option for 1P",
                         patches: [

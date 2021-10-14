@@ -378,6 +378,24 @@
                             { offset: 0x3B278D, off: [0x47, 0xB0, 0x6C, 0x00], on: [0x5B, 0x82, 0x19, 0x05] }, //PASELI: ******
                         ],
                     },
+                    {
+                        name: "Disable News Sound",
+                        tooltip: "Disables the sound played when news banners appear.",
+                        patches: [
+                            {
+                                offset: 0xAEA508,
+                                off: [0x73, 0x79, 0x73, 0x73, 0x64, 0x5F, 0x6E, 0x65, 0x77, 0x73, 0x5F, 0x63, 0x75, 0x74, 0x69, 0x6E, 0x5F, 0x73, 0x65], // syssd_news_cutin_se
+                                on: [0x73, 0x79, 0x73, 0x73, 0x64, 0x5F, 0x64, 0x75, 0x6D, 0x6D, 0x79, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00] // syssd_dummy
+                            },
+                        ]
+                    },
+                    {
+                        name: "Increase game volume",
+                        tooltip: "Ignore the in-game volume settings and use the maximum possible volume level. Especially helpful for TDJ which tends to be very quiet.",
+                        patches: [
+                           { offset: 0x8731D5, off: [0xFF, 0x90, 0x98, 0x00, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] },
+                        ],
+                    },
                 ]),
             ]);
         });

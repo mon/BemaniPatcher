@@ -336,6 +336,13 @@
                         patches: [{ offset: 0x4CBBF3, off: [0x74], on: [0xEB] }],
                     },
                     {
+                        name: "Show Lightning Model folder in LDJ",
+                        tooltip: "This folder is normally exclusive to TDJ mode",
+                        patches: [
+                            { offset: 0x4A46DD, off: [0x75, 0x0A], on: [0x90, 0x90] },
+                        ],
+                    },
+                    {
                         name: "Unlock All Songs",
                         patches: [
                             { offset: 0x4C647A, off: [0x32, 0xC0], on: [0xB0, 0x01] },

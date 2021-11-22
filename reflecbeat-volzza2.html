@@ -22,7 +22,7 @@
                             }]
                         },
                         {
-                            name: "Unlock all songs",
+                            name: "Unlock all songs/difficulties",
                             patches: [{
                                        offset: 0x85E83,
                                        off: [0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC],
@@ -45,6 +45,13 @@
                                       }
                             ]
                         },
+						{
+                            name: "Timer freeze",
+                            patches: [
+							{offset: 0x141EFF, off: [0x85, 0xC0], on: [0xB0, 0x01]},
+							{offset: 0x17CA65, off: [0x85, 0xC0], on: [0xB0, 0x01]}
+							]
+						}
                     ]),
                 ]);
             });

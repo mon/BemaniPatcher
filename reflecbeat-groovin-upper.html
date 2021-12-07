@@ -15,7 +15,8 @@
          */
 
             window.addEventListener("load", function() {
-                new Patcher("reflecbeat.dll", "", [
+                new PatchContainer([
+                new Patcher("reflecbeat.dll", "2015-10-21", [
                     {
                      name : "E: drive fix",
                      tooltip: "Fix crash caused by no E: drive",
@@ -844,6 +845,11 @@
                                 {offset : 0xAD396, off: [0x74], on : [0xEB]},
                         ]
                     },
+                    {
+                        name: "Timer freeze",
+                        patches: [{offset: 0x17C0F4, off: [0x75, 0x13], on: [0x90, 0x90]}]
+                    }
+                ])
                 ]);
             });
         </script>

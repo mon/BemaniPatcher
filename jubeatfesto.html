@@ -126,14 +126,22 @@
                           name : "Skip CATEGORY SELECT",
                           patches: [{offset: 0xA59F5, off: [0x04], on: [0x07]}]
                         },
+                    ])
+                ]);
+                new PatchContainer([
+                    new Patcher("music_db.dll", "2020-12-08, 2020-07-27", [
+                        {
+                         name : "Unlock all songs",
+                         patches : [{offset : 0x1E15, off: [0x74, 0x0A], on : [0x90, 0x90]}]
+                        },
                     ]),
-                    new Patcher("music_db.dll", "music_db.dll", [
+                    new Patcher("music_db.dll", "2019-09-03", [
                         {
                          name : "Unlock all songs",
                          patches : [{offset : 0x2363, off: [0x74, 0x14], on : [0x90, 0x90]}]
                         },
                     ])
-                ]);
+		]);    
             });
         </script>
     </head>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>GFDM V4 RockxRock DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- don't hate -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/FileSaver.min.js"></script>
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            new Patcher("game.dll", "", [
+                {
+                    name: "Force unlock SECRET folder",
+                    patches: [
+                        {offset: 0xA468A, off: [0x74, 0x12, 0x68, 0xD4], on: [0x90, 0x90, 0x68, 0xD4]}
+                        ]
+                }
+            ]);
+            new Patcher("libshare-pj.dll", "", [
+                {
+                    name: "Remove the game's 10.0.*.* IP check, allowing any IP address.",
+                    tooltip: "Without this, games will not get past server error 2-5000-0000",
+                    patches: [
+                        {offset: 0x16B9D, off: [0x01, 0x5B], on: [0x00, 0x5B]}
+                        ]
+                }
+            ]);
+        });
+    </script>
+</head>
+<body>
+    <h1>GFDM V4 RockxRock DLL Modder</h1>
+</body>
+</html>

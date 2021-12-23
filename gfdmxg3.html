@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>GFDM XG3 DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- don't hate -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/FileSaver.min.js"></script>
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            new Patcher("game.dll", "", [
+                {
+                    name: "Force unlock SECRET folder",
+                    patches: [
+                        {offset: 0x1652D2, off: [0x5B, 0x00], on: [0x4D, 0x01]},
+						{offset: 0x1652E2, off: [0x5D, 0x00], on: [0x4D, 0x01]},
+                        ]
+                }
+            ]);
+        });
+    </script>
+</head>
+<body>
+    <h1>GFDM XG3 DLL Modder</h1>
+</body>
+</html>

@@ -182,6 +182,12 @@
                 ]),
                 new Patcher("bm2dx.dll", "2021-09-15", [
                     {
+                        name: "SSE4.2 Fix",
+                        patches: [
+                            { offset: 0x28C8B4, off: [0xF3, 0x45, 0x0F], on: [0x90, 0x90, 0x90] },
+                        ],
+                    },
+                    {
                         name: "Bypass lightning monitor error",
                         patches: [
                             { offset: 0x7464A1, off: [0x0f, 0x85], on: [0x90, 0xe9] },

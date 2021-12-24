@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>jubeat saucer fulfill DLL Modder</title>
+        <link rel="stylesheet" href="css/style.css">
+        <!-- don't hate -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script type="text/javascript" src="js/FileSaver.min.js"></script>
+        <script type="text/javascript" src="js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function() {
+                new PatchContainer([
+                    new Patcher("jubeat.dll", "2014-11-18", [
+                        {
+                         name : "SELECT MUSIC timer lock",
+                         patches : [{offset : 0xF7B7F, off : [0x75], on : [0xEB]}]
+                        },
+                    ]),
+                    new Patcher("music_db.dll", "2014-11-18", [
+                        {
+                         name : "Unlock all songs",
+                         patches : [{offset : 0x1F6D, off: [0x02], on : [0x1f]}]
+                        },
+                    ])
+                ]);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>jubeat saucer fulfill DLL Modder</h1>
+    </body>
+</html>

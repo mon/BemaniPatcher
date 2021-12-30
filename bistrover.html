@@ -15,6 +15,7 @@
                 new Patcher("bm2dx.dll", "2021-04-26", [
                     {
                         name: "SSE4.2 Fix",
+                        tooltip : "This will allow the game to run on processors which do not support the SSE4.2 instruction set. If you can successfully boot the game, do NOT check this. This is known to cause a crash when using WASAPI audio.",
                         patches: [
                             { offset: 0x20A454, off: [0xF3, 0x45, 0x0F], on: [0x90, 0x90, 0x90] },
                         ],
@@ -24,7 +25,7 @@
                         patches: [{ offset: 0x6B231B, off: [0x84], on: [0x81] }],
                     },
                     {
-                        name: "Force 120hz timing and adapter mode in LDJ (Experimental)",
+                        name: "Force 120hz timing and adapter mode in LDJ",
                         patches: [
                             { offset: 0x3C6063, off: [0x75], on: [0xeb] },
                             { offset: 0x771A5E, off: [0x3c], on: [0x78] },
@@ -152,6 +153,7 @@
                     },
                     {
                         name: "WASAPI Shared Mode (with 44100Hz)",
+                        tooltip: "Turns WASAPI Exclusive Mode into Shared Mode. Audio device's default format must be set to 44100Hz for this to work.",
                         patches: [{ offset: 0x20A541, off: [0x01], on: [0x00] }],
                     },
                     {
@@ -183,6 +185,7 @@
                 new Patcher("bm2dx.dll", "2021-09-15", [
                     {
                         name: "SSE4.2 Fix",
+                        tooltip : "This will allow the game to run on processors which do not support the SSE4.2 instruction set. If you can successfully boot the game, do NOT check this. This is known to cause a crash when using WASAPI audio.",
                         patches: [
                             { offset: 0x28C8B4, off: [0xF3, 0x45, 0x0F], on: [0x90, 0x90, 0x90] },
                         ],
@@ -221,7 +224,7 @@
                         ],
                     },
                     {
-                        name: "Force 120hz timing and adapter mode in LDJ (Experimental)",
+                        name: "Force 120hz timing and adapter mode in LDJ",
                         patches: [
                             { offset: 0x45F163, off: [0x75], on: [0xeb] },
                             { offset: 0x854A2E, off: [0x3c], on: [0x78] },
@@ -230,6 +233,7 @@
                     },
                     {
                         name: "WASAPI Shared Mode (with 44100Hz)",
+                        tooltip: "Turns WASAPI Exclusive Mode into Shared Mode. Audio device's default format must be set to 44100Hz for this to work.",
                         patches: [{ offset: 0x28C9A1, off: [0x01], on: [0x00] }],
                     },
                     {

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Hello! Pop'n Music DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- don't hate -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/FileSaver.min.js"></script>
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            new Patcher("popn.dll", "", [
+                {
+                    name: "Remove the game's 10.0.*.* IP check, allowing any IP address.",
+                    tooltip: "Without this, games will not get past server error 2-5000-0001",
+                    patches: [
+                        {offset: 0x0007520C, off: [0x3C, 0xC0], on: [0x3C, 0x3C]}
+                        ]
+                }
+            ]);
+        });
+    </script>
+</head>
+<body>
+    <h1>Hello! Pop'n Music DLL Modder</h1>
+</body>
+</html>

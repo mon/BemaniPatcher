@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Taiko no Tatsujin (March 2020 Ver.)</title>
+        <title>Taiko no Tatsujin (March 2020 Ver.) Modder</title>
         <link rel="stylesheet" href="css/style.css">
         <!-- don't hate -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -11,7 +11,13 @@
         <script type="text/javascript">
             window.addEventListener("load", function () {
             new PatchContainer([
-                new Patcher("Taiko.exe", "12.00", [
+               new Patcher("Taiko.exe", "00.18", [
+                    {
+                        name: "Bypass Errors",
+                        patches: [
+                            {offset: 0x1E4A0, off: [0x48], on: [0xC3]}
+                        ]
+                    },			   
                     {
                         name: "Unlock Songs",
                         patches: [
@@ -19,7 +25,7 @@
                         ]
                     },
                     {
-                        name: "Shared audio mode",
+                        name: "Shared Audio Mode",
                         patches: [
                             {offset: 0x551577, off: [0x74], on: [0xEB]},
                         ],
@@ -40,14 +46,14 @@
                         ],
                     },
                     {
-                        name: "Patch Borderless Fullscreen Window to 2560x1440",
+                        name: "Patch Borderless Fullscreen Window Size to 2560x1440",
                         patches: [
                             {offset: 0x223F2B, off: [0x80, 0x07], on: [0x00, 0x0A]},
                             {offset: 0x223F32, off: [0x38, 0x04], on: [0xA0, 0x05]},
                         ],
                     },
                     {
-                        name: "Freeze STAGE Count at 1",
+                        name: "Freeze STAGE Count to 1",
                         patches: [
                             {offset: 0x206E34, off: [0x41, 0xFF, 0x46, 0x04], on: [0x90, 0x90, 0x90, 0x90]},
                         ],
@@ -66,12 +72,67 @@
                         ],
                     },
                 ]),
-              ]);
-          });
+                new Patcher("Taiko.exe", "08.18", [
+                    {
+                        name: "Bypass Errors",
+                        patches: [
+                            {offset: 0x22DC0, off: [0x48], on: [0xC3]}
+                        ]
+                    },
+                    {
+                        name: "Unlock Songs",
+                        patches: [
+                            {offset: 0x31428D, off: [0x32, 0xC0], on: [0xB0, 0x01]}
+                        ]
+                    },
+                    {
+                        name: "Shared Audio Mode",
+                        patches: [
+                            {offset: 0x692217, off: [0x74], on: [0xEB]},
+                        ],
+                    },
+                    {
+                        name: "Disable V-Sync",
+                        patches: [
+                            {offset: 0x516739, off: [0x8B, 0x96, 0x80, 0x00, 0x00, 0x00], on: [0xBA, 0x00, 0x00, 0x00, 0x00, 0x90]},						
+                        ],
+                    },
+                    {
+                        name: "Patch Borderless Fullscreen Window Size to 2560x1440",
+                        patches: [
+                            {offset: 0x35F05B, off: [0x80, 0x07], on: [0x00, 0x0A]},
+                            {offset: 0x35F062, off: [0x38, 0x04], on: [0xA0, 0x05]},
+                        ],
+                    },
+                    {
+                        name: "Patch game to run at 144fps (Breaks some Animations)",
+                        patches: [
+                            {offset: 0xB194D4, off: [0x74, 0x5A, 0x05, 0x41], on: [0xE4, 0x38, 0xDE, 0x40]},
+                            {offset: 0xB7675C, off: [0x7F, 0xA4, 0x88, 0x3C], on: [0x39, 0x8E, 0x63, 0x3C]},
+                            {offset: 0xB76936, off: [0x5E, 0x40], on: [0x62, 0x40]},
+                            {offset: 0xB76A16, off: [0xF0, 0x42], on: [0x10, 0x43]},
+                        ],
+                    },
+                    {
+                        name: "Freeze Enso Mode STAGE Count to 1",
+                        patches: [
+                            {offset: 0x328225, off: [0x41, 0xFF, 0x46, 0x04], on: [0x90, 0x90, 0x90, 0x90]},
+                        ],
+                    },
+                    {
+                        name: "English Character Names",
+                        patches: [
+                            {offset: 0xB44258, off: [0xE3, 0x81, 0xA9, 0xE3, 0x82, 0x93, 0xE3, 0x81, 0xA1, 0xE3, 0x82, 0x83, 0xE3, 0x82, 0x93], on: [0x44, 0x4F, 0x4E, 0x2D, 0x63, 0x68, 0x61, 0x6E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]},
+                            {offset: 0xB56130, off: [0xE3, 0x81, 0x8B, 0xE3, 0x81, 0xA3, 0xE3, 0x81, 0xA1, 0xE3, 0x82, 0x83, 0xE3, 0x82, 0x93], on: [0x4B, 0x41, 0x54, 0x53, 0x55, 0x2D, 0x63, 0x68, 0x61, 0x6E, 0x00, 0x00, 0x00, 0x00, 0x00]},
+                        ],
+                    },
+                ])
+            ]);
+            });
         </script>
     </head>
     <body>
-        <h1>Taiko no Tatsujin (March 2020 Ver.) EXE Patcher.</h1>
+        <h1>Taiko no Tatsujin (March 2020 Ver.) Modder</h1>
     </body>
 </html>
 

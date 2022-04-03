@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -123,6 +123,14 @@
                             { offset: 0x28DE7, off: [0x75], on: [0xEB] },
                             { offset: 0x8AE71, off: [0x75], on: [0xEB] },
                         ],
+                    },
+                    {
+                        name: "Unlock Deco Parts",
+                        patches: [{ offset: 0xF9E03, off: [0x75, 0x22], on: [0x90, 0x90] }],
+                    },
+                    {
+                        name: "Unlock Characters",
+                        patches: [{ offset: 0xF2C2E, off: [0x74], on: [0xEB] }],
                     },
                     {
                         name: "Unlock All Songs",

@@ -528,6 +528,10 @@
                          name : "Remove Timer",
                          patches : [{offset : 0xF2EC6, off: [0x0F, 0x85], on : [0x90, 0xE9]}]
                         },
+                        {
+                         name : "Coin Unlock",
+                         patches : [{offset : 0x132866, off: [0x00], on : [0x01]}]
+                        },
                     ]),
                 ]);
             });

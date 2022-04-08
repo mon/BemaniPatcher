@@ -47,6 +47,10 @@
               patches: [{offset: 0x19EAD2, off: [0x00], on: [0x01]}]
             },
             {
+              name: 'Uncensor album jackets (for K region only)',
+              patches: [{offset: 0x31FFEC, off: [0x61], on: [0x75]}]
+            },
+            {
               name: 'Disable EVENT MODE/FREE PLAY text',
               patches: [{offset: 0xBF9E0, off: [0xE8, 0xDB], on: [0xEB, 0x03]}]
             },

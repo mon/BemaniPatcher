@@ -16,6 +16,10 @@
                          name : "SELECT MUSIC timer lock",
                          patches : [{offset : 0xDF418, off : [0x75], on : [0xEB]}]
                         },
+                        {
+                          name: "Skip Online Matching",
+                          patches: [{offset: 0xBD6A0, off: [0x7D], on: [0xEB]}]
+                        },
                     ]),
                     new Patcher("music_db.dll", "2014-01-28", [
                         {

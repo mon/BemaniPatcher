@@ -17,6 +17,10 @@
                          patches : [{offset : 0xF7B7F, off : [0x75], on : [0xEB]}]
                         },
                         {
+                          name: "Skip Online Matching",
+                          patches: [{offset: 0xCB9A0, off: [0x7D], on: [0xEB]}]
+                        },
+                        {
                          name : "Coin Unlock",
                          tooltip : "Check the 'Coin Unlock' option in 'coin.dll'",
                          patches : [{offset : 0x175D, 

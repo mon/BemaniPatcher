@@ -20,6 +20,10 @@
                          name : "SELECT MUSIC timer lock",
                          patches : [{offset : 0x80576, off : [0x75], on : [0xEB]}]
                         },
+                        {
+                          name: "Skip Online Matching",
+                          patches: [{offset: 0x96977, off: [0x7D], on: [0xEB]}]
+                        },
                     ]),
 
                     new Patcher("jubeat.dll", "2017-04-15", [

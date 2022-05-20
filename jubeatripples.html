@@ -17,6 +17,14 @@
                          patches : [{offset : 0x6C2A1, off : [0x75], on : [0xEB]}]
                         },
                         {
+                         name : "Skip Tutorial",
+                         patches : [
+                            {offset : 0x36563, off : [0x75], on : [0xEB]},
+                            {offset : 0x3700F, off : [0x75], on : [0xEB]},
+                            {offset : 0x4AAB4, off : [0x75], on : [0xEB]}
+                         ]
+                        },
+                        {
                          name : "Unlock All Songs",
                          patches : [{offset : 0xA2BDD, off : [0x0F, 0x9D, 0xC0], on : [0x90, 0x90, 0x90]}]
                         },

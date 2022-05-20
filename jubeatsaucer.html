@@ -13,7 +13,7 @@
                 new PatchContainer([
                     new Patcher("jubeat.dll", "2014-01-28", [
                         {
-                         name : "SELECT MUSIC timer lock",
+                         name : "SELECT MUSIC Timer Lock",
                          patches : [{offset : 0xDF418, off : [0x75], on : [0xEB]}]
                         },
                         {
@@ -23,7 +23,7 @@
                     ]),
                     new Patcher("music_db.dll", "2014-01-28", [
                         {
-                         name : "Unlock all songs",
+                         name : "Unlock All Songs",
                          patches : [{offset : 0x1F3D, off: [0x02], on : [0x1f]}]
                         },
                     ])

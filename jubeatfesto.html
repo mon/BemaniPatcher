@@ -27,7 +27,7 @@
                         {
                           name: "Skip Online Matching",
                           patches: [{offset: 0xD0D0B, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
-                        },
+                        }
                     ]),
                     new Patcher("jubeat.dll", "2020-07-27", [
                         {
@@ -45,7 +45,7 @@
                         {
                           name: "Skip Online Matching",
                           patches: [{offset: 0xB368B, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
-                        },
+                        }
                     ]),
                     new Patcher("jubeat.dll", "2020-06-30", [
                         {
@@ -63,7 +63,7 @@
                         {
                           name: "Skip Online Matching",
                           patches: [{offset: 0xB31EB, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
-                        },
+                        }
                     ]),
                     new Patcher("jubeat.dll", "2020-06-11", [
                         {
@@ -81,7 +81,7 @@
                         {
                           name: "Skip Online Matching",
                           patches: [{offset: 0xB312B, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
-                        },
+                        }
                     ]),
                     new Patcher("jubeat.dll", "2020-02-19", [
                         {
@@ -93,13 +93,13 @@
                           patches: [{offset: 0xA0272, off: [0x75], on: [0xEB]}]
                         },
                         {
-                          name : "Skip CATEGORY SELECT",
+                          name: "Skip CATEGORY SELECT",
                           patches: [{offset: 0xA05F7, off: [0x04], on: [0x07]}]
                         },
                         {
                           name: "Skip Online Matching",
                           patches: [{offset: 0xB2D6B, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
-                        },
+                        }
                     ]),
                     new Patcher("jubeat.dll", "2019-09-03", [
                         {
@@ -111,13 +111,13 @@
                           patches: [{offset: 0xA72E7, off: [0x75], on: [0xEB]}]
                         },
                         {
-                          name : "Skip CATEGORY SELECT",
+                          name: "Skip CATEGORY SELECT",
                           patches: [{offset: 0xA7663, off: [0x04], on: [0x07]}]
                         },
                         {
                           name: "Skip Online Matching",
                           patches: [{offset: 0xBBDFB, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
-                        },
+                        }
                     ]),
                     new Patcher("jubeat.dll", "2019-06-25", [
                         {
@@ -127,7 +127,7 @@
                         {
                           name: "Online Matching Skip",
                           patches: [{offset: 0xBBD0B, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
-                        },
+                        }
                     ]),
                     new Patcher("jubeat.dll", "2019-04-22", [
                         {
@@ -139,41 +139,41 @@
                           patches: [{offset: 0xA6EB7, off: [0x75], on: [0xEB]}]
                         },
                         {
-                          name : "Skip CATEGORY SELECT",
+                          name: "Skip CATEGORY SELECT",
                           patches: [{offset: 0xA7233, off: [0x04], on: [0x07]}]
-                        },
+                        }
                     ]),
                     new Patcher("jubeat.dll",  "2018-11-27", [
                         // Ported by Cammy
                         {
-                          name : "Disable Tutorial",
+                          name: "Disable Tutorial",
                           patches: [{offset: 0xBE5B7, off: [0x0F, 0x85, 0xD6, 0x01, 0x00, 0x00], on: [0xE9, 0xD7, 0x01, 0x00, 0x00, 0x90]}]
                         },
                         // Ported by Cammy
                         {
-                          name : "SELECT MUSIC Timer Lock",
+                          name: "SELECT MUSIC Timer Lock",
                           patches: [{offset: 0xA5672, off: [0x75], on: [0xEB]}]
                         },
                         {
-                          name : "Skip CATEGORY SELECT",
+                          name: "Skip CATEGORY SELECT",
                           patches: [{offset: 0xA59F5, off: [0x04], on: [0x07]}]
-                        },
+                        }
                     ])
-                ]);
+                ]),
                 new PatchContainer([
                     new Patcher("music_db.dll", "2020-12-08, 2020-07-27, 2020-06-30, 2020-06-11", [
                         {
-                         name : "Unlock all songs",
-                         patches : [{offset : 0x1E15, off: [0x74, 0x0A], on : [0x90, 0x90]}]
-                        },
+                         name: "Unlock all songs",
+                         patches: [{offset: 0x1E15, off: [0x74, 0x0A], on: [0x90, 0x90]}]
+                        }
                     ]),
                     new Patcher("music_db.dll", "2019-09-03", [
                         {
-                         name : "Unlock all songs",
-                         patches : [{offset : 0x2363, off: [0x74, 0x14], on : [0x90, 0x90]}]
-                        },
+                         name: "Unlock all songs",
+                         patches: [{offset: 0x2363, off: [0x74, 0x14], on: [0x90, 0x90]}]
+                        }
                     ])
-		]);    
+                ])
             });
         </script>
     </head>

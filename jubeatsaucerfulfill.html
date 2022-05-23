@@ -17,8 +17,8 @@
                          patches : [{offset : 0xF7B7F, off : [0x75], on : [0xEB]}]
                         },
                         {
-                          name: "Skip Online Matching",
-                          patches: [{offset: 0xCB9A0, off: [0x7D], on: [0xEB]}]
+                          name : "Skip Online Matching",
+                          patches : [{offset: 0xCB9A0, off: [0x7D], on: [0xEB]}]
                         },
                         {
                          name : "Coin Unlock",
@@ -32,7 +32,7 @@
                          0x15, 0xF4, 0x02, 0x18, 0x10, 0x0F, 0xB6, 0xC0, 0x85, 0xC0, 
                          0x74, 0x0F, 0x6A, 0x1A, 0x68, 0xE1, 0x05, 0x00, 0x00, 0xE8, 
                          0x12, 0xAC, 0x00, 0x00, 0x83, 0xC4, 0x08]}]
-                        },
+                        }
                     ]),
                     new Patcher("coin.dll", "2014-11-18", [
                         {
@@ -83,17 +83,17 @@
                          0x95, 0xC1, 0x0F, 0xB6, 0xD1, 0x85, 0xD2, 0x74, 0x10, 0x68, 0x98, 
                          0x92, 0x00, 0x10, 0x6A, 0x01, 0xFF, 0x15, 0x5C, 0x81, 0x00, 0x10, 
                          0x83, 0xC4, 0x08, 0x8B, 0xE5, 0x5D, 0xC3, 0xCC, 0xCC, 0xCC]}]
-                        },
-                    ]),
-                ]);
+                        }
+                    ])
+                ]),
                 new PatchContainer([
                     new Patcher("music_db.dll", "2014-11-18", [
                         {
                          name : "Unlock all songs",
-                         patches : [{offset : 0x1F6D, off: [0x02], on : [0x1f]}]
-                        },
+                         patches : [{offset : 0x1F6D, off: [0x02], on : [0x1F]}]
+                        }
                     ])
-                ]);
+                ])
             });
         </script>
     </head>

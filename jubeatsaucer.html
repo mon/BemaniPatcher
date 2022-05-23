@@ -13,20 +13,20 @@
                 new PatchContainer([
                     new Patcher("jubeat.dll", "2014-01-28", [
                         {
-                         name : "SELECT MUSIC Timer Lock",
-                         patches : [{offset : 0xDF418, off : [0x75], on : [0xEB]}]
+                         name: "SELECT MUSIC Timer Lock",
+                         patches: [{offset: 0xDF418, off: [0x75], on: [0xEB]}]
                         },
                         {
                           name: "Skip Online Matching",
-                          patches : [{offset : 0xBD6A0, off : [0x7D], on : [0xEB]}]
+                          patches: [{offset: 0xBD6A0, off: [0x7D], on: [0xEB]}]
                         }
                     ]),
                 ]),
                 new PatchContainer([
                     new Patcher("music_db.dll", "2014-01-28", [
                         {
-                         name : "Unlock All Songs",
-                         patches : [{offset : 0x1F3D, off : [0x02], on : [0x1F]}]
+                         name: "Unlock All Songs",
+                         patches: [{offset: 0x1F3D, off: [0x02], on: [0x1F]}]
                         },
                     ])
                 ])

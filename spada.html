@@ -24,7 +24,7 @@
                         tooltip: "Purely visual, does not affect anything besides the FPS display",
                         //changes the FPS = %2.4f string to FPS = %2.6f
                         patches: [{offset: 0x160B05, off: [0x34], on: [0x36]}]
-                    },
+                    }
                 ]),
                 new Patcher('bm2dx.dll', "2014-07-16", [
                     {
@@ -84,8 +84,12 @@
                         //changes the FPS = %2.4f string to FPS = %2.6f
                         patches: [{offset: 0x192175, off: [0x34], on: [0x36]}]
                     },
-                ]),
-            ]);
+                    {
+                        name: "Coin Unlock",
+                        patches: [{offset: 0x3EE3, off: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90], on: [0x6A, 0x01, 0xE8, 0xF6, 0x04, 0x01, 0x00, 0x8B, 0xC8, 0xE8, 0x2F, 0x05, 0x01, 0x00]}]
+                    }
+                ])
+            ])
         });
     </script>
 </head>

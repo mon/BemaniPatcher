@@ -4,9 +4,6 @@
         <meta charset="utf-8">
         <title>jubeat knit DLL Modder</title>
         <link rel="stylesheet" href="css/style.css">
-        <!-- don't hate -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script type="text/javascript" src="js/FileSaver.min.js"></script>
         <script type="text/javascript" src="js/dllpatcher.js"></script>
         <script type="text/javascript">
             window.addEventListener("load", function() {
@@ -22,8 +19,8 @@
                     new Patcher("music_db.dll", "2011-01-14", [
                         {
                          name: "Unlock All Songs",
-                         patches: [{offset: 0x1000, 
-                             off: [0x8B, 0x4D, 0xAC, 0x89, 0x48, 0x34, 0x0F, 0xBF, 0x55, 0x98, 0x33, 0xC0, 0x85, 0xD2, 0x0F, 0x9D, 0xC0], 
+                         patches: [{offset: 0x1000,
+                             off: [0x8B, 0x4D, 0xAC, 0x89, 0x48, 0x34, 0x0F, 0xBF, 0x55, 0x98, 0x33, 0xC0, 0x85, 0xD2, 0x0F, 0x9D, 0xC0],
                               on: [0xB9, 0x00, 0x00, 0x00, 0x00, 0x89, 0x48, 0x34, 0x0F, 0xB5, 0x55, 0x98, 0x33, 0xC0, 0x85, 0xD2, 0x90]}]
                         }
                     ])

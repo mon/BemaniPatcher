@@ -38,6 +38,20 @@
                               on: [0xBA, 0x00, 0x00, 0x00, 0x00, 0x89, 0x51, 0x34, 0x0F, 0xBF, 0x45, 0xB8, 0x33, 0xC9, 0x85, 0xC0, 0x90]}]
                         }
                     ]),
+                    new Patcher("jubeat.exe", "2011-04-16 (China Ver.2)", [
+                        {
+                         name: "SELECT MUSIC Timer Lock",
+                         patches: [{offset: 0x6C29D, off: [0x75], on: [0xEB]}]
+                        },
+                        {
+                         name: "Skip Tutorial",
+                         patches: [{offset: 0x35A8F, off: [0x75], on: [0xEB]}]
+                        },
+                        {
+                         name: "Unlock All Songs",
+                         patches: [{offset: 0xA48CD, off: [0x0F, 0x9D, 0xC0], on: [0x90, 0x90, 0x90]}]
+                        }
+                    ]),
                     new Patcher("jubeat.exe", "2012-07-06 (China Ver.3)", [
                         {
                          name: "SELECT MUSIC Timer Lock",

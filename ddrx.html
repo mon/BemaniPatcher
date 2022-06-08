@@ -38,8 +38,25 @@
                             { offset: 0x95EF, off: [0x72, 0x06], on: [0x90, 0x90] },
                             { offset: 0xB2459, off: [0x74, 0x04], on: [0x90, 0x90] },
                             { offset: 0xB2583, off: [0x74, 0x04], on: [0x90, 0x90] },
-                            { offset: 0xB4973, off: [0x74, 0x04], on: [0x90, 0x90] },
+                            { offset: 0xB2683, off: [0x74, 0x04], on: [0x90, 0x90] },
                         ],
+                    },
+                    {
+                        name: "Enable timing offset",
+                        tooltip: "Set the value below to 2116822084 if disabled",
+                        patches: [
+                            { offset: 0x43B3E, off: [0x89], on: [0x05] },
+                            { offset: 0x43B43, off: [0x06, 0x2B, 0xC6, 0x89, 0x44, 0x24, 0x2C], on: [0x89, 0x44, 0x24, 0x2C, 0x90, 0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        type: "number",
+                        name: "Timing Offset",
+                        tooltip: "Change 2116822084 to the actual default of -1. From there, subtract to make timing later or add to make it earlier.",
+                        offset: 0x43B3F,
+                        size: 4,
+                        min: -20,
+                        max: 20,
                     },
                 ]),
                 new Patcher("ddr.exe", "2009-02-16", [
@@ -75,6 +92,23 @@
                             { offset: 0xB4973, off: [0x74, 0x04], on: [0x90, 0x90] },
                         ],
                     },
+                    {
+                        name: "Enable timing offset",
+                        tooltip: "Set the value below to 2116822084 if disabled",
+                        patches: [
+                            { offset: 0x4418E, off: [0x89], on: [0x05] },
+                            { offset: 0x44193, off: [0x06, 0x2B, 0xC6, 0x89, 0x44, 0x24, 0x2C], on: [0x89, 0x44, 0x24, 0x2C, 0x90, 0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        type: "number",
+                        name: "Timing Offset",
+                        tooltip: "Change 2116822084 to the actual default of -1. From there, subtract to make timing later or add to make it earlier.",
+                        offset: 0x4418F,
+                        size: 4,
+                        min: -20,
+                        max: 20,
+                    },
                 ]),
                 new Patcher("ddr.exe", "2009-03-16", [
                     {
@@ -108,6 +142,23 @@
                             { offset: 0xBFCB3, off: [0x74, 0x04], on: [0x90, 0x90] },
                             { offset: 0xBFDB3, off: [0x74, 0x04], on: [0x90, 0x90] },
                         ],
+                    },
+                    {
+                        name: "Enable timing offset",
+                        tooltip: "Set the value below to 2116822084 if disabled",
+                        patches: [
+                            { offset: 0x4806E, off: [0x89], on: [0x05] },
+                            { offset: 0x48073, off: [0x06, 0x2B, 0xC6, 0x89, 0x44, 0x24, 0x2C], on: [0x89, 0x44, 0x24, 0x2C, 0x90, 0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        type: "number",
+                        name: "Timing Offset",
+                        tooltip: "Change 2116822084 to the actual default of -1. From there, subtract to make timing later or add to make it earlier.",
+                        offset: 0x4806F,
+                        size: 4,
+                        min: -20,
+                        max: 20,
                     },
                 ]),
                 new Patcher("ddr.exe", "2009-06-10", [
@@ -143,6 +194,23 @@
                             { offset: 0xC0643, off: [0x74, 0x04], on: [0x90, 0x90] },
                         ],
                     },
+                                        {
+                        name: "Enable timing offset",
+                        tooltip: "Set the value below to 2116822084 if disabled",
+                        patches: [
+                            { offset: 0x485BE, off: [0x89], on: [0x05] },
+                            { offset: 0x485C3, off: [0x06, 0x2B, 0xC6, 0x89, 0x44, 0x24, 0x2C], on: [0x89, 0x44, 0x24, 0x2C, 0x90, 0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        type: "number",
+                        name: "Timing Offset",
+                        tooltip: "Change 2116822084 to the actual default of -1. From there, subtract to make timing later or add to make it earlier.",
+                        offset: 0x485BF,
+                        size: 4,
+                        min: -20,
+                        max: 20,
+                    },
                 ]),
                 new Patcher("ddr.exe", "2009-06-30", [
                     {
@@ -177,6 +245,23 @@
                             { offset: 0xC06C3, off: [0x74, 0x04], on: [0x90, 0x90] },
                         ],
                     },
+                    {
+                        name: "Enable timing offset",
+                        tooltip: "Set the value below to 2116822084 if disabled",
+                        patches: [
+                            { offset: 0x4866E, off: [0x89], on: [0x05] },
+                            { offset: 0x48673, off: [0x06, 0x2B, 0xC6, 0x89, 0x44, 0x24, 0x2C], on: [0x89, 0x44, 0x24, 0x2C, 0x90, 0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        type: "number",
+                        name: "Timing Offset",
+                        tooltip: "Change 2116822084 to the actual default of -1. From there, subtract to make timing later or add to make it earlier.",
+                        offset: 0x4866F,
+                        size: 4,
+                        min: -20,
+                        max: 20,
+                    },
                 ]),
                 new Patcher("ddr.exe", "2009-09-11 (US)", [
                     {
@@ -210,6 +295,23 @@
                             { offset: 0xC6771, off: [0x74, 0x04], on: [0x90, 0x90] },
                             { offset: 0xC6871, off: [0x74, 0x04], on: [0x90, 0x90] },
                         ],
+                    },
+                    {
+                        name: "Enable timing offset",
+                        tooltip: "Set the value below to 2116822084 if disabled",
+                        patches: [
+                            { offset: 0x48B2E, off: [0x89], on: [0x05] },
+                            { offset: 0x48B33, off: [0x06, 0x2B, 0xC6, 0x89, 0x44, 0x24, 0x2C], on: [0x89, 0x44, 0x24, 0x2C, 0x90, 0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        type: "number",
+                        name: "Timing Offset",
+                        tooltip: "Change 2116822084 to the actual default of -1. From there, subtract to make timing later or add to make it earlier.",
+                        offset: 0x48B2F,
+                        size: 4,
+                        min: -20,
+                        max: 20,
                     },
                 ]),
             ]);

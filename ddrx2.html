@@ -50,6 +50,23 @@
                             { offset: 0xB8D7, off: [0x72, 0x06], on: [0x90, 0x90] },
                         ],
                     },
+                    {
+                        name: "Enable timing offset",
+                        tooltip: "Set the value below to 2116822084 if disabled",
+                        patches: [
+                            { offset: 0x4AB7E, off: [0x89], on: [0x05] },
+                            { offset: 0x4AB83, off: [0x06, 0x2B, 0xC6, 0x89, 0x44, 0x24, 0x2C], on: [0x89, 0x44, 0x24, 0x2C, 0x90, 0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        type: "number",
+                        name: "Timing Offset",
+                        tooltip: "Change 2116822084 to the actual default of -1. From there, subtract to make timing later or add to make it earlier.",
+                        offset: 0x4AB7F,
+                        size: 4,
+                        min: -20,
+                        max: 20,
+                    },
                 ]),
                 new Patcher("ddr.exe", "2010-12-07 (US)", [
                     {
@@ -74,6 +91,23 @@
                     {
                         name: "Song Unlock",
                         patches: [{ offset: 0x22FC, off: [0x32, 0xC0], on: [0xB0, 0x01] }],
+                    },
+                    {
+                        name: "Enable timing offset",
+                        tooltip: "Set the value below to 2116822084 if disabled",
+                        patches: [
+                            { offset: 0x44B1E, off: [0x89], on: [0x05] },
+                            { offset: 0x44B23, off: [0x06, 0x2B, 0xC6, 0x89, 0x44, 0x24, 0x2C], on: [0x89, 0x44, 0x24, 0x2C, 0x90, 0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        type: "number",
+                        name: "Timing Offset",
+                        tooltip: "Change 2116822084 to the actual default of -1. From there, subtract to make timing later or add to make it earlier.",
+                        offset: 0x44B1F,
+                        size: 4,
+                        min: -20,
+                        max: 20,
                     },
                 ]),
             ]);

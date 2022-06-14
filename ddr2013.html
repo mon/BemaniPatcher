@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DDR 2013 DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            new PatchContainer([
+                new Patcher("mdxja_945.dll", "2014-03-27", [
+                    {
+                        name: "NVIDIA gray arrow/freeze color fix",
+                        tooltip: "Also affects newer AMD cards",
+                        patches: [{ offset: 0x284EC, off: [0xD9, 0x44, 0x24, 0x24, 0x89, 0x54, 0x24, 0x1C, 0xDB, 0x44, 0x24, 0x1C, 0x85, 0xD2, 0x7D, 0x06, 0xD8, 0x05, 0x80, 0xCC, 0x22, 0x10, 0x8B, 0x6C, 0x24, 0x2C, 0xDE, 0xF9, 0x0F, 0xBE, 0x54, 0x24, 0x13], on: [0x89, 0x54, 0xE4, 0x1C, 0xDB, 0x44, 0xE4, 0x1C, 0xD9, 0x44, 0xE4, 0x24, 0x8B, 0x54, 0xE4, 0x13, 0xDC, 0x05, 0x90, 0xCC, 0x22, 0x10, 0xD9, 0xC9, 0x0F, 0xBE, 0xD2, 0x8B, 0x6C, 0x24, 0x2C, 0xDE, 0xF9] }],
+                    },
+                    {
+                        name: "Timer Freeze",
+                        patches: [
+                            { offset: 0x240BB, off: [0x77, 0x09, 0xC7, 0x45, 0x3C, 0x00, 0x00], on: [0x90, 0x90, 0xC7, 0x45, 0x3C, 0x10, 0x27] },
+                            { offset: 0x24498, off: [0x89, 0x4D, 0x3C], on: [0x90, 0x90, 0x90] }
+                        ],
+                    },
+                    {
+                        name: "Mute crowd cheering and booing during song",
+                        tooltip: "Use with modified voice.xwb to also mute announcer",
+                        patches: [{ offset: 0x481FB, off: [0x0F, 0x84], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip online update check",
+                        tooltip: "30 seconds at boot",
+                        patches: [{ offset: 0x1C9B0, off: [0x6A, 0x54], on: [0xEB, 0xC0] }],
+                    },
+                    {
+                        name: "Song Unlock",
+                        patches: [
+                            { offset: 0x2C6B, off: [0x75], on: [0xEB] },
+                            { offset: 0xB78E, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0xB803, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0xB873, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0xB89F, off: [0x72, 0x06], on: [0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        name: "Enable timing offset",
+                        tooltip: "Set the value below to 2083529796 if disabled",
+                        patches: [
+                            { offset: 0x4D790, off: [0x89], on: [0x05] },
+                            { offset: 0x4D795, off: [0x10, 0x7F, 0x04, 0x3B, 0xC6, 0x76, 0x0A], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        type: "number",
+                        name: "Timing Offset",
+                        tooltip: "Change 2083529796 to the actual default of -100. From there, in intervals of 500, subtract to make timing later or add to make it earlier.",
+                        offset: 0x4D791,
+                        size: 4,
+                        min: -10000,
+                        max: 10000,
+                    },
+                ]),
+            ]);
+        });
+    </script>
+</head>
+<body>
+    <h1>DDR 2013 DLL Modder</h1>
+</body>
+</html>

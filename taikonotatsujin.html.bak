@@ -138,7 +138,7 @@
                         ],
                     },					
                     {
-                        name: "Move the CabinetOfflineData files to Same Folder as the Exe",
+                        name: "Move the CabinetOfflineDate* and CabinetInfo* files to Same Folder as the Exe",
                         patches: [
                             {offset: 0xB1A6B0, off: [0x46, 0x3A, 0x2F], on: [0x2E, 0x2F, 0x2F]}
                         ],

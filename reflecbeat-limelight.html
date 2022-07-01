@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>REFLEC BEAT limelight DLL Modder</title>
+        <link rel="stylesheet" href="css/style.css">
+        <script type="text/javascript" src="js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function() {
+                new PatchContainer([
+                    new Patcher("reflecbeat.dll", "2012-08-29", [
+                        {
+                            name : "Unlock all songs",
+                            patches: [{offset: 0x7CA0E, off: [0x74], on: [0xEB]}]
+                        },
+                        {
+                            name : "Unlock all difficulties",
+                            patches: [{offset: 0x7C8B0, off: [0x74], on: [0xEB]}]
+                        },
+                        {
+                            name: "Timer freeze",
+                            patches : [{offset : 0x10F02F, off: [0x95], on : [0x90]}]
+                        }
+                    ])
+                ])
+            });
+        </script>
+    </head>
+    <body>
+        <h1>REFLEC BEAT limelight DLL Modder</h1>
+    </body>
+</html>

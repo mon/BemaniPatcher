@@ -9,6 +9,10 @@
   font-style: normal;
 }
 
+.tagline {
+    font-family: monospace;
+}
+
 .icons, .subsection {
     display: grid;
     grid-template-columns: repeat(auto-fit, 180px);

@@ -9,13 +9,23 @@
   font-style: normal;
 }
 
-.icons {
-    display: flex;
-    flex-wrap: wrap;
+.icons, .subsection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 180px);
+    grid-auto-flow: dense;
     align-items: stretch;
     margin: 0 auto;
     text-align: center;
     justify-content: center;
+}
+
+.subsection {
+    grid-column: 1 / -1;
+    background-color: #a2a2a2;
+    margin: unset;
+    /* I don't understand anything */
+    margin-right: -15px;
+    padding-right: 15px;
 }
 
 .gameicon,
@@ -37,6 +47,20 @@
     justify-content: center;
 }
 
+label.gameicon {
+    cursor: pointer;
+    background: #fffcf0;
+}
+
+input.sectionToggle,
+input.sectionToggle + div {
+    display: none;
+}
+
+input:checked.sectionToggle + div {
+    display: grid;
+}
+
 .gameicon:hover,
 .dragover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -52,15 +76,11 @@
     margin-top: 5px;
 }
 
-.gameicon>div>div {
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
 .gameicon>div {
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .fileInput {

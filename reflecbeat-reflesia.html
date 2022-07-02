@@ -57,6 +57,13 @@
                     ]),
                     new Patcher("reflecbeat.dll", "2019-12-11", [
                         {
+                            name: "E: drive fix",
+                            tooltip: "Fix crash caused by no E: drive",
+                            patches: [
+                                { offset: 0x28BC50, off: [0x65, 0x3A, 0x2F], on: [0x64, 0x65, 0x76] }
+                            ]
+                        },
+                        {
                             name: "Timer freeze",
                             patches: [
                                 { offset: 0x13980B, off: [0x89, 0x4E, 0x18], on: [0x90, 0x90, 0x90] }

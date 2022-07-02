@@ -12,12 +12,88 @@
                         {
                             name: "E: drive fix",
                             tooltip: "Fix crash caused by no E: drive",
-                            patches: [{
-                                       offset: 0x28B0FC,
-                                       off: [0x65, 0x3A, 0x2F],
-                                       on: [0x64, 0x65, 0x76]
-                            }]
-                        }
+                            patches: [
+                                { offset: 0x28B0FC, off: [0x65, 0x3A, 0x2F], on: [0x64, 0x65, 0x76] }
+                            ]
+                        },
+                        {
+                            name: "Timer freeze",
+                            patches: [
+                                { offset: 0x1397FB, off: [0x89, 0x4E, 0x18], on: [0x90, 0x90, 0x90] }
+                            ]
+                        },
+                        {
+                            name: "Unscramble PIN pad",
+                            tooltip: "Disable randomization of PIN input when carding in",
+                            patches: [
+                                { offset: 0xB02DF, off: [0x03, 0xC0], on: [0x29, 0xC0] },
+                                { 
+                                    offset: 0x24E900,
+                                    off: [0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x09, 0x00, 0x00, 0x00],
+                                    on: [0x07, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x09, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+                                }
+                            ]
+                        },
+                        {
+                            name: "Remove CREDIT / FREE PLAY / EVENT MODE bottom text",
+                            patches: [
+                                {
+                                    offset: 0x167930,
+                                    off: [0xE8, 0x3B, 0xE3, 0xF0, 0xFF],
+                                    on: [0x90, 0x90, 0x90, 0x90, 0x90]
+                                }
+                            ],
+                        },
+                        {
+                            name: "Remove PASELI bottom text",
+                            patches: [
+                                {
+                                    offset: 0x16778B,
+                                    off: [0xE8, 0xE0, 0xE4, 0xF0, 0xFF],
+                                    on: [0x90, 0x90, 0x90, 0x90, 0x90]
+                                }
+                            ],
+                        },
+                    ]),
+                    new Patcher("reflecbeat.dll", "2019-12-11", [
+                        {
+                            name: "Timer freeze",
+                            patches: [
+                                { offset: 0x13980B, off: [0x89, 0x4E, 0x18], on: [0x90, 0x90, 0x90] }
+                            ],
+                        },
+                        {
+                            name: "Unscramble PIN pad",
+                            tooltip: "Disable randomization of PIN input when carding in",
+                            patches: [
+                                { offset: 0xB02DF, off: [0x03, 0xC0], on: [0x29, 0xC0] },
+                                { 
+                                    offset: 0x24F1F0,
+                                    off: [0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x09, 0x00, 0x00, 0x00],
+                                    on: [0x07, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x09, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+                                }
+                            ]
+                        },
+                        {
+                            name: "Remove CREDIT / FREE PLAY / EVENT MODE bottom text",
+                            patches: [
+                                {
+                                    offset: 0x167940,
+                                    off: [0xE8, 0x2B, 0xE3, 0xF0, 0xFF],
+                                    on: [0x90, 0x90, 0x90, 0x90, 0x90]
+                                }
+                            ],
+                        },
+                        {
+                            name: "Remove PASELI bottom text",
+                            patches: [
+                                {
+                                    offset: 0x16779B,
+                                    off: [0xE8, 0xD0, 0xE4, 0xF0, 0xFF],
+                                    on: [0x90, 0x90, 0x90, 0x90, 0x90]
+                                }
+                            ],
+                        },
                     ]),
                 ]);
             });

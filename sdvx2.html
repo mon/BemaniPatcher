@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>SDVX II DLL Modder</title>
+    <script src="/cdn-cgi/apps/head/HwU4Afx3ZsFv3HCMpwtQftaMMBI.js"></script><link rel='stylesheet' href='css/style.css'>
+    <script type='text/javascript' src='js/dllpatcher.js'></script>
+    <script type='text/javascript'>
+      window.addEventListener('load', function () {
+        new PatchContainer([
+        new Patcher('soundvoltex.dll', "2014-10-22", [
+                {
+                  name: 'Freeze timer in all modes',
+                  tooltip: 'Useful to slowly browse through the song list',
+                  patches: [{offset: 0x380BB, off: [0x8B, 0x43, 0x60, 0x85, 0xC0, 0x74, 0x04], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
+                },
+				{
+              name: 'Prevent Windows volume change on boot',
+              tooltip: 'If your volume gets forced to max, turn this on',
+              patches: [{offset: 0xEA2FA, off: [0xE8, 0x21, 0x03, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90]}]
+            },
+            ]),
+        ]);
+    });
+    </script>
+</head>
+<body>
+<h1>SDVX II DLL Modder</h1>
+</body>
+</html>

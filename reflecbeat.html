@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>REFLEC BEAT DLL Modder</title>
+        <link rel="stylesheet" href="css/style.css">
+        <script type="text/javascript" src="js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function() {
+                new PatchContainer([
+                    new Patcher("reflecbeat.dll", "2011-08-22", [
+                        {
+                            name : "Unlock all songs",
+                            patches: [{offset: 0x5FD0B, off: [0x74], on: [0xEB]}]
+                        },
+                        {
+                            name : "Unlock all difficulties",
+                            patches: [{offset: 0x5785F, off: [0x74, 0x05], on: [0x90, 0x90]}]
+                        },
+                        {
+                            name: "Timer freeze",
+                            patches : [{offset : 0xF310, off: [0x74, 0x03], on : [0x90, 0x90]}]
+                        }
+                    ])
+                ]);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>REFLEC BEAT DLL Modder</h1>
+    </body>
+</html>

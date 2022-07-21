@@ -4,6 +4,18 @@
         <meta charset="utf-8">
         <title>BEMANI DLL Patching Tools</title>
         <link rel="stylesheet" href="css/style.css">
+        <script>
+            window.addEventListener('DOMContentLoaded', function() {
+                // implement radio-style behaviour for categories
+                for(const input of document.querySelectorAll(".sectionToggle")) {
+                    input.onclick = () => {
+                        for(const el of document.querySelectorAll(".sectionToggle")) {
+                            if(el != input) el.checked = false;
+                        }
+                    }
+                }
+            });
+        </script>
     </head>
     <body>
         <h1>Pick a game!</h1>

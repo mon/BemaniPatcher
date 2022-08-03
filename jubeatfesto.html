@@ -8,6 +8,29 @@
         <script type="text/javascript">
             window.addEventListener("load", function() {
                 new PatchContainer([
+                    new Patcher("jubeat.dll", "2022-05-24", [
+                        {
+                            name: "Skip Tutorial",
+                            patches: [{ offset: 0xD746F, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                        },
+                        {
+                            name: "Select Music Timer Freeze",
+                            patches: [{ offset: 0xBFE72, off: [0x75], on: [0xEB] }],
+                        },
+                        {
+                            name: "Skip Category Select",
+                            patches: [{ offset: 0xC01F7, off: [0x04], on: [0x07] }],
+                        },
+                        {
+                            name: "Result Timer Freeze",
+                            tooltip: "Counts down to 0 then stops",
+                            patches: [{ offset: 0xA7E33, off: [0x75], on: [0xEB] }],
+                        },
+                        {
+                            name: "Skip Online Matching",
+                            patches: [{ offset: 0xD356F, off: [0x0F, 0x84], on: [0x90, 0xE9] }],
+                        },
+                    ]),
                     new Patcher("jubeat.dll", "2021-03-31", [
                         {
                           name: "Disable Tutorial",

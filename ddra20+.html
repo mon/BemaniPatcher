@@ -75,12 +75,12 @@
 					{
 						name : "PFC Mode",
 						tooltip: "Like Extra Encore Stage. If you hit a Great or a Good, you lose a life. This feature requires you to select LIFE8/LIFE4/RISKY on the Options, otherwise it has no effect."
-						patches: [{offset : 0xA872F, off:[0x0F,0x9C,0xC0] on:[0xB0,0x01,0x90]}],
+						patches: [{offset : 0xA872F, off:[0x0F,0x9C,0xC0], on:[0xB0,0x01,0x90]}],
 					},
 					{
 						name : "MFC Mode",
 						tooltip: "Like PFC Mode except this time no Perfects. Requires PFC Mode to be enabled.",
-						patches: [[{offset: 0xA870C, off:[0x83,0xF8,0x02] on: [0x83,0xF8,0x01]}],
+						patches: [[{offset: 0xA870C, off:[0x83,0xF8,0x02], on:[0x83,0xF8,0x01]}],
 					},
                     {
                         name: "Hide all bottom text",

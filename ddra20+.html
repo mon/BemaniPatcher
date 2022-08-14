@@ -58,6 +58,30 @@
                             { offset: 0x64536, off: [0x00], on: [0x01] },
                         ],
                     },
+					{
+						name : "Enable all Speed Modifiers",
+						tooltip :"Including x4.25/x7.75, Must have the Unlock Options patch enabled",
+						patches: [{ offset: 0xA7D45, off: [0x7E], on: [0xEB] }],
+					},
+					{
+						name : "Enable LIFE8 Modifier",
+						tooltip: "Must have the Unlock Options patch enabled",
+						patches: [
+						{ offset: 0xA7DB0, off:[0x77, 0x1A], on:[0xEB, 0x07] },
+						{ offset: 0xA7DBC, off:[0x8A,0xC3,0x5B,0x8B,0x4D,0xFC], on:[0x7F,0xDC,0xB0,0x01,0xEB,0xDA]},
+						],
+						
+					},
+					{
+						name : "PFC Mode",
+						tooltip: "Like Extra Encore Stage. If you hit a Great or a Good, you lose a life. This feature requires you to select LIFE8/LIFE4/RISKY on the Options, otherwise it has no effect."
+						patches: [{offset : 0xA872F, off:[0x0F,0x9C,0xC0] on:[0xB0,0x01,0x90]}],
+					},
+					{
+						name : "MFC Mode",
+						tooltip: "Like PFC Mode except this time no Perfects. Requires PFC Mode to be enabled.",
+						patches: [[{offset 0xA870C, off:[0x83,0xF8,0x02] on: [0x83,0xF8,0x01]}],
+					},
                     {
                         name: "Hide all bottom text",
                         tooltip: "Such as EVENT MODE, PASELI, COIN, CREDIT, MAINTENANCE",

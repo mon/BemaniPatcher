@@ -313,6 +313,17 @@
                         ],
                     },
                     {
+                        name: "Quicker Quick Retry",
+                        tooltip : "Shortens duration of the 'stage failed' animation.",
+                        patches: [
+                            {
+                                offset: 0x72D595,
+                                off: [0x8B, 0x58],
+                                on: [0xEB, 0x2D],
+                            },
+                        ],
+                    },
+                    {
                         name: "Always show FAST/SLOW total",
                         patches: [
                             { offset: 0x7186C3, off: [0x74], on: [0x75] },

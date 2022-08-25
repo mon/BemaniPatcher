@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -29,7 +29,39 @@
                         {
                           name: "Skip Online Matching",
                           patches: [{offset: 0xD358B, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
-                        }
+                        },
+                        {
+                          // by mon
+                          name: "Force unlock all markers",
+                          patches: [
+                            { offset: 0x1AABB0, off: [0x75], on: [0xEB] },
+                            { offset: 0x163DBE, off: [0x75], on: [0xEB] },
+                          ],
+                        },
+                        {
+                          // by mon
+                          name: "Force unlock all backgrounds",
+                          patches: [
+                            { offset: 0x135D4E, off: [0x75], on: [0xEB] },
+                            { offset: 0x163E71, off: [0x75], on: [0xEB] },
+                          ],
+                        },
+                        {
+                          // by mon
+                          name: "Force enable Expert Option",
+                          patches: [{ offset: 0xDCEC0, off: [0x55, 0x8B, 0xEC], on: [0xB0, 0x01, 0xC3] }],
+                        },
+                        {
+                          // by mon
+                          name: "Default marker for guest play",
+                          type: "union",
+                          offset: 0x5DFF7,
+                          patches: [
+                            { name: "Festo (Default)", patch: [46] },
+                            { name: "Qubell", patch: [40] },
+                            { name: "Shutter", patch: [4] },
+                          ],
+                        },
                     ]),
                     new Patcher("jubeat.dll", "2021-12-15", [
                         {

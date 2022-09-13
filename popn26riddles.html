@@ -4,9 +4,6 @@
     <meta charset="utf-8" />
     <title>pop'n music 解明リドルズ DLL Modder</title>
     <link rel="stylesheet" href="css/style.css" />
-    <!-- don't hate -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script type="text/javascript" src="js/FileSaver.min.js"></script>
     <script type="text/javascript" src="js/dllpatcher.js"></script>
     <script type="text/javascript">
       window.addEventListener("load", function () {
@@ -36,6 +33,7 @@
             },
             {
                 name: "Skip Menu and Long Note Tutorials",
+                danger: "Might interfere with score saving on networks",
                 patches: [
                     { offset: 0x28E2B, off: [0x74], on: [0xEB] },
                     { offset: 0x28E07, off: [0x75], on: [0xEB] },

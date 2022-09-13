@@ -67,6 +67,7 @@ class StandardPatch {
         this.name = options.name;
         this.patches = options.patches;
         this.tooltip = options.tooltip;
+        this.danger = options.danger;
     }
 
     createUI(parent) {
@@ -78,6 +79,9 @@ class StandardPatch {
         patch.appendChild(createLabel(label, id));
         if(this.tooltip) {
             patch.appendChild(createElementClass('div', 'tooltip', this.tooltip));
+        }
+        if(this.danger) {
+            patch.appendChild(createElementClass('div', 'danger tooltip', this.danger));
         }
         parent.appendChild(patch);
     }
@@ -137,6 +141,7 @@ class DynamicPatch {
         this.name = options.name;
         this.patches = options.patches;
         this.tooltip = options.tooltip;
+        this.danger = options.danger;
         this.mode = options.mode;
         this.target = options.target;
     }
@@ -150,6 +155,9 @@ class DynamicPatch {
         this.ui.appendChild(createLabel(label, id));
         if(this.tooltip) {
             this.ui.appendChild(createElementClass('div', 'tooltip', this.tooltip));
+        }
+        if(this.danger) {
+            this.ui.appendChild(createElementClass('div', 'danger tooltip', this.danger));
         }
         parent.appendChild(this.ui);
     }
@@ -401,6 +409,7 @@ class UnionPatch {
         this.offset = options.offset;
         this.patches = options.patches;
         this.tooltip = options.tooltip;
+        this.danger = options.danger;
     }
 
     createUI(parent) {
@@ -411,6 +420,9 @@ class UnionPatch {
         container.appendChild(createElementClass('span', 'patch-union-title', this.name + ':'));
         if(this.tooltip) {
             container.appendChild(createElementClass('div', 'tooltip', this.tooltip));
+        }
+        if(this.danger) {
+            container.appendChild(createElementClass('div', 'danger tooltip', this.danger));
         }
         container.appendChild(document.createElement('span'));
 
@@ -427,6 +439,9 @@ class UnionPatch {
             patchDiv.appendChild(createLabel(label, id));
             if(patch.tooltip) {
                 patchDiv.appendChild(createElementClass('div', 'tooltip', patch.tooltip));
+            }
+            if(patch.danger) {
+                patchDiv.appendChild(createElementClass('div', 'danger tooltip', patch.danger));
             }
             container.appendChild(patchDiv);
         }
@@ -475,6 +490,7 @@ class NumberPatch {
     constructor(options) {
         this.name = options.name;
         this.tooltip = options.tooltip;
+        this.danger = options.danger;
 
         this.offset = options.offset;
         this.size = options.size;
@@ -502,6 +518,9 @@ class NumberPatch {
 
         if (this.tooltip) {
             patch.appendChild(createElementClass('div', 'tooltip', this.tooltip));
+        }
+        if (this.danger) {
+            patch.appendChild(createElementClass('div', 'danger tooltip', this.danger));
         }
         parent.appendChild(patch);
 

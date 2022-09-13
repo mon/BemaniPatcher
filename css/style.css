@@ -162,6 +162,15 @@ input:checked.sectionToggle + div {
     display: none;
 }
 
+.danger {
+    background: #ff6000 !important;
+}
+
+.danger:before {
+    content: '!!';
+    background: #ff6000;
+}
+
 body {
     margin: 40px auto;
     max-width: 1300px;

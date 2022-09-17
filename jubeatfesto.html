@@ -32,7 +32,13 @@
                         },
                         {
                           // by mon
+                          name: "Force enable Expert Option",
+                          patches: [{ offset: 0xDCEC0, off: [0x55, 0x8B, 0xEC], on: [0xB0, 0x01, 0xC3] }],
+                        },
+                        {
+                          // by mon
                           name: "Force unlock all markers",
+						  tooltip : "For guest play, online required",
                           patches: [
                             { offset: 0x1AABB0, off: [0x75], on: [0xEB] },
                             { offset: 0x163DBE, off: [0x75], on: [0xEB] },
@@ -42,16 +48,12 @@
                         {
                           // by mon
                           name: "Force unlock all backgrounds",
+						  tooltip : "For guest play, online required",
                           patches: [
                             { offset: 0x135D4E, off: [0x75], on: [0xEB] },
                             { offset: 0x163E71, off: [0x75], on: [0xEB] },
                             { offset: 0x13602B, off: [0x0F, 0xB7, 0x45, 0xB0], on: [0x31, 0xC0, 0x90, 0x90] },
                           ],
-                        },
-                        {
-                          // by mon
-                          name: "Force enable Expert Option",
-                          patches: [{ offset: 0xDCEC0, off: [0x55, 0x8B, 0xEC], on: [0xB0, 0x01, 0xC3] }],
                         },
                         {
                           // by mon
@@ -71,7 +73,7 @@
                             { name: "QMA/CPU Sharon(QMA/CPUシャロン)", patch: [38] },
                             { name: "Shocho(ショッチョー)", patch: [37] },
                             { name: "saucer(ソーサー)", patch: [36] },
-                            { name: "Natural Block(ナチュラルブロック)", patch: [35] },
+                            { name: "Natural block(ナチュラルブロック)", patch: [35] },
                             { name: "Little owl(こびふくろう)", patch: [34] },
                             { name: "Circus(サーカス)", patch: [33] },
                             { name: "copious(コピオス)", patch: [32] },
@@ -124,8 +126,60 @@
                             { name: "Himouto! Umaru-chan(干物妹！うまるちゃん)", tooltip : "Omnimix required", patch: [8] },
                             { name: "NEW GAME!", tooltip : "Omnimix required", patch: [9] },
                             { name: "Ochazuke(お茶づけ)", tooltip : "Omnimix required", patch: [10] },
-                            { name: "Nengoro Neko(ねんごろねこ)", tooltip : "Force unlock required", patch: [12] },
+                            { name: "Kotaro and Nengoro Neko(コタローとねんごろねこ)", tooltip : "Force unlock required", patch: [12] },
                             { name: "HinaBitter♪(ひなビタ♪)", tooltip : "Force unlock required", patch: [13] },
+                          ],
+                        },
+                        {
+                          name: "Displaying Combo option default set for guest play",
+                          type: "union",
+                          offset: 0x5E003,
+                          patches: [
+                            { name: "ON", tooltip : "Default", patch: [1] },
+                            { name: "OFF", patch: [0] },
+                          ],
+                        },
+                        {
+                          name: "Displaying Ranking option default set for guest play",
+                          type: "union",
+                          offset: 0x5E002,
+                          patches: [
+                            { name: "ON", tooltip : "Default", patch: [1] },
+                            { name: "OFF", patch: [0] },
+                          ],
+                        },
+                        {
+                          name: "HARD MODE option default set for guest play",
+                          type: "union",
+                          offset: 0x5E00C,
+                          patches: [
+                            { name: "OFF", tooltip : "Default", patch: [0] },
+                            { name: "ON", patch: [1] },
+                          ],
+                        },
+                        {
+                          name: "MATCHING option default set for guest play",
+						  tooltip : "Expert option required",
+                          type: "union",
+                          offset: 0x5E00B,
+                          patches: [
+                            { name: "ON", tooltip : "Default", patch: [1] },
+                            { name: "OFF", patch: [0] },
+                          ],
+                        },
+                        {
+                          name: "HAZARD option default set for guest play",
+						  tooltip : "Expert option required",
+                          type: "union",
+                          offset: 0x5E013,
+                          patches: [
+                            { name: "OFF", tooltip : "Default", patch: [0] },
+                            { name: "EXC 1", patch: [1] },
+                            { name: "EXC 2", patch: [2] },
+                            { name: "EXC 3", patch: [3] },
+                            { name: "FC 1", patch: [4] },
+                            { name: "FC 2", patch: [5] },
+                            { name: "FC 3", patch: [6] },
                           ],
                         }
                     ]),

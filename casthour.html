@@ -129,6 +129,15 @@
                         ],
                     },
                     {
+                        name: "Force Max V-Discs",
+                        tooltip: "Infinite leggendaria plays in pfree",
+                        patches: [{ offset: 0x2A3503, off: [0x0F, 0x84], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Hide Time Limit Display on Results Screen",
+                        patches: [{ offset: 0x43C72F, off: [0x84, 0xC0], on: [0x90, 0x90] }],
+                    },
+                    {
                         name: "Hide bottom text",
                         tooltip: "Hides the CREDIT, INSERT COINS, NO ACCOUNT, NOT AVAILABLE, and EXTRA PASELI messages",
                         patches: [

@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>Nostalgia Op.3 DLL Modder</title>
+    <link rel='stylesheet' href='css/style.css'>
+    <script type='text/javascript' src='js/dllpatcher.js'></script>
+    <script type='text/javascript'>
+      window.addEventListener('load', function () {
+        new PatchContainer([
+          new Patcher('nostalgia.dll', "2020-11-16", [
+            {
+              name: 'Menu Timer Freeze',
+              patches: [{offset: 0x305AA3, off: [0x41, 0xFF, 0xC8], on: [0x90, 0x90, 0x90]}]
+            },
+          ]),
+        ]);
+      });
+    </script>
+</head>
+<body>
+<h1>Nostalgia Op.3 DLL Modder</h1>
+</body>
+</html>

@@ -10,8 +10,8 @@ These days, I do not create the patches. Everything is community submitted.
 If you would like new hex edits, make them yourself and make a pull request!
 
 ## Patch rules
-- *New*: No n-0 newer than 1 year ago. [Why?](docs/why_no_n_minus_zero.md)
-- Rhythm games only. Bombergirl is the one exception, it's Konami anyway.
+- No n-0 newer than 1 year ago. [Why?](docs/why_no_n_minus_zero.md)
+- *New for 2023* PC based arcade games only. The main focus is rhythm games though!
 - No autoplay patches
   - It is far too easy to accidentally get people banned from their networks
   - It's mainly used to upload autoplays to YouTube, which is not something I want to be involved with

@@ -8,7 +8,63 @@
     <script type="text/javascript">
         window.addEventListener("load", function () {
             new PatchContainer([
-                new Patcher("ddr.exe", "2008-12-19", [
+                new Patcher("DDR.exe", "2008-12-19", [
+                    {
+                        name: "NVIDIA gray arrow/freeze color fix",
+                        tooltip: "Also affects newer AMD cards",
+                        patches: [{ offset: 0x246FE, off: [0x85, 0xD2, 0xD9, 0x44, 0x24, 0x24, 0x89, 0x54, 0x24, 0x2C, 0xDB, 0x44, 0x24, 0x2C, 0x7D, 0x06, 0xD8, 0x05, 0xA0, 0xFA, 0x5D, 0x00, 0x0F, 0xBE, 0x54, 0x24, 0x13], on: [0x89, 0x54, 0xE4, 0x2C, 0xDB, 0x44, 0xE4, 0x2C, 0xD9, 0x44, 0xE4, 0x24, 0x8B, 0x54, 0xE4, 0x13, 0xDC, 0x05, 0xB0, 0xFA, 0x5D, 0x00, 0xD9, 0xC9, 0x0F, 0xBE, 0xD2] }],
+                    },
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0x207C8, off: [0x89, 0x4D, 0x34], on: [0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Disable check for 192.168 ip range",
+                        tooltip: "Fixes error 5-2002-0001",
+                        patches: [{ offset: 0xF9358, off: [0xC0], on: [0xBF] }],
+                    },
+                    {
+                        name: "Mute crowd cheering and booing during song",
+                        tooltip: "Use with modified voice.xwb to also mute announcer",
+                        patches: [{ offset: 0x3ED6B, off: [0x0F, 0x84], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Force DATA check OK",
+                        tooltip: "Use with modified VOICE.xwb to mute announcer",
+                        patches: [{ offset: 0xD3EA3, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Unlock Songs, Characters, Options, and Courses",
+                        patches: [
+                            { offset: 0x8715, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0x8769, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0x87A1, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0x87DD, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0x890F, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0xB506D, off: [0x74, 0x04], on: [0x90, 0x90] },
+                            { offset: 0xB51BF, off: [0x74, 0x04], on: [0x90, 0x90] },
+                            { offset: 0xB52EF, off: [0x74, 0x04], on: [0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        name: "Enable timing offset",
+                        tooltip: "Set the value below to 2116822084 if disabled",
+                        patches: [
+                            { offset: 0x43A7E, off: [0x89], on: [0x05] },
+                            { offset: 0x43A83, off: [0x06, 0x2B, 0xC6, 0x89, 0x44, 0x24, 0x2C], on: [0x89, 0x44, 0x24, 0x2C, 0x90, 0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        type: "number",
+                        name: "Timing Offset",
+                        tooltip: "Change 2116822084 to the actual default of -1. From there, subtract to make timing later or add to make it earlier.",
+                        offset: 0x43A7F,
+                        size: 4,
+                        min: -20,
+                        max: 20,
+                    },
+                ]),
+                new Patcher("DDR.exe", "2008-12-19", [
                     {
                         name: "NVIDIA gray arrow/freeze color fix",
                         tooltip: "Also affects newer AMD cards",
@@ -17,6 +73,11 @@
                     {
                         name: "Timer Freeze",
                         patches: [{ offset: 0x209A8, off: [0x89, 0x4D, 0x34], on: [0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Disable check for 192.168 ip range",
+                        tooltip: "Fixes error 5-2002-0001",
+                        patches: [{ offset: 0xF67A8, off: [0xC0], on: [0xBF] }],
                     },
                     {
                         name: "Mute crowd cheering and booing during song",
@@ -59,7 +120,175 @@
                         max: 20,
                     },
                 ]),
-                new Patcher("ddr.exe", "2009-02-16", [
+                new Patcher("DDR.exe", "2009-02-06", [
+                    {
+                        name: "NVIDIA gray arrow/freeze color fix",
+                        tooltip: "Also affects newer AMD cards",
+                        patches: [{ offset: 0x241EE, off: [0x85, 0xD2, 0xD9, 0x44, 0x24, 0x24, 0x89, 0x54, 0x24, 0x2C, 0xDB, 0x44, 0x24, 0x2C, 0x7D, 0x06, 0xD8, 0x05, 0x58, 0xFA, 0x5D, 0x00, 0x0F, 0xBE, 0x54, 0x24, 0x13], on: [0x89, 0x54, 0xE4, 0x2C, 0xDB, 0x44, 0xE4, 0x2C, 0xD9, 0x44, 0xE4, 0x24, 0x8B, 0x54, 0xE4, 0x13, 0xDC, 0x05, 0x68, 0xFA, 0x5D, 0x00, 0xD9, 0xC9, 0x0F, 0xBE, 0xD2] }],//
+                    },
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0x202A8, off: [0x89, 0x4D, 0x34], on: [0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Disable check for 192.168 ip range",
+                        tooltip: "Fixes error 5-2002-0001",
+                        patches: [{ offset: 0xF9218, off: [0xC0], on: [0xBF] }],
+                    },
+                    {
+                        name: "Mute crowd cheering and booing during song",
+                        tooltip: "Use with modified voice.xwb to also mute announcer",
+                        patches: [{ offset: 0x3E89B, off: [0x0F, 0x84], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Force DATA check OK",
+                        tooltip: "Use with modified VOICE.xwb to mute announcer",
+                        patches: [{ offset: 0xD3C03, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Unlock Songs, Characters, Options, and Courses",
+                        patches: [
+                            { offset: 0x8725, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0x8779, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0x87B1, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0x87ED, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0x891F, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0xB4E9D, off: [0x74, 0x04], on: [0x90, 0x90] },
+                            { offset: 0xB4FEF, off: [0x74, 0x04], on: [0x90, 0x90] },
+                            { offset: 0xB511F, off: [0x74, 0x04], on: [0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        name: "Enable timing offset",
+                        tooltip: "Set the value below to 2116822084 if disabled",
+                        patches: [
+                            { offset: 0x4356E, off: [0x89], on: [0x05] },
+                            { offset: 0x43573, off: [0x06, 0x2B, 0xC6, 0x89, 0x44, 0x24, 0x2C], on: [0x89, 0x44, 0x24, 0x2C, 0x90, 0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        type: "number",
+                        name: "Timing Offset",
+                        tooltip: "Change 2116822084 to the actual default of -1. From there, subtract to make timing later or add to make it earlier.",
+                        offset: 0x4356F,
+                        size: 4,
+                        min: -20,
+                        max: 20,
+                    },
+                ]),
+                new Patcher("DDR.exe", "2009-02-16", [
+                    {
+                        name: "NVIDIA gray arrow/freeze color fix",
+                        tooltip: "Also affects newer AMD cards",
+                        patches: [{ offset: 0x249EE, off: [0x85, 0xD2, 0xD9, 0x44, 0x24, 0x24, 0x89, 0x54, 0x24, 0x2C, 0xDB, 0x44, 0x24, 0x2C, 0x7D, 0x06, 0xD8, 0x05, 0xF0, 0xD5, 0x5D, 0x00, 0x0F, 0xBE, 0x54, 0x24, 0x13], on: [0x89, 0x54, 0xE4, 0x2C, 0xDB, 0x44, 0xE4, 0x2C, 0xD9, 0x44, 0xE4, 0x24, 0x8B, 0x54, 0xE4, 0x13, 0xDC, 0x05, 0x00, 0xD6, 0x5D, 0x00, 0xD9, 0xC9, 0x0F, 0xBE, 0xD2] }],
+                    },
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0x20AA8, off: [0x89, 0x4D, 0x34], on: [0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Disable check for 192.168 ip range",
+                        tooltip: "Fixes error 5-2002-0001",
+                        patches: [{ offset: 0xF7378, off: [0xC0], on: [0xBF] }],
+                    },
+                    {
+                        name: "Mute crowd cheering and booing during song",
+                        tooltip: "Use with modified voice.xwb to also mute announcer",
+                        patches: [{ offset: 0x3F00B, off: [0x0F, 0x84], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Force DATA check OK",
+                        tooltip: "Use with modified VOICE.xwb to mute announcer",
+                        patches: [{ offset: 0xD1EC3, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Unlock Songs, Characters, Options, and Courses",
+                        patches: [
+                            { offset: 0x8CD5, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0x8D29, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0x8D61, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0x8D9D, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0x962F, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0xB3009, off: [0x74, 0x04], on: [0x90, 0x90] },
+                            { offset: 0xB3133, off: [0x74, 0x04], on: [0x90, 0x90] },
+                            { offset: 0xB3233, off: [0x74, 0x04], on: [0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        name: "Enable timing offset",
+                        tooltip: "Set the value below to 2116822084 if disabled",
+                        patches: [
+                            { offset: 0x43D8E, off: [0x89], on: [0x05] },
+                            { offset: 0x43D93, off: [0x06, 0x2B, 0xC6, 0x89, 0x44, 0x24, 0x2C], on: [0x89, 0x44, 0x24, 0x2C, 0x90, 0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        type: "number",
+                        name: "Timing Offset",
+                        tooltip: "Change 2116822084 to the actual default of -1. From there, subtract to make timing later or add to make it earlier.",
+                        offset: 0x43D8F,
+                        size: 4,
+                        min: -20,
+                        max: 20,
+                    },
+                ]),
+                new Patcher("DDR.exe", "2009-02-16", [
+                    {
+                        name: "NVIDIA gray arrow/freeze color fix",
+                        tooltip: "Also affects newer AMD cards",
+                        patches: [{ offset: 0x23EFE, off: [0x85, 0xD2, 0xD9, 0x44, 0x24, 0x24, 0x89, 0x54, 0x24, 0x2C, 0xDB, 0x44, 0x24, 0x2C, 0x7D, 0x06, 0xD8, 0x05, 0x28, 0xB7, 0x5D, 0x00, 0x0F, 0xBE, 0x54, 0x24, 0x13], on: [0x89, 0x54, 0xE4, 0x2C, 0xDB, 0x44, 0xE4, 0x2C, 0xD9, 0x44, 0xE4, 0x24, 0x8B, 0x54, 0xE4, 0x13, 0xDC, 0x05, 0x38, 0xB7, 0x5D, 0x00, 0xD9, 0xC9, 0x0F, 0xBE, 0xD2] }],
+                    },
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0x1FFB8, off: [0x89, 0x4D, 0x34], on: [0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Disable check for 192.168 ip range",
+                        tooltip: "Fixes error 5-2002-0001",
+                        patches: [{ offset: 0xF5F48, off: [0xC0], on: [0xBF] }],
+                    },
+                    {
+                        name: "Mute crowd cheering and booing during song",
+                        tooltip: "Use with modified voice.xwb to also mute announcer",
+                        patches: [{ offset: 0x3E63B, off: [0x0F, 0x84], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Force DATA check OK",
+                        tooltip: "Use with modified VOICE.xwb to mute announcer",
+                        patches: [{ offset: 0xD07B3, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Unlock Songs, Characters, Options, and Courses",
+                        patches: [
+                            { offset: 0x8715, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0x8769, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0x87A1, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0x87DD, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0x890F, off: [0x72, 0x06], on: [0x90, 0x90] },
+                            { offset: 0xB1A6D, off: [0x74, 0x04], on: [0x90, 0x90] },
+                            { offset: 0xB1BBF, off: [0x74, 0x04], on: [0x90, 0x90] },
+                            { offset: 0xB1CEF, off: [0x74, 0x04], on: [0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        name: "Enable timing offset",
+                        tooltip: "Set the value below to 2116822084 if disabled",
+                        patches: [
+                            { offset: 0x4331E, off: [0x89], on: [0x05] },
+                            { offset: 0x43323, off: [0x06, 0x2B, 0xC6, 0x89, 0x44, 0x24, 0x2C], on: [0x89, 0x44, 0x24, 0x2C, 0x90, 0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        type: "number",
+                        name: "Timing Offset",
+                        tooltip: "Change 2116822084 to the actual default of -1. From there, subtract to make timing later or add to make it earlier.",
+                        offset: 0x4331F,
+                        size: 4,
+                        min: -20,
+                        max: 20,
+                    },
+                ]),
+                new Patcher("DDR.exe", "2009-02-16", [
                     {
                         name: "NVIDIA gray arrow/freeze color fix",
                         tooltip: "Also affects newer AMD cards",
@@ -68,6 +297,11 @@
                     {
                         name: "Timer Freeze",
                         patches: [{ offset: 0x20DF8, off: [0x89, 0x4D, 0x34], on: [0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Disable check for 192.168 ip range",
+                        tooltip: "Fixes error 5-2002-0001",
+                        patches: [{ offset: 0xF8AD8, off: [0xC0], on: [0xBF] }],
                     },
                     {
                         name: "Mute crowd cheering and booing during song",
@@ -110,7 +344,7 @@
                         max: 20,
                     },
                 ]),
-                new Patcher("ddr.exe", "2009-03-16", [
+                new Patcher("DDR.exe", "2009-03-16", [
                     {
                         name: "NVIDIA gray arrow/freeze color fix",
                         tooltip: "Also affects newer AMD cards",
@@ -119,6 +353,11 @@
                     {
                         name: "Timer Freeze",
                         patches: [{ offset: 0x22568, off: [0x89, 0x4D, 0x34], on: [0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Disable check for 192.168 ip range",
+                        tooltip: "Fixes error 5-2002-0001",
+                        patches: [{ offset: 0x1040E8, off: [0xC0], on: [0xBF] }],
                     },
                     {
                         name: "Mute crowd cheering and booing during song",
@@ -161,7 +400,7 @@
                         max: 20,
                     },
                 ]),
-                new Patcher("ddr.exe", "2009-06-10", [
+                new Patcher("DDR.exe", "2009-06-10", [
                     {
                         name: "NVIDIA gray arrow/freeze color fix",
                         tooltip: "Also affects newer AMD cards",
@@ -170,6 +409,11 @@
                     {
                         name: "Timer Freeze",
                         patches: [{ offset: 0x229F8, off: [0x89, 0x4D, 0x34], on: [0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Disable check for 192.168 ip range",
+                        tooltip: "Fixes error 5-2002-0001",
+                        patches: [{ offset: 0x104788, off: [0xC0], on: [0xBF] }],
                     },
                     {
                         name: "Mute crowd cheering and booing during song",
@@ -212,7 +456,7 @@
                         max: 20,
                     },
                 ]),
-                new Patcher("ddr.exe", "2009-06-30", [
+                new Patcher("DDR.exe", "2009-06-30", [
                     {
                         name: "NVIDIA gray arrow/freeze color fix",
                         tooltip: "Also affects newer AMD cards",
@@ -268,7 +512,7 @@
                         max: 20,
                     },
                 ]),
-                new Patcher("ddr.exe", "2009-09-11 (US)", [
+                new Patcher("DDR.exe", "2009-09-11 (US)", [
                     {
                         name: "NVIDIA gray arrow/freeze color fix",
                         tooltip: "Also affects newer AMD cards",
@@ -277,6 +521,11 @@
                     {
                         name: "Timer Freeze",
                         patches: [{ offset: 0x22D88, off: [0x89, 0x4D, 0x34], on: [0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Disable check for 192.168 ip range",
+                        tooltip: "Fixes error 5-2002-0001",
+                        patches: [{ offset: 0x10DD48, off: [0xC0], on: [0xBF] }],
                     },
                     {
                         name: "Mute crowd cheering and booing during song",

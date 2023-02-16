@@ -81,6 +81,14 @@
                             {offset: 0xE78E37, off: [0x80], on: [0x00]},
                         ],
                     },
+                    {
+                        name: "Bypass LED board check",
+                        tooltip: "Forces LED board check to good and auto continues",
+                        patches: [
+                            {offset: 0x95790A, off: [0x01], on: [0x00]},
+                            {offset: 0x95790F, off: [0x00], on: [0x01]},
+                        ]
+                    },
                 ]);
             });
         </script>

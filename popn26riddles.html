@@ -115,208 +115,208 @@
                     },
                 ]),
                 new Patcher('popn22.dll', "2022-04-25", [
-						{
-						    name: "E: Drive Fix",
-						    tooltip: "Fix crash caused by no E: drive",
-						    patches: [{ offset: 0x234DE8, off: [0x65, 0x3A, 0x2F], on: [0x64, 0x65, 0x76] }],
-						},
-						{
-						    name: "HDMI Audio Fix",
-						    patches: [{ offset: 0x13E66C, off: [0x85, 0xC0, 0x75, 0x96], on: [0x90, 0x90, 0x90, 0x90] }],
-						},
-						{
-						    name: "Prevent Windows volume change on boot",
-						    tooltip: "If your volume gets forced to max, turn this on",
-						    patches: [{ offset: 0x141270, off: [0x83], on: [0xC3] }],
-						},
-						{
-						    name: "Boot to Event Mode",
-						    patches: [{ offset: 0x112EE0, off: [0x8B, 0x00, 0xC3, 0xCC], on: [0x31, 0xC0, 0x40, 0xC3] }],
-						},
-						{
-						    name: "Remove Timer",
-						    patches: [{ offset: 0xE981C, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
-						},
-						{
-						    name: "Skip Menu and Long Note Tutorials",
-						    patches: [
-						        { offset: 0x28D4B, off: [0x74], on: [0xEB] },
-						        { offset: 0x28D27, off: [0x75], on: [0xEB] },
-						        { offset: 0x91D41, off: [0x75], on: [0xEB] },
-						    ],
-						},
-						{
-						    name: "Unlock All Songs",
-						    patches: [
-						        { offset: 0x109F71, off: [0x74], on: [0xEB] },
-						        { offset: 0x109EE2, off: [0x74, 0x13], on: [0x90, 0x90] },
-						    ],
-						},
-						{
-						    name: "Unlock EX Charts",
-						    patches: [
-						        { offset: 0x2DE8C8, off: [0x80], on: [0x00] },
-						        { offset: 0x2DEF80, off: [0x80], on: [0x00] },
-						        { offset: 0x2E3C18, off: [0x80], on: [0x00] },
-						        { offset: 0x2E8AB4, off: [0x80], on: [0x00] },
-						        { offset: 0x2E8CB8, off: [0x80], on: [0x00] },
-						        { offset: 0x2F3608, off: [0x80], on: [0x00] },
-						        { offset: 0x2DBE74, off: [0x80], on: [0x00] },
-						        { offset: 0x2DFA40, off: [0x80], on: [0x00] },
-						        { offset: 0x2DFB98, off: [0x80], on: [0x00] },
-						        { offset: 0x2DFFA0, off: [0x80], on: [0x00] },
-						        { offset: 0x2E02FC, off: [0x80], on: [0x00] },
-						        { offset: 0x2E07B0, off: [0x80], on: [0x00] },
-						        { offset: 0x2E0E68, off: [0x80], on: [0x00] },
-						        { offset: 0x2E1724, off: [0x80], on: [0x00] },
-						        { offset: 0x2E2290, off: [0x80], on: [0x00] },
-						        { offset: 0x2E2540, off: [0x80], on: [0x00] },
-						        { offset: 0x2E4428, off: [0x80], on: [0x00] },
-						        { offset: 0x2E6718, off: [0x80], on: [0x00] },
-						        { offset: 0x2EA2E4, off: [0x80], on: [0x00] },
-						        { offset: 0x2ED8A4, off: [0x80], on: [0x00] },
-						        { offset: 0x2EE160, off: [0x80], on: [0x00] },
-						        { offset: 0x2F23E4, off: [0x80], on: [0x00] },
-						        { offset: 0x2F40C8, off: [0x80], on: [0x00] },
-						    ],
-						},
-						{
-						    name: "Unlock Deco Parts",
-						    patches: [{ offset: 0x1016B3, off: [0x75, 0x22], on: [0x90, 0x90] }],
-						},
-						{
-						    name: "Unlock Characters",
-						    patches: [{ offset: 0xFA4D9, off: [0x74], on: [0xEB] }],
-						},
-						{
-						    name: "Premium Free",
-						    tooltip: "Score buffer never resets, use offline",
-						    patches: [
-						        { offset: 0x11E140, off: [0xFE, 0x46, 0x0E], on: [0x90, 0x90, 0x90] },
-						        { offset: 0x11E14A, off: [0x75], on: [0xEB] },
-						        { offset: 0x123068, off: [0x77, 0x3E], on: [0xEB, 0x07] },
-						    ],
-						},
-						{
-						    name: "Autoplay",
-						    patches: [
-						        { offset: 0xD799E, off: [0x0F, 0x84, 0x08, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] },
-						        { offset: 0xD7A88, off: [0x74, 0x53], on: [0x90, 0x90] },
-						    ],
-						},
-						{
-						    name: "Replace COLOR CHECK test menu with debug CHARA VIEWER",
-						    tooltip: "Press service button to exit",
-						    patches: [
-						        { offset: 0x22B8C4, off: [0x43, 0x4F, 0x4C, 0x4F, 0x52, 0x20, 0x43, 0x48, 0x45, 0x43, 0x4B, 0x00, 0x43], on: [0x43, 0x48, 0x41, 0x52, 0x41, 0x20, 0x56, 0x49, 0x45, 0x57, 0x45, 0x52, 0x00] },
-						        { offset: 0x26E82, off: [0xAC, 0x00, 0x00], on: [0xB0, 0x34, 0x0C] },
-						        { offset: 0x26EA0, off: [0xDC, 0xFE, 0xFF, 0xFF], on: [0x1C, 0xCD, 0x09, 0x00] },
-						    ],
-						},
-						{
-						    name: "Replace SCREEN CHECK test menu with debug MUSIC INFO CHECKER",
-						    tooltip: "Press service button to exit",
-						    patches: [
-						        { offset: 0x22C2B8, off: [0x53, 0x43, 0x52, 0x45, 0x45, 0x4E, 0x20, 0x43, 0x48, 0x45, 0x43, 0x4B], on: [0x4D, 0x55, 0x53, 0x49, 0x43, 0x20, 0x49, 0x4E, 0x46, 0x4F, 0x00, 0x00] },
-						        { offset: 0x26D12, off: [0x8C, 0x00, 0x00], on: [0xB0, 0x34, 0x0C] },
-						        { offset: 0x26D30, off: [0xFC, 0xFE, 0xFF, 0xFF], on: [0xAC, 0xFB, 0x09, 0x00]}]
+                    {
+                        name: "E: Drive Fix",
+                        tooltip: "Fix crash caused by no E: drive",
+                        patches: [{ offset: 0x234DE8, off: [0x65, 0x3A, 0x2F], on: [0x64, 0x65, 0x76] }],
+                    },
+                    {
+                        name: "HDMI Audio Fix",
+                        patches: [{ offset: 0x13E66C, off: [0x85, 0xC0, 0x75, 0x96], on: [0x90, 0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Prevent Windows volume change on boot",
+                        tooltip: "If your volume gets forced to max, turn this on",
+                        patches: [{ offset: 0x141270, off: [0x83], on: [0xC3] }],
+                    },
+                    {
+                        name: "Boot to Event Mode",
+                        patches: [{ offset: 0x112EE0, off: [0x8B, 0x00, 0xC3, 0xCC], on: [0x31, 0xC0, 0x40, 0xC3] }],
+                    },
+                    {
+                        name: "Remove Timer",
+                        patches: [{ offset: 0xE981C, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip Menu and Long Note Tutorials",
+                        patches: [
+                            { offset: 0x28D4B, off: [0x74], on: [0xEB] },
+                            { offset: 0x28D27, off: [0x75], on: [0xEB] },
+                            { offset: 0x91D41, off: [0x75], on: [0xEB] },
+                        ],
+                    },
+                    {
+                        name: "Unlock All Songs",
+                        patches: [
+                            { offset: 0x109F71, off: [0x74], on: [0xEB] },
+                            { offset: 0x109EE2, off: [0x74, 0x13], on: [0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        name: "Unlock EX Charts",
+                        patches: [
+                            { offset: 0x2DE8C8, off: [0x80], on: [0x00] },
+                            { offset: 0x2DEF80, off: [0x80], on: [0x00] },
+                            { offset: 0x2E3C18, off: [0x80], on: [0x00] },
+                            { offset: 0x2E8AB4, off: [0x80], on: [0x00] },
+                            { offset: 0x2E8CB8, off: [0x80], on: [0x00] },
+                            { offset: 0x2F3608, off: [0x80], on: [0x00] },
+                            { offset: 0x2DBE74, off: [0x80], on: [0x00] },
+                            { offset: 0x2DFA40, off: [0x80], on: [0x00] },
+                            { offset: 0x2DFB98, off: [0x80], on: [0x00] },
+                            { offset: 0x2DFFA0, off: [0x80], on: [0x00] },
+                            { offset: 0x2E02FC, off: [0x80], on: [0x00] },
+                            { offset: 0x2E07B0, off: [0x80], on: [0x00] },
+                            { offset: 0x2E0E68, off: [0x80], on: [0x00] },
+                            { offset: 0x2E1724, off: [0x80], on: [0x00] },
+                            { offset: 0x2E2290, off: [0x80], on: [0x00] },
+                            { offset: 0x2E2540, off: [0x80], on: [0x00] },
+                            { offset: 0x2E4428, off: [0x80], on: [0x00] },
+                            { offset: 0x2E6718, off: [0x80], on: [0x00] },
+                            { offset: 0x2EA2E4, off: [0x80], on: [0x00] },
+                            { offset: 0x2ED8A4, off: [0x80], on: [0x00] },
+                            { offset: 0x2EE160, off: [0x80], on: [0x00] },
+                            { offset: 0x2F23E4, off: [0x80], on: [0x00] },
+                            { offset: 0x2F40C8, off: [0x80], on: [0x00] },
+                        ],
+                    },
+                    {
+                        name: "Unlock Deco Parts",
+                        patches: [{ offset: 0x1016B3, off: [0x75, 0x22], on: [0x90, 0x90] }],
+                    },
+                    {
+                        name: "Unlock Characters",
+                        patches: [{ offset: 0xFA4D9, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Premium Free",
+                        tooltip: "Score buffer never resets, use offline",
+                        patches: [
+                            { offset: 0x11E140, off: [0xFE, 0x46, 0x0E], on: [0x90, 0x90, 0x90] },
+                            { offset: 0x11E14A, off: [0x75], on: [0xEB] },
+                            { offset: 0x123068, off: [0x77, 0x3E], on: [0xEB, 0x07] },
+                        ],
+                    },
+                    {
+                        name: "Autoplay",
+                        patches: [
+                            { offset: 0xD799E, off: [0x0F, 0x84, 0x08, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] },
+                            { offset: 0xD7A88, off: [0x74, 0x53], on: [0x90, 0x90] },
+                        ],
+                    },
+                    {
+                        name: "Replace COLOR CHECK test menu with debug CHARA VIEWER",
+                        tooltip: "Press service button to exit",
+                        patches: [
+                            { offset: 0x22B8C4, off: [0x43, 0x4F, 0x4C, 0x4F, 0x52, 0x20, 0x43, 0x48, 0x45, 0x43, 0x4B, 0x00, 0x43], on: [0x43, 0x48, 0x41, 0x52, 0x41, 0x20, 0x56, 0x49, 0x45, 0x57, 0x45, 0x52, 0x00] },
+                            { offset: 0x26E82, off: [0xAC, 0x00, 0x00], on: [0xB0, 0x34, 0x0C] },
+                            { offset: 0x26EA0, off: [0xDC, 0xFE, 0xFF, 0xFF], on: [0x1C, 0xCD, 0x09, 0x00] },
+                        ],
+                    },
+                    {
+                        name: "Replace SCREEN CHECK test menu with debug MUSIC INFO CHECKER",
+                        tooltip: "Press service button to exit",
+                        patches: [
+                            { offset: 0x22C2B8, off: [0x53, 0x43, 0x52, 0x45, 0x45, 0x4E, 0x20, 0x43, 0x48, 0x45, 0x43, 0x4B], on: [0x4D, 0x55, 0x53, 0x49, 0x43, 0x20, 0x49, 0x4E, 0x46, 0x4F, 0x00, 0x00] },
+                            { offset: 0x26D12, off: [0x8C, 0x00, 0x00], on: [0xB0, 0x34, 0x0C] },
+                            { offset: 0x26D30, off: [0xFC, 0xFE, 0xFF, 0xFF], on: [0xAC, 0xFB, 0x09, 0x00]}]
                     },
                 ]),
                 new Patcher("popn22.dll", "2022-06-13", [
-            {
-                name: "E: Drive Fix",
-                tooltip: "Fix crash caused by no E: drive",
-                patches: [{ offset: 0x237968, off: [0x65, 0x3A, 0x2F], on: [0x64, 0x65, 0x76] }],
-            },
-            {
-                name: "HDMI Audio Fix",
-                patches: [{ offset: 0x1406CC, off: [0x85, 0xC0, 0x75, 0x96], on: [0x90, 0x90, 0x90, 0x90] }],
-            },
-            {
-                name: "Prevent Windows volume change on boot",
-                tooltip: "If your volume gets forced to max, turn this on",
-                patches: [{ offset: 0x1432D0, off: [0x83], on: [0xC3] }],
-            },
-            {
-                name: "Boot to Event Mode",
-                patches: [{ offset: 0x114E90, off: [0x8B, 0x00, 0xC3, 0xCC], on: [0x31, 0xC0, 0x40, 0xC3] }],
-            },
-            {
-                name: "Remove Timer",
-                patches: [{ offset: 0xEB2EC, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
-            },
-            {
-                name: "Skip Menu and Long Note Tutorials",
-                danger: "Might interfere with score saving on networks",
-                patches: [
-                    { offset: 0x28E2B, off: [0x74], on: [0xEB] },
-                    { offset: 0x28E07, off: [0x75], on: [0xEB] },
-                    { offset: 0x93811, off: [0x75], on: [0xEB] },
-                ]
-            },
-            {
-                name: "Unlock All Songs",
-                patches: [
-                    { offset: 0x10BF21, off: [0x74], on: [0xEB] },
-                    { offset: 0x10BE92, off: [0x74, 0x13], on: [0x90, 0x90] },
-                ]
-            },
-            {
-                name: "Unlock EX Charts",
-                patches: [
-                    { offset: 0x2E1F98, off: [0x80], on: [0x00] },
-                    { offset: 0x2E2650, off: [0x80], on: [0x00] },
-                    { offset: 0x2E72E8, off: [0x80], on: [0x00] },
-                    { offset: 0x2EC184, off: [0x80], on: [0x00] },
-                    { offset: 0x2EC388, off: [0x80], on: [0x00] },
-                    { offset: 0x2F6CD8, off: [0x80], on: [0x00] },
-                    { offset: 0x2DF544, off: [0x80], on: [0x00] },
-                    { offset: 0x2E3110, off: [0x80], on: [0x00] },
-                    { offset: 0x2E3268, off: [0x80], on: [0x00] },
-                    { offset: 0x2E3670, off: [0x80], on: [0x00] },
-                    { offset: 0x2E39CC, off: [0x80], on: [0x00] },
-                    { offset: 0x2E3E80, off: [0x80], on: [0x00] },
-                    { offset: 0x2E4538, off: [0x80], on: [0x00] },
-                    { offset: 0x2E4DF4, off: [0x80], on: [0x00] },
-                    { offset: 0x2E5960, off: [0x80], on: [0x00] },
-                    { offset: 0x2E5C10, off: [0x80], on: [0x00] },
-                    { offset: 0x2E7AF8, off: [0x80], on: [0x00] },
-                    { offset: 0x2E9DE8, off: [0x80], on: [0x00] },
-                    { offset: 0x2ED9B4, off: [0x80], on: [0x00] },
-                    { offset: 0x2F0F74, off: [0x80], on: [0x00] },
-                    { offset: 0x2F1830, off: [0x80], on: [0x00] },
-                    { offset: 0x2F5AB4, off: [0x80], on: [0x00] },
-                    { offset: 0x2F7798, off: [0x80], on: [0x00] },
-                ]
-            },
-            {
-                name: "Unlock Deco Parts",
-                patches: [{ offset: 0x103193, off: [0x75, 0x22], on: [0x90, 0x90] }],
-            },
-            {
-                name: "Unlock Characters",
-                patches: [{ offset: 0xFBFB9, off: [0x74], on: [0xEB] }],
-            },
-            {
-                name: "Replace COLOR CHECK test menu with debug CHARA VIEWER",
-                tooltip: "Press service button to exit",
-                patches: [
-                    { offset: 0x22E444, off: [0x43, 0x4F, 0x4C, 0x4F, 0x52, 0x20, 0x43, 0x48, 0x45, 0x43, 0x4B, 0x00, 0x43], on: [0x43, 0x48, 0x41, 0x52, 0x41, 0x20, 0x56, 0x49, 0x45, 0x57, 0x45, 0x52, 0x00] },
-                    { offset: 0x26F62, off: [0xAC, 0x00, 0x00], on: [0xB0, 0x34, 0x0C] },
-                    { offset: 0x26F80, off: [0xDC, 0xFE, 0xFF, 0xFF], on: [0x4C, 0x27, 0x0A, 0x00] },
-                ]
-            },
-            {
-                name: "Replace SCREEN CHECK test menu with debug MUSIC INFO CHECKER",
-                tooltip: "Press service button to exit",
-                patches: [
-                    { offset: 0x22EE38, off: [0x53, 0x43, 0x52, 0x45, 0x45, 0x4E, 0x20, 0x43, 0x48, 0x45, 0x43, 0x4B], on: [0x4D, 0x55, 0x53, 0x49, 0x43, 0x20, 0x49, 0x4E, 0x46, 0x4F, 0x00, 0x00] },
-                    { offset: 0x26DF2, off: [0x8C, 0x00, 0x00], on: [0xB0, 0x34, 0x0C] },
-                    { offset: 0x26E10, off: [0xFC, 0xFE, 0xFF, 0xFF], on: [0xDC, 0x55, 0x0A, 0x00] },
-                ]
-            },
-          ])
-        ]);
+                    {
+                        name: "E: Drive Fix",
+                        tooltip: "Fix crash caused by no E: drive",
+                        patches: [{ offset: 0x237968, off: [0x65, 0x3A, 0x2F], on: [0x64, 0x65, 0x76] }],
+                    },
+                    {
+                        name: "HDMI Audio Fix",
+                        patches: [{ offset: 0x1406CC, off: [0x85, 0xC0, 0x75, 0x96], on: [0x90, 0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Prevent Windows volume change on boot",
+                        tooltip: "If your volume gets forced to max, turn this on",
+                        patches: [{ offset: 0x1432D0, off: [0x83], on: [0xC3] }],
+                    },
+                    {
+                        name: "Boot to Event Mode",
+                        patches: [{ offset: 0x114E90, off: [0x8B, 0x00, 0xC3, 0xCC], on: [0x31, 0xC0, 0x40, 0xC3] }],
+                    },
+                    {
+                        name: "Remove Timer",
+                        patches: [{ offset: 0xEB2EC, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip Menu and Long Note Tutorials",
+                        danger: "Might interfere with score saving on networks",
+                        patches: [
+                            { offset: 0x28E2B, off: [0x74], on: [0xEB] },
+                            { offset: 0x28E07, off: [0x75], on: [0xEB] },
+                            { offset: 0x93811, off: [0x75], on: [0xEB] },
+                        ]
+                    },
+                    {
+                        name: "Unlock All Songs",
+                        patches: [
+                            { offset: 0x10BF21, off: [0x74], on: [0xEB] },
+                            { offset: 0x10BE92, off: [0x74, 0x13], on: [0x90, 0x90] },
+                        ]
+                    },
+                    {
+                        name: "Unlock EX Charts",
+                        patches: [
+                            { offset: 0x2E1F98, off: [0x80], on: [0x00] },
+                            { offset: 0x2E2650, off: [0x80], on: [0x00] },
+                            { offset: 0x2E72E8, off: [0x80], on: [0x00] },
+                            { offset: 0x2EC184, off: [0x80], on: [0x00] },
+                            { offset: 0x2EC388, off: [0x80], on: [0x00] },
+                            { offset: 0x2F6CD8, off: [0x80], on: [0x00] },
+                            { offset: 0x2DF544, off: [0x80], on: [0x00] },
+                            { offset: 0x2E3110, off: [0x80], on: [0x00] },
+                            { offset: 0x2E3268, off: [0x80], on: [0x00] },
+                            { offset: 0x2E3670, off: [0x80], on: [0x00] },
+                            { offset: 0x2E39CC, off: [0x80], on: [0x00] },
+                            { offset: 0x2E3E80, off: [0x80], on: [0x00] },
+                            { offset: 0x2E4538, off: [0x80], on: [0x00] },
+                            { offset: 0x2E4DF4, off: [0x80], on: [0x00] },
+                            { offset: 0x2E5960, off: [0x80], on: [0x00] },
+                            { offset: 0x2E5C10, off: [0x80], on: [0x00] },
+                            { offset: 0x2E7AF8, off: [0x80], on: [0x00] },
+                            { offset: 0x2E9DE8, off: [0x80], on: [0x00] },
+                            { offset: 0x2ED9B4, off: [0x80], on: [0x00] },
+                            { offset: 0x2F0F74, off: [0x80], on: [0x00] },
+                            { offset: 0x2F1830, off: [0x80], on: [0x00] },
+                            { offset: 0x2F5AB4, off: [0x80], on: [0x00] },
+                            { offset: 0x2F7798, off: [0x80], on: [0x00] },
+                        ]
+                    },
+                    {
+                        name: "Unlock Deco Parts",
+                        patches: [{ offset: 0x103193, off: [0x75, 0x22], on: [0x90, 0x90] }],
+                    },
+                    {
+                        name: "Unlock Characters",
+                        patches: [{ offset: 0xFBFB9, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Replace COLOR CHECK test menu with debug CHARA VIEWER",
+                        tooltip: "Press service button to exit",
+                        patches: [
+                            { offset: 0x22E444, off: [0x43, 0x4F, 0x4C, 0x4F, 0x52, 0x20, 0x43, 0x48, 0x45, 0x43, 0x4B, 0x00, 0x43], on: [0x43, 0x48, 0x41, 0x52, 0x41, 0x20, 0x56, 0x49, 0x45, 0x57, 0x45, 0x52, 0x00] },
+                            { offset: 0x26F62, off: [0xAC, 0x00, 0x00], on: [0xB0, 0x34, 0x0C] },
+                            { offset: 0x26F80, off: [0xDC, 0xFE, 0xFF, 0xFF], on: [0x4C, 0x27, 0x0A, 0x00] },
+                        ]
+                    },
+                    {
+                        name: "Replace SCREEN CHECK test menu with debug MUSIC INFO CHECKER",
+                        tooltip: "Press service button to exit",
+                        patches: [
+                            { offset: 0x22EE38, off: [0x53, 0x43, 0x52, 0x45, 0x45, 0x4E, 0x20, 0x43, 0x48, 0x45, 0x43, 0x4B], on: [0x4D, 0x55, 0x53, 0x49, 0x43, 0x20, 0x49, 0x4E, 0x46, 0x4F, 0x00, 0x00] },
+                            { offset: 0x26DF2, off: [0x8C, 0x00, 0x00], on: [0xB0, 0x34, 0x0C] },
+                            { offset: 0x26E10, off: [0xFC, 0xFE, 0xFF, 0xFF], on: [0xDC, 0x55, 0x0A, 0x00] },
+                        ]
+                    },
+                ])
+            ]);
       });
     </script>
   </head>

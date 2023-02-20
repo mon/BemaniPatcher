@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Kancolle Arcade Modder</title>
+        <link rel="stylesheet" href="css/style.css">
+        <script type="text/javascript" src="js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function () {
+                new PatchContainer([
+                    new Patcher("fc.exe", "4.00.00", [
+						{
+                            name: "Bypass Location Server timer",
+                            patches: [
+                                {offset: 0xA48F38, off: [0xFF,0xC8], on: [0x31,0xC0]},
+                            ],
+                        },
+						{
+                            name: "Bypass all start-up errors",
+                            patches: [
+                                {offset: 0xB8B045, off: [0x75], on: [0xEB]},
+                            ],
+                        },
+						{
+                            name: "Disable ALL.net",
+                            patches: [
+                                {offset: 0x289261, off: [0x01], on: [0x00]},
+                            ],
+                        },
+						{
+                            name: "Disable Card system",
+                            patches: [
+                                {offset: 0x289421, off: [0x01], on: [0x00]},
+                            ],
+                        },
+						{
+                            name: "Disable Partition LED",
+                            patches: [
+                                {offset: 0x289441, off: [0x01], on: [0x00]},
+                            ],
+                        },
+                        {
+                            name: "Disable Deck reader",
+                            patches: [
+                                {offset: 0x289371, off: [0x01], on: [0x00]},
+                            ],
+                        },
+                        {
+                            name: "Disable Gear POP LED",
+                            patches: [
+                                {offset: 0x2893C1, off: [0x01], on: [0x00]},
+                            ],
+                        },
+						{
+                            name: "Disable Printer",
+                            patches: [
+                                {offset: 0x289451, off: [0x01], on: [0x00]},
+                            ],
+                        },
+                        {
+                            name: "Disable Touch panel",
+                            patches: [
+                                {offset: 0x289531, off: [0x01], on: [0x00]},
+                            ],
+                        },
+                    ])
+                ]);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Kancolle Arcade Modder</h1>
+    </body>
+</html>

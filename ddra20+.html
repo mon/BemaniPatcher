@@ -8,6 +8,493 @@
     <script type="text/javascript">
         window.addEventListener("load", function () {
             new PatchContainer([
+                new Patcher("gamemdx.dll", "2020-07-28", [
+                    {
+                        name: "Force enable fast/slow",
+                        patches: [{offset: 0xA5590, off: [0x8B, 0x41, 0x44], on: [0x31, 0xC0, 0x40]}]
+                    },
+                    {
+                        name: "Force background judgement",
+                        patches: [{offset: 0xA5580, off: [0x8B, 0x41], on: [0x31, 0xC0]}]
+                    },
+                    {
+                        name: "Force darkest background",
+                        patches: [{offset: 0xA635E, off: [0x75, 0x03, 0x33, 0xC0], on: [0x33, 0xC0, 0xB0, 0x03]}]
+                    },
+                    {
+                        name: "Gold Cab (Type 6)",
+                        patches: [{offset: 0xDB48, off: [0xFF, 0x24], on: [0xEB, 0x71]}]
+                    },
+                    {
+                        name: "Song Unlock",
+                        patches: [
+                            {offset: 0x99646, off: [0x75, 0x08, 0x5E, 0x32, 0xC0], on: [0x90, 0x90, 0x5E, 0xB0, 0x01]},
+                            {offset: 0x9AD10, off: [0x0F, 0x8C], on: [0x90, 0xE9]},
+                            {offset: 0x1D4CFC, off: [0x65], on: [0x62]},
+                            {offset: 0x1D4D10, off: [0x72], on: [0x62]},
+                            {offset: 0x1D4D18, off: [0x6C], on: [0x62]},
+                            {offset: 0x1D4D24, off: [0x6C], on: [0x62]},
+                        ]
+                    },
+                    {
+                        name: "Tutorial Skip",
+						patches: [{offset: 0x4E003, off: [0x75], on: [0xEB]}]
+                    },
+                    {
+                        name: "Timer Freeze",
+                        patches: [{offset: 0x292F5, off: [0x74], on: [0xEB]}]
+                    },
+                    {
+                        name: "Unlock options",
+						tooltip: "Unlocks e-amusement exclusive options such as ARROW COLOR",
+						patches: [{offset: 0x8E8B3, off: [0x75], on: [0xEB]}]
+                    },
+                    {
+                        name: "Enable DDR SELECTION",
+						tooltip: "Even works in offline/local mode!",
+						patches: [{offset: 0x88E09, off: [0xE8, 0x52, 0xB3, 0x01], on: [0xB8, 0x01, 0x00, 0x00]}]
+                    },
+                    {
+                        name: "Premium Free",
+						patches: [{offset: 0x1FD71, off: [0x01], on: [0x00]}]
+                    },
+                    {
+                        name: 'Mute announcer',
+						tooltip: 'Also mutes crowd cheering and booing during gameplay', 
+						patches: [
+							{offset: 0x2C448, off: [0x0F, 0x84], on: [0x90, 0xE9]},
+							{offset: 0x1C74E3, off: [0x76], on: [0x62]},
+							{offset: 0x1C74FF, off: [0x76], on: [0x62]},
+                        ]
+                    },
+                    {
+                        name: 'Force DDR SELECTION theme everywhere',
+						tooltip: 'Skips intro and enables the skin selected below on all songs',
+						patches: [
+							{offset: 0x28061, off: [0x0F, 0x84], on: [0x90, 0xE9]},
+							{offset: 0xA3CCD, off: [0x75, 0x49], on: [0x90, 0x90]},
+							{offset: 0xA3CDA, off: [0x77, 0x3C], on: [0x90, 0x90]},
+							{offset: 0xA3CDC, off: [0xFF, 0x24], on: [0xEB, 0x11]},
+                        ]
+                    },
+                    {
+                        type : "union",
+						name : "Choose forced theme",
+						offset : 0xA3CE4,
+                        patches : [
+                            {
+                                name : "1st",
+                                patch : [0x01],
+                            },
+                            {
+                                name : "EXTREME",
+                                patch : [0x02],
+                            },
+                            {
+                                name : "SuperNOVA2",
+                                patch : [0x03],
+                            },
+                            {
+                                name : "X2",
+                                patch : [0x04],
+                            },
+                            {
+                                name : "2013",
+                                patch : [0x05],
+                            },
+                        ]
+                    }
+                ]),
+                new Patcher("gamemdx.dll", "2020-12-08", [
+                    {
+                        name: "Force enable fast/slow",
+                        patches: [{offset: 0xA6750, off: [0x8B, 0x41, 0x44], on: [0x31, 0xC0, 0x40]}]
+                    },
+                    {
+                        name: "Force background judgement",
+                        patches: [{offset: 0xA6740, off: [0x8B, 0x41], on: [0x31, 0xC0]}]
+                    },
+                    {
+                        name: "Force darkest background",
+                        patches: [{offset: 0xA750E, off: [0x75, 0x03, 0x33, 0xC0], on: [0x33, 0xC0, 0xB0, 0x03]}]
+                    },
+                    {
+                        name: "Gold Cab (Type 6)",
+                        patches: [{offset: 0xDEB8, off: [0xFF, 0x24], on: [0xEB, 0x71]}]
+                    },
+                    {
+                        name: "Song Unlock",
+                        patches: [
+                            {offset: 0x9A746, off: [0x75, 0x08, 0x5E, 0x32, 0xC0], on: [0x90, 0x90, 0x5E, 0xB0, 0x01]},
+                            {offset: 0x9BE90, off: [0x0F, 0x8C], on: [0x90, 0xE9]},
+                            {offset: 0x1D6794, off: [0x65], on: [0x62]},
+                            {offset: 0x1D67A8, off: [0x72], on: [0x62]},
+                            {offset: 0x1D67B0, off: [0x6C], on: [0x62]},
+                            {offset: 0x1D67BC, off: [0x6C], on: [0x62]},
+                        ]
+                    },
+                    {
+                        name: "Tutorial Skip",
+						patches: [{offset: 0x4F0C3, off: [0x75], on: [0xEB]}]
+                    },
+                    {
+                        name: "Timer Freeze",
+                        patches: [{offset: 0x2A0B5, off: [0x74], on: [0xEB]}]
+                    },
+                    {
+                        name: "Unlock options",
+						tooltip: "Unlocks e-amusement exclusive options such as ARROW COLOR",
+						patches: [{offset: 0x8FF53, off: [0x75], on: [0xEB]}]
+                    },
+                    {
+                        name: "Enable DDR SELECTION",
+						tooltip: "Even works in offline/local mode!",
+						patches: [{offset: 0x8A0DC, off: [0xE8, 0x2F, 0xB2, 0x01], on: [0xB8, 0x01, 0x00, 0x00]}]
+                    },
+                    {
+                        name: "Premium Free",
+						patches: [{offset: 0x1FEA1, off: [0x01], on: [0x00]}]
+                    },
+                    {
+                        name: 'Mute announcer',
+						tooltip: 'Also mutes crowd cheering and booing during gameplay', 
+						patches: [
+							{offset: 0x2D208, off: [0x0F, 0x84], on: [0x90, 0xE9]},
+							{offset: 0x1C8DD3, off: [0x76], on: [0x62]},
+							{offset: 0x1C8DEF, off: [0x76], on: [0x62]},
+                        ]
+                    },
+                    {
+                        name: 'Force DDR SELECTION theme everywhere',
+						tooltip: 'Skips intro and enables the skin selected below on all songs',
+						patches: [
+							{offset: 0x28E21, off: [0x0F, 0x84], on: [0x90, 0xE9]},
+							{offset: 0xA4E7D, off: [0x75, 0x49], on: [0x90, 0x90]},
+							{offset: 0xA4E8A, off: [0x77, 0x3C], on: [0x90, 0x90]},
+							{offset: 0xA4E8C, off: [0xFF, 0x24], on: [0xEB, 0x11]},
+                        ]
+                    },
+                    {
+                        type : "union",
+						name : "Choose forced theme",
+						offset : 0xA4E94,
+                        patches : [
+                            {
+                                name : "1st",
+                                patch : [0x01],
+                            },
+                            {
+                                name : "EXTREME",
+                                patch : [0x02],
+                            },
+                            {
+                                name : "SuperNOVA2",
+                                patch : [0x03],
+                            },
+                            {
+                                name : "X2",
+                                patch : [0x04],
+                            },
+                            {
+                                name : "2013",
+                                patch : [0x05],
+                            },
+                        ]
+                    }
+                ]),
+                new Patcher("gamemdx.dll", "2021-02-09", [
+                    {
+                        name: "Force enable fast/slow",
+                        patches: [{offset: 0xA6C20, off: [0x8B, 0x41, 0x44], on: [0x31, 0xC0, 0x40]}]
+                    },
+                    {
+                        name: "Force background judgement",
+                        patches: [{offset: 0xA6C10, off: [0x8B, 0x41], on: [0x31, 0xC0]}]
+                    },
+                    {
+                        name: "Force darkest background",
+                        patches: [{offset: 0xA79EE, off: [0x75, 0x03, 0x33, 0xC0], on: [0x33, 0xC0, 0xB0, 0x03]}]
+                    },
+                    {
+                        name: "Gold Cab (Type 6)",
+                        patches: [{offset: 0xE0D8, off: [0xFF, 0x24], on: [0xEB, 0x71]}]
+                    },
+                    {
+                        name: "Song Unlock",
+                        patches: [
+                            {offset: 0x9AAA6, off: [0x75, 0x08, 0x5E, 0x32, 0xC0], on: [0x90, 0x90, 0x5E, 0xB0, 0x01]},
+                            {offset: 0x9C1E0, off: [0x0F, 0x8C], on: [0x90, 0xE9]},
+                            {offset: 0x1D6C54, off: [0x65], on: [0x62]},
+                            {offset: 0x1D6C68, off: [0x72], on: [0x62]},
+                            {offset: 0x1D6C70, off: [0x6C], on: [0x62]},
+                            {offset: 0x1D6C7C, off: [0x6C], on: [0x62]},
+                        ]
+                    },
+                    {
+                        name: "Tutorial Skip",
+						patches: [{offset: 0x4F723, off: [0x75], on: [0xEB]}]
+                    },
+                    {
+                        name: "Timer Freeze",
+                        patches: [{offset: 0x2A305, off: [0x74], on: [0xEB]}]
+                    },
+                    {
+                        name: "Unlock options",
+						tooltip: "Unlocks e-amusement exclusive options such as ARROW COLOR",
+						patches: [{offset: 0x90623, off: [0x75], on: [0xEB]}]
+                    },
+                    {
+                        name: "Enable DDR SELECTION",
+						tooltip: "Even works in offline/local mode!",
+						patches: [{offset: 0x8A59C, off: [0xE8, 0x5F, 0xB2, 0x01], on: [0xB8, 0x01, 0x00, 0x00]}]
+                    },
+                    {
+                        name: "Premium Free",
+						patches: [{offset: 0x20151, off: [0x01], on: [0x00]}]
+                    },
+                    {
+                        name: 'Mute announcer',
+						tooltip: 'Also mutes crowd cheering and booing during gameplay', 
+						patches: [
+							{offset: 0x2D468, off: [0x0F, 0x84], on: [0x90, 0xE9]},
+							{offset: 0x1C91F3, off: [0x76], on: [0x62]},
+							{offset: 0x1C920F, off: [0x76], on: [0x62]},
+                        ]
+                    },
+                    {
+                        name: 'Force DDR SELECTION theme everywhere',
+						tooltip: 'Skips intro and enables the skin selected below on all songs',
+						patches: [
+							{offset: 0x29071, off: [0x0F, 0x84], on: [0x90, 0xE9]},
+							{offset: 0xA536D, off: [0x75, 0x49], on: [0x90, 0x90]},
+							{offset: 0xA537A, off: [0x77, 0x3C], on: [0x90, 0x90]},
+							{offset: 0xA537C, off: [0xFF, 0x24], on: [0xEB, 0x11]},
+                        ]
+                    },
+                    {
+                        type : "union",
+						name : "Choose forced theme",
+						offset : 0xA5384,
+                        patches : [
+                            {
+                                name : "1st",
+                                patch : [0x01],
+                            },
+                            {
+                                name : "EXTREME",
+                                patch : [0x02],
+                            },
+                            {
+                                name : "SuperNOVA2",
+                                patch : [0x03],
+                            },
+                            {
+                                name : "X2",
+                                patch : [0x04],
+                            },
+                            {
+                                name : "2013",
+                                patch : [0x05],
+                            },
+                        ]
+                    }
+                ]),
+                new Patcher("gamemdx.dll", "2021-03-16", [
+                    {
+                        name: "Force enable fast/slow",
+                        patches: [{offset: 0xA6AA0, off: [0x8B, 0x41, 0x44], on: [0x31, 0xC0, 0x40]}]
+                    },
+                    {
+                        name: "Force background judgement",
+                        patches: [{offset: 0xA6A90, off: [0x8B, 0x41], on: [0x31, 0xC0]}]
+                    },
+                    {
+                        name: "Force darkest background",
+                        patches: [{offset: 0xA786E, off: [0x75, 0x03, 0x33, 0xC0], on: [0x33, 0xC0, 0xB0, 0x03]}]
+                    },
+                    {
+                        name: "Gold Cab (Type 6)",
+                        patches: [{offset: 0xDF78, off: [0xFF, 0x24], on: [0xEB, 0x71]}]
+                    },
+                    {
+                        name: "Song Unlock",
+                        patches: [
+                            {offset: 0x9A926, off: [0x75, 0x08, 0x5E, 0x32, 0xC0], on: [0x90, 0x90, 0x5E, 0xB0, 0x01]},
+                            {offset: 0x9C060, off: [0x0F, 0x8C], on: [0x90, 0xE9]},
+                            {offset: 0x1D6A64, off: [0x65], on: [0x62]},
+                            {offset: 0x1D6A78, off: [0x72], on: [0x62]},
+                            {offset: 0x1D6A80, off: [0x6C], on: [0x62]},
+                            {offset: 0x1D6A8C, off: [0x6C], on: [0x62]},
+                        ]
+                    },
+                    {
+                        name: "Tutorial Skip",
+						patches: [{offset: 0x4F543, off: [0x75], on: [0xEB]}]
+                    },
+                    {
+                        name: "Timer Freeze",
+                        patches: [{offset: 0x2A0E5, off: [0x74], on: [0xEB]}]
+                    },
+                    {
+                        name: "Unlock options",
+						tooltip: "Unlocks e-amusement exclusive options such as ARROW COLOR",
+						patches: [{offset: 0x90333, off: [0x75], on: [0xEB]}]
+                    },
+                    {
+                        name: "Enable DDR SELECTION",
+						tooltip: "Even works in offline/local mode!",
+						patches: [{offset: 0x8A2AC, off: [0xE8, 0xCF, 0xB3, 0x01], on: [0xB8, 0x01, 0x00, 0x00]}]
+                    },
+                    {
+                        name: "Premium Free",
+						patches: [{offset: 0x1FF51, off: [0x01], on: [0x00]}]
+                    },
+                    {
+                        name: 'Mute announcer',
+						tooltip: 'Also mutes crowd cheering and booing during gameplay', 
+						patches: [
+							{offset: 0x2D238, off: [0x0F, 0x84], on: [0x90, 0xE9]},
+							{offset: 0x1C9003, off: [0x76], on: [0x62]},
+							{offset: 0x1C901F, off: [0x76], on: [0x62]},
+                        ]
+                    },
+                    {
+                        name: 'Force DDR SELECTION theme everywhere',
+						tooltip: 'Skips intro and enables the skin selected below on all songs',
+						patches: [
+							{offset: 0x28E51, off: [0x0F, 0x84], on: [0x90, 0xE9]},
+							{offset: 0xA51ED, off: [0x75, 0x49], on: [0x90, 0x90]},
+							{offset: 0xA51FA, off: [0x77, 0x3C], on: [0x90, 0x90]},
+							{offset: 0xA51FC, off: [0xFF, 0x24], on: [0xEB, 0x11]},
+                        ]
+                    },
+                    {
+                        type : "union",
+						name : "Choose forced theme",
+						offset : 0xA5204,
+                        patches : [
+                            {
+                                name : "1st",
+                                patch : [0x01],
+                            },
+                            {
+                                name : "EXTREME",
+                                patch : [0x02],
+                            },
+                            {
+                                name : "SuperNOVA2",
+                                patch : [0x03],
+                            },
+                            {
+                                name : "X2",
+                                patch : [0x04],
+                            },
+                            {
+                                name : "2013",
+                                patch : [0x05],
+                            },
+                        ]
+                    }
+                ]),
+                //patch by mp01↓
+				new Patcher("gamemdx.dll", "2021-08-04", [ 
+                    {
+                        name: "Force enable fast/slow",
+                        patches: [{offset: 0xA6B50, off: [0x8B, 0x41, 0x44], on: [0x31, 0xC0, 0x40]}]
+                    },
+                    {
+                        name: "Force background judgement",
+                        patches: [{offset: 0xA6B60, off: [0x8B, 0x41], on: [0x31, 0xC0]}]
+                    },
+                    //fixed by J0nny0
+                    {
+                        name: "Force darkest background",
+                        patches: [{offset: 0xA791E, off: [0x75, 0x03, 0x33, 0xC0], on: [0x33, 0xC0, 0xB0, 0x03]}]
+                    },
+                    {
+                        name: "Gold Cab (Type 6)",
+						patches: [{offset: 0xDB98, off: [0xFF, 0x24], on: [0xEB, 0x71]}]
+                    },
+                    {
+                        name: "Song Unlock",
+                        patches: [
+                            {offset: 0x9AB86, off: [0x75, 0x08, 0x5E, 0x32, 0xC0], on: [0x90, 0x90, 0x5E, 0xB0, 0x01]},
+                            {offset: 0x9C2D0, off: [0x0F, 0x8C], on: [0x90, 0xE9]},
+                            {offset: 0x1D704C, off: [0x65], on: [0x62]},
+                            {offset: 0x1D7060, off: [0x72], on: [0x62]},
+                            {offset: 0x1D7068, off: [0x6C], on: [0x62]},
+                            {offset: 0x1D7074, off: [0x6C], on: [0x62]},
+                        ]
+                    },
+                    {
+                        name: "Tutorial Skip",
+						patches: [{offset: 0x4ECD3, off: [0x75], on: [0xEB]}]
+                    },
+                    {
+                        name: "Timer Freeze",
+                        patches: [{offset: 0x29B15, off: [0x74], on: [0xEB]}]
+                    },
+                    {
+                        name: "Unlock options",
+						tooltip: "Unlocks e-amusement exclusive options such as ARROW COLOR",
+						patches: [{offset: 0x8FD73, off: [0x75], on: [0xEB]}]
+                    },
+                    {
+                        name: "Enable DDR SELECTION",
+						tooltip: "Even works in offline/local mode!",
+						patches: [{offset: 0x89DFC, off: [0xE8, 0x0F, 0xB9, 0x01], on: [0xB8, 0x01, 0x00, 0x00]}]
+                    },
+                    {
+                        name: "Premium Free",
+						patches: [{offset: 0x1F801, off: [0x01], on: [0x00]}]
+                    },
+                    {
+                        name: 'Mute announcer',
+						tooltip: 'Also mutes crowd cheering and booing during gameplay', 
+						patches: [
+							{offset: 0x2CC98, off: [0x0F, 0x84], on: [0x90, 0xE9]},
+							{offset: 0x1C9613, off: [0x76], on: [0x62]},
+							{offset: 0x1C962F, off: [0x76], on: [0x62]},
+                        ]
+                    },
+                    {
+                        name: 'Force DDR SELECTION theme everywhere',
+						tooltip: 'Skips intro and enables the skin selected below on all songs',
+						patches: [
+							{offset: 0x28881, off: [0x0F, 0x84], on: [0x90, 0xE9]},
+							{offset: 0xA527D, off: [0x75, 0x49], on: [0x90, 0x90]},
+							{offset: 0xA528A, off: [0x77, 0x3C], on: [0x90, 0x90]},
+							{offset: 0xA528C, off: [0xFF, 0x24], on: [0xEB, 0x11]},
+                        ]
+                    },
+                    {
+                        type : "union",
+						name : "Choose forced theme",
+						offset : 0xA5294,
+                        patches : [
+                            {
+                                name : "1st",
+                                patch : [0x01],
+                            },
+                            {
+                                name : "EXTREME",
+                                patch : [0x02],
+                            },
+                            {
+                                name : "SuperNOVA2",
+                                patch : [0x03],
+                            },
+                            {
+                                name : "X2",
+                                patch : [0x04],
+                            },
+                            {
+                                name : "2013",
+                                patch : [0x05],
+                            },
+                        ]
+                    }
+                ]),
                 new Patcher("gamemdx.dll", "2022-02-02", [
                     {
                         name: "Force enable fast/slow",
@@ -258,7 +745,181 @@
                     },
                 ]),
             ]);
-        });
+         });
+    </script>
+
+<script type="text/javascript">
+    window.addEventListener("load", function () {
+    new PatchContainer([
+          new Patcher("arkmdxp3.dll", "2020-07-28", [
+                    {
+                        type: "union",
+                        name: "Screen Setting",
+                        tooltip: "Changes resolution based on Sceen type",
+                        offset: 0x60A2F,
+                        patches:[
+                            {
+                                name : "CRT 945 P3IO SD",
+                                patch : [0x00],
+                            },
+                            {
+                                name : "LCD 945 P3IO",
+                                patch : [0x01],
+                            },
+                            {
+                                name : "LCD HM64 P4IO SD",
+                                patch : [0x02],
+                            },
+                            {
+                                name : "CRT ADE-6291 P3IO HD",
+                                patch : [0x03],
+                            },
+                            {
+                                name : "LCD ADE-6291 P3IO HD (forced gold cab)",
+                                patch : [0x04],
+                            },
+                            {
+                                name : "LCD ADE-6291 P4IO",
+                                patch : [0x05],
+                            },
+                            {
+                                name : "LCD ADE-6291 BIO2",
+                                patch : [0x06]},
+                            ]
+                        },
+                    ]),
+                    //patch by J0nny0
+                new Patcher("arkmdxp3.dll", "2020-12-08", [
+                    {
+                        type: "union",
+                        name: "Screen Setting",
+                        tooltip: "Changes resolution based on Sceen type",
+                        offset: 0x62ADF,
+                        patches :[
+                            {
+                                name : "CRT 945 P3IO SD",
+                                patch : [0x00],
+                            },
+                            {
+                                name : "LCD 945 P3IO",
+                                patch : [0x01],
+                            },
+                            {
+                                name : "LCD HM64 P4IO SD",
+                                patch : [0x02],
+                            },
+                            {
+                                name : "CRT ADE-6291 P3IO HD",
+                                patch : [0x03],
+                            },
+                            {
+                                name : "LCD ADE-6291 P3IO HD (forced gold cab)",
+                                patch : [0x04],
+                            },
+                            {
+                                name : "LCD ADE-6291 P4IO",
+                                patch : [0x05],
+                            },
+                            {
+                                name : "LCD ADE-6291 BIO2",
+                                patch : [0x06]},
+                            ]
+                        }
+                    ]),
+                    //Patch by J0nny0
+                new Patcher("arkmdxp3.dll", "2021-03-16", [
+                    {
+                        type: "union",
+                        name: "Screen Setting",
+                        tooltip: "Changes resolution based on Sceen type",
+                        offset: 0x629EF,
+                        patches :[
+                            {
+                                name : "CRT 945 P3IO SD",
+                                patch : [0x00],
+                            },
+                            {
+                                name : "LCD 945 P3IO",
+                                patch : [0x01],
+                            },
+                            {
+                                name : "LCD HM64 P4IO SD",
+                                patch : [0x02],
+                            },
+                            {
+                                name : "CRT ADE-6291 P3IO HD",
+                                patch : [0x03],
+                            },
+                            {
+                                name : "LCD ADE-6291 P3IO HD (forced gold cab)",
+                                patch : [0x04],
+                            },
+                            {
+                                name : "LCD ADE-6291 P4IO",
+                                patch : [0x05],
+                            },
+                            {
+                                name : "LCD ADE-6291 BIO2",
+                                patch : [0x06]},
+                            ]
+                        }
+                    ]),
+                new Patcher("arkmdxp3.dll", "2021-08-04", [
+                    {
+                        type: "union",
+                        name: "Screen Setting",
+                        tooltip: "Changes resolution based on Sceen type",
+                        offset: 0x64D7F,
+                        patches :[
+                            {
+                                name : "CRT 945 P3IO SD",
+                                patch : [0x00],
+                            },
+                            {
+                                name : "LCD 945 P3IO",
+                                patch : [0x01],
+                            },
+                            {
+                                name : "LCD HM64 P4IO SD",
+                                patch : [0x02],
+                            },
+                            {
+                                name : "CRT ADE-6291 P3IO HD",
+                                patch : [0x03],
+                            },
+                            {
+                                name : "LCD ADE-6291 P3IO HD (forced gold cab)",
+                                patch : [0x04],
+                            },
+                            {
+                                name : "LCD ADE-6291 P4IO",
+                                patch : [0x05],
+                            },
+                            {
+                                name : "LCD ADE-6291 BIO2",
+                                patch : [0x06]
+                            },
+                            ]
+                        }
+                    ]),
+                new Patcher("arkmdxp3.dll", "2022-02-02", [
+						{
+						    name: "Forced HD mode",
+						    patches: [{ offset: 0x64D70, off: [0x10, 0x02], on: [0x10, 0x03] }],
+						},
+						{
+						    name: "Forced Gold Cabinet",
+						    patches: [{ offset: 0x64D70, off: [0x10, 0x02], on: [0x10, 0x04] }],
+						},
+						{
+						    name: "SD (CRT cab) Mode",
+						    patches: [{ offset: 0x64D70, off: [0x10, 0x02], on: [0x10, 0x01],
+                },
+              ],
+            },
+          ])
+        ]);
+      });
     </script>
 </head>
 <body>

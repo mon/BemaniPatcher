@@ -90,13 +90,6 @@
                         ],
                     },
                     {
-                        name: "Autoplay",
-                        patches: [
-                            { offset: 0xD35CE, off: [0x0F, 0x84, 0x08, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] },
-                            { offset: 0xD36B8, off: [0x74, 0x53], on: [0x90, 0x90] },
-                        ]
-                    },
-                    {
                         name: "Replace COLOR CHECK test menu with debug CHARA VIEWER",
                         tooltip: "Press service button to exit",
                         patches: [
@@ -195,13 +188,6 @@
                             { offset: 0x11E140, off: [0xFE, 0x46, 0x0E], on: [0x90, 0x90, 0x90] },
                             { offset: 0x11E14A, off: [0x75], on: [0xEB] },
                             { offset: 0x123068, off: [0x77, 0x3E], on: [0xEB, 0x07] },
-                        ],
-                    },
-                    {
-                        name: "Autoplay",
-                        patches: [
-                            { offset: 0xD799E, off: [0x0F, 0x84, 0x08, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] },
-                            { offset: 0xD7A88, off: [0x74, 0x53], on: [0x90, 0x90] },
                         ],
                     },
                     {

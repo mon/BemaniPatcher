@@ -45,6 +45,35 @@
               patches: [
                 {offset: 0x5C50F8, off: [0x43, 0x52, 0x45], on: [0x00, 0x52, 0x45]},
                 {offset: 0x5C50D8, off: [0x43, 0x52, 0x45], on: [0x00, 0x52, 0x45]}
+            },
+          ]),
+          new Patcher('nostalgia.dll', "2022-04-26", [
+            {
+              name: 'Menu Timer Freeze',
+              patches: [{offset: 0x309D83, off: [0x41, 0xFF, 0xC8], on: [0x90, 0x90, 0x90]}]
+            },
+            {
+              name: 'Shorter Monitor Check',
+              tooltip : "Similar to Op.2, recommended only if you have a stable framerate",
+              patches: [{offset: 0x21740A, off: [0x1E], on: [0x00]}]
+            },
+            {
+              name: 'Unscramble PIN pad',
+              patches: [{offset: 0x2BCE46, off: [0x48, 0x8D, 0x0C, 0x80, 0x48, 0x03, 0xC9], on: [0x48, 0xC7, 0xC1, 0x78, 0x00, 0x00, 0x00]}]
+            },
+            {
+              name: 'Hide "EXTRA PASELI: %d"',
+              patches: [
+                {offset: 0x5D0998, off: [0x45, 0x58, 0x54], on: [0x00, 0x58, 0x54]},
+                {offset: 0x5D0A28, off: [0x45, 0x58, 0x54], on: [0x00, 0x58, 0x54]}
+              ]
+            },
+            {
+              name: 'Hide Credit Count',
+              tooltip : 'Hides "CREDIT: %d" and "CREDIT %d  COIN: %d / %d"',
+              patches: [
+                {offset: 0x5D09D0, off: [0x43, 0x52, 0x45], on: [0x00, 0x52, 0x45]},
+                {offset: 0x5D0B70 off: [0x43, 0x52, 0x45], on: [0x00, 0x52, 0x45]}
               ]
             },
           ]),

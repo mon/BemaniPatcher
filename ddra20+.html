@@ -599,8 +599,17 @@
                         patches: [{ offset: 0xA66B5, off: [0x32, 0xC0], on: [0xB0, 0x01] }],
                     },
                     {
-                        name: "Premium Free",
+                        name: "PFREE - Force 1st stage forever",
+                        danger: "Breaks score saving unless the patch below is also enabled.",
                         patches: [{ offset: 0x1FC91, off: [0x01], on: [0x00] }],
+                    },
+                    {
+                        name: "PFREE score saving",
+                        danger: "Make sure your network supports this before enabling.",
+                        patches: [
+                            { offset: 0x11650, off: [0xFF, 0x24, 0x85, 0x58, 0x24, 0x01, 0x10], on: [0xEB, 0x05, 0x90, 0x90, 0x90, 0x90, 0x90] },
+                            { offset: 0x116A8, off: [0x74, 0x66], on: [0x90, 0x90] },
+                        ]
                     },
                     {
                         name: "Mute Announcer",

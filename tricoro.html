@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>IIDX tricoro DLL Modder</title>
-    <link rel="stylesheet" href="css/style.css">
+    <script src="/cdn-cgi/apps/head/HwU4Afx3ZsFv3HCMpwtQftaMMBI.js"></script><link rel="stylesheet" href="css/style.css">
     <script type="text/javascript" src="js/dllpatcher.js"></script>
     <script type="text/javascript">
         window.addEventListener("load", function () {
@@ -62,6 +62,29 @@
                         tooltip: "Purely visual, does not affect anything besides the FPS display",
                         //changes the FPS = %2.4f string to FPS = %2.6f
                         patches: [{offset: 0x16BDD5, off: [0x34], on: [0x36]}]
+                    },
+					                    {
+                        name: "Timer Freeze",
+                        patches: [{offset: 0x8A59E, off: [0x74], on: [0xEB]}]
+                    },
+                    {
+                         name: "CS-Style Song Start Delay",
+                         tooltip: "Holding Start will pause the song at the beginning until you release it",
+                         patches: [{offset: 0x66CB6, off: [0x7C], on: [0xEB]}]
+                    },
+                    {
+                        name: "Premium Free Timer Freeze",
+                        patches: [{offset: 0x48E8D, off: [0x48], on: [0x90]}]
+                    },
+                    {
+                        name: "Volume Bug Fix",
+                        tooltip: "If your volume gets forced to max, turn this on",
+                        patches: [{offset: 0xBD399, off: [0x00], on: [0x01]}]
+                    },
+                    {
+                        name: "Debug mode (disables score saving!)",
+                        tooltip: "Press F1 in-game to open menu",
+                        patches: [{offset: 0x96480, off: [0x32, 0xC0], on: [0x0C, 0x01]}]
                     },
                     {
                         name: "Coin Unlock",

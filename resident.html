@@ -569,6 +569,23 @@
                         ]
                     },
                     {
+                        name: "Force Monitor Adjust Offset",
+                        tooltip: "Enable to force using the below patch, otherwise 0 is used.",
+                        patches: [
+                            { offset: 0x58DE92, off: [0x74, 0x26], on: [0xEB, 0x0B] },
+                            { offset: 0x58DEB3, off: [0x08], on: [0x21] },
+                        ]
+                    },
+                    {
+                        type : "number",
+                        name : "Monitor Adjust Offset",
+                        tooltip: "Every +1 Adjust is -0.10 offset. Use -28 to make LDJ mode behave like TDJ mode default.",
+                        offset : 0x989188,
+                        size : 4,
+                        min : -1000,
+                        max : 1000,
+                    },
+                    {
                         name: "Enable BPL Battle",
                         patches: [{ offset: 0x537236, off: [0x74, 0x1C], on: [0x90, 0x90] }],
                     },

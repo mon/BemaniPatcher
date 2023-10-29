@@ -1,0 +1,5 @@
+root: ./
+ignore_re:
+  - 'An "img" element must have an "alt" attribute, except under certain conditions'
+  - 'Element "div" not allowed as child of element "label" in this context'
+  - 'The "center" element is obsolete. Use CSS instead' # initialdzero

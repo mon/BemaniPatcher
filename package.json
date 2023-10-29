@@ -1,0 +1,10 @@
+{
+  "name": "bemanipatcher",
+  "version": "1.0.0",
+  "description": "Online DLL patcher. This file only exists for eslint.",
+  "author": "mon",
+  "devDependencies": {
+    "eslint": "^8.52.0",
+    "eslint-plugin-html": "^7.1.0"
+  }
+}

@@ -679,6 +679,15 @@
                         patches: [{ offset: 0x2AEFC9, off: [0x0F, 0x84], on: [0x90, 0xE9] }],
                     },
                     {
+                        name: "Prevent Windows volume change (stop game from setting it to 100% on launch)",
+                        patches: [{ offset: 0x363F71, off: [0xFF, 0x50, 0x38], on: [0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Increase Game Volume",
+                        tooltip: "Ignore the in-game volume settings and use the maximum possible volume level. Especially helpful for TDJ which tends to be very quiet.",
+                        patches: [{ offset: 0x6DC250, off: [0xFF, 0x90, 0x98, 0x00, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                    {
                         name: "Skip Decide Screen",
                         tooltip: "Immediately loads into chart after selection.",
                         patches: [{ offset: 0x399400, off: [0x48, 0x89, 0x5C, 0x24], on: [0x48, 0x8B, 0xC1, 0xC3] }],

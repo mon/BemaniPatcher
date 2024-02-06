@@ -1,0 +1,20 @@
+name: Check HTML/JS is valid
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run HTML5 Validator
+      uses: Cyb3r-Jak3/html5validator-action@v7.2.0
+      with:
+        config: ./.github/html5validator.yml
+        css: true
+    - name: Install modules for eslint
+      run: npm i
+    - name: Run ESLint
+      run: npx eslint . --ext .js,.html

@@ -17,6 +17,22 @@ var bytesMatch = function(buffer, offset, bytes) {
     return true;
 };
 
+var bytesToHex = function(bytes) {
+	var s = ''
+	for(var i = 0; i < bytes.length; i++) {
+        s += bytes[i].toString(16).toUpperCase().padStart(2, '0');
+    }
+	return s;
+}
+
+var hexToBytes = function(hex) {
+	var bytes = [];
+	for(var i = 0; i < hex.length; i += 2) {
+		bytes.push(parseInt(hex.substr(i, 2), 16));
+	}
+	return bytes;
+}
+
 var replace = function(buffer, offset, bytes) {
     for(var i = 0; i < bytes.length; i++) {
         buffer[offset+i] = bytes[i];
@@ -67,6 +83,7 @@ class StandardPatch {
         this.name = options.name;
         this.patches = options.patches;
         this.tooltip = options.tooltip;
+        this.danger = options.danger;
     }
 
     createUI(parent) {
@@ -78,6 +95,9 @@ class StandardPatch {
         patch.appendChild(createLabel(label, id));
         if(this.tooltip) {
             patch.appendChild(createElementClass('div', 'tooltip', this.tooltip));
+        }
+        if(this.danger) {
+            patch.appendChild(createElementClass('div', 'danger tooltip', this.danger));
         }
         parent.appendChild(patch);
     }
@@ -137,6 +157,7 @@ class DynamicPatch {
         this.name = options.name;
         this.patches = options.patches;
         this.tooltip = options.tooltip;
+        this.danger = options.danger;
         this.mode = options.mode;
         this.target = options.target;
     }
@@ -150,6 +171,9 @@ class DynamicPatch {
         this.ui.appendChild(createLabel(label, id));
         if(this.tooltip) {
             this.ui.appendChild(createElementClass('div', 'tooltip', this.tooltip));
+        }
+        if(this.danger) {
+            this.ui.appendChild(createElementClass('div', 'danger tooltip', this.danger));
         }
         parent.appendChild(this.ui);
     }
@@ -401,6 +425,7 @@ class UnionPatch {
         this.offset = options.offset;
         this.patches = options.patches;
         this.tooltip = options.tooltip;
+        this.danger = options.danger;
     }
 
     createUI(parent) {
@@ -411,6 +436,9 @@ class UnionPatch {
         container.appendChild(createElementClass('span', 'patch-union-title', this.name + ':'));
         if(this.tooltip) {
             container.appendChild(createElementClass('div', 'tooltip', this.tooltip));
+        }
+        if(this.danger) {
+            container.appendChild(createElementClass('div', 'danger tooltip', this.danger));
         }
         container.appendChild(document.createElement('span'));
 
@@ -427,6 +455,9 @@ class UnionPatch {
             patchDiv.appendChild(createLabel(label, id));
             if(patch.tooltip) {
                 patchDiv.appendChild(createElementClass('div', 'tooltip', patch.tooltip));
+            }
+            if(patch.danger) {
+                patchDiv.appendChild(createElementClass('div', 'danger tooltip', patch.danger));
             }
             container.appendChild(patchDiv);
         }
@@ -475,6 +506,7 @@ class NumberPatch {
     constructor(options) {
         this.name = options.name;
         this.tooltip = options.tooltip;
+        this.danger = options.danger;
 
         this.offset = options.offset;
         this.size = options.size;
@@ -502,6 +534,9 @@ class NumberPatch {
 
         if (this.tooltip) {
             patch.appendChild(createElementClass('div', 'tooltip', this.tooltip));
+        }
+        if (this.danger) {
+            patch.appendChild(createElementClass('div', 'danger tooltip', this.danger));
         }
         parent.appendChild(patch);
 
@@ -540,6 +575,103 @@ class NumberPatch {
             // Write this byte
             file[this.offset + i] = val;
         }
+    }
+}
+
+// Each unique kind of patch should have createUI, validatePatch, applyPatch,
+// updateUI
+class HexPatch {
+    constructor(options) {
+        this.name = options.name;
+        this.tooltip = options.tooltip;
+        this.danger = options.danger;
+		this.offset = options.offset;
+
+		this.off = options.off;
+    }
+
+    createUI(parent) {
+		this.radios = [];
+		var radio_id = createID();
+
+		// Title of the radio option.
+        var container = createElementClass('div', 'patch-union');
+        container.appendChild(createElementClass('span', 'patch-union-title', this.name + ':'));
+        if(this.tooltip) {
+            container.appendChild(createElementClass('div', 'tooltip', this.tooltip));
+        }
+        if(this.danger) {
+            container.appendChild(createElementClass('div', 'danger tooltip', this.danger));
+        }
+        container.appendChild(document.createElement('span'));
+		
+		// Default option; tooltip shows default hex value.
+		var id = createID();
+		var patchDiv = createElementClass('div', 'patch');
+		var radio = createInput('radio', id);
+		radio.name = radio_id;
+		this.radios.push(radio);
+		
+		patchDiv.appendChild(radio);
+		patchDiv.appendChild(createLabel('Default', id));
+		patchDiv.appendChild(createElementClass('div', 'tooltip', 'Value ' + bytesToHex(this.off)));
+		container.appendChild(patchDiv);
+
+		// Custom option.
+		id = createID();
+		patchDiv = createElementClass('div', 'patch');
+		radio = createInput('radio', id);
+		radio.name = radio_id;
+		this.radios.push(radio);
+		
+		patchDiv.appendChild(radio);
+		patchDiv.appendChild(createLabel('Custom ' + this.off.length + '-byte hex value: ', id));
+		this.valueHex = document.createElement('input');
+		this.valueHex.type = 'text';
+		this.valueHex.id = id;
+		patchDiv.appendChild(this.valueHex);
+		
+		patchDiv.appendChild(createElementClass('div', 'danger tooltip', 'Invalid values will not be applied.'));
+		container.appendChild(patchDiv);
+
+        parent.appendChild(container);
+
+    }
+
+    updateUI(file) {
+		if(bytesMatch(file, this.offset, this.off)) {
+			this.radios[0].checked = true;
+			return;
+		}
+		this.valueHex.value = bytesToHex(file.slice(this.offset, this.offset + this.off.length));
+		this.radios[1].checked = true;
+    }
+
+    validatePatch(file) {
+		if(bytesMatch(file, this.offset, this.off)) {
+			console.log(this.name, "has default hex value");
+			return;
+		}
+		console.log(this.name, "has custom hex value");
+    }
+
+    applyPatch(file) {
+        if(this.radios[0].checked) {
+			replace(file, this.offset, this.off);
+			return;
+		}
+		if(this.radios[1].checked) {
+			if(!this.valueHex.value.match(/^[0-9a-fA-F]+$/)) {
+				alert('Patch "' + this.name + '" not applied - invalid hex!');
+				return;
+			}
+			if(this.valueHex.value.length != this.off.length * 2) {
+				alert('Patch "' + this.name + '" not applied - invalid length!!');
+				return;
+			}
+			replace(file, this.offset, hexToBytes(this.valueHex.value));
+			return;
+		}
     }
 }
 
@@ -727,6 +859,9 @@ class Patcher {
                 }
                 if(mod.type === "dynamic") {
                     this.mods.push(new DynamicPatch(mod));
+                }
+                if(mod.type === "hex") {
+                    this.mods.push(new HexPatch(mod));
                 }
             } else { // standard patch
                 this.mods.push(new StandardPatch(mod));

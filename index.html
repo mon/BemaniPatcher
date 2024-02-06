@@ -4,7 +4,18 @@
         <meta charset="utf-8">
         <title>BEMANI DLL Patching Tools</title>
         <link rel="stylesheet" href="css/style.css">
-        <script type="text/javascript" src="https://livejs.com/live.js"></script>
+        <script>
+            window.addEventListener('DOMContentLoaded', function() {
+                // implement radio-style behaviour for categories
+                for(const input of document.querySelectorAll(".sectionToggle")) {
+                    input.onclick = () => {
+                        for(const el of document.querySelectorAll(".sectionToggle")) {
+                            if(el != input) el.checked = false;
+                        }
+                    }
+                }
+            });
+        </script>
     </head>
     <body>
         <h1>Pick a game!</h1>
@@ -24,6 +35,11 @@
                     <div>BeatStream<br>アニムトライヴ</div>
                 </a>
             </div>
+
+            <a href="bishibashi.html" class="gameicon">
+                <img src="img/bishibashi.png">
+                <div>THE ☆ BishiBashi</div>
+            </a>
 
             <a href="bombergirl.html" class="gameicon">
                 <img src="img/bombergirl.png">
@@ -67,6 +83,10 @@
                 <a href="chusan.html" class="gameicon">
                     <img src="img/chusan.png">
                     <div>CHUNITHM NEW!!</div>
+                </a>
+                <a href="chuninewplus.html" class="gameicon">
+                    <img src="img/chuninewplus.png">
+                    <div>CHUNITHM NEW PLUS!!</div>
                 </a>
             </div>
 
@@ -120,6 +140,14 @@
                     <img src="img/bistrover.png">
                     <div>beatmania IIDX 28 BISTROVER</div>
                 </a>
+                <a href="casthour.html" class="gameicon">
+                    <img src="img/casthour.png">
+                    <div>beatmania IIDX 29 CastHour</div>
+                </a>
+                <a href="resident.html" class="gameicon">
+                    <img src="img/resident.png">
+                    <div>beatmania IIDX 30 Resident</div>
+                </a>
             </div>
 
             <label for="check_ddr" class="gameicon">
@@ -162,6 +190,11 @@
                 </a>
             </div>
 
+            <a href="drs.html" class="gameicon">
+                <img src="img/drs.png">
+                <div>DANCERUSH STARDOM</div>
+            </a>
+
             <a href="gc4ex.html" class="gameicon">
                 <img src="img/gc4ex.png">
                 <div>Groove Coaster 4EX Infinity Highway</div>
@@ -197,7 +230,6 @@
                     <img src="img/gfdmxg2.png">
                     <div>GuitarFreaks & DrumMania XG2</div>
                 </a>
-                </a>
                 <a href="gfdmxg3.html" class="gameicon">
                     <img src="img/gfdmxg3.png">
                     <div>GuitarFreaks & DrumMania XG3</div>
@@ -226,11 +258,20 @@
                     <img src="img/nextage.png">
                     <div>GITADORA NEX+AGE</div>
                 </a>
+                <a href="gitadorahighvoltage.html" class="gameicon">
+                    <img src="img/highvoltage.png">
+                    <div>GITADORA HIGH-VOLTAGE</div>
+                </a>
             </div>
 
             <a href="futuretone.html" class="gameicon">
                 <img src="img/futuretone.png">
                 <div>Hatsune Miku: Project DIVA Arcade Future Tone</div>
+            </a>
+
+            <a href="initialdzero.html" class="gameicon">
+                <img src="img/idz.png">
+                <div>Initial D Arcade Stage Zero</div>
             </a>
 
             <label for="check_jubeat" class="gameicon">
@@ -277,6 +318,11 @@
                 </a>
             </div>
 
+            <a href="kancolle.html" class="gameicon">
+                <img src="img/kancolle.png">
+                <div>Kancolle Arcade</div>
+            </a>
+
             <label for="check_museca" class="gameicon">
                 <img src="img/aaa_museca.png">
                 <div>MÚSECA</div>
@@ -293,10 +339,21 @@
                 </a>
             </div>
 
-            <a href="nostalgiaop2.html" class="gameicon">
-                <img src="img/op2.png">
-                <div>Nostalgia Op.2</div>
-            </a>
+            <label for="check_nostalgia" class="gameicon">
+                <img src="img/aaa_nostalgia.png">
+                <div>Nostalgia</div>
+            </label>
+            <input type="checkbox" id="check_nostalgia" class="sectionToggle"/>
+            <div class="subsection">
+                <a href="nostalgiaop2.html" class="gameicon">
+                    <img src="img/op2.png">
+                    <div>Nostalgia Op.2</div>
+                </a>
+                <a href="nostalgiaop3.html" class="gameicon">
+                    <img src="img/op3.png">
+                    <div>Nostalgia Op.3</div>
+                </a>
+            </div>
 
             <label for="check_popn" class="gameicon">
                 <img src="img/aaa_popn.png">
@@ -336,6 +393,10 @@
                     <img src="img/peace.png">
                     <div>pop'n music 25 peace</div>
                 </a>
+                <a href="popn26riddles.html" class="gameicon">
+                    <img src="img/riddles.png">
+                    <div>pop'n music 26 解明リドルズ</div>
+                </a>
             </div>
 
             <label for="check_reflec" class="gameicon">
@@ -344,6 +405,10 @@
             </label>
             <input type="checkbox" id="check_reflec" class="sectionToggle"/>
             <div class="subsection">
+                <a href="reflecbeat.html" class="gameicon">
+                    <img src="img/reflecbeat.png">
+                    <div>REFLEC BEAT</div>
+                </a>
                 <a href="reflecbeat-limelight.html" class="gameicon">
                     <img src="img/limelight.png">
                     <div>REFLEC BEAT limelight</div>
@@ -372,6 +437,10 @@
             </label>
             <input type="checkbox" id="check_sdvx" class="sectionToggle"/>
             <div class="subsection">
+                <a href="sdvx2.html" class="gameicon">
+                    <img src="img/sdvx2.png">
+                    <div>SDVX II INFINITE INFECTION</div>
+                </a>
                 <a href="sdvx3.html" class="gameicon">
                     <img src="img/sdvx.png">
                     <div>SDVX III GRAVITY WARS</div>

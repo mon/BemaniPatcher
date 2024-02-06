@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>THE ☆ BishiBashi DLL Modder</title>
+    <link rel='stylesheet' href='css/style.css'>
+    <script type='text/javascript' src='js/dllpatcher.js'></script>
+    <script type='text/javascript'>
+      window.addEventListener('load', function () {
+        new Patcher('bishi09.exe', "", [
+        {
+            name: 'Allow A region exe to run with J dongle',
+            patches: [
+                {offset : 0x6ebd1, off: [0xb0, 0x42, 0x88, 0x44, 0x24, 0x17], on : [0x8d, 0x44, 0x24, 0x14, 0xb3, 0x42]},
+                {offset : 0x6ebd8, off: [0x44, 0x24, 0x18, 0xb0, 0x41, 0x88, 0x44, 0x24, 0x19, 0x88, 0x44, 0x24, 0x1a, 0x88, 0x44, 0x24, 0x1b], on : [0x58, 0x03, 0x88, 0x58, 0x04, 0xfe, 0xcb, 0x88, 0x58, 0x06, 0x88, 0x58, 0x07, 0xc6, 0x40, 0x05, 0x4a]},
+                {offset : 0x6fa3a, off: [0x12], on : [0x19]},
+            ]
+        },
+        ])
+      });
+    </script>
+</head>
+<body>
+<h1>THE ☆ BishiBashi DLL Modder</h1>
+</body>
+</html>

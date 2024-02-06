@@ -111,6 +111,16 @@
                             },
                         ]
                     },
+                    {
+                        name: "Make game respect server-sent option to disable local matching", // Created by Cammy
+                        patches: [
+                            {
+                                offset: 0x248525,
+                                off: [0x75],
+                                on: [0x74]
+                            },
+                        ]
+                    },
                 ]),
             ]);
         });

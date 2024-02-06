@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Initial D Arcade Stage Zero DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+      window.addEventListener("load", function () {
+        new PatchContainer([
+          new Patcher("InitialD0_DX11_Nu.exe", "1.31", [
+            {
+              name: "Remove vertical resolution limit (allow 4K and higher)",
+              tooltip:"Removes the vertical res limit of 1900 pixels. This does NOT change your resolution, just lets you set higher ones in the initiald.ini without the game ignoring it.",
+              patches: [{ offset: 0x35e170, off: [0xdc, 0x05], on: [0xff, 0xff] }],
+            },
+            {
+              name: "Fullscreen Fix 2.0 (Borderless) EXPERIMENTAL UNTESTED",
+              tooltip: "This will force the game to be borderless fullscreen at all times, even in windowed mode.",
+              patches: [
+                {
+                  offset: 0x35e205,
+                  off: [0x01],
+                  on: [0x03],
+                },
+                {
+                  offset: 0xa3a05f,
+                  off: [0xc8, 0x00],
+                  on: [0x00, 0x80],
+                },
+              ],
+            },
+            {
+              name: "Allow any IP-Range for in-store linking",
+              tooltip: "By default, D0 will only match two cabinets if they use a specific ip range. This removes that check.But, error 8306 occurs and the connection to the local server cannot be established.",
+              patches: [
+                {
+                  offset: 0x4b7206,
+                  off: [0x8b, 0xc8, 0x23, 0xcf, 0x81, 0xf9, 0x00, 0x9e, 0xa8, 0xc0, 0x75, 0x07],
+                  on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90],
+                },
+              ],
+            },
+          ]),
+          new Patcher("InitialD0_DX11_Nu.exe", "2.11", [
+            {
+              name: "Skip Wheel-check on boot",
+              tooltip: "This will skip the \"don't touch the wheel\" screen, making the game boot a lot faster",
+              patches: [
+                {
+                  offset: 0x678163,
+                  off: [0x80, 0xB8, 0x56, 0x33, 0x00, 0x00, 0x00, 0x74, 0x43],
+                  on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90],
+                },
+              ],
+            },
+            {
+              name: "Remove vertical resolution limit (allow 4K and higher)",
+              tooltip:
+                "Removes the vertical res limit of 1900 pixels. This does NOT change your resolution, just lets you set higher ones in the initiald.ini without the game ignoring it.",
+              patches: [{ offset: 0x3377fa, off: [0xdc, 0x05], on: [0xff, 0xff] }],
+            },
+            {
+              name: "Fullscreen Fix 2.0 (Borderless) EXPERIMENTAL UNTESTED",
+              tooltip: "This will force the game to be borderless fullscreen at all times, even in windowed mode.",
+              patches: [
+                {
+                  offset: 0x33788c,
+                  off: [0x01],
+                  on: [0x03],
+                },
+                {
+                  offset: 0xaf5e8f,
+                  off: [0xc8, 0x00],
+                  on: [0x00, 0x80],
+                },
+              ],
+            },
+            {
+              name: "Allow any IP-Range for in-store linking",
+              tooltip: "By default, D0 will only match two cabinets if they use a specific ip range. This removes that check.But, error 8306 occurs and the connection to the local server cannot be established.",
+              patches: [
+                {
+                  offset: 0x4ac1d6,
+                  off: [0x8b, 0xc8, 0x23, 0xcf, 0x81, 0xf9, 0x00, 0x9e, 0xa8, 0xc0, 0x75, 0x07],
+                  on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90],
+                },
+              ],
+            },
+          ]),
+        ]);
+        new PatchContainer([
+          new Patcher("ServerBoxD8_Nu_x64.exe", "1.31", [
+            {
+              name: "Allow any IP-Range for in-store linking",
+              tooltip: "By default, D0 will only match two cabinets if they use a specific ip range. This removes that check.",
+              patches: [
+                {
+                  offset: 0x38b5d,
+                  off: [0x0f, 0xb6, 0x44, 0x24, 0x30, 0x85, 0xc0, 0x75, 0x25, 0x81, 0xbc, 0x24, 0x80, 0x00, 0x00, 0x00, 0x00, 0x9e, 0xa8, 0xc0, 0x75, 0x18],
+                  on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90],
+                },
+              ],
+            },
+          ]),
+          new Patcher("ServerBoxD8_Nu_x64.exe", "2.11", [
+            {
+              name: "Allow any IP-Range for in-store linking",
+              tooltip: "By default, D0 will only match two cabinets if they use a specific ip range. This removes that check.",
+              patches: [
+                {
+                  offset: 0x36d7d,
+                  off: [0x0f, 0xb6, 0x44, 0x24, 0x30, 0x85, 0xc0, 0x75, 0x25, 0x81, 0xbc, 0x24, 0x80, 0x00, 0x00, 0x00, 0x00, 0x9e, 0xa8, 0xc0, 0x75, 0x18],
+                  on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90],
+                },
+              ],
+            },
+          ]),
+        ]);
+        new PatchContainer([
+          new Patcher("amdaemon.exe", "1.31", [
+            {
+              name: "Remove DVD check/Fix Error 0919",
+              tooltip: "Removes the need to remove/disable your DVD drive. Thanks to lan @ Discord for mentioning the hex edit.",
+              patches: [{ offset: 0x22553a, off: [0x74], on: [0xeb] }],
+            },
+          ]),
+          new Patcher("amdaemon.exe", "2.11", [
+            {
+              name: "Remove DVD check/Fix Error 0919",
+              tooltip: "Removes the need to remove/disable your DVD drive. Thanks to lan @ Discord for mentioning the hex edit.",
+              patches: [{ offset: 0x242ada, off: [0x74], on: [0xeb] }],
+            },
+          ]),
+        ]);
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Initial D Arcade Stage Zero DLL Modder</h1>
+    <center style="color: rgb(189, 29, 29)"><b>WARNING: This is version 2 of the fullscreen patch, but it needs more testing.</b></center>
+      <center>
+      Pro tip: Using the fullscreen patch and using Rivatuner to lock to 60fps, then setting "FullScreen = 0" and "SYNCMODE = 0" in the InitialD.ini<br />will let you alt-tab out
+      of the game, and still run at locked 60fps.
+    </center>
+    <center style="color: rgb(212, 66, 146)"><b>Notes about the in-store patch:</b></center>
+    <center>
+      The game will still require an ip in the 192.168.X.X range to boot up. However, everything past that can be freely choosen now, so using something like zerotier or a custom
+      vpn It's technically possible to play in-store battles. You'll need to both have matching ip-ranges in segatools.ini though, and one of you'll have to disable dipsw1, etc.
+    </center>
+  </body>
+</html>

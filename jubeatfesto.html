@@ -8,6 +8,410 @@
         <script type="text/javascript">
             window.addEventListener("load", function() {
                 new PatchContainer([
+                    new Patcher("jubeat.dll", "2022-05-24, 2022-02-16", [
+                        {
+                          name: "Disable Tutorial",
+                          patches: [{offset: 0xD746F, off: [0x0F, 0x85, 0x7F, 0x01, 0x00, 0x00], on: [0xE9, 0x80, 0x01, 0x00, 0x00, 0x90]}]
+                        },
+                        {
+                          name: "SELECT MUSIC Timer Lock",
+                          patches: [{offset: 0xBFE72, off: [0x75], on: [0xEB]}]
+                        },
+                        {
+                          name: "Skip CATEGORY SELECT",
+                          patches: [{offset: 0xC01F7, off: [0x04], on: [0x07]}]
+                        },
+                        {
+                          name: "Result Timer Freeze",
+                          tooltip: "Counts down to 0 then stops",
+                          patches: [{ offset: 0xA7E33, off: [0x75], on: [0xEB] }],
+                        },
+                        {
+                          name: "Skip Online Matching",
+                          patches: [{offset: 0xD358B, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
+                        },
+                        {
+                          // by mon
+                          name: "Force enable Expert Option",
+                          patches: [{ offset: 0xDCEC0, off: [0x55, 0x8B, 0xEC], on: [0xB0, 0x01, 0xC3] }],
+                        },
+                        {
+                          // by mon
+                          name: "Force unlock all markers",
+                          tooltip : "For guest play, online required",
+                          patches: [
+                            { offset: 0x1AABB0, off: [0x75], on: [0xEB] },
+                            { offset: 0x163DBE, off: [0x75], on: [0xEB] },
+                            { offset: 0x1AAE9A, off: [0x0F, 0xB7, 0x45, 0xB0], on: [0x31, 0xC0, 0x90, 0x90] },
+                          ],
+                        },
+                        {
+                          // by mon
+                          name: "Force unlock all backgrounds",
+                          tooltip : "For guest play, online required",
+                          patches: [
+                            { offset: 0x135D4E, off: [0x75], on: [0xEB] },
+                            { offset: 0x163E71, off: [0x75], on: [0xEB] },
+                            { offset: 0x13602B, off: [0x0F, 0xB7, 0x45, 0xB0], on: [0x31, 0xC0, 0x90, 0x90] },
+                          ],
+                        },
+                        {
+                          // by mon
+                          name: "Default marker for guest play",
+                          type: "union",
+                          offset: 0x5DFF7,
+                          patches: [
+                            { name: "festo(フェスト)", tooltip : "Default", patch: [46] },
+                            { name: "HinaBitter♪(ひなビタ♪)", tooltip : "Force unlock required", patch: [47] },
+                            { name: "clan(クラン)", patch: [45] },
+                            { name: "Ochazuke(お茶づけ)", tooltip : "Omnimix required", patch: [44] },
+                            { name: "AC Ver. Disney Tsum Tsum(AC版ディズニー ツムツム)", tooltip : "Omnimix required", patch: [43] },
+                            { name: "NEW GAME!", tooltip : "Omnimix required", patch: [42] },
+                            { name: "Himouto! Umaru-chan(干物妹！うまるちゃん)", tooltip : "Omnimix required", patch: [41] },
+                            { name: "Qubell(キューベル)", patch: [40] },
+                            { name: "prop(プロップ)", patch: [39] },
+                            { name: "QMA/CPU Sharon(QMA/CPUシャロン)", patch: [38] },
+                            { name: "Shocho(ショッチョー)", patch: [37] },
+                            { name: "saucer(ソーサー)", patch: [36] },
+                            { name: "Natural block(ナチュラルブロック)", patch: [35] },
+                            { name: "Little owl(こびふくろう)", patch: [34] },
+                            { name: "Circus(サーカス)", patch: [33] },
+                            { name: "copious(コピオス)", patch: [32] },
+                            { name: "jubeat-kun(jubeatくん)", patch: [28] },
+                            { name: "Concierge(コンシェルジュ)", patch: [27] },
+                            { name: "Nengoro Neko(ねんごろねこ)", patch: [31] },
+                            { name: "Stopwatch(ストップウォッチ)", patch: [30] },
+                            { name: "Color composition(色彩構成)", patch: [29] },
+                            { name: "knit(ニット)", patch: [26] },
+                            { name: "Stealth(ステルス)", patch: [25] },
+                            { name: "Fusuma(襖)", patch: [22] },
+                            { name: "Torus(トーラス)", patch: [18] },
+                            { name: "Painting(絵画)", patch: [23] },
+                            { name: "Blur(ブラー)", patch: [19] },
+                            { name: "Banana(バナナ)", patch: [21] },
+                            { name: "Shoku(触)", patch: [20] },
+                            { name: "Yubiko(ユビ子)", patch: [24] },
+                            { name: "ripples(リプルズ)", patch: [17] },
+                            { name: "Mirror ball(ミラーボール)", patch: [16] },
+                            { name: "Sand art(サンドアート)", patch: [13] },
+                            { name: "Digital block(デジタルブロック)", patch: [12] },
+                            { name: "Blow bubbles(シャボン玉)", patch: [14] },
+                            { name: "Ice(アイス)", patch: [10] },
+                            { name: "Okojo(オコジョ)", patch: [15] },
+                            { name: "Gauge(ゲージ)", patch: [9] },
+                            { name: "Volcano(火山)", patch: [11] },
+                            { name: "Tamago(たまご)", patch: [8] },
+                            { name: "Target(ターゲット)", patch: [7] },
+                            { name: "Fireworks(花火)", patch: [6] },
+                            { name: "Blue ring(ブルーリング)", patch: [5] },
+                            { name: "Shutter(シャッター)", patch: [4] },
+                            { name: "Afro(アフロ)", patch: [3] },
+                            { name: "Flower(フラワー)", patch: [2] },
+                            { name: "Cyber(サイバー)", patch: [1] },
+                          ],
+                        },
+                        {
+                          name: "Default background for guest play",
+                          type: "union",
+                          offset: 0x5DFF8,
+                          patches: [
+                            { name: "Plant(プラント)", tooltip : "Default", patch: [2] },
+                            { name: "Ocean(オーシャン)", patch: [1] },
+                            { name: "Banana(バナナ)", patch: [3] },
+                            { name: "Charcoal Grey(チャコールグレー)", patch: [4] },
+                            { name: "Lake(レイク)", patch: [5] },
+                            { name: "Charcoal(チャコール)", patch: [6] },
+                            { name: "Acerola(アセロラ)", patch: [7] },
+                            { name: "Cassis(カシス)", patch: [11] },
+                            { name: "Himouto! Umaru-chan(干物妹！うまるちゃん)", tooltip : "Omnimix required", patch: [8] },
+                            { name: "NEW GAME!", tooltip : "Omnimix required", patch: [9] },
+                            { name: "Ochazuke(お茶づけ)", tooltip : "Omnimix required", patch: [10] },
+                            { name: "Kotaro and Nengoro Neko(コタローとねんごろねこ)", tooltip : "Force unlock required", patch: [12] },
+                            { name: "HinaBitter♪(ひなビタ♪)", tooltip : "Force unlock required", patch: [13] },
+                          ],
+                        },
+                        {
+                          name: "Combo display - guest play default",
+                          type: "union",
+                          offset: 0x5E003,
+                          patches: [
+                            { name: "ON", tooltip : "Default", patch: [1] },
+                            { name: "OFF", patch: [0] },
+                          ],
+                        },
+                        {
+                          name: "Ranking display - guest play default",
+                          type: "union",
+                          offset: 0x5E002,
+                          patches: [
+                            { name: "ON", tooltip : "Default", patch: [1] },
+                            { name: "OFF", patch: [0] },
+                          ],
+                        },
+                        {
+                          name: "HARD MODE - guest play default",
+                          type: "union",
+                          offset: 0x5E00C,
+                          patches: [
+                            { name: "OFF", tooltip : "Default", patch: [0] },
+                            { name: "ON", patch: [1] },
+                          ],
+                        },
+                        {
+                          name: "MATCHING option - guest play default",
+                          tooltip : "Expert option required",
+                          type: "union",
+                          offset: 0x5E00B,
+                          patches: [
+                            { name: "ON", tooltip : "Default", patch: [1] },
+                            { name: "OFF", patch: [0] },
+                          ],
+                        },
+                        {
+                          name: "HAZARD option - guest play default",
+                          tooltip : "Expert option required",
+                          type: "union",
+                          offset: 0x5E013,
+                          patches: [
+                            { name: "OFF", tooltip : "Default", patch: [0] },
+                            { name: "EXC 1", patch: [1] },
+                            { name: "EXC 2", patch: [2] },
+                            { name: "EXC 3", patch: [3] },
+                            { name: "FC 1", patch: [4] },
+                            { name: "FC 2", patch: [5] },
+                            { name: "FC 3", patch: [6] },
+                          ],
+                        }
+                    ]),
+                    new Patcher("jubeat.dll", "2021-12-15", [
+                        {
+                          name: "Disable Tutorial",
+                          patches: [{offset: 0xD746F, off: [0x0F, 0x85, 0x7F, 0x01, 0x00, 0x00], on: [0xE9, 0x80, 0x01, 0x00, 0x00, 0x90]}]
+                        },
+                        {
+                          name: "SELECT MUSIC Timer Lock",
+                          patches: [{offset: 0xBFE52, off: [0x75], on: [0xEB]}]
+                        },
+                        {
+                          name: "Skip CATEGORY SELECT",
+                          patches: [{offset: 0xC01D7, off: [0x04], on: [0x07]}]
+                        },
+                        {
+                          name: "Skip Online Matching",
+                          patches: [{offset: 0xD358B, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
+                        }
+                    ]),
+                    new Patcher("jubeat.dll", "2021-10-19", [
+                        {
+                          name: "Disable Tutorial",
+                          patches: [{offset: 0xD746F, off: [0x0F, 0x85, 0x7F, 0x01, 0x00, 0x00], on: [0xE9, 0x80, 0x01, 0x00, 0x00, 0x90]}]
+                        },
+                        {
+                          name: "SELECT MUSIC Timer Lock",
+                          patches: [{offset: 0xBFE72, off: [0x75], on: [0xEB]}]
+                        },
+                        {
+                          name: "Skip CATEGORY SELECT",
+                          patches: [{offset: 0xC01F7, off: [0x04], on: [0x07]}]
+                        },
+                        {
+                          name: "Result Timer Freeze",
+                          tooltip: "Counts down to 0 then stops",
+                          patches: [{ offset: 0xA7E33, off: [0x75], on: [0xEB] }],
+                        },
+                        {
+                          name: "Skip Online Matching",
+                          patches: [{offset: 0xD358B, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
+                        },
+                        {
+                          // by mon
+                          name: "Force enable Expert Option",
+                          patches: [{ offset: 0xDCEC0, off: [0x55, 0x8B, 0xEC], on: [0xB0, 0x01, 0xC3] }],
+                        },
+                        {
+                          // by mon
+                          name: "Force unlock all markers",
+                          tooltip : "For guest play, online required",
+                          patches: [
+                            { offset: 0x1AAB20, off: [0x75], on: [0xEB] },
+                            { offset: 0x163D1E, off: [0x75], on: [0xEB] },
+                            { offset: 0x1AAE0A, off: [0x0F, 0xB7, 0x45, 0xB0], on: [0x31, 0xC0, 0x90, 0x90] },
+                          ],
+                        },
+                        {
+                          // by mon
+                          name: "Force unlock all backgrounds",
+                          tooltip : "For guest play, online required",
+                          patches: [
+                            { offset: 0x135D4E, off: [0x75], on: [0xEB] },
+                            { offset: 0x163DD1, off: [0x75], on: [0xEB] },
+                            { offset: 0x13602B, off: [0x0F, 0xB7, 0x45, 0xB0], on: [0x31, 0xC0, 0x90, 0x90] },
+                          ],
+                        },
+                        {
+                          // by mon
+                          name: "Default marker for guest play",
+                          type: "union",
+                          offset: 0x5DFF7,
+                          patches: [
+                            { name: "festo(フェスト)", tooltip : "Default", patch: [46] },
+                            { name: "HinaBitter♪(ひなビタ♪)", tooltip : "Force unlock required", patch: [47] },
+                            { name: "clan(クラン)", patch: [45] },
+                            { name: "Ochazuke(お茶づけ)", tooltip : "Omnimix required", patch: [44] },
+                            { name: "AC Ver. Disney Tsum Tsum(AC版ディズニー ツムツム)", tooltip : "Omnimix required", patch: [43] },
+                            { name: "NEW GAME!", tooltip : "Omnimix required", patch: [42] },
+                            { name: "Himouto! Umaru-chan(干物妹！うまるちゃん)", tooltip : "Omnimix required", patch: [41] },
+                            { name: "Qubell(キューベル)", patch: [40] },
+                            { name: "prop(プロップ)", patch: [39] },
+                            { name: "QMA/CPU Sharon(QMA/CPUシャロン)", patch: [38] },
+                            { name: "Shocho(ショッチョー)", patch: [37] },
+                            { name: "saucer(ソーサー)", patch: [36] },
+                            { name: "Natural block(ナチュラルブロック)", patch: [35] },
+                            { name: "Little owl(こびふくろう)", patch: [34] },
+                            { name: "Circus(サーカス)", patch: [33] },
+                            { name: "copious(コピオス)", patch: [32] },
+                            { name: "jubeat-kun(jubeatくん)", patch: [28] },
+                            { name: "Concierge(コンシェルジュ)", patch: [27] },
+                            { name: "Nengoro Neko(ねんごろねこ)", patch: [31] },
+                            { name: "Stopwatch(ストップウォッチ)", patch: [30] },
+                            { name: "Color composition(色彩構成)", patch: [29] },
+                            { name: "knit(ニット)", patch: [26] },
+                            { name: "Stealth(ステルス)", patch: [25] },
+                            { name: "Fusuma(襖)", patch: [22] },
+                            { name: "Torus(トーラス)", patch: [18] },
+                            { name: "Painting(絵画)", patch: [23] },
+                            { name: "Blur(ブラー)", patch: [19] },
+                            { name: "Banana(バナナ)", patch: [21] },
+                            { name: "Shoku(触)", patch: [20] },
+                            { name: "Yubiko(ユビ子)", patch: [24] },
+                            { name: "ripples(リプルズ)", patch: [17] },
+                            { name: "Mirror ball(ミラーボール)", patch: [16] },
+                            { name: "Sand art(サンドアート)", patch: [13] },
+                            { name: "Digital block(デジタルブロック)", patch: [12] },
+                            { name: "Blow bubbles(シャボン玉)", patch: [14] },
+                            { name: "Ice(アイス)", patch: [10] },
+                            { name: "Okojo(オコジョ)", patch: [15] },
+                            { name: "Gauge(ゲージ)", patch: [9] },
+                            { name: "Volcano(火山)", patch: [11] },
+                            { name: "Tamago(たまご)", patch: [8] },
+                            { name: "Target(ターゲット)", patch: [7] },
+                            { name: "Fireworks(花火)", patch: [6] },
+                            { name: "Blue ring(ブルーリング)", patch: [5] },
+                            { name: "Shutter(シャッター)", patch: [4] },
+                            { name: "Afro(アフロ)", patch: [3] },
+                            { name: "Flower(フラワー)", patch: [2] },
+                            { name: "Cyber(サイバー)", patch: [1] },
+                          ],
+                        },
+                        {
+                          name: "Default background for guest play",
+                          type: "union",
+                          offset: 0x5DFF8,
+                          patches: [
+                            { name: "Plant(プラント)", tooltip : "Default", patch: [2] },
+                            { name: "Ocean(オーシャン)", patch: [1] },
+                            { name: "Banana(バナナ)", patch: [3] },
+                            { name: "Charcoal Grey(チャコールグレー)", patch: [4] },
+                            { name: "Lake(レイク)", patch: [5] },
+                            { name: "Charcoal(チャコール)", patch: [6] },
+                            { name: "Acerola(アセロラ)", patch: [7] },
+                            { name: "Cassis(カシス)", patch: [11] },
+                            { name: "Himouto! Umaru-chan(干物妹！うまるちゃん)", tooltip : "Omnimix required", patch: [8] },
+                            { name: "NEW GAME!", tooltip : "Omnimix required", patch: [9] },
+                            { name: "Ochazuke(お茶づけ)", tooltip : "Omnimix required", patch: [10] },
+                            { name: "Kotaro and Nengoro Neko(コタローとねんごろねこ)", tooltip : "Force unlock required", patch: [12] },
+                            { name: "HinaBitter♪(ひなビタ♪)", tooltip : "Force unlock required", patch: [13] },
+                          ],
+                        },
+                        {
+                          name: "Combo display - guest play default",
+                          type: "union",
+                          offset: 0x5E003,
+                          patches: [
+                            { name: "ON", tooltip : "Default", patch: [1] },
+                            { name: "OFF", patch: [0] },
+                          ],
+                        },
+                        {
+                          name: "Ranking display - guest play default",
+                          type: "union",
+                          offset: 0x5E002,
+                          patches: [
+                            { name: "ON", tooltip : "Default", patch: [1] },
+                            { name: "OFF", patch: [0] },
+                          ],
+                        },
+                        {
+                          name: "HARD MODE - guest play default",
+                          type: "union",
+                          offset: 0x5E00C,
+                          patches: [
+                            { name: "OFF", tooltip : "Default", patch: [0] },
+                            { name: "ON", patch: [1] },
+                          ],
+                        },
+                        {
+                          name: "MATCHING option - guest play default",
+                          tooltip : "Expert option required",
+                          type: "union",
+                          offset: 0x5E00B,
+                          patches: [
+                            { name: "ON", tooltip : "Default", patch: [1] },
+                            { name: "OFF", patch: [0] },
+                          ],
+                        },
+                        {
+                          name: "HAZARD option - guest play default",
+                          tooltip : "Expert option required",
+                          type: "union",
+                          offset: 0x5E013,
+                          patches: [
+                            { name: "OFF", tooltip : "Default", patch: [0] },
+                            { name: "EXC 1", patch: [1] },
+                            { name: "EXC 2", patch: [2] },
+                            { name: "EXC 3", patch: [3] },
+                            { name: "FC 1", patch: [4] },
+                            { name: "FC 2", patch: [5] },
+                            { name: "FC 3", patch: [6] },
+                          ],
+                        }
+                    ]),
+                    new Patcher("jubeat.dll", "2021-08-17", [
+                        {
+                          name: "Disable Tutorial",
+                          patches: [{offset: 0xD51AF, off: [0x0F, 0x85, 0x7F, 0x01, 0x00, 0x00], on: [0xE9, 0x80, 0x01, 0x00, 0x00, 0x90]}]
+                        },
+                        {
+                          name: "SELECT MUSIC Timer Lock",
+                          patches: [{offset: 0xBF812, off: [0x75], on: [0xEB]}]
+                        },
+                        {
+                          name: "Skip CATEGORY SELECT",
+                          patches: [{offset: 0xBFB97, off: [0x04], on: [0x07]}]
+                        },
+                        {
+                          name: "Skip Online Matching",
+                          patches: [{offset: 0xD12DB, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
+                        }
+                    ]),
+                    new Patcher("jubeat.dll", "2021-07-19", [
+                        {
+                          name: "Disable Tutorial",
+                          patches: [{offset: 0xD4FCF, off: [0x0F, 0x85, 0x7F, 0x01, 0x00, 0x00], on: [0xE9, 0x80, 0x01, 0x00, 0x00, 0x90]}]
+                        },
+                        {
+                          name: "SELECT MUSIC Timer Lock",
+                          patches: [{offset: 0xBF642, off: [0x75], on: [0xEB]}]
+                        },
+                        {
+                          name: "Skip CATEGORY SELECT",
+                          patches: [{offset: 0xBF9C7, off: [0x04], on: [0x07]}]
+                        },
+                        {
+                          name: "Skip Online Matching",
+                          patches: [{offset: 0xD10FB, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
+                        }
+                    ]),
                     new Patcher("jubeat.dll", "2021-03-31", [
                         {
                           name: "Disable Tutorial",
@@ -24,6 +428,24 @@
                         {
                           name: "Skip Online Matching",
                           patches: [{offset: 0xD0CBB, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
+                        }
+                    ]),
+                    new Patcher("jubeat.dll", "2021-02-09", [
+                        {
+                          name: "Disable Tutorial",
+                          patches: [{offset: 0xD4CBF, off: [0x0F, 0x85, 0x7F, 0x01, 0x00, 0x00], on: [0xE9, 0x80, 0x01, 0x00, 0x00, 0x90]}]
+                        },
+                        {
+                          name: "SELECT MUSIC Timer Lock",
+                          patches: [{offset: 0xBF302, off: [0x75], on: [0xEB]}]
+                        },
+                        {
+                          name: "Skip CATEGORY SELECT",
+                          patches: [{offset: 0xBF687, off: [0x04], on: [0x07]}]
+                        },
+                        {
+                          name: "Skip Online Matching",
+                          patches: [{offset: 0xD0DEB, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
                         }
                     ]),
                     new Patcher("jubeat.dll", "2020-12-08", [
@@ -69,11 +491,11 @@
                         },
                         {
                             name: "SELECT MUSIC Timer Lock",
-                            patches: [{ offset: 0xa06e2, off: [0x75], on: [0xeb] }],
+                            patches: [{ offset: 0xA06E2, off: [0x75], on: [0xeb] }],
                         },
                         {
                             name: "Skip CATEGORY SELECT",
-                            patches: [{ offset: 0xa0a67, off: [0x04], on: [0x07] }],
+                            patches: [{ offset: 0xA0A67, off: [0x04], on: [0x07] }],
                         },
                         {
                           name: "Skip Online Matching",
@@ -140,7 +562,7 @@
                           patches: [{offset: 0xA7227, off: [0x75], on: [0xEB]}]
                         },
                         {
-                          name: "Online Matching Skip",
+                          name: "Skip Online Matching",
                           patches: [{offset: 0xBBD0B, off: [0x0F, 0x8D, 0x72, 0x01], on: [0xE9, 0x73, 0x01, 0x00]}]
                         }
                     ]),
@@ -176,11 +598,11 @@
                     ])
                 ]),
                 new PatchContainer([
-                    new Patcher("music_db.dll", "2020-12-08, 2020-07-27, 2020-06-30, 2020-06-11", [
+                    new Patcher("music_db.dll", "2022-05-24, 2022-02-16, 2021-12-15, 2021-10-19, 2021-08-17, 2021-07-19, 2021-03-31, 2021-02-09, 2020-12-08, 2020-07-27, 2020-06-30, 2020-06-11", [
                         {
                          name: "Unlock all songs",
                          patches: [{offset: 0x1E15, off: [0x74, 0x0A], on: [0x90, 0x90]}]
-                        }
+                        },
                     ]),
                     new Patcher("music_db.dll", "2019-09-03", [
                         {

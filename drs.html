@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>DANCERUSH STARDOM DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+      window.addEventListener('load', function () {
+        new PatchContainer([
+          new Patcher('superstep.dll', '2020-12-14', [
+            {
+              name: 'Timer Freeze',
+              patches: [
+                {
+                  offset: 0x3565aa,
+                  off: [0x89, 0x43, 0x0c],
+                  on: [0x90, 0x90, 0x90]
+                }
+              ]
+            },
+            {
+              name: 'Song Unlock',
+              patches: [
+                { offset: 0x785ad8, off: [0x74], on: [0xeb] },
+                { offset: 0x785b08, off: [0x00], on: [0x01] },
+                { offset: 0x787219, off: [0x75, 0x07], on: [0x90, 0x90] },
+                { offset: 0x78721e, off: [0x00], on: [0x03] },
+                { offset: 0x892b55, off: [0x66], on: [0x62] }
+              ]
+            },
+            {
+              name: 'Hide Bottom Text',
+              tooltip: 'Such as EVENT MODE, PASELI, COIN, CREDIT',
+              patches: [
+                { offset: 0x74b733, off: [0x0f, 0x84], on: [0x90, 0xe9] },
+                { offset: 0x74b9bb, off: [0x74, 0x4f], on: [0x90, 0x90] },
+                { offset: 0x74b9c0, off: [0x0f, 0x84], on: [0x90, 0xe9] }
+              ]
+            },
+            {
+              type: 'union',
+              name: "Reroute 'All Factory Settings' Test Menu",
+              tooltip: 'AfpViewer keyboard controls are broken',
+              offset: 0xa2c138,
+              patches: [
+                {
+                  name: 'Default',
+                  patch: [0x70, 0xd8, 0x39, 0x80, 0x01]
+                },
+                {
+                  name: 'QCTestMenuScene',
+                  patch: [0x30, 0xd9, 0x39, 0x80, 0x01]
+                },
+                {
+                  name: 'AfpViewerScene',
+                  patch: [0x30, 0xac, 0x39, 0x80, 0x01]
+                }
+              ]
+            },
+            {
+              type: 'union',
+              name: "Reroute 'QCTestMenuScene' Test Menu",
+              tooltip: "The patch above must be set to 'QCTestMenuScene'",
+              offset: 0x39cd50,
+              patches: [
+                {
+                  name: 'Default',
+                  patch: [0xec, 0x93, 0x3f, 0x00]
+                },
+                {
+                  name: 'KoteraTestScene',
+                  patch: [0xbc, 0xd5, 0x3d, 0x00]
+                },
+                {
+                  name: 'GamePrototypeSelectScene',
+                  patch: [0xdc, 0xbb, 0x3c, 0x00]
+                }
+              ]
+            }
+          ]),
+          new Patcher('superstep.dll', '2022-12-14', [
+            {
+              name: 'Timer Freeze',
+              patches: [
+                {
+                  offset: 0x359fea,
+                  off: [0x89, 0x43, 0x0c],
+                  on: [0x90, 0x90, 0x90]
+                }
+              ]
+            },
+            {
+              name: 'Song Unlock',
+              patches: [
+                { offset: 0x78a9a8, off: [0x74], on: [0xeb] },
+                { offset: 0x78a9d8, off: [0x00], on: [0x01] },
+                { offset: 0x78c0e9, off: [0x75, 0x07], on: [0x90, 0x90] },
+                { offset: 0x78c0ee, off: [0x00], on: [0x03] },
+                { offset: 0x8986a5, off: [0x66], on: [0x62] } // bestival lmfao
+              ]
+            },
+            {
+              name: 'Hide Bottom Text',
+              tooltip: 'Such as EVENT MODE, PASELI, COIN, CREDIT',
+              patches: [
+                { offset: 0x74fc73, off: [0x0f, 0x84], on: [0x90, 0xe9] },
+                { offset: 0x74fefb, off: [0x74, 0x4f], on: [0x90, 0x90] },
+                { offset: 0x74ff00, off: [0x0f, 0x84], on: [0x90, 0xe9] }
+              ]
+            },
+            {
+              type: 'union',
+              name: "Reroute 'All Factory Settings' Test Menu",
+              tooltip: 'AfpViewer keyboard controls are broken',
+              offset: 0xa33338,
+              patches: [
+                {
+                  name: 'Default',
+                  patch: [0x10, 0x13, 0x3a, 0x80, 0x01]
+                },
+                {
+                  name: 'QCTestMenuScene',
+                  patch: [0xd0, 0x13, 0x3a, 0x80, 0x01]
+                },
+                {
+                  name: 'AfpViewerScene',
+                  patch: [0x70, 0xe6, 0x39, 0x80, 0x01]
+                }
+              ]
+            },
+            {
+              type: 'union',
+              name: "Reroute 'QCTestMenuScene' Test Menu",
+              tooltip: "The patch above must be set to 'QCTestMenuScene'",
+              offset: 0x3a07f0,
+              patches: [
+                {
+                  name: 'Default',
+                  patch: [0x1c, 0xa8, 0x3f, 0x00]
+                },
+                {
+                  name: 'KoteraTestScene',
+                  patch: [0x0d, 0xe9, 0x3d, 0x00]
+                },
+                {
+                  name: 'GamePrototypeSelectScene',
+                  patch: [0xad, 0xce, 0x3c, 0x00]
+                }
+              ]
+            }
+          ])
+        ])
+      })
+    </script>
+  </head>
+  <body>
+    <h1>DANCERUSH STARDOM DLL Modder</h1>
+  </body>
+</html>

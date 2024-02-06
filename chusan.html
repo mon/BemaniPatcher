@@ -57,7 +57,7 @@
                     },
                     {
                         name: "CVT Mode",
-                        tooltip: "Check to use 60Hz",
+                        tooltip: "[DEPRECATED] Check to use 60Hz",
                         patches: [
                             {offset: 0x1D864, off: [0x01], on: [0x00]},
                             {offset: 0x1D89B, off: [0x01], on: [0x00]},
@@ -66,6 +66,17 @@
                             {offset: 0xE5C217, off: [0x80], on: [0x00]},
                         ],
                     },
+					{
+						name: "Unlimit Max Tracks",
+						tooltip: "Play up to 7 tracks",
+						{
+						type: "number",
+						name: "Max Tracks",
+						offset: 0x3985B1,
+						size: 4,
+						min: 1,
+						max: 7,
+					},
                 ]);
             });
         </script>

@@ -82,7 +82,7 @@
                         {
                             // ikaros14
                             name: "Dummy LED",
-                            tooltip: "Skip LED board check",
+                            tooltip: "[DEPRECATED] Skip LED board check",
                             patches: [
                                 {offset: 0x2499D7, off: [0x00], on: [0x01]},
                             ],
@@ -154,7 +154,7 @@
                         {
                             // ikaros14
                             name: "Dummy LED",
-                            tooltip: "Skip LED board check",
+                            tooltip: "[DEPRECATED] Skip LED board check",
                             patches: [
                                 {offset: 0x2499D7, off: [0x00], on: [0x01]},
                             ],
@@ -167,6 +167,7 @@
                         },
                         {
                             name: "No Title Server TLS",
+							tooltip: "Title Server Workaround: Disables HTTPS",
                             patches: [
                                 {offset: 0xCE5479, off: [0x81, 0xE3, 0x00, 0x00, 0x80, 0x00], on: [0x31, 0xDB, 0x90, 0x90, 0x90, 0x90]},
                             ],

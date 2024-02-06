@@ -83,7 +83,7 @@
                     {
                         // esterTion
                         name: "Dummy LED",
-                        tooltip: "Skip LED board check",
+                        tooltip: "[DEPRECATED] Skip LED board check",
                         patches: [
                             {offset: 0x24A5E7, off: [0x00], on: [0x01]},
                         ],
@@ -97,7 +97,7 @@
                     },
                     {
                         name: "No TLS",
-                        tooltip: "Title server workaround",
+                        tooltip: "Title server workaround: Disables HTTPS",
                         patches: [
                             {offset: 0xD04D09, off: [0x81, 0xE3, 0x00, 0x00, 0x80, 0x00], on: [0x31, 0xDB, 0x90, 0x90, 0x90, 0x90]},
                         ]

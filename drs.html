@@ -8,6 +8,25 @@
     <script type="text/javascript">
       window.addEventListener('load', function () {
         new PatchContainer([
+		  new Patcher("superstep.dll", "2018-03-28", [
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0x19348A, off: [0x89, 0x43, 0x0C], on: [0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Song Unlock",
+                        patches: [
+                            { offset: 0x4336D8, off: [0x74], on: [0xEB] },
+                            { offset: 0x433708, off: [0x00], on: [0x01] },
+                        ]
+                    },
+                        ]),
+                new Patcher("superstep.dll", "2018-10-16", [
+                    {
+                        name: "Timer Freeze",
+                        patches: [{offset: 0x23127, off: [0x74], on: [0xEB]}]
+                    },
+                        ]),
           new Patcher('superstep.dll', '2020-12-14', [
             {
               name: 'Timer Freeze',

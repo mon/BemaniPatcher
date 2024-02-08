@@ -487,6 +487,60 @@
               patches: [{ offset: 0x3DF18D, off: [0x47, 0xFC, 0x4F, 0x00], on: [0x8B, 0x46, 0x56, 0x04] }],
             },
             {
+              name: "Increase 'All Factory Settings' Buffer",
+              tooltip: "Enable this if the option below is not default",
+              patches: [
+                { offset: 0x6E4DBE, off: [0x40, 0x01, 0x00, 0x00], on: [0x22, 0x61, 0x14, 0x00] },
+                { offset: 0x8C283A, off: [0x40, 0x01, 0x00, 0x00], on: [0x22, 0x61, 0x14, 0x00] },
+              ]
+            },
+            {
+              type : "union",
+              name : "Reroute 'All Factory Settings' Test Menu",
+              offset : 0x6E4DD5,
+              patches : [
+                {
+                  name : "Default",
+                  patch : [0x17, 0x88, 0x01, 0x00],
+                },
+                {
+                  name : "AfpViewerScene",
+                  patch : [0xC7, 0x72, 0xD4, 0xFF],
+                },
+                {
+                  name : "QproViewerScene",
+                  patch : [0x77, 0x03, 0xD5, 0xFF],
+                },
+                {
+                  name : "SoundViewerScene",
+                  patch : [0xA7, 0x69, 0xD5, 0xFF],
+                },
+              ]
+            },
+            {
+              type : "union",
+              name : "Reroute 'Ecomode Options' Test Menu",
+              offset : 0x6E4F45,
+              patches : [
+                {
+                  name : "Default",
+                  patch : [0xD7, 0xBB, 0x01, 0x00],
+                },
+                {
+                  name : "CustomizeViewerScene",
+                  patch : [0x27, 0x96, 0xD4, 0xFF],
+                },
+                {
+                  name : "SoundRankingViewerScene",
+                  patch : [0xE7, 0x2E, 0xD5, 0xFF],
+                },
+                {
+                  name : "SystemSoundViewerScene",
+                  patch : [0xE7, 0xA1, 0xD5, 0xFF],
+                },
+              ]
+            },
+            {
               name: "Omnimix",
               patches: [
                 { offset: 0x6E7646, off: [0xC3, 0xCC, 0xCC, 0xCC, 0xCC], on: [0xC6, 0x47, 0x05, 0x58, 0xC3] },

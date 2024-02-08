@@ -7,13 +7,15 @@
         <script type="text/javascript" src="js/dllpatcher.js"></script>
         <script type="text/javascript">
             window.addEventListener("load", function () {
-                new Patcher("museca.dll", "", [
+                new PatchContainer([
+                new Patcher("museca.dll", "2016-07-13", [
                     {
                         //Discovered by Cammy - ported by Zelminar
                         name: "Song 1 Lock",
                         tooltip: "Song clears/scores only. Profile progress and custom settings do not save. Reboot game to re-query for scores.",
                         patches: [{offset: 0x27E0C7, off: [0xFF, 0x83, 0x8C, 0x09, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
                     },
+                ])
                 ]);
             });
         </script>

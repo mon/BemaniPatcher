@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>CHUNITHM AMAZON Modder</title>
+        <link rel="stylesheet" href="css/style.css">
+        <script type="text/javascript" src="js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function () {
+            new PatchContainer([
+                new Patcher("chuniApp.exe", "1.30.00", [
+                    {
+                        // mon
+                        name: "Allow 127.0.0.1/localhost as the network server",
+                        patches: [
+                            {offset: 0x8BC180, off: [0x55, 0x8B, 0xEC], on: [0x31, 0xC0, 0xC3]},
+                            {offset: 0x164D0E0, off: [0x31, 0x32, 0x37, 0x2F], on: [0x30, 0x2F, 0x38, 0x00]}
+                        ]
+                    },
+                    {
+                        // mon
+                        name: "Disable shop close lockout",
+                        tooltip: "Disables ~12-8am lockout. Does not disable maint lockout from 6:30-7am JST",
+                        patches: [
+                            {offset: 0x8E3DD3, off: [0x74], on: [0xEB]},
+                        ],
+                    },
+                    {
+                        // mon
+                        name: "Disable update check (faster boot)",
+                        patches: [
+                            {offset: 0x8AE690, off: [0xA1, 0x54, 0x88], on: [0x31, 0xC0, 0xC3]},
+                        ],
+                    },
+                    {
+                        // somewhatlurker
+                        name: "Force shared audio mode, system audio samplerate must be 48000",
+                        tooltip: "Improves compatibility but may increase latency",
+                        patches: [
+                            {offset: 0xC77D1A, off: [0x01], on: [0x00]},
+                        ],
+                    },
+                    {
+                        // somewhatlurker
+                        name: "Force 2 channel audio output",
+                        patches: [
+                            {offset: 0xC77DF1, off: [0x75, 0x3F], on: [0x90, 0x90]},
+                        ],
+                    },
+                    {
+                        // lybxlpsv
+                        name: "Disable Song Select Timer",
+                        tooltip: "May only work when playing with card.",
+                        patches: [
+                            {offset: 0x6FFC62, off: [0x74], on: [0xEB]},
+                        ],
+                    },
+                    {
+                        // esterTion
+                        name: "Set All Timers to 999",
+                        patches: [
+                            {offset: 0x5C30E0, off: [0x8B, 0x44, 0x24, 0x04, 0x69, 0xC0, 0xE8, 0x03, 0x00, 0x00], on: [0xB8, 0x58, 0x3E, 0x0F, 0x00, 0x90, 0x90, 0x90, 0x90, 0x90]},
+                        ],
+                    },
+                    {
+                        // lin714093880 & esterTion
+                        name: "Better patch for head-to-head play",
+                        tooltip: "Fix infinite sync while trying to connect to head to head play.",
+                        patches: [
+                            {offset: 0x440CD3, off: [0x01], on: [0x00]},
+                        ]
+                    },
+                    {
+                        // esterTion
+                        name: "Increase max credits to 254",
+                        patches: [
+                            {offset: 0xBC4B37, off: [0x8A, 0x5D, 0x14], on: [0xB3, 0xFE, 0x90]},
+                        ],
+                    },
+                    {
+                        // esterTion
+                        name: "Free Play",
+                        tooltip: "Endless credits",
+                        patches: [
+                            {offset: 0xBC4F55, off: [0x28], on: [0x08]},
+                        ],
+                    },
+                    {
+                        // maybenotuseful
+                        name: "Patch for Windows 7",
+                        danger: "May not be able to connect to the server",
+                        patches: [
+                            {offset: 0x19B0AAE, off: [0x45, 0x78], on: [0x5F, 0x41]},
+                            {offset: 0x19B0AB7, off: [0x43, 0x61, 0x6E, 0x63, 0x65, 0x6C, 0x51, 0x75, 0x65, 0x72, 0x79], on: [0x51, 0x75, 0x65, 0x72, 0x79, 0x5F, 0x41, 0x00, 0x00, 0x00, 0x00]},
+                        ],
+                    },
+                    {
+                        // esterTion
+                        name: "Dummy LED",
+                        danger: "[DEPRECATED] Skip LED board check",
+                        patches: [
+                            {offset: 0x244AE7, off: [0x00], on: [0x01]},
+                        ],
+                    },
+                ])
+            ]);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>CHUNITHM AMAZON Modder</h1>
+    </body>
+</html>

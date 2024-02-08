@@ -8,7 +8,6 @@
   font-weight: normal;
   font-style: normal;
 }
-
 .tagline {
     font-family: monospace;
 }
@@ -356,4 +355,34 @@ input[type=checkbox]:checked ~ ul > li.patch-on {
 }
 input[type=checkbox]:checked ~ ul > li.patch-off {
     display: list-item;
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #1d1e1f;
+	color: #fff;
+  }
+  .gameicon, .patchContainer {
+		background-color: #2e2e2e;
+  }
+  label.gameicon {
+	  background: #303025;
+  }
+  .subsection {
+    background-color: #464646;
+  }
+}
+@media (prefers-color-scheme: light) {
+  body {
+    background: #e2e1e0;
+	color: #000;
+  }
+  .gameicon, .patchContainer {
+		background-color: white;
+  }
+  label.gameicon {
+	  background: #fffcf0;
+  }
+  .subsection {
+    background-color: #a2a2a2;
+  }
 }

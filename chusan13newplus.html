@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>CHUNITHM NEW PLUS!! Modder</title>
+        <link rel="stylesheet" href="css/style.css">
+        <script type="text/javascript" src="js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function () {
+            new PatchContainer([
+                new Patcher("chusanApp.exe", "2.05.00", [
+                    {
+                        name: "Disable shop close lockout",
+                        tooltip: "Disables ~12-8am lockout. Does not disable maint lockout from 6:30-7am JST",
+                        patches: [
+                            {offset: 0xB81943, off: [0x74], on: [0xEB]},
+                        ],
+                    },
+                    {
+                        name: "Force shared audio mode, system audio samplerate must be 48000",
+                        tooltip: "Improves compatibility but may increase latency",
+                        patches: [
+                            {offset: 0xE95D2A, off: [0x01], on: [0x00]},
+                        ],
+                    },
+                    {
+                        name: "Force 2 channel audio output",
+                        patches: [
+                            {offset: 0xE95E01, off: [0x75, 0x3F], on: [0x90, 0x90]},
+                        ],
+                    },
+                    {
+                        name: "Disable Song Select Timer",
+                        patches: [
+                            {offset: 0x98455B, off: [0x74], on: [0xEB]},
+                        ],
+                    },
+                    {
+                        name: "Set All Timers to 999",
+                        patches: [
+                            {offset: 0x819940, off: [0x8B, 0x44, 0x24, 0x04, 0x69, 0xC0, 0xE8, 0x03, 0x00, 0x00], on: [0xB8, 0x58, 0x3E, 0x0F, 0x00, 0x90, 0x90, 0x90, 0x90, 0x90]},
+                        ],
+                    },
+                    {
+                        name: "Unlimit Maximum Tracks",
+                        tooltip: "You must check to play more than 7 tracks.",
+                        patches: [
+                            {offset: 0x6CBC89, off: [0xF0], on: [0xC0]},
+                        ],
+                    },
+                    {
+                        type : "number",
+                        name : "Max Tracks",
+                        offset : 0x398381,
+                        size : 4,
+                        min : 1,
+                        max : 12,
+                    },
+                    {
+                        name: "Patch for head-to-head play",
+                        tooltip: "Fix infinite sync while trying to connect to head to head play.",
+                        patches: [
+                            {offset: 0x609FB3, off: [0x01], on: [0x00]},
+                        ]
+                    },
+                    {
+                        name: "No Encryption",
+                        tooltip: "Title server workaround",
+                        patches: [
+                            {offset: 0x1D10640, off: [0xCD], on: [0x00]},
+                            {offset: 0x1D10644, off: [0xCD], on: [0x00]},
+                        ]
+                    },
+                    {
+                        name: "CVT Mode",
+                        danger: "[DEPRECATED] Check to use 60Hz",
+                        patches: [
+                            {offset: 0x1D864, off: [0x01], on: [0x00]},
+                            {offset: 0x1D89B, off: [0x01], on: [0x00]},
+                            {offset: 0x37BBCB, off: [0x75], on: [0xEB]},
+                            {offset: 0x37D6DE, off: [0x84, 0xC0, 0x0F, 0x94, 0xC1], on: [0x90, 0x90, 0x90, 0x90, 0x90]},
+                            {offset: 0xE78E37, off: [0x80], on: [0x00]},
+                        ],
+                    },
+                    {
+                        name: "Bypass LED board check",
+                        danger: "[DEPRECATED] Forces LED board check to good and auto continues",
+                        patches: [
+                            {offset: 0x95790A, off: [0x01], on: [0x00]},
+                            {offset: 0x95790F, off: [0x00], on: [0x01]},
+                        ]
+                    },
+                ])
+                ]);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>CHUNITHM NEW PLUS!! Modder</h1>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>GITADORA Tri-Boost DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+          new PatchContainer([
+            new Patcher("game.dll", "2016-11-23", [
+              {
+                name: "Timer Freeze",
+                patches: [{offset: 0xBC17, off: [0x0F, 0x85, 0xAA, 0x01, 0x00, 0x00], on: [0xE9, 0xAB, 0x01, 0x00, 0x00, 0x90]}]
+              },
+              {
+                name: "Stage Freeze",
+                danger: "Breaks score submission to server",
+                patches: [{offset: 0x14B551, off: [0x0F, 0x85, 0xFB, 0x01, 0x00, 0x00], on: [0xE9, 0xFC, 0x01, 0x00, 0x00, 0x90]}]
+              },
+              {
+                name: "Unlock all songs",
+                patches: [
+                  {offset: 0x1D6C4A, off: [0x5B, 0x00], on: [0x4D, 0x01]},
+                  {offset: 0x1D6C62, off: [0x5D, 0x00], on: [0x4D, 0x01]},
+                  {offset: 0x153904, off: [0x75, 0x16], on: [0xEB, 0x23]},
+                ]
+              },
+              {
+                name: "Enable Long Music",
+                patches: [{offset: 0x153A44, off: [0x75, 0x03], on: [0x90, 0x90]}]
+              }
+            ])
+          ]);
+        });
+    </script>
+</head>
+<body>
+    <h1>GITADORA Tri-Boost DLL Modder</h1>
+</body>
+</html>

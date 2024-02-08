@@ -8,7 +8,7 @@
     <script type="text/javascript">
       window.addEventListener('load', function () {
         new PatchContainer([
-		  new Patcher("superstep.dll", "2018-03-28", [
+        new Patcher("superstep.dll", "2018-03-28", [
                     {
                         name: "Timer Freeze",
                         patches: [{ offset: 0x19348A, off: [0x89, 0x43, 0x0C], on: [0x90, 0x90, 0x90] }],

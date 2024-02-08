@@ -7,7 +7,8 @@
         <script type="text/javascript" src="js/dllpatcher.js"></script>
         <script type="text/javascript">
             window.addEventListener("load", function () {
-                new Patcher("chusanApp.exe", "", [
+            new PatchContainer([
+                new Patcher("chusanApp.exe", "2.16.00", [
                     {
                         name: "Disable shop close lockout",
                         tooltip: "Disables ~12-8am lockout. Does not disable maint lockout from 6:30-7am JST",
@@ -111,8 +112,10 @@
                             {offset: 0x1CCB1, off: [0x85, 0xC0], on: [0xEB, 0x30]},
                         ],
                     },
+                ])
                 ]);
-                new Patcher("amdaemon.exe", "", [
+                new PatchContainer([
+                new Patcher("amdaemon.exe", "2.16.00", [
                     {
                         name: "Replace error 6401 with no error",
                         danger: "[DEPRECATED] Sets all instances of error 6401 to 0",
@@ -122,6 +125,7 @@
                             {offset: 0x222C87, off: [0x01, 0x19], on: [0x00, 0x00]},
                         ],
                     },
+                ])
                 ]);
             });
         </script>

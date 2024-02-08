@@ -3726,6 +3726,64 @@
                         patches: [{ offset: 0x36CD5D, off: [0xC7, 0x84, 0x4B, 0x00], on: [0xEB, 0x70, 0x49, 0x06] }],
                     },
                     {
+                        name: "Increase 'All Factory Settings' Buffer",
+                        tooltip: "Enable this if the option below is not default",
+                        patches: [
+                            { offset: 0x5530EE, off: [0x48, 0x01, 0x00, 0x00], on: [0x22, 0x61, 0x14, 0x00] },
+                            { offset: 0x7F5C3A, off: [0x48, 0x01, 0x00, 0x00], on: [0x22, 0x61, 0x14, 0x00] },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Reroute 'All Factory Settings' Test Menu",
+                        offset : 0x553105,
+                        patches : [
+                            {
+                                name : "Default",
+                                patch : [0x27, 0x8E, 0x01, 0x00],
+                            },
+                            {
+                                name : "AfpViewerScene",
+                                patch : [0x27, 0xFB, 0xED, 0xFF],
+                            },
+                            {
+                                name : "QproViewerScene",
+                                patch : [0x67, 0x8C, 0xEE, 0xFF],
+                            },
+                            {
+                                name : "SoundViewerScene",
+                                patch : [0x87, 0xF8, 0xEE, 0xFF],
+                            },
+                            {
+                                name : "TestICCardQCScene",
+                                patch : [0x67, 0x4C, 0xEF, 0xFF],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Reroute 'Ecomode Options' Test Menu",
+                        offset : 0x553275,
+                        patches : [
+                            {
+                                name : "Default",
+                                patch : [0xB7, 0xC3, 0x01, 0x00],
+                            },
+                            {
+                                name : "CustomizeViewerScene",
+                                patch : [0xA7, 0x1E, 0xEE, 0xFF],
+                            },
+                            {
+                                name : "SoundRankingViewerScene",
+                                patch : [0x47, 0xB8, 0xEE, 0xFF],
+                            },
+                            {
+                                name : "SystemSoundViewerScene",
+                                patch : [0x47, 0x2F, 0xEF, 0xFF],
+                            },
+                        ]
+                    },
+                    {
                         name: "Omnimix",
                         patches: [
                             { offset: 0x555B46, off: [0xC3, 0xCC, 0xCC, 0xCC, 0xCC], on: [0xC6, 0x47, 0x05, 0x58, 0xC3] },

@@ -369,6 +369,9 @@ input[type=checkbox]:checked ~ ul > li.patch-off {
   .subsection {
     background-color: #464646;
   }
+  .success {
+    color: green;
+  }
 }
 @media (prefers-color-scheme: light) {
   body {

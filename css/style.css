@@ -8,7 +8,6 @@
   font-weight: normal;
   font-style: normal;
 }
-
 .tagline {
     font-family: monospace;
 }
@@ -332,7 +331,6 @@ input[type=radio] {
     cursor: pointer;
     display: inline-block;
 }
-
 .patchPreviewLabel {
     cursor: pointer;
 }
@@ -356,4 +354,50 @@ input[type=checkbox]:checked ~ ul > li.patch-on {
 }
 input[type=checkbox]:checked ~ ul > li.patch-off {
     display: list-item;
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #1d1e1f;
+	color: #fff;
+  }
+  .gameicon, .patchContainer {
+		background-color: #2e2e2e;
+  }
+  label.gameicon {
+	  background: #303025;
+  }
+  .subsection {
+    background-color: #464646;
+  }
+  .success {
+    color: green;
+  }
+}
+@media (prefers-color-scheme: light) {
+  body {
+    background: #e2e1e0;
+	color: #000;
+  }
+  .gameicon, .patchContainer {
+		background-color: white;
+  }
+  label.gameicon {
+	  background: #fffcf0;
+  }
+  .subsection {
+    background-color: #a2a2a2;
+  }
+}
+.image-wrapper {
+    position: relative;
+}
+.image-hover {
+    position: absolute;
+    top: 0;
+    left: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+.image-hover:hover {
+    opacity: 1;
 }

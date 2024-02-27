@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8'>
+    <title>WACCA REVERSE Modder</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function() {
+            new PatchContainer([
+                new Patcher('Mercury-Win64-Shipping.exe', "3.07.01", [{
+                    name: 'Fully disable lockout',
+                    tooltip: "closing time patch for「このマシンは本日の稼働を終了しました。改めてご来店ください。」 ",
+                    patches: [{
+                        offset: 0x4EF970,
+                        off: [0xE8, 0x2B, 0x5A, 0xE4, 0xFF, 0x45, 0x33, 0xC0, 0x41, 0x8D, 0x50, 0x04, 0x48, 0x8B, 0xCB, 0xE8, 0x0C, 0xAC, 0xED, 0xFF, 0x84, 0xC0, 0x75, 0x12, 0xBA, 0x06],
+                        on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0xBA, 0x00]
+                    }, {
+                        offset: 0x4EF9A6,
+                        off: [0xBA, 0x02],
+                        on: [0xBA, 0x00]
+                    }, {
+                        offset: 0x4EF9F2,
+                        off: [0x48, 0x8D, 0x55, 0x20, 0x48],
+                        on: [0xE9, 0x79, 0xFF, 0xFF, 0xFF]
+                    }, ]
+                }, {
+                    name: 'Force Engine locale (ignore router country language)',
+                    patches: [{
+                        offset: 0x558154,
+                        off: [0x74, 0x07],
+                        on: [0x90, 0x90]
+                    }, ]
+                }, {
+                    name: 'Allow using CHN region (don\'t change to HKG)',
+                    patches: [{
+                        offset: 0x1F2B0B7,
+                        off: [0x75],
+                        on: [0xEB]
+                    }, ]
+                }, {
+                    name: 'Force enable Hidden Luin title screen',
+                    patches: [{
+                        offset: 0x4F0FFA,
+                        off: [0x74],
+                        on: [0xEB]
+                    }, ]
+                }, ]),
+                new Patcher('Mercury-Win64-Shipping.exe', "3.10.00", [{
+                    name: 'Fully disable lockout',
+                    tooltip: "closing time patch for「このマシンは本日の稼働を終了しました。改めてご来店ください。」 ",
+                    patches: [{
+                        offset: 0x4E0897,
+                        off: [0xFF, 0xE1, 0x48, 0x8D, 0x55, 0x20, 0x48, 0x8B, 0xCF, 0xE8, 0x3B, 0x87, 0xE4, 0xFF, 0x45, 0x33, 0xC0, 0x41, 0x8D, 0x50],
+                        on: [0xBA, 0x00, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xCB, 0xE8, 0x0C, 0xCB, 0xFF, 0xFF, 0xE9, 0xE7, 0x01, 0x00, 0x00, 0x90, 0x90]
+                    }, ]
+                }, ]),
+            ]);
+        });
+    </script>
+</head>
+
+<body>
+    <h1>WACCA REVERSE Modder</h1>
+</body>
+
+</html>

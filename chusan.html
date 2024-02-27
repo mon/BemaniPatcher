@@ -7,7 +7,8 @@
         <script type="text/javascript" src="js/dllpatcher.js"></script>
         <script type="text/javascript">
             window.addEventListener("load", function () {
-                new Patcher("chusanApp.exe", "", [
+            new PatchContainer([
+                new Patcher("chusanApp.exe", "2.00.01", [
                     {
                         name: "Disable shop close lockout",
                         tooltip: "Disables ~12-8am lockout. Does not disable maint lockout from 6:30-7am JST",
@@ -56,8 +57,18 @@
                         ]
                     },
                     {
+                        name: "Unlimit Max Tracks",
+                        tooltip: "Play up to 7 tracks",
+                        type: "number",
+                        name: "Max Tracks",
+                        offset: 0x3985B1,
+                        size: 4,
+                        min: 1,
+                        max: 7,
+                    },
+                    {
                         name: "CVT Mode",
-                        tooltip: "Check to use 60Hz",
+                        danger: "[DEPRECATED] Check to use 60Hz",
                         patches: [
                             {offset: 0x1D864, off: [0x01], on: [0x00]},
                             {offset: 0x1D89B, off: [0x01], on: [0x00]},
@@ -66,6 +77,7 @@
                             {offset: 0xE5C217, off: [0x80], on: [0x00]},
                         ],
                     },
+                ])
                 ]);
             });
         </script>

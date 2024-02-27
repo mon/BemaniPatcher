@@ -11,7 +11,7 @@
                     new Patcher('soundvoltex.dll', "2014-10-22 (PhaseII)", [
                         {
                             name: 'Freeze timer in all modes',
-                            tooltip: 'Useful to slowly browse through the song list',
+                            danger: 'Not properly tested',
                             patches: [{offset: 0x380BB, off: [0x8B, 0x43, 0x60, 0x85, 0xC0, 0x74, 0x04], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
                         },
                         {

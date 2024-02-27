@@ -2,12 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>CHUNITHM PARADISE Modder</title>
+        <title>CHUNITHM PARADISE (LOST) Modder</title>
         <link rel="stylesheet" href="css/style.css">
         <script type="text/javascript" src="js/dllpatcher.js"></script>
         <script type="text/javascript">
             window.addEventListener("load", function () {
-                new Patcher("chuniApp.exe", "", [
+            new PatchContainer([
+                new Patcher("chuniApp.exe", "1.50.00", [
                     {
                         name: "Allow 127.0.0.1/localhost as the network server",
                         patches: [
@@ -57,15 +58,6 @@
                         ]
                     },
                     {
-                        // maybenotuseful
-                        name: "Patch for Windows 7",
-                        tooltip: "May not be able to connect to the server",
-                        patches: [
-                            {offset: 0x1bdd428, off: [0x45, 0x78], on: [0x5F, 0x41]},
-                            {offset: 0x1bdd430, off: [0x43, 0x61, 0x6E, 0x63, 0x65, 0x6C, 0x51, 0x75, 0x65, 0x72, 0x79], on: [0x51, 0x75, 0x65, 0x72, 0x79, 0x5F, 0x41, 0x00, 0x00, 0x00, 0x00]},
-                        ],
-                    },
-                    {
                         // ikaros14
                         name: "Increase max credits to 254",
                         patches: [
@@ -81,14 +73,6 @@
                         ],
                     },
                     {
-                        // esterTion
-                        name: "Dummy LED",
-                        tooltip: "Skip LED board check",
-                        patches: [
-                            {offset: 0x24A5E7, off: [0x00], on: [0x01]},
-                        ],
-                    },
-                    {
                         name: "No Encryption",
                         tooltip: "Title server workaround",
                         patches: [
@@ -97,17 +81,35 @@
                     },
                     {
                         name: "No TLS",
-                        tooltip: "Title server workaround",
+                        tooltip: "Title server workaround: Disables HTTPS",
                         patches: [
                             {offset: 0xD04D09, off: [0x81, 0xE3, 0x00, 0x00, 0x80, 0x00], on: [0x31, 0xDB, 0x90, 0x90, 0x90, 0x90]},
                         ]
+                    },
+                    {
+                        // maybenotuseful
+                        name: "Patch for Windows 7",
+                        danger: "May not be able to connect to the server",
+                        patches: [
+                            {offset: 0x1bdd428, off: [0x45, 0x78], on: [0x5F, 0x41]},
+                            {offset: 0x1bdd430, off: [0x43, 0x61, 0x6E, 0x63, 0x65, 0x6C, 0x51, 0x75, 0x65, 0x72, 0x79], on: [0x51, 0x75, 0x65, 0x72, 0x79, 0x5F, 0x41, 0x00, 0x00, 0x00, 0x00]},
+                        ],
+                    },
+                    {
+                        // esterTion
+                        name: "Dummy LED",
+                        danger: "[DEPRECATED] Skip LED board check",
+                        patches: [
+                            {offset: 0x24A5E7, off: [0x00], on: [0x01]},
+                        ],
                     }
+                ])
                 ]);
             });
         </script>
     </head>
     <body>
-        <h1>CHUNITHM PARADISE Modder</h1>
+        <h1>CHUNITHM PARADISE (LOST) Modder</h1>
     </body>
 </html>
 

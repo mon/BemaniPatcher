@@ -7,7 +7,8 @@
     <script type="text/javascript" src="js/dllpatcher.js"></script>
     <script type="text/javascript">
         window.addEventListener("load", function () {
-            new Patcher("game.dll", "", [
+          new PatchContainer([
+            new Patcher("game.dll", "2016-11-23", [
               {
                 name: "Timer Freeze",
                 patches: [{offset: 0xBC17, off: [0x0F, 0x85, 0xAA, 0x01, 0x00, 0x00], on: [0xE9, 0xAB, 0x01, 0x00, 0x00, 0x90]}]
@@ -29,6 +30,7 @@
                 name: "Enable Long Music",
                 patches: [{offset: 0x153A44, off: [0x75, 0x03], on: [0x90, 0x90]}]
               }
+            ])
           ]);
         });
     </script>

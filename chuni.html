@@ -7,10 +7,10 @@
         <script type="text/javascript" src="js/dllpatcher.js"></script>
         <script type="text/javascript">
             window.addEventListener("load", function () {
-			new PatchContainer([
+            new PatchContainer([
 
-// 1.00
-                new Patcher("chuniApp.exe", "(1.00.00)", [
+            // 1.00
+                new Patcher("chuniApp.exe", "1.00.02", [
                     {
                         // mon
                         name: "Allow 127.0.0.1 as the network server",
@@ -73,10 +73,10 @@
                             {offset: 0x3E5E13, off: [0x01], on: [0x00]},
                         ]
                     }
-				]),
+                ]),
 
-// 1.01
-				new Patcher("chuniApp.exe", "(1.01.00)", [
+                // 1.01
+                new Patcher("chuniApp.exe", "1.01.00", [
                     {
                         // mon
                         name: "Allow 127.0.0.1 as the network server",
@@ -109,14 +109,6 @@
                         ],
                     },
                     {
-                        name: "Patch for Windows 7",
-                        tooltip: "May not be able to connect to the server",
-                        patches: [
-                            {offset: 0x16D470C, off: [0x45, 0x78], on: [0x5F, 0x41]},
-                            {offset: 0x16D4715, off: [0x43, 0x61, 0x6E, 0x63, 0x65, 0x6C, 0x51, 0x75, 0x65, 0x72, 0x79], on: [0x51, 0x75, 0x65, 0x72, 0x79, 0x5F, 0x41, 0x00, 0x00, 0x00, 0x00]},
-                        ],
-                    },
-                    {
                         // lybxlpsv
                         name: "Disable Song Select Timer",
                         tooltip: "May only work when playing with card.",
@@ -138,7 +130,15 @@
                         patches: [
                             {offset: 0x3E61B3, off: [0x01], on: [0x00]},
                         ]
-                    }
+                    },
+                    {
+                        name: "Patch for Windows 7",
+                        danger: "May not be able to connect to the server",
+                        patches: [
+                            {offset: 0x16D470C, off: [0x45, 0x78], on: [0x5F, 0x41]},
+                            {offset: 0x16D4715, off: [0x43, 0x61, 0x6E, 0x63, 0x65, 0x6C, 0x51, 0x75, 0x65, 0x72, 0x79], on: [0x51, 0x75, 0x65, 0x72, 0x79, 0x5F, 0x41, 0x00, 0x00, 0x00, 0x00]},
+                        ],
+                    },
                 ]),
 
                 ]);

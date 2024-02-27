@@ -7,7 +7,8 @@
     <script type="text/javascript" src="js/dllpatcher.js"></script>
     <script type="text/javascript">
         window.addEventListener("load", function () {
-            new Patcher("game.dll", "", [
+          new PatchContainer([
+            new Patcher("game.dll", "2021-02-15", [
               {
                 name: "Timer Freeze",
                 patches: [{offset: 0x1035BF, off: [0x0F, 0x85], on: [0x90, 0xE9]}]
@@ -41,6 +42,7 @@
                 name: 'Skip "NOW DATA INITIALIZING" (useful for testing only)',
                 patches: [{offset: 0x36E5D, off: [0x0F, 0x84, 0x74, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90]}]
               },
+            ])
             ]);
         });
     </script>

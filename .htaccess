@@ -1,0 +1,5 @@
+# Over time, some patchers have changed path due to reorganisation and cleanup.
+# This avoids link rot on mon's server by redirecting the old paths to the new ones
+
+Redirect permanent "/bemanipatcher/chuninewplus.html" "/bemanipatcher/chusannewplus.html"
+Redirect permanent "/bemanipatcher/resort_anthem.html" "/bemanipatcher/resortanthem.html"

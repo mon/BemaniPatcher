@@ -3796,10 +3796,7 @@
                     {
                         name: "Disable Recording Lock",
                         tooltip: "Allows all songs to be recorded in-game",
-                        patches: [
-                            { offset: 0x4669D8, off: [0x75], on: [0xEB] },
-                            { offset: 0x466A3D, off: [0x32, 0xC0], on: [0xF6, 0xD0] },
-                        ]
+                        patches: [{ offset: 0x466A0F, off: [0x40, 0x84, 0xFF], on: [0x90, 0x90, 0x90] }],
                     },
                     {
                         // https://github.com/spice2x/spice2x.github.io/issues/102

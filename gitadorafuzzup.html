@@ -1,0 +1,2085 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>GITADORA FUZZ-UP DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            new PatchContainer([
+                new Patcher("game.dll", "2022-12-14", [
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0xED8AF, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Premium Timer Freeze",
+                        danger: "Score saving may break",
+                        patches: [{ offset: 0x107E70, off: [0xFF, 0xC9], on: [0x90, 0x90] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 15",
+                        offset : 0x1AAB2,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 10",
+                        offset : 0x1AAFA,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Cursor Hold",
+                        patches: [{ offset: 0xB2655, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Stage Freeze",
+                        danger: "Scores don't save",
+                        patches: [{ offset: 0x110726, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip Tutorial",
+                        patches: [{ offset: 0xDF3CA, off: [0x0F, 0x87], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Unlock all songs",
+                        patches: [
+                            { offset: 0x1C7902, off: [0x61, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x1C791A, off: [0x63, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x119C53, off: [0x75, 0x08], on: [0xEB, 0x11] },
+                        ]
+                    },
+                    {
+                        name: "Enable Long Music",
+                        patches: [{ offset: 0x119D04, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Skip 'NOW DATA INITIALIZING'",
+                        danger: "Useful for testing only",
+                        patches: [{ offset: 0x3527D, off: [0x0F, 0x84, 0x74, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                ]),
+                new Patcher("game.dll", "2023-02-15", [
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0xF0B7F, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Premium Timer Freeze",
+                        danger: "Score saving may break",
+                        patches: [{ offset: 0x10B920, off: [0xFF, 0xC9], on: [0x90, 0x90] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 15",
+                        offset : 0x1AAB1,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 10",
+                        offset : 0x1AAF7,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Cursor Hold",
+                        patches: [{ offset: 0xB5D45, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Stage Freeze",
+                        danger: "Scores don't save",
+                        patches: [{ offset: 0x1141D6, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip Tutorial",
+                        patches: [{ offset: 0xE269A, off: [0x0F, 0x87], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Unlock all songs",
+                        patches: [
+                            { offset: 0x1C8C92, off: [0x61, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x1C8CAA, off: [0x63, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x11D523, off: [0x75, 0x08], on: [0xEB, 0x11] },
+                        ]
+                    },
+                    {
+                        name: "Enable Long Music",
+                        patches: [{ offset: 0x11D5D4, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Skip 'NOW DATA INITIALIZING'",
+                        danger: "Useful for testing only",
+                        patches: [{ offset: 0x3543D, off: [0x0F, 0x84, 0x74, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                ]),
+                new Patcher("game.dll", "2023-03-29", [
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0xF37CF, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Premium Timer Freeze",
+                        danger: "Score saving may break",
+                        patches: [{ offset: 0x10DF80, off: [0xFF, 0xC9], on: [0x90, 0x90] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 15",
+                        offset : 0x1AAB1,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 10",
+                        offset : 0x1AAF7,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Cursor Hold",
+                        patches: [{ offset: 0xB8825, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Stage Freeze",
+                        danger: "Scores don't save",
+                        patches: [{ offset: 0x116836, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip Tutorial",
+                        patches: [{ offset: 0xE52EA, off: [0x0F, 0x87], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Unlock all songs",
+                        patches: [
+                            { offset: 0x1CC692, off: [0x61, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x1CC6AA, off: [0x63, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x120653, off: [0x75, 0x08], on: [0xEB, 0x11] },
+                        ]
+                    },
+                    {
+                        name: "Enable Long Music",
+                        patches: [{ offset: 0x120704, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Skip 'NOW DATA INITIALIZING'",
+                        danger: "Useful for testing only",
+                        patches: [{ offset: 0x3544D, off: [0x0F, 0x84, 0x74, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                ]),
+                new Patcher("game.dll", "2023-04-25", [
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0xF3A9F, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Premium Timer Freeze",
+                        danger: "Score saving may break",
+                        patches: [{ offset: 0x10E250, off: [0xFF, 0xC9], on: [0x90, 0x90] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 15",
+                        offset : 0x1AAB1,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 10",
+                        offset : 0x1AAF7,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Cursor Hold",
+                        patches: [{ offset: 0xB8AF5, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Stage Freeze",
+                        danger: "Scores don't save",
+                        patches: [{ offset: 0x116B06, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip Tutorial",
+                        patches: [{ offset: 0xE55BA, off: [0x0F, 0x87], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Unlock all songs",
+                        patches: [
+                            { offset: 0x1CC892, off: [0x61, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x1CC8AA, off: [0x63, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x120923, off: [0x75, 0x08], on: [0xEB, 0x11] },
+                        ]
+                    },
+                    {
+                        name: "Enable Long Music",
+                        patches: [{ offset: 0x1209D4, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Skip 'NOW DATA INITIALIZING'",
+                        danger: "Useful for testing only",
+                        patches: [{ offset: 0x3544D, off: [0x0F, 0x84, 0x74, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                ]),
+                new Patcher("game.dll", "2023-06-13", [
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0xF403F, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Premium Timer Freeze",
+                        danger: "Score saving may break",
+                        patches: [{ offset: 0x10E800, off: [0xFF, 0xC9], on: [0x90, 0x90] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 15",
+                        offset : 0x1AAB1,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 10",
+                        offset : 0x1AAF7,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Cursor Hold",
+                        patches: [{ offset: 0xB9099, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Stage Freeze",
+                        danger: "Scores don't save",
+                        patches: [{ offset: 0x1170B6, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip Tutorial",
+                        patches: [{ offset: 0xE5B5A, off: [0x0F, 0x87], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Unlock all songs",
+                        patches: [
+                            { offset: 0x1D1292, off: [0x61, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x1D12AA, off: [0x63, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x121733, off: [0x75, 0x08], on: [0xEB, 0x11] },
+                        ]
+                    },
+                    {
+                        name: "Enable Long Music",
+                        patches: [{ offset: 0x1217E4, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Skip 'NOW DATA INITIALIZING'",
+                        danger: "Useful for testing only",
+                        patches: [{ offset: 0x356FD, off: [0x0F, 0x84, 0x74, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                ]),
+                new Patcher("game.dll", "2023-08-01, 2023-08-07, 2023-09-04", [
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0xF47DF, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Premium Timer Freeze",
+                        danger: "Score saving may break",
+                        patches: [{ offset: 0x10F850, off: [0xFF, 0xC9], on: [0x90, 0x90] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 15",
+                        offset : 0x1AAB1,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 10",
+                        offset : 0x1AAF7,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Cursor Hold",
+                        patches: [{ offset: 0xB9715, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Stage Freeze",
+                        danger: "Scores don't save",
+                        patches: [{ offset: 0x118106, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip Tutorial",
+                        patches: [{ offset: 0xE62FA, off: [0x0F, 0x87], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Unlock all songs",
+                        patches: [
+                            { offset: 0x1D6B92, off: [0x61, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x1D6BAA, off: [0x63, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x123403, off: [0x75, 0x08], on: [0xEB, 0x11] },
+                        ]
+                    },
+                    {
+                        name: "Enable Long Music",
+                        patches: [{ offset: 0x1234B4, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Skip 'NOW DATA INITIALIZING'",
+                        danger: "Useful for testing only",
+                        patches: [{ offset: 0x3580D, off: [0x0F, 0x84, 0x74, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                ]),
+                new Patcher("game.dll", "2023-09-12", [
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0xF49EF, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Premium Timer Freeze",
+                        danger: "Score saving may break",
+                        patches: [{ offset: 0x10FD10, off: [0xFF, 0xC9], on: [0x90, 0x90] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 15",
+                        offset : 0x1AAB1,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 10",
+                        offset : 0x1AAF7,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Cursor Hold",
+                        patches: [{ offset: 0xB97F5, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Stage Freeze",
+                        danger: "Scores don't save",
+                        patches: [{ offset: 0x1185C6, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip Tutorial",
+                        patches: [{ offset: 0xE650A, off: [0x0F, 0x87], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Unlock all songs",
+                        patches: [
+                            { offset: 0x1DA592, off: [0x61, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x1DA5AA, off: [0x63, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x1246D3, off: [0x75, 0x08], on: [0xEB, 0x11] },
+                        ]
+                    },
+                    {
+                        name: "Enable Long Music",
+                        patches: [{ offset: 0x124784, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Skip 'NOW DATA INITIALIZING'",
+                        danger: "Useful for testing only",
+                        patches: [{ offset: 0x3591D, off: [0x0F, 0x84, 0x74, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                ]),
+                new Patcher("game.dll", "2023-10-11", [
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0xF4ACF, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Premium Timer Freeze",
+                        danger: "Score saving may break",
+                        patches: [{ offset: 0x10FDD0, off: [0xFF, 0xC9], on: [0x90, 0x90] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 15",
+                        offset : 0x1AB82,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 10",
+                        offset : 0x1ABCC,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Cursor Hold",
+                        patches: [{ offset: 0xB9DE5, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Stage Freeze",
+                        danger: "Scores don't save",
+                        patches: [{ offset: 0x118686, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip Tutorial",
+                        patches: [{ offset: 0xE65EA, off: [0x0F, 0x87], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Unlock all songs",
+                        patches: [
+                            { offset: 0x1DA192, off: [0x61, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x1DA1AA, off: [0x63, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x123743, off: [0x75, 0x08], on: [0xEB, 0x11] },
+                        ]
+                    },
+                    {
+                        name: "Enable Long Music",
+                        patches: [{ offset: 0x1237F4, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Skip 'NOW DATA INITIALIZING'",
+                        danger: "Useful for testing only",
+                        patches: [{ offset: 0x35B0D, off: [0x0F, 0x84, 0x74, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                ]),
+                new Patcher("game.dll", "2023-11-07", [
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0xF4DAF, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Premium Timer Freeze",
+                        danger: "Score saving may break",
+                        patches: [{ offset: 0x110100, off: [0xFF, 0xC9], on: [0x90, 0x90] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 15",
+                        offset : 0x1AB82,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 10",
+                        offset : 0x1ABCC,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Cursor Hold",
+                        patches: [{ offset: 0xBA0C5, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Stage Freeze",
+                        danger: "Scores don't save",
+                        patches: [{ offset: 0x1189B6, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip Tutorial",
+                        patches: [{ offset: 0xE68CA, off: [0x0F, 0x87], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Unlock all songs",
+                        patches: [
+                            { offset: 0x1DB392, off: [0x61, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x1DB3AA, off: [0x63, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x123AE3, off: [0x75, 0x08], on: [0xEB, 0x11] },
+                        ]
+                    },
+                    {
+                        name: "Enable Long Music",
+                        patches: [{ offset: 0x123B94, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Skip 'NOW DATA INITIALIZING'",
+                        danger: "Useful for testing only",
+                        patches: [{ offset: 0x35B0D, off: [0x0F, 0x84, 0x74, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                ]),
+                new Patcher("game.dll", "2023-11-28", [
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0xF4DDF, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Premium Timer Freeze",
+                        danger: "Score saving may break",
+                        patches: [{ offset: 0x110130, off: [0xFF, 0xC9], on: [0x90, 0x90] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 15",
+                        offset : 0x1AB82,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 10",
+                        offset : 0x1ABCC,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Cursor Hold",
+                        patches: [{ offset: 0xBA0F5, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Stage Freeze",
+                        danger: "Scores don't save",
+                        patches: [{ offset: 0x1189E6, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip Tutorial",
+                        patches: [{ offset: 0xE68FA, off: [0x0F, 0x87], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Unlock all songs",
+                        patches: [
+                            { offset: 0x1DCD92, off: [0x61, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x1DCDAA, off: [0x63, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x123BF3, off: [0x75, 0x08], on: [0xEB, 0x11] },
+                        ]
+                    },
+                    {
+                        name: "Enable Long Music",
+                        patches: [{ offset: 0x123CA4, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Skip 'NOW DATA INITIALIZING'",
+                        danger: "Useful for testing only",
+                        patches: [{ offset: 0x35B0D, off: [0x0F, 0x84, 0x74, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                ]),
+                new Patcher("game.dll", "2023-12-19", [
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0xF4E1F, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Premium Timer Freeze",
+                        danger: "Score saving may break",
+                        patches: [{ offset: 0x110170, off: [0xFF, 0xC9], on: [0x90, 0x90] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 15",
+                        offset : 0x1B11F,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 10",
+                        offset : 0x1B169,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Cursor Hold",
+                        patches: [{ offset: 0xBA4A5, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Stage Freeze",
+                        danger: "Scores don't save",
+                        patches: [{ offset: 0x118A16, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip Tutorial",
+                        patches: [{ offset: 0xE693A, off: [0x0F, 0x87], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Unlock all songs",
+                        patches: [
+                            { offset: 0x1E0282, off: [0x61, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x1E029A, off: [0x63, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x123C43, off: [0x75, 0x08], on: [0xEB, 0x11] },
+                        ]
+                    },
+                    {
+                        name: "Enable Long Music",
+                        patches: [{ offset: 0x123CF4, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Skip 'NOW DATA INITIALIZING'",
+                        danger: "Useful for testing only",
+                        patches: [{ offset: 0x360BD, off: [0x0F, 0x84, 0x74, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                ]),
+                new Patcher("game.dll", "2024-01-16", [
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0xF628F, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Premium Timer Freeze",
+                        danger: "Score saving may break",
+                        patches: [{ offset: 0x111DB0, off: [0xFF, 0xC9], on: [0x90, 0x90] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 15",
+                        offset : 0x1B16F,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 10",
+                        offset : 0x1B1B9,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Cursor Hold",
+                        patches: [{ offset: 0xBBEEF, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Stage Freeze",
+                        danger: "Scores don't save",
+                        patches: [{ offset: 0x11A5E6, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip Tutorial",
+                        patches: [{ offset: 0xE7DAA, off: [0x0F, 0x87], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Unlock all songs",
+                        patches: [
+                            { offset: 0x1E13D2, off: [0x61, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x1E13EA, off: [0x63, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x125CB3, off: [0x75, 0x08], on: [0xEB, 0x11] },
+                        ]
+                    },
+                    {
+                        name: "Enable Long Music",
+                        patches: [{ offset: 0x125D64, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Skip 'NOW DATA INITIALIZING'",
+                        danger: "Useful for testing only",
+                        patches: [{ offset: 0x361CD, off: [0x0F, 0x84, 0x74, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                ]),
+                new Patcher("game.dll", "2024-02-20", [
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0xF64FF, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Premium Timer Freeze",
+                        danger: "Score saving may break",
+                        patches: [{ offset: 0x112070, off: [0xFF, 0xC9], on: [0x90, 0x90] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 15",
+                        offset : 0x1B16F,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 10",
+                        offset : 0x1B1B9,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Cursor Hold",
+                        patches: [{ offset: 0xBBFEF, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Stage Freeze",
+                        danger: "Scores don't save",
+                        patches: [{ offset: 0x11A8A6, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip Tutorial",
+                        patches: [{ offset: 0xE801A, off: [0x0F, 0x87], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Unlock all songs",
+                        patches: [
+                            { offset: 0x1E15D2, off: [0x61, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x1E15EA, off: [0x63, 0x00], on: [0x4D, 0x01] },
+                            { offset: 0x125F73, off: [0x75, 0x08], on: [0xEB, 0x11] },
+                        ]
+                    },
+                    {
+                        name: "Enable Long Music",
+                        patches: [{ offset: 0x126024, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Skip 'NOW DATA INITIALIZING'",
+                        danger: "Useful for testing only",
+                        patches: [{ offset: 0x3633D, off: [0x0F, 0x84, 0x74, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                ]),
+            ]);
+        });
+    </script>
+  </head>
+  <body>
+    <h1>GITADORA FUZZ-UP DLL Modder</h1>
+  </body>
+</html>

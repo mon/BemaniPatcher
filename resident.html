@@ -779,12 +779,12 @@
                     },
                     {
                         name: "Disable Server Region Check for Premium Area Functions",
-                        tooltip: "mainly to force activate functions (such as recording) for asphyxia and server with region other than 'JP'",
+                        tooltip: "force activate functions (such as recording) for asphyxia and server with region other than 'JP'",
                         patches: [{ offset: 0x71cdc3, off: [0x75, 0x41], on: [0x90, 0x90]}],
                     },
                     {
-                        name: "Expand InternetWriteFile() body chunk size to 0x3200000",
-                        tooltip: "make video upload put request 1000 times faster in theory",
+                        name: "Faster video uploads",
+                        tooltip: "Expand InternetWriteFile() body chunk size to 0x3200000 - makes video upload put request 1000 times faster in theory",
                         patches: [{ offset: 0x7b53ea, off: [0x41, 0xbe, 0x00, 0x32, 0x00, 0x00], on: [0x41, 0xbe, 0x00, 0x00, 0x20, 0x03]}],
                     }
                 ]),

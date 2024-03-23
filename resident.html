@@ -777,6 +777,16 @@
                         tooltip: "Allows all songs to be recorded in-game",
                         patches: [{ offset: 0x5973DF, off: [0x40, 0x84, 0xFF], on: [0x90, 0x90, 0x90] }],
                     },
+                    {
+                        name: "Disable Server Region Check for Premium Area Functions",
+                        tooltip: "force activate functions (such as recording) for asphyxia and server with region other than 'JP'",
+                        patches: [{ offset: 0x71cdc3, off: [0x75, 0x41], on: [0x90, 0x90]}],
+                    },
+                    {
+                        name: "Faster video uploads",
+                        tooltip: "Expand InternetWriteFile() body chunk size to 0x3200000 - makes video upload put request 1000 times faster in theory",
+                        patches: [{ offset: 0x7b53ea, off: [0x41, 0xbe, 0x00, 0x32, 0x00, 0x00], on: [0x41, 0xbe, 0x00, 0x00, 0x20, 0x03]}],
+                    }
                 ]),
                 new Patcher("bm2dx.dll", "2023-09-05 (LDJ-012)", [
                     {

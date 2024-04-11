@@ -117,6 +117,28 @@
                 new PatchContainer([
                 new Patcher("amdaemon.exe", "2.10.00", [
                     {
+                        name: "Allow 127.0.0.1/localhost as the network server",
+                        patches: [
+                            {
+                                offset: 0x3B6EF4,
+                                off: [0xFF, 0x15, 0x3E, 0x79, 0x1A, 0x00, 0x8B],
+                                on: [0x33, 0xC0, 0x48, 0x83, 0xC4, 0x28, 0xC3],
+                            },
+                            {
+                                offset: 0x6BC83C,
+                                off: [0x31, 0x32, 0x37, 0x2F],
+                                on: [0x30, 0x2F, 0x38, 0x00],
+                            },
+                        ],
+                    },
+                    {
+                        name: "Free Play",
+                        tooltip: "Endless credits",
+                        patches: [
+                            {offset: 0x2BB928, off: [0x28], on: [0x08]},
+                        ]
+                    },
+                    {
                         name: "Replace error 6401 with no error",
                         danger: "[DEPRECATED] Sets all instances of error 6401 to 0",
                         patches: [

@@ -957,128 +957,133 @@ class PatchContainer {
 
         container.appendChild(createElementClass('h4', null, 'Supported Versions:'));
         container.appendChild(createElementClass('h5', null, 'Click name to preview patches'));
+        
         // Creating a top message
-			const topMessage = document.createElement('h2');
-			topMessage.className = 'top-message';
-			topMessage.innerText =
-				'Apply patches by providing a .dll here, or download a JSON file instead.';
-			document.body.appendChild(topMessage);
+        
+		const topMessage = document.createElement('h2');
+		topMessage.className = 'top-message';
+		topMessage.innerText =
+			'Apply patches by providing a .dll here, or download a JSON file instead.';
+		document.body.appendChild(topMessage);
 
-			// Creating a schema toggle
-			const toggleOptions = ['Regular JSON Schema', 'Newest JSON Schema'];
-			const toggleDiv = document.createElement('div');
-			toggleDiv.className = 'toggle-div';
+		// Creating a schema toggle
+		const toggleOptions = ['Regular JSON Schema', 'Newest JSON Schema'];
+		const toggleDiv = document.createElement('div');
+		toggleDiv.className = 'toggle-div';
 
-			const appendToggles = () => {
-				toggleOptions.forEach((option, index) => {
-					const toggle = document.createElement('input');
-					toggle.type = 'radio';
-					toggle.id = 'toolToggle';
-					toggle.className = `tool-toggle${index + 1}`;
-					toggle.name = 'toolToggle';
-					if (option === toggleOptions[0]) {
+		const appendToggles = () => {
+		    toggleOptions.forEach((option, index) => {
+				const toggle = document.createElement('input');
+				toggle.type = 'radio';
+				toggle.id = 'toolToggle';
+				toggle.className = `tool-toggle${index + 1}`;
+				toggle.name = 'toolToggle';
+				if (option === toggleOptions[0]) {
 						toggle.checked = true; // Always checks the first option by default
+				}
+    	        const toggleLabel = document.createElement('label');
+				toggleLabel.for = 'toolToggle';
+				toggleLabel.innerText = option;
+				toggleLabel.className = `toggle-text${index + 1}`;
+				toggle.addEventListener('change', () => {
+					// If the first option is selected
+					if (option === toggleOptions[0]) {
+						this.createJSONObject('regular');
+					} else if (option === toggleOptions[1]) {
+						this.createJSONObject('new');
 					}
-					const toggleLabel = document.createElement('label');
-					toggleLabel.for = 'toolToggle';
-					toggleLabel.innerText = option;
-					toggleLabel.className = `toggle-text${index + 1}`;
-					toggle.addEventListener('change', () => {
-						// If the first option is selected
-						if (option === toggleOptions[0]) {
-							this.createJSONObject('regular');
-						} else if (option === toggleOptions[1]) {
-							this.createJSONObject('new');
-						}
-					});
-
-					return (
-						toggleDiv.appendChild(toggle), toggleDiv.appendChild(toggleLabel)
-					);
 				});
-			};
-			appendToggles();
-			// Creating a form for datecode selection
-			const form = document.createElement('form');
-			form.action = '#';
-			form.className = 'dropdownMenu';
-			const formLabel = document.createElement('label');
-			// Creating a label for the form item
-			formLabel.for = 'datecode';
-			formLabel.className = 'dropdownTitle';
-			formLabel.textContent = 'Choose a datecode :';
-			// Creating a select element to append
-			const select = document.createElement('select');
-			select.name = 'datecode';
-			select.className = 'dropdownOptions';
-			select.id = 'dropdownOptions';
-			select.style.textAlign = 'center';
-			// Creating a download button for the .JSON file
-			const downloadButton = document.createElement('button');
-			downloadButton.className = 'JSON';
-			downloadButton.id = 'JSON';
-			downloadButton.textContent = 'Download JSON';
-			const selectElement = select;
-
-			// This is used to populate the form with all datecodes
-			function setDatecodeToDropdown() {
-				allDatecodes.forEach((datecode) => {
-					// Create an <option> element
-					const option = document.createElement('option');
-
-					option.value = datecode;
-					option.textContent = datecode;
-
-					// Append the <option> to the <select> element
-					selectElement.appendChild(option);
-				});
-			}
-			setTimeout(() => {
-				setDatecodeToDropdown(); // There has to be a better way,probably async await...Though this will work for now
-			}, 50);
-			downloadButton.addEventListener('click', (event) => {
-				event.preventDefault();
-				const selectedOption = select.value;
-				const selectedDatecode = selectedOption
-					.split('-')
-					.join('')
-					.replace(' ', '-');
-
-				const firstArray = JSONObj[selectedOption];
-				// Convert the combined array to JSON format
-				const jsonData = stringify(firstArray);
-				// Create a blob from the JSON data
-				const blob = new Blob([jsonData], { type: 'application/json' });
-
-				// Create a URL for the blob
-				const url = window.URL.createObjectURL(blob);
-
-				// Create a link element and trigger the download
-				const a = document.createElement('a');
-				a.href = url;
-				const fileName = () => {
-					if (toolVersion === 'regular') {
-						return `OLD_${currentGame}-${selectedDatecode}-patches.json`;
-					} else if (toolVersion === 'new') {
-						return `NEW_${currentGame}-${selectedDatecode}-patches.json`;
-					}
-				};
-
-				a.download = fileName();
-				a.click();
-				// Clean up the URL object
-				window.URL.revokeObjectURL(url);
+				return (
+					toggleDiv.appendChild(toggle), toggleDiv.appendChild(toggleLabel)
+				);
 			});
-			container.appendChild(supportedDlls);
-			container.appendChild(this.successDiv);
-			container.appendChild(this.errorDiv);
-			container.append(toggleDiv);
-			container.appendChild(form);
-			form.appendChild(formLabel);
-			form.appendChild(select);
-			container.appendChild(downloadButton);
-			document.body.appendChild(container);
-		}
+			};
+		appendToggles();
+		// Creating a form for datecode selection
+		
+        const form = document.createElement('form');
+		form.action = '#';
+        form.className = 'dropdownMenu';
+        const formLabel = document.createElement('label');
+    
+        // Creating a label for the form item
+    
+        formLabel.for = 'datecode';
+        formLabel.className = 'dropdownTitle';
+        formLabel.textContent = 'Choose a datecode :';
+    
+        // Creating a select element to append
+    
+        const select = document.createElement('select');
+        select.name = 'datecode';
+        select.className = 'dropdownOptions';
+        select.id = 'dropdownOptions';
+        select.style.textAlign = 'center';
+    
+        // Creating a download button for the .JSON file   
+
+        const downloadButton = document.createElement('button');
+        downloadButton.className = 'JSON';
+        downloadButton.id = 'JSON';
+        downloadButton.textContent = 'Download JSON';
+        const selectElement = select;
+
+        // This is used to populate the form with all datecodes
+    
+        function setDatecodeToDropdown() {
+            allDatecodes.forEach((datecode) => {
+                // Create an <option> element
+                const option = document.createElement('option');
+
+                option.value = datecode;
+                option.textContent = datecode;
+
+                // Append the <option> to the <select> element
+                selectElement.appendChild(option);
+            });
+        }
+        setTimeout(() => {
+            setDatecodeToDropdown(); // There has to be a better way,probably async await...Though this will work for now
+        }, 50);
+        downloadButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        const selectedOption = select.value;
+        const selectedDatecode = selectedOption
+            .split('-')
+            .join('')
+            .replace(' ', '-');
+        const firstArray = JSONObj[selectedOption];
+        // Convert the combined array to JSON format
+        const jsonData = JSON.stringify(firstArray);
+        // Create a blob from the JSON data
+        const blob = new Blob([jsonData], { type: 'application/json' });	
+        // Create a URL for the blob	
+        const url = window.URL.createObjectURL(blob);
+        // Create a link element and trigger the download
+        const a = document.createElement('a');
+        a.href = url;
+        const fileName = () => {
+            if (toolVersion === 'regular') {
+                return `OLD_${currentGame}-${selectedDatecode}-patches.json`;
+            } else if (toolVersion === 'new') {
+                return `NEW_${currentGame}-${selectedDatecode}-patches.json`;
+            }
+        };
+        a.download = fileName();
+        a.click();
+        // Clean up the URL object
+        window.URL.revokeObjectURL(url);
+		});
+		container.appendChild(supportedDlls);
+		container.appendChild(this.successDiv);
+		container.appendChild(this.errorDiv);
+		container.append(toggleDiv);
+		container.appendChild(form);
+		form.appendChild(formLabel);
+		form.appendChild(select);
+		container.appendChild(downloadButton);
+		document.body.appendChild(container);
+	}
 
     loadFile(file) {
         var reader = new FileReader();
@@ -1327,27 +1332,4 @@ class Patcher {
 
 window.Patcher = Patcher;
 window.PatchContainer = PatchContainer;
-function stringify(data) {
-    /*Since this environment doesn't support the JSON.stringify method,
-  we use this to achieve the same thing pretty much */
-    if (typeof data === 'object') {
-        let result = '';
-        if (Array.isArray(data)) {
-            result += '[';
-            result += data.map((item) => stringify(item)).join(',');
-            result += ']';
-        } else {
-            result += '{';
-            result += Object.keys(data)
-                .map((key) => `"${key}":${stringify(data[key])}`)
-                .join(',');
-            result += '}';
-        }
-        return result;
-    } else if (typeof data === 'string') {
-        return `"${data}"`;
-    } else {
-        return String(data);
-    }
-}
 })(window, document);

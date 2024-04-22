@@ -1,363 +1,361 @@
 @font-face {
-	font-family: 'file';
-	src: url('file.eot?abyff3');
-	src: url('file.eot?abyff3#iefix') format('embedded-opentype'),
-		url('file.ttf?abyff3') format('truetype'),
-		url('file.woff?abyff3') format('woff'),
-		url('file.svg?abyff3#file') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'file';
+  src:  url('file.eot?abyff3');
+  src:  url('file.eot?abyff3#iefix') format('embedded-opentype'),
+    url('file.ttf?abyff3') format('truetype'),
+    url('file.woff?abyff3') format('woff'),
+    url('file.svg?abyff3#file') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
+
 .tagline {
-	font-family: monospace;
+    font-family: monospace;
 }
 
-.icons,
-.subsection {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, 180px);
-	grid-auto-flow: dense;
-	align-items: stretch;
-	margin: 0 auto;
-	text-align: center;
-	justify-content: center;
+.icons, .subsection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 180px);
+    grid-auto-flow: dense;
+    align-items: stretch;
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
 }
 
 .subsection {
-	grid-column: 1 / -1;
-	background-color: #a2a2a2;
-	margin: unset;
-	/* I don't understand anything */
-	margin-right: -15px;
-	padding-right: 15px;
+    grid-column: 1 / -1;
+    background-color: #a2a2a2;
+    margin: unset;
+    /* I don't understand anything */
+    margin-right: -15px;
+    padding-right: 15px;
 }
 
 .gameicon,
 .patchContainer {
-	border-radius: 2px;
-	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-	color: inherit;
-	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-	background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    color: inherit;
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    background: #fff;
 }
 
 .gameicon {
-	display: flex;
-	flex-direction: column;
-	text-decoration: none;
-	margin: 15px;
-	width: 144px;
-	padding: 10px;
-	justify-content: center;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    margin: 15px;
+    width: 144px;
+    padding: 10px;
+    justify-content: center;
 }
 
 label.gameicon {
-	cursor: pointer;
-	background: #fffcf0;
+    cursor: pointer;
+    background: #fffcf0;
 }
 
 input.sectionToggle,
 input.sectionToggle + div {
-	display: none;
+    display: none;
 }
 
 input:checked.sectionToggle + div {
-	display: grid;
+    display: grid;
 }
 
 .gameicon:hover,
 .dragover {
-	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .gameicon img {
-	margin-bottom: 10px;
-	border-radius: 2px;
-	width: 128px;
-	height: 128px;
-	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.24), 0 0px 1px rgba(0, 0, 0, 0.48);
-	align-self: center;
-	margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    width: 128px;
+    height: 128px;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, .24), 0 0px 1px rgba(0, 0, 0, 0.48);
+    align-self: center;
+    margin-top: 5px;
 }
 
-.gameicon > div {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+.gameicon>div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .fileInput {
-	display: none;
+    display: none
 }
 
 .fileLabel {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .error {
-	color: red;
+    color: red;
 }
 
 .success {
-	color: DarkGreen;
+    color: DarkGreen;
 }
 
 .success.hidden {
-	display: none;
+    display: none;
 }
 
 .patchContainer {
-	background-color: white;
-	padding: 20px;
-	max-width: 650px;
-	margin: 0 auto 2em;
-	position: relative;
+    background-color: white;
+    padding: 20px;
+    max-width: 650px;
+    margin: 0 auto 2em;
+    position: relative;
 }
 
 .tooltip {
-	visibility: hidden;
-	font-size: 14px;
-	margin-left: 8px;
-	padding: 8px;
-	border-radius: 4px;
-	position: relative;
-	background: grey;
-	white-space: nowrap;
-	cursor: pointer;
+    visibility: hidden;
+    font-size: 14px;
+    margin-left: 8px;
+    padding: 8px;
+    border-radius: 4px;
+    position: relative;
+    background: grey;
+    white-space: nowrap;
+    cursor: pointer;
 }
 
 .tooltip:hover,
 .tooltip:focus,
 .tooltip:active {
-	visibility: visible;
-	color: white;
-	border: none;
-	margin-top: 0px;
-	position: absolute;
-	padding: 3px 16px;
-	white-space: normal;
-	max-width: 300px;
-	z-index: 11;
+    visibility: visible;
+    color: white;
+    border: none;
+    margin-top: 0px;
+    position: absolute;
+    padding: 3px 16px;
+    white-space: normal;
+    max-width: 300px;
+    z-index: 11;
 }
 
 .tooltip:before {
-	visibility: visible;
-	content: '?';
-	font-size: 18px;
-	margin-right: 8px;
-	background: gray;
-	border-radius: 50%;
-	padding: 2px 9px;
-	margin-left: -8px;
-	color: white;
-	cursor: pointer;
-	z-index: 10;
+    visibility: visible;
+    content: '?';
+    font-size: 18px;
+    margin-right: 8px;
+    background: gray;
+    border-radius: 50%;
+    padding: 2px 9px;
+    margin-left: -8px;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
 }
 
 .tooltip:hover:before,
 .tooltip:focus:before,
 .tooltip:active:before {
-	color: black;
-	display: none;
+    color: black;
+    display: none;
 }
 
 .danger {
-	background: #ff6000 !important;
+    background: #ff6000 !important;
 }
 
 .danger:before {
-	content: '!!';
-	background: #ff6000;
+    content: '!!';
+    background: #ff6000;
 }
 
 body {
-	margin: 40px auto;
-	max-width: 1300px;
-	line-height: 1.6;
-	font-size: 18px;
-	color: #000;
-	padding: 0 10px;
-	background: #e2e1e0;
-	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    margin: 40px auto;
+    max-width: 1300px;
+    line-height: 1.6;
+    font-size: 18px;
+    color: #000;
+    padding: 0 10px;
+    background: #e2e1e0;
+    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 }
 
 h1,
 h2,
 h3 {
-	line-height: 1.2;
+    line-height: 1.2;
 }
 
 h4,
 h5 {
-	line-height: 1;
-	margin: 10px auto;
+    line-height: 1;
+    margin: 10px auto;
 }
 
 h1 {
-	text-align: center;
+    text-align: center;
 }
 
 h1 a {
-	color: inherit;
-	text-decoration: inherit;
+    color: inherit;
+    text-decoration: inherit;
 }
 
-button,
-.fileLabel > strong {
-	transition-duration: 0.2s;
-	transition-timing-function: cubic-bezier(0.25, 0.5, 0.5, 1);
-	position: relative;
-	padding: 0 16px;
-	height: 36px;
-	border: none;
-	border-radius: 2px;
-	outline: none;
-	font-size: 0.875rem;
-	font-weight: 500;
-	letter-spacing: 0.04em;
-	line-height: 2.25rem;
-	color: rgba(0, 0, 0, 0.73);
-	transition-property: box-shadow, background;
-	background-color: #40b31a;
-	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25), 0px 0px 2px rgba(0, 0, 0, 0.125);
-	color: white;
-	cursor: pointer;
+button, .fileLabel > strong {
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.25, 0.5, 0.5, 1);
+    position: relative;
+    padding: 0 16px;
+    height: 36px;
+    border: none;
+    border-radius: 2px;
+    outline: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    line-height: 2.25rem;
+    color: rgba(0, 0, 0, 0.73);
+    transition-property: box-shadow, background;
+    background-color: #40b31a;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25), 0px 0px 2px rgba(0, 0, 0, 0.125);
+    color: white;
+    cursor: pointer;
 }
 
 button:disabled {
-	background-color: rgba(0, 0, 0, 0.12);
-	color: rgba(0, 0, 0, 0.38);
-	box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2),
-		0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
-	cursor: default;
+    background-color: rgba(0, 0, 0, 0.12);
+    color: rgba(0, 0, 0, 0.38);
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
+    cursor: default;
 }
 
-button:hover:enabled,
-.fileLabel > strong:hover {
-	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25), 0px 0px 4px rgba(0, 0, 0, 0.125);
-	background-color: #5dbe3c;
+button:hover:enabled, .fileLabel > strong:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25), 0px 0px 4px rgba(0, 0, 0, 0.125);
+    background-color: #5dbe3c;
 }
 
 .matchPercent {
-	font-size: 15px;
-	font-style: italic;
-	color: red;
+    font-size: 15px;
+    font-style: italic;
+    color: red;
 }
 
 .matchSuccess {
-	font-size: 15px;
-	font-style: italic;
-	color: green;
+    font-size: 15px;
+    font-style: italic;
+    color: green;
 }
 
 li > button {
-	height: 24px;
-	padding: 0 7px;
-	line-height: 0;
+    height: 24px;
+    padding: 0 7px;
+    line-height: 0;
 }
 
 .patches {
-	margin: 1em auto;
+    margin: 1em auto;
 }
 
-input[type='checkbox'],
-input[type='radio'] {
-	vertical-align: middle;
-	position: relative;
-	bottom: 1px;
+input[type=checkbox],
+input[type=radio] {
+    vertical-align: middle;
+    position: relative;
+    bottom: 1px;
 }
 
-input[type='radio'] {
-	bottom: 2px;
+input[type=radio] {
+    bottom: 2px;
 }
 
 .patches label {
-	margin-left: 4px;
+    margin-left: 4px;
 }
 
-.dragover > * {
-	filter: blur(5px);
+.dragover>* {
+    filter: blur(5px);
 }
 
 .dragover::before {
-	content: '';
-	display: block;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	text-align: center;
-	z-index: 10;
-	outline: dashed 10px;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+    outline: dashed 10px;
 }
 
 .dragover::after {
-	content: '\e900';
-	font-family: 'file' !important;
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+    content: "\e900";
+    font-family: 'file' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
-	display: block;
-	height: auto;
-	position: absolute;
-	top: calc(50% - 3rem);
-	left: 0;
-	width: 100%;
-	text-align: center;
-	z-index: 11;
-	font-size: 8rem;
+    display: block;
+    height: auto;
+    position: absolute;
+    top: calc(50% - 3rem);
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 11;
+    font-size: 8rem;
 }
 
 .tooltip:not(:hover) {
-	font-size: 0px;
-	padding: 0;
-	margin-left: 16px;
+    font-size: 0px;
+    padding: 0;
+    margin-left: 16px;
 }
 
 .tooltip {
-	visibility: hidden;
-	font-size: 14px;
-	margin-left: 8px;
-	padding: 8px;
-	border-radius: 4px;
-	position: relative;
-	background: gray;
-	white-space: nowrap;
-	cursor: pointer;
-	display: inline-block;
+    visibility: hidden;
+    font-size: 14px;
+    margin-left: 8px;
+    padding: 8px;
+    border-radius: 4px;
+    position: relative;
+    background: gray;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
 }
+
 .patchPreviewLabel {
-	cursor: pointer;
+    cursor: pointer;
 }
 .patchPreviewToggle {
-	display: none;
+    display: none;
 }
 .patchPreview {
-	display: none;
+    display: none;
 }
-input[type='checkbox']:checked + .patchPreview {
-	display: block;
+input[type=checkbox]:checked + .patchPreview {
+    display: block;
 }
-input[type='checkbox'] ~ ul > li.patch-off {
-	display: none;
+input[type=checkbox] ~ ul > li.patch-off {
+    display: none;
 }
-input[type='checkbox'] ~ ul > li.patch-on {
-	display: list-item;
+input[type=checkbox] ~ ul > li.patch-on {
+    display: list-item;
 }
-input[type='checkbox']:checked ~ ul > li.patch-on {
-	display: none;
+input[type=checkbox]:checked ~ ul > li.patch-on {
+    display: none;
 }
-input[type='checkbox']:checked ~ ul > li.patch-off {
-	display: list-item;
+input[type=checkbox]:checked ~ ul > li.patch-off {
+    display: list-item;
 }
 @media (prefers-color-scheme: dark) {
 	body {

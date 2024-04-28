@@ -210,8 +210,8 @@ class DynamicPatch {
                         replace(file, offset,
                             new TextEncoder().encode(featureOn? patch.on : patch.off));
                     } else {
-                        patch.on = patch.on.map((patch, idx) => patch === 'XX' ? file[offset + idx] : patch);
-                        patch.off = patch.off.map((patch, idx) => patch === 'XX' ? file[offset + idx] : patch);
+                        patch.on = patch.on.map((byte, idx) => byte === 'XX' ? file[offset + idx] : byte);
+                        patch.off = patch.off.map((byte, idx) => byte === 'XX' ? file[offset + idx] : byte);
                         replace(file, offset,
                             featureOn? patch.on : patch.off);
                     }
@@ -221,8 +221,8 @@ class DynamicPatch {
                     replace(file, patch.offset,
                         new TextEncoder().encode(featureOn? patch.on : patch.off));
                 } else {
-                    patch.on = patch.on.map((patch, idx) => patch === 'XX' ? file[patch.offset + idx] : patch);
-                    patch.off = patch.off.map((patch, idx) => patch === 'XX' ? file[patch.offset + idx] : patch);
+                    patch.on = patch.on.map((byte, idx) => byte === 'XX' ? file[patch.offset + idx] : byte);
+                    patch.off = patch.off.map((byte, idx) => byte === 'XX' ? file[patch.offset + idx] : byte);
                     replace(file, patch.offset,
                         featureOn? patch.on : patch.off);
                 }

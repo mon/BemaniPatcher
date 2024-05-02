@@ -8,7 +8,6 @@
   font-weight: normal;
   font-style: normal;
 }
-
 .tagline {
     font-family: monospace;
 }
@@ -412,6 +411,22 @@ input[type=checkbox]:checked ~ ul > li.patch-off {
 	text-align: center;
 	margin-bottom: 26px;
 	color: rgb(190, 149, 27);
+    user-select: none;
+}
+
+.JSONSpan{
+    padding: 0px 4px 0px 4px;
+    background-color: rgba(190, 149, 27, 0.412);
+    transition: 0.15s;
+    cursor: pointer;
+    text-decoration: underline;
+    border-radius: 6px;
+}
+.JSONSpan:hover{
+    filter: brightness(120%);
+}
+.JSONSpan:active{
+    filter: brightness(130%);
 }
 
 .tool-toggle1,
@@ -426,14 +441,14 @@ input[type=checkbox]:checked ~ ul > li.patch-off {
 	transition: 0.11s all linear;
 }
 .tool-toggle1:checked {
-	background-color: red;
+	background-color: blue;
 	box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.528),
 		0px 0px 3px rgba(0, 0, 0, 0.436);
 }
 .tool-toggle2:checked {
-	background-color: blue;
+	background-color: red;
 	box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.528),
-		0px 0px 3px rgba(0, 0, 0, 0.436);
+	    0px 0px 3px rgba(0, 0, 0, 0.436);
 }
 .toggle-text1 {
 	margin-left: 15px;

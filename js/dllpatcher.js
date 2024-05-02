@@ -962,15 +962,21 @@ class PatchContainer {
         
 		const topMessage = document.createElement('h2');
 		topMessage.className = 'top-message';
-		topMessage.innerText =
-			'Apply patches by providing a .dll here, or download a JSON file instead.';
-		document.body.appendChild(topMessage);
+		topMessage.innerHTML =
+			'Apply patches by providing a DLL file here, or download a ' +
+            '<span class="JSONSpan" id="JSONSpan">JSON</span>' +
+            ' instead.';
+        document.body.appendChild(topMessage);
+        const JSONSpan = document.getElementById("JSONSpan");
+        JSONSpan.addEventListener("click",() => {
+            appendJSONButton();
+        })
 
 		// Creating a schema toggle
-		const toggleOptions = ['Regular JSON Schema', 'Newest JSON Schema'];
+		
+        const toggleOptions = ['Regular JSON Schema', 'Newest JSON Schema'];
 		const toggleDiv = document.createElement('div');
 		toggleDiv.className = 'toggle-div';
-
 		const appendToggles = () => {
 		    toggleOptions.forEach((option, index) => {
 				const toggle = document.createElement('input');
@@ -979,14 +985,13 @@ class PatchContainer {
 				toggle.className = `tool-toggle${index + 1}`;
 				toggle.name = 'toolToggle';
 				if (option === toggleOptions[0]) {
-						toggle.checked = true; // Always checks the first option by default
+						toggle.checked = true; // Checks regular schema as default
 				}
     	        const toggleLabel = document.createElement('label');
 				toggleLabel.for = 'toolToggle';
 				toggleLabel.innerText = option;
 				toggleLabel.className = `toggle-text${index + 1}`;
-				toggle.addEventListener('change', () => {
-					// If the first option is selected
+				toggle.addEventListener('change', () => {	
 					if (option === toggleOptions[0]) {
 						this.createJSONObject('regular');
 					} else if (option === toggleOptions[1]) {
@@ -998,8 +1003,8 @@ class PatchContainer {
 				);
 			});
 			};
-		appendToggles();
-		// Creating a form for datecode selection
+
+        // Creating a form for datecode selection
 		
         const form = document.createElement('form');
 		form.action = '#';
@@ -1034,10 +1039,8 @@ class PatchContainer {
             allDatecodes.forEach((datecode) => {
                 // Create an <option> element
                 const option = document.createElement('option');
-
                 option.value = datecode;
                 option.textContent = datecode;
-
                 // Append the <option> to the <select> element
                 selectElement.appendChild(option);
             });
@@ -1053,13 +1056,15 @@ class PatchContainer {
             .join('')
             .replace(' ', '-');
         const firstArray = JSONObj[selectedOption];
-        // Convert the combined array to JSON format
+ 
         const jsonData = JSON.stringify(firstArray);
-        // Create a blob from the JSON data
+        
         const blob = new Blob([jsonData], { type: 'application/json' });	
-        // Create a URL for the blob	
+
         const url = window.URL.createObjectURL(blob);
+
         // Create a link element and trigger the download
+        
         const a = document.createElement('a');
         a.href = url;
         const fileName = () => {
@@ -1071,19 +1076,33 @@ class PatchContainer {
         };
         a.download = fileName();
         a.click();
+
         // Clean up the URL object
+        
         window.URL.revokeObjectURL(url);
 		});
+
+        // Appending inner container's elements
+
+		appendToggles();
 		container.appendChild(supportedDlls);
 		container.appendChild(this.successDiv);
-		container.appendChild(this.errorDiv);
-		container.append(toggleDiv);
-		container.appendChild(form);
-		form.appendChild(formLabel);
-		form.appendChild(select);
-		container.appendChild(downloadButton);
-		document.body.appendChild(container);
-	}
+		container.appendChild(this.errorDiv);		
+        function appendJSONButton(){
+            if (container.contains(toggleDiv)){
+                container.removeChild(toggleDiv);
+                container.removeChild(form);
+                container.removeChild(downloadButton);
+                return;
+            }
+            container.append(toggleDiv);
+		    container.appendChild(form);
+		    form.appendChild(formLabel);
+		    form.appendChild(select);
+		    container.appendChild(downloadButton);
+        }
+        document.body.appendChild(container);
+    }
 
     loadFile(file) {
         var reader = new FileReader();

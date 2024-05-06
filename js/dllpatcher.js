@@ -2,9 +2,10 @@
 (function(window, document) {
 "use strict";
 	// Global variables to used for JSON creation
-	const allDatecodes = [];
+	const allDatecodes = [{}]
 	let currentGame = '';
 	let toolVersion = '';
+    const containersList = []
 // form labels often need unique IDs - this can be used to generate some
 window.Patcher_uniqueid = 0;
 var createID = function() {
@@ -34,6 +35,13 @@ var hexToBytes = function(hex) {
 		bytes.push(parseInt(hex.substr(i, 2), 16));
 	}
 	return bytes;
+}
+
+var decimalToHex = function(array) {
+    return array
+        .map((num) => num.toString(16).padStart(2, '0')) // Adds leading zero to hex if single digit/letter
+        .join('')
+        .toUpperCase();
 }
 
 var replace = function(buffer, offset, bytes) {
@@ -738,12 +746,6 @@ class PatchContainer {
         return dlls;
     }
     async createJSONObject(type) {
-        function decimalToHex(array) {
-            return array
-                .map((num) => num.toString(16).padStart(2, '0')) // Adds leading zero to hex if single digit/letter
-                .join('') // stringify and removes the spaces from the array
-                .toUpperCase();
-        }
         function changeGameCode(filledJSON) {
             if (filledJSON.gameCode === 'bm2dx.dll') {
                 filledJSON.gameCode = 'LDJ';
@@ -770,21 +772,21 @@ class PatchContainer {
         }
         for (const patcher of this.patchers) {
             const gameCode = patcher.filename;
-            const cabVersion = patcher.description; // I had to make a separate variable to account for multiple istances of the same datecode in the HTML,but for different cabinets
-            allDatecodes.push(cabVersion); // Adds the datecode to this global variable,we'll use it to choose which datecode to download later
+            const cabVersion = patcher.description; // for different game builds
+            const dllName = patcher.filename;
+            allDatecodes.push([gameCode,cabVersion]);
             const datecode = parseInt(
                 // THIS IS FOUNDAMENTALLY BROKEN,BECAUSE DATECODES NOT ALWAYS END WITH 00,THOUGH THEY DO LIKE 80% OF THE TIME
-                //  Default patcher used "Rev.1" to account for 01 istances of various datecodes
+                //  Default patcher used "Rev.1" to account for 01 instances of various datecodes
                 //  So if that's the standard,we could use :  if (patcher.description.includes('Rev. 1')) {}
                 patcher.description.replace(/-/g, '').slice(0, 8) + '00'
             );
             10;
-            const dllName = patcher.filename;
 
             // Create a unique array for each cabVersion (full datecode)
             const JSONArray = [];
             let filledJSON;
-
+            
             const patches = patcher.mods;
             for (const patch of patches) {
                 if (patch instanceof StandardPatch) {
@@ -835,11 +837,12 @@ class PatchContainer {
                     }
 
                     // Checks the name of the .dll and changes gameCode accordingly
-                    changeGameCode(filledJSON); // Passes the object,and changes it's datecodes
+                    changeGameCode(filledJSON); // Passes the object,and changes it's datecodes     
                     JSONArray.push(filledJSON);
                 }
                 if (patch instanceof UnionPatch) {
-                    // This creates a new UnionPatch only if "Newest JSON Schema is selected"
+                    // This creates a new UnionPatch only if "Newest JSON Schema is selected"  - TODO : Veriry this 
+                    if (type === "new"){
                     const name = (patch.name || '').replace(/"/g, "'");
                     const tooltip = (patch.tooltip || '').replace(/"/g, "'");
                     const offset = patch.offset;
@@ -871,25 +874,28 @@ class PatchContainer {
                         });
                         changeGameCode(filledJSON);
                         JSONArray.push(filledJSON);
-                    }
+                    }}
                 }
             }
-
             // Adds all datecode's patches to JSONObj
-
-            JSONObj[cabVersion] = JSONArray;
+            const index = patcher.filename.includes(cabVersion) ? index : `${patcher.filename} ${cabVersion}`; 
+            JSONObj[index] = JSONArray;
         }
     }
     createUI() {
         var self = this;
         var container = createElementClass('div', 'patchContainer');
         var header = this.getSupportedDLLs().join(", ");
+        container.id = ("container_" + (containersList.length + 1))
+        containersList.push(container);   
         container.innerHTML = "<h3>" + header + "</h3>";
 
         var supportedDlls = document.createElement('ul');
         this.forceLoadTexts = [];
         this.forceLoadButtons = [];
         this.matchSuccessText = [];
+        this.containerIndex = containersList.length; // Used only to selecting the first container
+        
         for (var i = 0; i < this.patchers.length; i++) {
             var checkboxId = createID();
 
@@ -966,11 +972,7 @@ class PatchContainer {
 			'Apply patches by providing a DLL file here, or download a ' +
             '<span class="JSONSpan" id="JSONSpan">JSON</span>' +
             ' instead.';
-        document.body.appendChild(topMessage);
-        const JSONSpan = document.getElementById("JSONSpan");
-        JSONSpan.addEventListener("click",() => {
-            appendJSONButton();
-        })
+
 
 		// Creating a schema toggle
 		
@@ -983,7 +985,7 @@ class PatchContainer {
 				toggle.type = 'radio';
 				toggle.id = 'toolToggle';
 				toggle.className = `tool-toggle${index + 1}`;
-				toggle.name = 'toolToggle';
+				toggle.name = header;    // Assign the same name to both radios
 				if (option === toggleOptions[0]) {
 						toggle.checked = true; // Checks regular schema as default
 				}
@@ -1016,13 +1018,13 @@ class PatchContainer {
         formLabel.for = 'datecode';
         formLabel.className = 'dropdownTitle';
         formLabel.textContent = 'Choose a datecode :';
-    
+
         // Creating a select element to append
     
         const select = document.createElement('select');
         select.name = 'datecode';
         select.className = 'dropdownOptions';
-        select.id = 'dropdownOptions';
+        select.id = `dropdownOptions-${header}`;
         select.style.textAlign = 'center';
     
         // Creating a download button for the .JSON file   
@@ -1033,62 +1035,118 @@ class PatchContainer {
         downloadButton.textContent = 'Download JSON';
         const selectElement = select;
 
+        // Set state of each container (active - inactive)
+        containersList.forEach((container) => {
+            if (container.id != "container_1") {
+                container.style.opacity = 0.4;
+                container.querySelectorAll('*').forEach(child => {
+                    child.style.pointerEvents = "none";
+                });
+            } else {
+                container.addEventListener("click", () => {
+                    if (container.style.opacity == 0.4) {
+                        containersList.forEach((inactiveContainer) => {
+                            if (inactiveContainer.id != "container_1") {
+                                inactiveContainer.style.opacity = 0.4;
+                                inactiveContainer.querySelectorAll('*').forEach(child => {
+                                    child.style.pointerEvents = "none";
+                                });
+                            }
+                        });
+                        container.style.opacity = 1;
+                        container.querySelectorAll('*').forEach(child => {
+                            child.style.pointerEvents = "auto";
+                        });
+                    }
+                });
+            }
+            
+            container.addEventListener("click", () => {
+                if (container.style.opacity == 0.4){
+                    containersList.forEach((inactiveContainer) => {
+                    inactiveContainer.style.opacity = 0.4;
+                    inactiveContainer.querySelectorAll('*').forEach(child => {
+                        child.style.pointerEvents = "none";
+                        });
+                    });
+                    container.style.opacity = 1;
+                    container.querySelectorAll('*').forEach(child => {
+                        child.style.pointerEvents = "auto";
+                    });
+                }
+            });
+        });
+        
         // This is used to populate the form with all datecodes
     
         function setDatecodeToDropdown() {
             allDatecodes.forEach((datecode) => {
                 // Create an <option> element
+                const name = datecode[0];
+                const date = datecode[1];
                 const option = document.createElement('option');
-                option.value = datecode;
-                option.textContent = datecode;
-                // Append the <option> to the <select> element
-                selectElement.appendChild(option);
+                option.value = name + " " + date;
+                option.innerHTML = date;
+                option.id = name;
+                // If the .DLL for the datecode matches it's cointainer's header 
+                if (name === header) { 
+                    selectElement.appendChild(option);
+                };
             });
         }
+        
         setTimeout(() => {
             setDatecodeToDropdown(); // There has to be a better way,probably async await...Though this will work for now
         }, 50);
+        
+        // Downloads the actual file
+
         downloadButton.addEventListener('click', (event) => {
-        event.preventDefault();
-        const selectedOption = select.value;
-        const selectedDatecode = selectedOption
-            .split('-')
-            .join('')
-            .replace(' ', '-');
-        const firstArray = JSONObj[selectedOption];
- 
-        const jsonData = JSON.stringify(firstArray);
-        
-        const blob = new Blob([jsonData], { type: 'application/json' });	
+            event.preventDefault();
+            const selectedDatecode = select;
+            const selectedOption = select.value;
+            const fileDatecode = selectedOption
+                .split('-')
+                .join('')
+                .replace(' ', '_');
+            const firstArray = JSONObj[selectedOption];           
+            const jsonData = JSON.stringify(firstArray);          
+            const blob = new Blob([jsonData], { type: 'application/json' });	
+            const url = window.URL.createObjectURL(blob);
 
-        const url = window.URL.createObjectURL(blob);
+            // Create a link element and trigger the download
+            
+            const a = document.createElement('a');
+            a.href = url;
+            const fileName = () => {
+                if (toolVersion === 'regular') {
+                    return `OLD_${fileDatecode}.json`;
+                } else if (toolVersion === 'new') {
+                    return `NEW_${fileDatecode}.json`;
+                }
+            };
+            a.download = fileName(); 
+            a.click();
 
-        // Create a link element and trigger the download
-        
-        const a = document.createElement('a');
-        a.href = url;
-        const fileName = () => {
-            if (toolVersion === 'regular') {
-                return `OLD_${currentGame}-${selectedDatecode}-patches.json`;
-            } else if (toolVersion === 'new') {
-                return `NEW_${currentGame}-${selectedDatecode}-patches.json`;
-            }
-        };
-        a.download = fileName();
-        a.click();
-
-        // Clean up the URL object
-        
-        window.URL.revokeObjectURL(url);
-		});
+            // Clean up the URL object
+            
+            window.URL.revokeObjectURL(url);
+        });
 
         // Appending inner container's elements
 
-		appendToggles();
+        if (this.containerIndex === 1) {
+            document.body.appendChild(topMessage);
+        }
+        const JSONSpan = document.getElementById("JSONSpan");
+        JSONSpan.addEventListener("click",() => {
+            appendJSONButton();
+        })
 		container.appendChild(supportedDlls);
 		container.appendChild(this.successDiv);
 		container.appendChild(this.errorDiv);		
-        function appendJSONButton(){
+        appendToggles();     // TODO Append the toggles only to the selected container,make a removeToggle function as well
+        const appendJSONButton = () => {
             if (container.contains(toggleDiv)){
                 container.removeChild(toggleDiv);
                 container.removeChild(form);
@@ -1197,7 +1255,7 @@ class Patcher {
             this.loadPatchUI();
         }
     }
-
+    
     createUI() {
         var self = this;
         this.container = createElementClass('div', 'patchContainer');

@@ -7,6 +7,7 @@
 	let toolVersion = '';
     let selectedContainer = '';
     const containersList = [];
+    const inputElArray = [];  
     // form labels often need unique IDs - this can be used to generate some
 window.Patcher_uniqueid = 0;
 var createID = function() {
@@ -804,8 +805,7 @@ class PatchContainer {
                     const tooltip = (patch.tooltip || '').replace(/"/g, "'");
 
                     if (type === 'regular') {
-                        console.log("Regular fired");
-                        toolVersion = 'regular';
+                                                toolVersion = 'regular';
                         filledJSON = new StandardJSON({
                             gameCode: gameCode,
                             dateCode: datecode,
@@ -903,7 +903,7 @@ class PatchContainer {
         this.forceLoadTexts = [];
         this.forceLoadButtons = [];
         this.matchSuccessText = [];
-        this.containerIndex = containersList.length; // Used only to selecting the first container
+        this.containerIndex = containersList.length; // Used only for selecting the first container
         
         for (var i = 0; i < this.patchers.length; i++) {
             var checkboxId = createID();
@@ -922,6 +922,7 @@ class PatchContainer {
             listItem.appendChild(forceButton);
 
             var input = createInput('checkbox', checkboxId, 'patchPreviewToggle');
+            inputElArray.push(input);
             listItem.appendChild(input);
             var patchPreviews = createElementClass('ul', 'patchPreview');
             for (var j = 0; j < this.patchers[i].mods.length; j++) {
@@ -1048,7 +1049,6 @@ class PatchContainer {
 
         const activateContainer = (container) => {
             selectedContainer = container;
-            console.log(`activateContainer fired on ${container.id}`);
             container.style.opacity = 1;
             container.style.userSelect = "auto";
             container.querySelectorAll('*').forEach(child => {
@@ -1057,7 +1057,6 @@ class PatchContainer {
         };
         
         const deactivateContainer = (container) => {
-            console.log(`deactivateContainer fired on ${container.id}`);
             container.style.opacity = 0.4;
             container.style.userSelect = "none";
             setTimeout(() => {
@@ -1065,11 +1064,13 @@ class PatchContainer {
                     child.style.pointerEvents = "none";
                 });
             }, 10); // Use async await instead 
+            inputElArray.forEach((inputEl) => {
+                inputEl.checked = false;   // Hide patches preview
+            })
         };
         
         const handleContainerClick = (container) => {
             if (container === selectedContainer) {
-                console.log("You clicked an already selected container, returning.");
                 return;
             } else {
                 activateContainer(container);

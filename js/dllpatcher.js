@@ -2,12 +2,13 @@
 (function(window, document) {
 "use strict";
 	// Global variables to used for JSON creation
+    let selectedContainer = '';
 	const allDatecodes = [{}];
 	let currentGame = '';
 	let toolVersion = '';
-    let selectedContainer = '';
     const containersList = [];
     const inputElArray = [];  
+    let isJSONToggled = false;
     // form labels often need unique IDs - this can be used to generate some
 window.Patcher_uniqueid = 0;
 var createID = function() {
@@ -989,33 +990,7 @@ class PatchContainer {
         const toggleOptions = ['Regular JSON Schema', 'Newest JSON Schema'];
 		const toggleDiv = document.createElement('div');
 		toggleDiv.className = 'toggle-div';
-		const appendToggles = () => {
-		    toggleOptions.forEach((option, index) => {
-				const toggle = document.createElement('input');
-				toggle.type = 'radio';
-				toggle.id = 'toolToggle';
-				toggle.className = `tool-toggle${index + 1}`;
-				toggle.name = header;    // Assign the same name to both radios
-				if (option === toggleOptions[0]) {
-						toggle.checked = true; // Checks regular schema as default
-				}
-    	        const toggleLabel = document.createElement('label');
-				toggleLabel.for = 'toolToggle';
-				toggleLabel.innerText = option;
-				toggleLabel.className = `toggle-text${index + 1}`;
-				toggle.addEventListener('change', () => {	
-					if (option === toggleOptions[0]) {
-						this.createJSONObject('regular');
-					} else if (option === toggleOptions[1]) {
-						this.createJSONObject('new');
-					}
-				});
-				return (
-					toggleDiv.appendChild(toggle), toggleDiv.appendChild(toggleLabel)
-				);
-		});
-		};
-        
+
         // Creating a form for datecode selection
 		
         const form = document.createElement('form');
@@ -1045,10 +1020,55 @@ class PatchContainer {
         downloadButton.textContent = 'Download JSON';
         const selectElement = select;
 
+        // Creating append/remove toggles functions
+
+        const appendToggles = () => {
+		    toggleOptions.forEach((option, index) => {
+				const toggle = document.createElement('input');
+				toggle.type = 'radio';
+				toggle.id = 'toolToggle';
+				toggle.className = `tool-toggle${index + 1}`;
+				toggle.name = header;    // Assign the same name to both radios
+				if (option === toggleOptions[0]) {
+						toggle.checked = true; // Checks regular schema as default
+				}
+    	        const toggleLabel = document.createElement('label');
+				toggleLabel.for = 'toolToggle';
+				toggleLabel.innerText = option;
+				toggleLabel.className = `toggle-text${index + 1}`;
+				toggle.addEventListener('change', () => {	
+					if (option === toggleOptions[0]) {
+						this.createJSONObject('regular');
+					} else if (option === toggleOptions[1]) {
+						this.createJSONObject('new');
+					}
+				});
+				return (
+					toggleDiv.appendChild(toggle), toggleDiv.appendChild(toggleLabel)
+				);
+		});
+		};
+        
+        const removeToggles = (container) => {
+            const toggleDiv = container.getElementsByClassName("toggle-div")[0];
+            const form = container.getElementsByTagName("form")[0];
+            const downloadButton = container.getElementsByClassName("JSON")[0];     
+            
+            if (!form) {
+                return;
+            }
+            container.removeChild(toggleDiv);       
+            container.removeChild(form);        
+            container.removeChild(downloadButton);   
+        }
+
         // Set state of each container (active - inactive)
 
         const activateContainer = (container) => {
             selectedContainer = container;
+            if (isJSONToggled === true) {
+                appendJSONButton();
+            }
             container.style.opacity = 1;
             container.style.userSelect = "auto";
             container.querySelectorAll('*').forEach(child => {
@@ -1059,6 +1079,7 @@ class PatchContainer {
         const deactivateContainer = (container) => {
             container.style.opacity = 0.4;
             container.style.userSelect = "none";
+       
             setTimeout(() => {
                 container.querySelectorAll('*').forEach(child => {
                     child.style.pointerEvents = "none";
@@ -1077,6 +1098,7 @@ class PatchContainer {
                 containersList.forEach((inactiveContainer) => {
                     if (inactiveContainer !== container) {
                         deactivateContainer(inactiveContainer);
+                        removeToggles(inactiveContainer);
                     }
                 });
             }
@@ -1157,15 +1179,26 @@ class PatchContainer {
             document.body.appendChild(topMessage);
         }
         const JSONSpan = document.getElementById("JSONSpan");
-        JSONSpan.addEventListener("click",() => {
+        
+
+        JSONSpan.addEventListener("click", () => {
             appendJSONButton();
-        })
-		container.appendChild(supportedDlls);
+        });
+		
+        container.appendChild(supportedDlls);
 		container.appendChild(this.successDiv);
 		container.appendChild(this.errorDiv);		
+        
         appendToggles();     // TODO Append the toggles only to the selected container,make a removeToggle function as well
+        
         const appendJSONButton = () => {
+            if (container !== selectedContainer) {
+                return;
+            }
+            isJSONToggled = true;
             if (container.contains(toggleDiv)){
+                isJSONToggled = false;  // If the function fires,but the elements are already present :
+                console.log("removed");
                 container.removeChild(toggleDiv);
                 container.removeChild(form);
                 container.removeChild(downloadButton);

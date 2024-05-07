@@ -2,15 +2,22 @@
 (function(window, document) {
 "use strict";
 	// Global variables to used for JSON creation
-	const allDatecodes = [{}]
+	const allDatecodes = [{}];
 	let currentGame = '';
 	let toolVersion = '';
-    const containersList = []
-// form labels often need unique IDs - this can be used to generate some
+    let selectedContainer = '';
+    const containersList = [];
+    // form labels often need unique IDs - this can be used to generate some
 window.Patcher_uniqueid = 0;
 var createID = function() {
     window.Patcher_uniqueid++;
     return "dllpatch_" + window.Patcher_uniqueid;
+};
+
+window.Patcher_patcherid = 0;
+var createPatcherID = function() {
+    window.Patcher_patcherid++;
+    return "container_" + window.Patcher_patcherid;
 };
 
 var bytesMatch = function(buffer, offset, bytes) {
@@ -797,6 +804,7 @@ class PatchContainer {
                     const tooltip = (patch.tooltip || '').replace(/"/g, "'");
 
                     if (type === 'regular') {
+                        console.log("Regular fired");
                         toolVersion = 'regular';
                         filledJSON = new StandardJSON({
                             gameCode: gameCode,
@@ -816,6 +824,7 @@ class PatchContainer {
                         });
                     }
                     if (type === 'new') {
+                        console.log("New fired");
                         toolVersion = 'new';
                         const patchesArray = [];
                         const patchesValues = patch.patches;
@@ -886,7 +895,7 @@ class PatchContainer {
         var self = this;
         var container = createElementClass('div', 'patchContainer');
         var header = this.getSupportedDLLs().join(", ");
-        container.id = ("container_" + (containersList.length + 1))
+        container.id = createPatcherID();
         containersList.push(container);   
         container.innerHTML = "<h3>" + header + "</h3>";
 
@@ -1003,9 +1012,9 @@ class PatchContainer {
 				return (
 					toggleDiv.appendChild(toggle), toggleDiv.appendChild(toggleLabel)
 				);
-			});
-			};
-
+		});
+		};
+        
         // Creating a form for datecode selection
 		
         const form = document.createElement('form');
@@ -1020,13 +1029,13 @@ class PatchContainer {
         formLabel.textContent = 'Choose a datecode :';
 
         // Creating a select element to append
-    
+
         const select = document.createElement('select');
         select.name = 'datecode';
         select.className = 'dropdownOptions';
         select.id = `dropdownOptions-${header}`;
         select.style.textAlign = 'center';
-    
+
         // Creating a download button for the .JSON file   
 
         const downloadButton = document.createElement('button');
@@ -1036,47 +1045,55 @@ class PatchContainer {
         const selectElement = select;
 
         // Set state of each container (active - inactive)
-        containersList.forEach((container) => {
-            if (container.id != "container_1") {
-                container.style.opacity = 0.4;
+
+        const activateContainer = (container) => {
+            selectedContainer = container;
+            console.log(`activateContainer fired on ${container.id}`);
+            container.style.opacity = 1;
+            container.style.userSelect = "auto";
+            container.querySelectorAll('*').forEach(child => {
+                child.style.pointerEvents = "auto";
+            });
+        };
+        
+        const deactivateContainer = (container) => {
+            console.log(`deactivateContainer fired on ${container.id}`);
+            container.style.opacity = 0.4;
+            container.style.userSelect = "none";
+            setTimeout(() => {
                 container.querySelectorAll('*').forEach(child => {
                     child.style.pointerEvents = "none";
                 });
+            }, 10); // Use async await instead 
+        };
+        
+        const handleContainerClick = (container) => {
+            if (container === selectedContainer) {
+                console.log("You clicked an already selected container, returning.");
+                return;
             } else {
-                container.addEventListener("click", () => {
-                    if (container.style.opacity == 0.4) {
-                        containersList.forEach((inactiveContainer) => {
-                            if (inactiveContainer.id != "container_1") {
-                                inactiveContainer.style.opacity = 0.4;
-                                inactiveContainer.querySelectorAll('*').forEach(child => {
-                                    child.style.pointerEvents = "none";
-                                });
-                            }
-                        });
-                        container.style.opacity = 1;
-                        container.querySelectorAll('*').forEach(child => {
-                            child.style.pointerEvents = "auto";
-                        });
+                activateContainer(container);
+                containersList.forEach((inactiveContainer) => {
+                    if (inactiveContainer !== container) {
+                        deactivateContainer(inactiveContainer);
                     }
                 });
             }
-            
-            container.addEventListener("click", () => {
-                if (container.style.opacity == 0.4){
-                    containersList.forEach((inactiveContainer) => {
-                    inactiveContainer.style.opacity = 0.4;
-                    inactiveContainer.querySelectorAll('*').forEach(child => {
-                        child.style.pointerEvents = "none";
-                        });
-                    });
-                    container.style.opacity = 1;
-                    container.querySelectorAll('*').forEach(child => {
-                        child.style.pointerEvents = "auto";
-                    });
-                }
-            });
-        });
+        };
         
+        //  On page load,we select the first container by default
+        
+        if (container.id === "container_1") {
+            activateContainer(container);
+        }else{
+            deactivateContainer(container);
+        }
+        
+        container.addEventListener("click",() => {
+            handleContainerClick(container);
+        });
+
+    
         // This is used to populate the form with all datecodes
     
         function setDatecodeToDropdown() {

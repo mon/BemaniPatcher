@@ -153,20 +153,6 @@
                         }
                     ])
                 ])
-                new PatchContainer([
-                    new Patcher("music_db.dll", "2022-08-03", [
-                        {
-                         name : "Unlock all songs",
-                         patches : [{offset : 0x1E55, off: [0x74, 0x0A], on : [0x90, 0x90]}]
-                        },
-                    ]),
-                    new Patcher("music_db.dll", "2023-08-08", [
-                        {
-                         name : "Unlock all songs",
-                         patches : [{offset : 0x1EA5, off: [0x74, 0x0A], on : [0x90, 0x90]}]
-                        }
-                    ])
-                ])
             });
         </script>
     </head>

@@ -2,4 +2,18 @@
 # This avoids link rot on mon's server by redirecting the old paths to the new ones
 
 Redirect permanent "/bemanipatcher/chuninewplus.html" "/bemanipatcher/chusannewplus.html"
-Redirect permanent "/bemanipatcher/resort_anthem.html" "/bemanipatcher/resortanthem.html"
+
+Redirect permanent "/bemanipatcher/resort_anthem.html" "/bemanipatcher/iidx18resortanthem.html"
+Redirect permanent "/bemanipatcher/resortanthem.html" "/bemanipatcher/iidx18resortanthem.html"
+Redirect permanent "/bemanipatcher/lincle.html" "/bemanipatcher/iidx19lincle.html"
+Redirect permanent "/bemanipatcher/tricoro.html" "/bemanipatcher/iidx20tricoro.html"
+Redirect permanent "/bemanipatcher/spada.html" "/bemanipatcher/iidx21spada.html"
+Redirect permanent "/bemanipatcher/pendual.html" "/bemanipatcher/iidx22pendual.html"
+Redirect permanent "/bemanipatcher/copula.html" "/bemanipatcher/iidx23copula.html"
+Redirect permanent "/bemanipatcher/sinobuz.html" "/bemanipatcher/iidx24sinobuz.html"
+Redirect permanent "/bemanipatcher/ballerz.html" "/bemanipatcher/iidx25ballerz.html"
+Redirect permanent "/bemanipatcher/rootage.html" "/bemanipatcher/iidx26rootage.html"
+Redirect permanent "/bemanipatcher/heroicverse.html" "/bemanipatcher/iidx27heroicverse.html"
+Redirect permanent "/bemanipatcher/bistrover.html" "/bemanipatcher/iidx28bistrover.html"
+Redirect permanent "/bemanipatcher/casthour.html" "/bemanipatcher/iidx29casthour.html"
+Redirect permanent "/bemanipatcher/resident.html" "/bemanipatcher/iidx30resident.html"

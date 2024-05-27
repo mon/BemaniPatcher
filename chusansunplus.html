@@ -73,6 +73,15 @@
                         max: 12,
                     },
                     {
+                        name: "Remove recent scores from rating calculation",
+                        tooltip: "Changes the rating algorithm from (Best30+Recent10)÷40 to (Best30)÷30",
+                        danger: "Decreases the rating ceiling",
+                        patches: [
+                            { offset: 0x6FF272, off: [0x0a], on: [0x00] },
+                            { offset: 0x6FF285, off: [0x28], on: [0x1e] },
+                        ],
+                    },
+                    {
                         name: "Ignore some errors from amdaemon",
                         danger: "[DEPRECATED] May relieve some errors like error 6401, but may also cause problems elsewhere.",
                         patches: [

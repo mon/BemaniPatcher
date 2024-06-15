@@ -468,6 +468,10 @@
                         patches: [{ offset: 0x4318F1, off: [0xFF, 0x50, 0x38], on: [0x90, 0x90, 0x90] }],
                     },
                     {
+                        name: "WASAPI Shared Mode (with 44.1kHz)",
+                        patches: [{ offset: 0x2CF265, off: [0x45, 0x8B, 0xF0], on: [0x4D, 0x31, 0xF6] }],
+                    },
+                    {
                         name: "Skip Camera Device Error",
                         patches: [{ offset: 0x650E0B, off: [0x84], on: [0x81] }],
                     },
@@ -789,7 +793,7 @@
                     },
                     {
                         name: "Unscramble touch screen keypad in TDJ",
-                        patches: [{ offset: 0x719f35, off: [0x4D, 0x03, 0xC8, 0x49, 0xF7, 0xF1], on: [0xba, 0x0c, 0x00, 0x00, 0x00, 0x90]}],
+                        patches: [{ offset: 0x719F35, off: [0x4D, 0x03, 0xC8, 0x49, 0xF7, 0xF1], on: [0xba, 0x0c, 0x00, 0x00, 0x00, 0x90]}],
                     }
                 ]),
                 new Patcher("bm2dx.dll", "2023-09-05 (LDJ-012)", [

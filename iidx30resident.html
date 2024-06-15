@@ -786,6 +786,10 @@
                         name: "Faster video uploads",
                         tooltip: "Expand InternetWriteFile() body chunk size to 0x3200000 - makes video upload put request 1000 times faster in theory",
                         patches: [{ offset: 0x7b53ea, off: [0x41, 0xbe, 0x00, 0x32, 0x00, 0x00], on: [0x41, 0xbe, 0x00, 0x00, 0x20, 0x03]}],
+                    },
+                    {
+                        name: "Unscramble touch screen keypad in TDJ",
+                        patches: [{ offset: 0x719f35, off: [0x4D, 0x03, 0xC8, 0x49, 0xF7, 0xF1], on: [0xba, 0x0c, 0x00, 0x00, 0x00, 0x90]}],
                     }
                 ]),
                 new Patcher("bm2dx.dll", "2023-09-05 (LDJ-012)", [

@@ -121,6 +121,21 @@
                             },
                         ]
                     },
+                    {
+                        name: "Timer freeze", // Created by Cammy
+                        patches: [
+                            {
+                                offset: 0x28E610,
+                                off: [0x0F, 0x85, 0x26, 0x01, 0x00],
+                                on: [0xE9, 0x27, 0x01, 0x00, 0x00]
+                            },
+                            {
+                                offset: 0x287C3E,
+                                off: [0x75],
+                                on: [0xEB]
+                            }
+                        ]
+                    },
                 ]),
             ]);
         });

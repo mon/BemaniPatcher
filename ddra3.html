@@ -583,6 +583,25 @@
                             },
                         ]
                     },
+                    {
+                        name: "OmniMIX",
+                        tooltip: "v1.2",
+                        danger: "Convert .m2v movies to .wmv, or default background stages show",
+                        patches: [
+                            { offset: 0x2434C, off: [0x74], on: [0xEB] },
+                            { offset: 0x3214B, off: [0x14], on: [0x26] },
+                            { offset: 0x32261, off: [0x14], on: [0x26] },
+                            { offset: 0xEEBE6, off: [0x75], on: [0xEB] },
+                            { offset: 0xEED32, off: [0x74, 0x36], on: [0x90, 0x90] },
+                            { offset: 0xEED3C, off: [0x74], on: [0xEB] },
+                            { offset: 0xEED58, off: [0x0F, 0x84, 0xE5, 0x03, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] },
+                            { offset: 0xEED62, off: [0x0F, 0x84, 0xDB, 0x03, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] },
+                            { offset: 0xEEDC8, off: [0x0F, 0x95, 0xC0], on: [0xB0, 0x01, 0x90] },
+                            { offset: 0xF8AB1, off: [0x75], on: [0xEB] },
+                            { offset: 0x109367, off: [0x10], on: [0x20] },
+                            { offset: 0x1093F0, off: [0x10], on: [0x20] },
+                        ]
+                    },
                 ]),
             ]);
             new PatchContainer([

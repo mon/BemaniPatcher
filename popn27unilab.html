@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>pop'n music UniLab DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+      window.addEventListener("load", function () {
+        new PatchContainer([
+          new Patcher("popn22.dll", "2024-07-31", [
+                    {
+                        name: "E: Drive Fix",
+                        tooltip: "Fix crash caused by no E: drive",
+                        patches: [{ offset: 0x21B31C, off: [0x65, 0x3A, 0x2F], on: [0x64, 0x65, 0x76] }],
+                    },
+                    {
+                        name: "HDMI Audio Fix",
+                        patches: [{ offset: 0x12DB1C, off: [0x85, 0xC0, 0x75, 0x96], on: [0x90, 0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Prevent Windows volume change on boot",
+                        tooltip: "If your volume gets forced to max, turn this on",
+                        patches: [{ offset: 0x130720, off: [0x83], on: [0xC3] }],
+                    },
+                    {
+                        name: "Boot to Event Mode",
+                        patches: [{ offset: 0xFE890, off: [0x8B, 0x00, 0xC3, 0xCC], on: [0x31, 0xC0, 0x40, 0xC3] }],
+                    },
+                    {
+                        name: "Remove Timer",
+                        patches: [{ offset: 0xD65BC, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip Menu and Long Note Tutorials",
+                        patches: [
+                            { offset: 0x2770B, off: [0x74], on: [0xEB] },
+                            { offset: 0x276E7, off: [0x75], on: [0xEB] },
+                            { offset: 0x7CE41, off: [0x75], on: [0xEB] },
+                        ],
+                    },
+                    {
+                        name: "Unlock All Songs",
+                        patches: [
+                            { offset: 0xF585B, off: [0x74, 0xE7], on: [0x90, 0x90] },
+                            { offset: 0xF587C, off: [0x74], on: [0xEB] },
+                        ]
+                    },
+                    {
+                        name: "Unlock Deco Parts",
+                        patches: [{ offset: 0xEDD5F, off: [0x75, 0x22], on: [0x90, 0x90] }],
+                    },
+                    {
+                        name: "Unlock Characters",
+                        patches: [{ offset: 0xE6C9A, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Replace COLOR CHECK test menu with debug CHARA VIEWER",
+                        tooltip: "Press service button to exit",
+                        patches: [
+                            { offset: 0x211D9C, off: [0x43, 0x4F, 0x4C, 0x4F, 0x52, 0x20, 0x43, 0x48, 0x45, 0x43, 0x4B, 0x00, 0x43], on: [0x43, 0x48, 0x41, 0x52, 0x41, 0x20, 0x56, 0x49, 0x45, 0x57, 0x45, 0x52, 0x00] },
+                            { offset: 0x25862, off: [0xAC, 0x00, 0x00], on: [0xB0, 0x34, 0x0C] },
+                            { offset: 0x25880, off: [0xDC, 0xFE, 0xFF, 0xFF], on: [0xBC, 0xF0, 0x08, 0x00] },
+                        ]
+                    },
+                    {
+                        name: "Replace SCREEN CHECK test menu with debug MUSIC INFO CHECKER",
+                        tooltip: "Press service button to exit",
+                        patches: [
+                            { offset: 0x212790, off: [0x53, 0x43, 0x52, 0x45, 0x45, 0x4E, 0x20, 0x43, 0x48, 0x45, 0x43, 0x4B], on: [0x4D, 0x55, 0x53, 0x49, 0x43, 0x20, 0x49, 0x4E, 0x46, 0x4F, 0x00, 0x00] },
+                            { offset: 0x256F2, off: [0x8C, 0x00, 0x00], on: [0xB0, 0x34, 0x0C] },
+                            { offset: 0x25710, off: [0xFC, 0xFE, 0xFF, 0xFF], on: [0xCC, 0x1E, 0x09, 0x00]}]
+                    },
+                ]),
+            ]);
+      });
+    </script>
+  </head>
+  <body>
+    <h1>pop'n music UniLab DLL Modder</h1>
+  </body>
+</html>

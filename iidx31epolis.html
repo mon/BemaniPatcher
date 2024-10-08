@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>IIDX EPOLIS DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            new PatchContainer([
+                new Patcher("bm2dx.dll", "2024-08-26 (LDJ-010)", [
+                    {
+                        name: "Standard/Menu Timer Freeze",
+                        patches: [{ offset: 0x900EA7, off: [0x0F, 0x84], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Premium Free Timer Freeze",
+                        patches: [{ offset: 0x82A64D, off: [0x7E], on: [0xEB] }],
+                    },
+                    {
+                        name: "Allow 1-99m Premium Free Length",
+                        patches: [
+                            { offset: 0x58EEBE, off: [0x06], on: [0x01] },
+                            { offset: 0x58EECB, off: [0x19], on: [0x63] },
+                            { offset: 0x58AF82, off: [0x84, 0xC0], on: [0x90, 0x90] },
+                        ]
+                    },
+                    {
+                        name: "Hide Time Limit Display on Results Screen",
+                        patches: [{ offset: 0x8B29D3, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Hide Background Color Banners on Song List",
+                        patches: [
+                            { offset: 0xBFCC6D, off: [0x5F], on: [0x00] },
+                            { offset: 0xBFCC7D, off: [0x5F], on: [0x00] },
+                            { offset: 0xC0C38D, off: [0x5F], on: [0x00] },
+                            { offset: 0xC0C39D, off: [0x5F], on: [0x00] },
+                        ]
+                    },
+                    {
+                        name: "Cursor Lock",
+                        tooltip: "Return to previous selected in music select. Requires a card.",
+                        patches: [{ offset: 0x887E57, off: [0x74, 0x22], on: [0x90, 0x90] }],
+                    },
+                    {
+                        name: "Unlock All Songs and Charts",
+                        patches: [{ offset: 0x8242DA, off: [0x32, 0xC0], on: [0xB0, 0x01] }],
+                    },
+                    {
+                        name: "CS-style Song Start Delay",
+                        tooltip: "Holding Start will pause the song at the beginning until you release it",
+                        patches: [{ offset: 0x8A9487, off: [0x7D, 0x36], on: [0x90, 0x90] }],
+                    },
+                    {
+                        name: "Unscramble Touch Screen Keypad in TDJ",
+                        patches: [{ offset: 0x96E195, off: [0x4D, 0x03, 0xC8, 0x49, 0xF7, 0xF1], on: [0xBA, 0x0C, 0x00, 0x00, 0x00, 0x90] }],
+                    },
+                    {
+                        name: "Disable News Sound",
+                        patches: [{ offset: 0xC86F58, off: [0x73, 0x79, 0x73, 0x73, 0x64, 0x5F, 0x6E, 0x65, 0x77, 0x73, 0x5F, 0x63, 0x75, 0x74, 0x69, 0x6E, 0x5F, 0x73, 0x65], on: [0x73, 0x79, 0x73, 0x73, 0x64, 0x5F, 0x64, 0x75, 0x6D, 0x6D, 0x79, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00] }],
+                    },
+                    {
+                        name: "Mute Navigator Voices",
+                        patches: [{ offset: 0x90FA8F, off: [0x75, 0x0B], on: [0x90, 0x90] }],
+                    },
+                    {
+                        name: "Increase Game Volume",
+                        tooltip: "Ignore the in-game volume settings and use the maximum possible volume level. Especially helpful for TDJ which tends to be very quiet.",
+                        patches: [{ offset: 0x9F3595, off: [0xFF, 0x90, 0x98, 0x00, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Force Audio Output Mode",
+                        offset : 0xA040A3,
+                        patches : [
+                            {
+                                name : "Default",
+                                patch : [0xE8, 0xE8, 0xC3, 0xEC, 0xFF, 0x83, 0x78, 0x08, 0x03],
+                            },
+                            {
+                                name : "WASAPI",
+                                patch : [0xBB, 0x00, 0x00, 0x00, 0x00, 0xEB, 0x16, 0x90, 0x90],
+                            },
+                            {
+                                name : "ASIO",
+                                patch : [0xBB, 0x01, 0x00, 0x00, 0x00, 0xEB, 0x16, 0x90, 0x90],
+                            },
+                        ]
+                    },
+                    {
+                        name: "WASAPI Shared Mode",
+                        danger: "Lag",
+                        tooltip: "Audio device sample rate must be >=48kHz",
+                        patches: [{ offset: 0x4828FB, off: [0x44, 0x8B, 0xF2], on: [0x4D, 0x31, 0xF6] }],
+                    },
+                    {
+                        name: "Remove Camera Boot Delay",
+                        tooltip: "Skips some fixed delays around camera checks. Significantly speeds up game booting",
+                        patches: [
+                            { offset: 0x8D461D, off: [0x58, 0x02], on: [0x01, 0x00] },
+                            { offset: 0x9E31F1, off: [0xE8, 0x03], on: [0x01, 0x00] },
+                        ]
+                    },
+                    {
+                        name: "Skip Camera Device Error",
+                        tooltip: "Legacy patch for old tools",
+                        patches: [{ offset: 0x8D563B, off: [0x84], on: [0x81] }],
+                    },
+                    {
+                        name: "Force Enable Dummy Cameras",
+                        tooltip: "Use this if you still get camera device errors during boot up when using -iidxdisablecams",
+                        patches: [
+                            { offset: 0x9EFD46, off: [0x74], on: [0xEB] },
+                            { offset: 0x9EFE18, off: [0x74], on: [0xEB] },
+                        ]
+                    },
+                    {
+                        name: "Enable Single Monitor Windowed Subscreen",
+                        tooltip: "Legacy patch for old tools",
+                        patches: [{ offset: 0x8D096F, off: [0x41, 0x0F, 0x93, 0xC6], on: [0x41, 0xB6, 0x01, 0x90] }],
+                    },
+                    {
+                        name: "Disable Volume Change",
+                        tooltip: "Legacy patch for old tools",
+                        patches: [{ offset: 0x57FB41, off: [0xFF, 0x50, 0x38], on: [0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Disable Recording Lock",
+                        tooltip: "Allows all songs to be recorded in-game",
+                        patches: [{ offset: 0x7F3FAF, off: [0x40, 0x84, 0xFF], on: [0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Disable Server Region Check for Premium Area Functions",
+                        tooltip: "Force activate recording for server with region other than JP (Asphyxia)",
+                        patches: [{ offset: 0x971103, off: [0x75, 0x41], on: [0x90, 0x90]}],
+                    },
+                    {
+                        name: "Faster video uploads",
+                        tooltip: "Expand InternetWriteFile() body chunk size to 0x3200000 - makes video upload put request 1000 times faster in theory",
+                        patches: [{ offset: 0x9FFA0A, off: [0x41, 0xBE, 0x00, 0x32, 0x00, 0x00], on: [0x41, 0xBE, 0x00, 0x00, 0x20, 0x03]}],
+                    },
+                    {
+                        name: "Force LDJ Mode",
+                        danger: "Boot in LDJ mode when using 010 DLL",
+                        patches: [{ offset: 0x9D1AC7, off: [0x03], on: [0x02] }],
+                    },
+                    {
+                        name: "Stock LDJ 120Hz Light Speed",
+                        danger: "Halves most light rates to stock-like behaviour. Should be used along with LDJ 120Hz edits",
+                        patches: [
+                            { offset: 0x896245, off: [0x78], on: [0xF0] },
+                            { offset: 0x8A7701, off: [0x78], on: [0xF0] },
+                            { offset: 0x89623D, off: [0x5F], on: [0x5D] },
+                            { offset: 0x55A09E, off: [0xCC, 0xCC], on: [0xD1, 0xF9] },
+                            { offset: 0x90A0BE, off: [0x8B, 0x0D, 0xB0, 0xE8, 0x7B, 0x06], on: [0xB9, 0x20, 0x00, 0x00, 0x00, 0x90] },
+                            { offset: 0x896692, off: [0x6A], on: [0x67] },
+                            { offset: 0x8961FD, off: [0xCC, 0xCC, 0xCC], on: [0x8B, 0x71, 0x3C] },
+                            { offset: 0x896261, off: [0x8B, 0x4B, 0x3C], on: [0xD1, 0xFE, 0x90] },
+                            { offset: 0x89626A, off: [0xE9, 0x03, 0xD1], on: [0xEE, 0x01, 0xF2] },
+                            { offset: 0x89627A, off: [0x2B, 0xC8], on: [0x29, 0xC6] },
+                            { offset: 0x89627D, off: [0xF9], on: [0xFE] },
+                            { offset: 0x90B0F7, off: [0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC], on: [0x44, 0x8B, 0x49, 0x18, 0x41, 0xD1, 0xF9, 0xEB, 0x10] },
+                            { offset: 0x90B12D, off: [0x44, 0x8B, 0x43, 0x18], on: [0x45, 0x8B, 0xC1, 0x90] },
+                            { offset: 0x90B39A, off: [0x72], on: [0x59] },
+                        ]
+                    },
+                    {
+                        name: "Show Lightning Model Folder in LDJ Mode",
+                        patches: [{ offset: 0x7EFBDE, off: [0x75, 0x0A], on: [0x90, 0x90] }],
+                    },
+                    {
+                        name: "Bypass Lightning Monitor Error",
+                        patches: [
+                            { offset: 0x8C90BA, off: [0x77, 0x0E], on: [0x90, 0x90] },
+                            { offset: 0x8C90C4, off: [0x0F, 0x86], on: [0x90, 0xE9] },
+                        ]
+                    },
+                    {
+                        name: "Force LDJ Software Video Decoder for All Boot Modes",
+                        patches: [{ offset: 0x93F401, off: [0x0F, 0x85, 0x86, 0x00, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Force Custom Timing and Adapter Mode (Experimental)",
+                        danger: "For LDJ mode and the patch below",
+                        patches: [
+                            { offset: 0x7A4353, off: [0x75], on: [0xEB] },
+                            { offset: 0x9D1A17, off: [0x74, 0x03], on: [0x90, 0x90] },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Choose Custom LDJ Timing/Adapter FPS",
+                        offset : 0x9D1801,
+                        patches : [
+                            {
+                                name : "60 FPS",
+                                tooltip : "Default",
+                                patch : [0xC7, 0x45, 0xDB, 0x3C, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xFF, 0x01, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x45, 0xD7, 0x48, 0x89, 0x45, 0x03, 0xC7, 0x45, 0xD7, 0x01, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xDB, 0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "120 FPS",
+                                patch : [0xC7, 0x45, 0xDB, 0x78, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xFF, 0x01, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x45, 0xD7, 0x48, 0x89, 0x45, 0x03, 0xC7, 0x45, 0xD7, 0x01, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xDB, 0x78, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "144 FPS",
+                                patch : [0xC7, 0x45, 0xDB, 0x90, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xFF, 0x01, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x45, 0xD7, 0x48, 0x89, 0x45, 0x03, 0xC7, 0x45, 0xD7, 0x01, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xDB, 0x90, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "165 FPS",
+                                patch : [0xC7, 0x45, 0xDB, 0xA5, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xFF, 0x01, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x45, 0xD7, 0x48, 0x89, 0x45, 0x03, 0xC7, 0x45, 0xD7, 0x01, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xDB, 0xA5, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "240 FPS",
+                                patch : [0xC7, 0x45, 0xDB, 0xF0, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xFF, 0x01, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x45, 0xD7, 0x48, 0x89, 0x45, 0x03, 0xC7, 0x45, 0xD7, 0x01, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xDB, 0xF0, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "360 FPS",
+                                patch : [0xC7, 0x45, 0xDB, 0x68, 0x01, 0x00, 0x00, 0xC7, 0x45, 0xFF, 0x01, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x45, 0xD7, 0x48, 0x89, 0x45, 0x03, 0xC7, 0x45, 0xD7, 0x01, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xDB, 0x68, 0x01, 0x00, 0x00],
+                            },
+                            {
+                                name : "480 FPS",
+                                patch : [0xC7, 0x45, 0xDB, 0xE0, 0x01, 0x00, 0x00, 0xC7, 0x45, 0xFF, 0x01, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x45, 0xD7, 0x48, 0x89, 0x45, 0x03, 0xC7, 0x45, 0xD7, 0x01, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xDB, 0xE0, 0x01, 0x00, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Choose Custom TDJ Timing/Adapter FPS",
+                        offset : 0x9D183B,
+                        patches : [
+                            {
+                                name : "60 FPS",
+                                patch : [0xC7, 0x45, 0xDB, 0x3C, 0x00, 0x00, 0x00, 0xC7, 0x45, 0x17, 0x03, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x45, 0xD7, 0x48, 0x89, 0x45, 0x1B, 0xC7, 0x45, 0xD7, 0x01, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xDB, 0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "120 FPS",
+                                tooltip : "Default",
+                                patch : [0xC7, 0x45, 0xDB, 0x78, 0x00, 0x00, 0x00, 0xC7, 0x45, 0x17, 0x03, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x45, 0xD7, 0x48, 0x89, 0x45, 0x1B, 0xC7, 0x45, 0xD7, 0x01, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xDB, 0x78, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "144 FPS",
+                                patch : [0xC7, 0x45, 0xDB, 0x90, 0x00, 0x00, 0x00, 0xC7, 0x45, 0x17, 0x03, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x45, 0xD7, 0x48, 0x89, 0x45, 0x1B, 0xC7, 0x45, 0xD7, 0x01, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xDB, 0x90, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "165 FPS",
+                                patch : [0xC7, 0x45, 0xDB, 0xA5, 0x00, 0x00, 0x00, 0xC7, 0x45, 0x17, 0x03, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x45, 0xD7, 0x48, 0x89, 0x45, 0x1B, 0xC7, 0x45, 0xD7, 0x01, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xDB, 0xA5, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "240 FPS",
+                                patch : [0xC7, 0x45, 0xDB, 0xF0, 0x00, 0x00, 0x00, 0xC7, 0x45, 0x17, 0x03, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x45, 0xD7, 0x48, 0x89, 0x45, 0x1B, 0xC7, 0x45, 0xD7, 0x01, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xDB, 0xF0, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "360 FPS",
+                                patch : [0xC7, 0x45, 0xDB, 0x68, 0x01, 0x00, 0x00, 0xC7, 0x45, 0x17, 0x03, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x45, 0xD7, 0x48, 0x89, 0x45, 0x1B, 0xC7, 0x45, 0xD7, 0x01, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xDB, 0x68, 0x01, 0x00, 0x00],
+                            },
+                            {
+                                name : "480 FPS",
+                                patch : [0xC7, 0x45, 0xDB, 0xE0, 0x01, 0x00, 0x00, 0xC7, 0x45, 0x17, 0x03, 0x00, 0x00, 0x00, 0x48, 0x8B, 0x45, 0xD7, 0x48, 0x89, 0x45, 0x1B, 0xC7, 0x45, 0xD7, 0x01, 0x00, 0x00, 0x00, 0xC7, 0x45, 0xDB, 0xE0, 0x01, 0x00, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Choose Fullscreen Monitor Check FPS Target",
+                        offset : 0x8D0A46,
+                        patches : [
+                            {
+                                name : "60 FPS",
+                                patch : [0x3C, 0x00],
+                            },
+                            {
+                                name : "120 FPS",
+                                tooltip : "Default",
+                                patch : [0x78, 0x00],
+                            },
+                            {
+                                name : "144 FPS",
+                                patch : [0x90, 0x00],
+                            },
+                            {
+                                name : "165 FPS",
+                                patch : [0xA5, 0x00],
+                            },
+                            {
+                                name : "240 FPS",
+                                patch : [0xF0, 0x00],
+                            },
+                            {
+                                name : "360 FPS",
+                                patch : [0x68, 0x01],
+                            },
+                            {
+                                name : "480 FPS",
+                                patch : [0xE0, 0x01],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Skip Monitor Check",
+                        danger: "Useful for tools and network development. Not for playing.",
+                        patches: [{ offset: 0x8C905A, off: [0x8C], on: [0x8D] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Choose Skip Monitor Check FPS",
+                        offset : 0x8DE030,
+                        patches : [
+                            {
+                                name : "Default",
+                                patch : [0x44, 0x8B, 0x91, 0x70, 0x0B, 0x00, 0x00, 0x44, 0x8B, 0xCA, 0x4C, 0x8B, 0xD9, 0x41, 0x81, 0xC2, 0x67, 0x01, 0x00, 0x00],
+                            },
+                            {
+                                name : "60.0000 FPS",
+                                patch : [0x48, 0xB8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x4E, 0x40, 0x66, 0x48, 0x0F, 0x6E, 0xC0, 0xF2, 0x0F, 0x58, 0xC8, 0xC3],
+                            },
+                            {
+                                name : "120.0000 FPS",
+                                patch : [0x48, 0xB8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x5E, 0x40, 0x66, 0x48, 0x0F, 0x6E, 0xC0, 0xF2, 0x0F, 0x58, 0xC8, 0xC3],
+                            },
+                            {
+                                name : "144.0000 FPS",
+                                patch : [0x48, 0xB8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x62, 0x40, 0x66, 0x48, 0x0F, 0x6E, 0xC0, 0xF2, 0x0F, 0x58, 0xC8, 0xC3],
+                            },
+                            {
+                                name : "165.0000 FPS",
+                                patch : [0x48, 0xB8, 0x00, 0x00, 0x00, 0x00, 0x00, 0xA0, 0x64, 0x40, 0x66, 0x48, 0x0F, 0x6E, 0xC0, 0xF2, 0x0F, 0x58, 0xC8, 0xC3],
+                            },
+                            {
+                                name : "240.0000 FPS",
+                                patch : [0x48, 0xB8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x6E, 0x40, 0x66, 0x48, 0x0F, 0x6E, 0xC0, 0xF2, 0x0F, 0x58, 0xC8, 0xC3],
+                            },
+                            {
+                                name : "360.0000 FPS",
+                                patch : [0x48, 0xB8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x76, 0x40, 0x66, 0x48, 0x0F, 0x6E, 0xC0, 0xF2, 0x0F, 0x58, 0xC8, 0xC3],
+                            },
+                            {
+                                name : "480.0000 FPS",
+                                patch : [0x48, 0xB8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7E, 0x40, 0x66, 0x48, 0x0F, 0x6E, 0xC0, 0xF2, 0x0F, 0x58, 0xC8, 0xC3],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Force Monitor Adjust Offset",
+                        tooltip: "Enable to force using the below patch, otherwise 0 is used.",
+                        patches: [
+                            { offset: 0x8DFF42, off: [0x74, 0x26], on: [0xEB, 0x0B] },
+                            { offset: 0x8DFF63, off: [0x08], on: [0x21] },
+                        ]
+                    },
+                    {
+                        type : "number",
+                        name : "Monitor Adjust Offset",
+                        tooltip: "Every +1 Adjust is -0.10 offset. Use -28 to make LDJ mode behave like TDJ mode default.",
+                        offset : 0xCE7418,
+                        size : 4,
+                        min : -1000,
+                        max : 1000,
+                    },
+                    {
+                        name: "Force Max V-Discs",
+                        tooltip: "Infinite LEGGENDARIA plays in Premium Free",
+                        patches: [{ offset: 0x5A1A53, off: [0x0F, 0x84], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Enable 1P Premium Free",
+                        patches: [{ offset: 0x882089, off: [0x75], on: [0xEB] }],
+                    },
+                    {
+                        name: "Enable 2P Premium Free",
+                        patches: [
+                            { offset: 0x88226A, off: [0x74, 0x1B], on: [0x90, 0x90] },
+                            { offset: 0x882280, off: [0x74, 0x05], on: [0x90, 0x90] },
+                        ]
+                    },
+                    {
+                        name: "Enable ARENA",
+                        patches: [{ offset: 0x8822C0, off: [0x74, 0x30], on: [0x90, 0x90] }],
+                    },
+                    {
+                        name: "Enable BPL BATTLE",
+                        patches: [{ offset: 0x8822D4, off: [0x74, 0x1C], on: [0x90, 0x90] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Set Mode Select Default",
+                        tooltip : "Cardless Override",
+                        offset : 0x882306,
+                        patches : [
+                            {
+                                name : "Standard",
+                                patch : [0x00],
+                            },
+                            {
+                                name : "Free",
+                                patch : [0x01],
+                            },
+                            {
+                                name : "Class",
+                                patch : [0x03],
+                            },
+                            {
+                                name : "Step Up",
+                                tooltip : "Default",
+                                patch : [0x05],
+                            },
+                            {
+                                name : "Premium Free",
+                                patch : [0x06],
+                            },
+                            {
+                                name : "Arena",
+                                patch : [0x07],
+                            },
+                            {
+                                name : "BPL Battle",
+                                patch : [0x08],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Set Override Music Select BGM",
+                        offset : 0x8883A6,
+                        patches : [
+                            {
+                                name : "Default",
+                                patch : [0xE8, 0xD5, 0xF5, 0xFF, 0xFF],
+                            },
+                            {
+                                name : "Standard",
+                                patch : [0xB8, 0xF0, 0x25, 0x00, 0x00],
+                            },
+                            {
+                                name : "Free",
+                                patch : [0xB8, 0x90, 0x26, 0x00, 0x00],
+                            },
+                            {
+                                name : "Premium Free",
+                                patch : [0xB8, 0xD0, 0x27, 0x00, 0x00],
+                            },
+                            {
+                                name : "Class",
+                                patch : [0xB8, 0x70, 0x28, 0x00, 0x00],
+                            },
+                            {
+                                name : "Step Up",
+                                patch : [0xB8, 0x10, 0x29, 0x00, 0x00],
+                            },
+                            {
+                                name : "Arena",
+                                patch : [0xB8, 0xC0, 0x96, 0x00, 0x00],
+                            },
+                            {
+                                name : "BPL Battle",
+                                patch : [0xB8, 0xE0, 0x99, 0x00, 0x00],
+                            },
+                            {
+                                name : "MY POLIS DESIGNER - Map 1",
+                                patch : [0xB8, 0x00, 0xA2, 0x00, 0x00],
+                            },
+                            {
+                                name : "MY POLIS DESIGNER - Map 2",
+                                patch : [0xB8, 0x50, 0xA2, 0x00, 0x00],
+                            },
+                            {
+                                name : "MY POLIS DESIGNER - Map 3",
+                                patch : [0xB8, 0xA0, 0xA2, 0x00, 0x00],
+                            },
+                            {
+                                name : "MY POLIS DESIGNER - Map Final",
+                                patch : [0xB8, 0xF0, 0xA2, 0x00, 0x00],
+                            },
+                            {
+                                name : "EPOLIS SINGULARITY - System I",
+                                patch : [0xB8, 0xE0, 0xA8, 0x00, 0x00],
+                            },
+                            {
+                                name : "EPOLIS SINGULARITY - System II",
+                                patch : [0xB8, 0x80, 0xA9, 0x00, 0x00],
+                            },
+                            {
+                                name : "EPOLIS RESTORATION",
+                                patch : [0xB8, 0x70, 0xAA, 0x00, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Set Override Music Select Decide BGM",
+                        offset : 0x8899A6,
+                        patches : [
+                            {
+                                name : "Default",
+                                patch : [0xE8, 0x05, 0xBF, 0xF6, 0xFF],
+                            },
+                            {
+                                name : "Standard",
+                                patch : [0xB8, 0xF0, 0x2A, 0x00, 0x00],
+                            },
+                            {
+                                name : "Arena",
+                                patch : [0xB8, 0x10, 0x97, 0x00, 0x00],
+                            },
+                            {
+                                name : "BPL Battle",
+                                patch : [0xB8, 0x30, 0x9A, 0x00, 0x00],
+                            },
+                            {
+                                name : "EPOLIS SINGULARITY - System I",
+                                patch : [0xB8, 0x30, 0xA9, 0x00, 0x00],
+                            },
+                            {
+                                name : "EPOLIS SINGULARITY - System II",
+                                patch : [0xB8, 0xD0, 0xA9, 0x00, 0x00],
+                            },
+                            {
+                                name : "EPOLIS RESTORATION",
+                                patch : [0xB8, 0xB0, 0xAB, 0x00, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        name: "All Notes Preview 12s",
+                        patches: [
+                            { offset: 0x89D50D, off: [0x05], on: [0x0C] },
+                            { offset: 0x89D67B, off: [0x05], on: [0x0C] },
+                        ]
+                    },
+                    {
+                        name: "ARENA Quick Close",
+                        tooltip: "As the host of an online ARENA lobby, press VEFX+EFFECT to stop searching for players",
+                        patches: [
+                            { offset: 0x8F8E2E, off: [0xBB, 0x01, 0x00, 0x00, 0x00], on: [0xE9, 0x75, 0x98, 0x2E, 0x00] },
+                            { offset: 0xBE26A8, off: [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00], on: [0x8B, 0x05, 0x90, 0xAC, 0x4F, 0x06, 0xF7, 0xD0, 0xA8, 0x0C, 0x75, 0x01, 0x99, 0xFF, 0xC3, 0xE9, 0x77, 0x67, 0xD1, 0xFF] },
+                        ]
+                    },
+                    {
+                        name: "Dark Mode",
+                        patches: [{ offset: 0x89C537, off: [0x84, 0xC0], on: [0x90, 0x90] }],
+                    },
+                    {
+                        name: "Hide Measure Lines",
+                        patches: [{ offset: 0x7A8426, off: [0x75], on: [0xEB] }],
+                    },
+                    {
+                        name: "Hide Judge Combo Count",
+                        patches: [{ offset: 0x90E002, off: [0xFF, 0xC0], on: [0x31, 0xC0] }],
+                    },
+                    {
+                        name: "Disable Background Movies",
+                        danger: "Disables rendering of movies & overlays during gameplay. May be useful for low-end hardware",
+                        patches: [
+                            { offset: 0x8EA54C, off: [0x0F, 0x84, 0x9E, 0x00, 0x00, 0x00], on: [0x31, 0xC0, 0x90, 0x90, 0x90, 0x90] },
+                            { offset: 0x894047, off: [0x74], on: [0xEB] },
+                        ]
+                    },
+                    {
+                        name: "Skip Decide Screen",
+                        tooltip: "Immediately loads into chart after selection.",
+                        patches: [{ offset: 0x5BD590, off: [0x48, 0x89, 0x5C, 0x24], on: [0x48, 0x8B, 0xC1, 0xC3] }],
+                    },
+                    {
+                        name: "Quick Retry",
+                        patches: [{ offset: 0x7F4070, off: [0x40, 0x53, 0x48, 0x83, 0xEC, 0x20], on: [0xB0, 0x01, 0xC3, 0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Quicker Quick Retry",
+                        tooltip: "Shortens duration of the 'stage failed' animation.",
+                        patches: [{ offset: 0x8A88C5, off: [0x7C, 0x12], on: [0x90, 0x90] }],
+                    },
+                    {
+                        name: "Hide All Bottom Text",
+                        tooltip: "Except for FREE PLAY",
+                        patches: [{ offset: 0xBF1980, off: [0x43, 0x52, 0x45, 0x44, 0x49, 0x54, 0x3A, 0x20, 0x25, 0x64, 0x20, 0x43, 0x4F, 0x49, 0x4E, 0x3A, 0x20, 0x25, 0x64, 0x20, 0x2F, 0x20, 0x25, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x43, 0x52, 0x45, 0x44, 0x49, 0x54, 0x3A, 0x20, 0x25, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x50, 0x41, 0x53, 0x45, 0x4C, 0x49, 0x3A, 0x20, 0x4E, 0x4F, 0x54, 0x20, 0x41, 0x56, 0x41, 0x49, 0x4C, 0x41, 0x42, 0x4C, 0x45, 0x00, 0x00, 0x00, 0x45, 0x58, 0x54, 0x52, 0x41, 0x20, 0x50, 0x41, 0x53, 0x45, 0x4C, 0x49, 0x3A, 0x20, 0x25, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x45, 0x58, 0x54, 0x52, 0x41, 0x20, 0x50, 0x41, 0x53, 0x45, 0x4C, 0x49, 0x3A, 0x20, 0x25, 0x73, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x50, 0x41, 0x53, 0x45, 0x4C, 0x49, 0x3A, 0x20, 0x25, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x50, 0x41, 0x53, 0x45, 0x4C, 0x49, 0x3A, 0x20, 0x25, 0x73, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x50, 0x41, 0x53, 0x45, 0x4C, 0x49, 0x3A, 0x20, 0x2A, 0x2A, 0x2A, 0x2A, 0x2A, 0x2A, 0x00, 0x00, 0x20, 0x2B, 0x20, 0x25, 0x64, 0x00, 0x00, 0x00, 0x20, 0x2B, 0x20, 0x25, 0x73, 0x00, 0x00, 0x00, 0x50, 0x41, 0x53, 0x45, 0x4C, 0x49, 0x3A, 0x20, 0x4E, 0x4F, 0x20, 0x41, 0x43, 0x43, 0x4F, 0x55, 0x4E, 0x54, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x49, 0x4E, 0x53, 0x45, 0x52, 0x54, 0x20, 0x43, 0x4F, 0x49, 0x4E, 0x5B, 0x53, 0x5D, 0x00, 0x00, 0x50, 0x41, 0x53, 0x45, 0x4C, 0x49, 0x3A, 0x20, 0x2A, 0x2A, 0x2A, 0x2A, 0x2A, 0x2A, 0x20, 0x2B, 0x20, 0x30, 0x30, 0x30, 0x30, 0x30, 0x00, 0x00, 0x43, 0x52, 0x45, 0x44, 0x49, 0x54, 0x3A, 0x20, 0x39, 0x39, 0x20, 0x43, 0x4F, 0x49, 0x4E, 0x3A, 0x20, 0x39, 0x39, 0x20, 0x2F, 0x20, 0x31, 0x30], on: [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Reroute FREE PLAY Text",
+                        offset : 0x59F81F,
+                        patches : [
+                            {
+                                name : "Default",
+                                patch : [0x4D, 0x2D, 0x65, 0x00],
+                            },
+                            {
+                                name : "Song Title/Ticker information",
+                                patch : [0x59, 0x91, 0xB2, 0x06],
+                            },
+                            {
+                                name : "Hide",
+                                patch : [0xA1, 0xEF, 0x74, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Reroute PASELI: ****** Text To Song Title/Ticker Information",
+                        patches: [{ offset: 0x59F95D, off: [0xB7, 0x2C, 0x65, 0x00], on: [0x1B, 0x90, 0xB2, 0x06] }],
+                    },
+                    {
+                        name: "Debug Mode",
+                        tooltip: "While in game, press F1 to enable menu",
+                        danger: "Disables Profile/Score saving",
+                        patches: [{ offset: 0x8D6510, off: [0x32, 0xC0], on: [0xB0, 0x01] }],
+                    },
+                    {
+                        name: "Increase 'All Factory Settings' Buffer",
+                        tooltip: "Enable this if the option below is not default",
+                        patches: [
+                            { offset: 0x906BEE, off: [0x60, 0x01, 0x00, 0x00], on: [0x22, 0x61, 0x14, 0x00] },
+                            { offset: 0xB818FA, off: [0x60, 0x01, 0x00, 0x00], on: [0x22, 0x61, 0x14, 0x00] },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Reroute 'All Factory Settings' Test Menu",
+                        offset : 0x906C05,
+                        patches : [
+                            {
+                                name : "Default",
+                                patch : [0x77, 0x84, 0x01, 0x00],
+                            },
+                            {
+                                name : "AfpViewerScene",
+                                patch : [0xD7, 0x3B, 0xEB, 0xFF],
+                            },
+                            {
+                                name : "CustomizeViewerScene",
+                                patch : [0x77, 0x61, 0xEB, 0xFF],
+                            },
+                            {
+                                name : "QproViewerScene", // RIP NAMES
+                                patch : [0xE7, 0xD3, 0xEB, 0xFF],
+                            },
+                            {
+                                name : "SoundRankingViewerScene",
+                                patch : [0x97, 0x03, 0xEC, 0xFF],
+                            },
+                            {
+                                name : "SoundViewerScene",
+                                patch : [0xB7, 0x43, 0xEC, 0xFF],
+                            },
+                            {
+                                name : "SystemSoundViewerScene",
+                                patch : [0x07, 0x8A, 0xEC, 0xFF],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Omnimix",
+                        patches: [
+                            { offset: 0x7EE6C4, off: [0x74, 0x25], on: [0x90, 0x90] },
+                            { offset: 0x8E7A10, off: [0x74, 0x73], on: [0xEB, 0x30] },
+                            { offset: 0x8E7A45, off: [0x41], on: [0x58] },
+                            { offset: 0x8EB16F, off: [0x74], on: [0xEB] },
+                            { offset: 0x8EB186, off: [0x7F, 0x19], on: [0x90, 0x90] },
+                            { offset: 0xC35F27, off: [0x61], on: [0x6F] },
+                            { offset: 0xCE8183, off: [0x64, 0x61, 0x74, 0x61], on: [0x6F, 0x6D, 0x6E, 0x69] },
+                            { offset: 0x7EE63D, off: [0xE8, 0x6E, 0xA9, 0x03, 0x00], on: [0xB8, 0x01, 0x00, 0x00, 0x00] },
+                        ]
+                    },
+                    {
+                        name: "Omnimix Lightning Model Extras",
+                        danger: "Requires music_artist_omni.xml, music_title_omni.xml, and video_music_omni.xml",
+                        patches: [
+                            { offset: 0xC30602, off: [0x79, 0x6F, 0x6D, 0x69], on: [0x6F, 0x6D, 0x6E, 0x69] },
+                            { offset: 0xC3062B, off: [0x79, 0x6F, 0x6D, 0x69], on: [0x6F, 0x6D, 0x6E, 0x69] },
+                            { offset: 0xCFA561, off: [0x6C, 0x69, 0x73, 0x74], on: [0x6F, 0x6D, 0x6E, 0x69] },
+                        ]
+                    },
+                ]),
+            ]);
+        });
+    </script>
+  </head>
+  <body>
+    <h1>IIDX EPOLIS DLL Modder</h1>
+  </body>
+</html>

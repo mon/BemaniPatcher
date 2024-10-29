@@ -18,6 +18,11 @@
                         patches: [{ offset: 0x82A64D, off: [0x7E], on: [0xEB] }],
                     },
                     {
+                        name: "Video Purchase Timer Freeze",
+                        tooltip: "Prevents an additional subscreen countdown on the transition from result to music select",
+                        patches: [{ offset: 0x95AD3D, off: [0xFF, 0xC8], on: [0x90, 0x90]}],
+                    },
+                    {
                         name: "Allow 1-99m Premium Free Length",
                         patches: [
                             { offset: 0x58EEBE, off: [0x06], on: [0x01] },
@@ -142,6 +147,11 @@
                         name: "Faster video uploads",
                         tooltip: "Expand InternetWriteFile() body chunk size to 0x3200000 - makes video upload put request 1000 times faster in theory",
                         patches: [{ offset: 0x9FFA0A, off: [0x41, 0xBE, 0x00, 0x32, 0x00, 0x00], on: [0x41, 0xBE, 0x00, 0x00, 0x20, 0x03]}],
+                    },
+                    {
+                        name: "Force 120 FPS Recording Output .mp4",
+                        danger: "Verify if your hardware and network can support this",
+                        patches: [{ offset: 0xD0BB58, off: [0x3C], on: [0x78]}],
                     },
                     {
                         name: "Force LDJ Mode",

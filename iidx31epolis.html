@@ -154,6 +154,81 @@
                         patches: [{ offset: 0xD0BB58, off: [0x3C], on: [0x78]}],
                     },
                     {
+                        type: "number",
+                        name: "Set Video Recording Quality (Constant QP I Frame)",
+                        danger: "Verify if your network allows modifying this. Lower values increase quality at the cost of file size.",
+                        tooltip: "Default: 25 NetworkSuggest: 20 LocalSuggest: 16",
+                        offset: 0x54FA08,
+                        size: 4,
+                        min: -1,
+                        max: 51,
+                    },
+                    {
+                        type: "number",
+                        name: "Set Video Recording Quality (Constant QP P Frame)",
+                        danger: "Verify if your network allows modifying this. Lower values increase quality at the cost of file size.",
+                        tooltip: "Default: 28 NetworkSuggest: 23 LocalSuggest: 19",
+                        offset: 0x54F9EA,
+                        size: 4,
+                        min: -1,
+                        max: 51,
+                    },
+                    {
+                        type: "number",
+                        name: "Set Video Recording Quality (Constant QP B Frame)",
+                        danger: "Verify if your network allows modifying this. Lower values increase quality at the cost of file size.",
+                        tooltip: "Default: 31 NetworkSuggest: 25 LocalSuggest: 21",
+                        offset: 0x54F9F2,
+                        size: 4,
+                        min: -1,
+                        max: 51,
+                    },
+                    {
+                        type : "union",
+                        name : "Set Audio Recording Output AAC Bitrate",
+                        danger : "Values other than default (160 kbps) may cause the game to crash. Try recording locally before actually playing with a non-default value.",
+                        offset : 0xA01BF4,
+                        patches : [
+                            {
+                                name : "64 kbps",
+                                patch : [0x40, 0x00],
+                            },
+                            {
+                                name : "96 kbps",
+                                patch : [0x60, 0x00],
+                            },
+                            {
+                                name : "128 kbps",
+                                patch : [0x80, 0x00],
+                            },
+                            {
+                                name : "160 kbps",
+                                tooltip : "Default",
+                                patch : [0xA0, 0x00],
+                            },
+                            {
+                                name : "196 kbps",
+                                patch : [0xC4, 0x00],
+                            },
+                            {
+                                name : "224 kbps",
+                                patch : [0xE0, 0x00],
+                            },
+                            {
+                                name : "256 kbps",
+                                patch : [0x00, 0x01],
+                            },
+                            {
+                                name : "288 kbps",
+                                patch : [0x20, 0x01],
+                            },
+                            {
+                                name : "320 kbps",
+                                patch : [0x40, 0x01],
+                            },
+                        ]
+                    },
+                    {
                         name: "Force LDJ Mode",
                         danger: "Boot in LDJ mode when using 010 DLL",
                         patches: [{ offset: 0x9D1AC7, off: [0x03], on: [0x02] }],

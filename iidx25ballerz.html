@@ -237,6 +237,12 @@
               patches: [{offset: 0xF296A, off: [0x7D, 0x25], on: [0x90, 0x90]}]
             },
           ]),
+          new Patcher('bm2dx_debug.dll', "2017-07-19 (DEBUG VERSION)", [
+            {
+              name: 'Skip Monitor Check',
+              patches: [{offset: 0x2C07C9, off: [0x7C], on: [0x7D]}]
+            },
+          ]),
         ]);
       });
     </script>

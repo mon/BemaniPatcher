@@ -1,0 +1,19 @@
+# Over time, some patchers have changed path due to reorganisation and cleanup.
+# This avoids link rot on mon's server by redirecting the old paths to the new ones
+
+/chuninewplus.html /chusannewplus.html 301
+
+/resort_anthem.html /iidx18resortanthem.html 301
+/resortanthem.html /iidx18resortanthem.html 301
+/lincle.html /iidx19lincle.html 301
+/tricoro.html /iidx20tricoro.html 301
+/spada.html /iidx21spada.html 301
+/pendual.html /iidx22pendual.html 301
+/copula.html /iidx23copula.html 301
+/sinobuz.html /iidx24sinobuz.html 301
+/ballerz.html /iidx25ballerz.html 301
+/rootage.html /iidx26rootage.html 301
+/heroicverse.html /iidx27heroicverse.html 301
+/bistrover.html /iidx28bistrover.html 301
+/casthour.html /iidx29casthour.html 301
+/resident.html /iidx30resident.html 301

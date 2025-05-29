@@ -48,6 +48,11 @@
                         patches: [{ offset: 0x2A52B, off: [0x74], on: [0xEB] }],
                     },
                     {
+                        name: "Force enable Dan courses",
+                        tooltip: "Allows playing Dan class courses on regular cabinets",
+                        patches: [{ offset: 0xB2F66, off: [0x74], on: [0xEB] }],
+                    },
+                    {
                         name: "Force unlock extended paseli exclusive options",
                         tooltip: "Premium mode options such as ARROW COLOR and 0.25 speed mod",
                         patches: [
@@ -344,6 +349,11 @@
                     {
                         name: "Timer Freeze",
                         patches: [{ offset: 0x33370, off: [0x74], on: [0xEB] }],
+                    },
+                    {
+                        name: "Force enable Dan courses",
+                        tooltip: "Allows playing Dan class courses on regular cabinets",
+                        patches: [{ offset: 0xEED3C, off: [0x74], on: [0xEB] }],
                     },
                     {
                         name: "Force unlock extended paseli exclusive options",

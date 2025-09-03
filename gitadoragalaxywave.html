@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>GITADORA GALAXY WAVE DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            new PatchContainer([
+                new Patcher("game.dll", "2024-08-07", [
+                    {
+                        name: "Timer Freeze",
+                        patches: [{ offset: 0xF0C2F, off: [0x0F, 0x85], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Premium Timer Freeze",
+                        danger: "Scores will only save on exiting Premium Time, and only up to 20 songs.",
+                        patches: [{ offset: 0x10FE80, off: [0xFF, 0xC9], on: [0x90, 0x90] }],
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 15",
+                        danger: "Scores will only save on exiting Premium Time, and only up to 20 songs. Recommended to keep this under 45 minutes.",
+                        offset : 0x1997A,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time 10",
+                        danger: "Scores will only save on exiting Premium Time, and only up to 20 songs. Recommended to keep this under 45 minutes.",
+                        offset : 0x199BB,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0x06, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0xF0, 0x3C, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x7C, 0xBF, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x98, 0x28, 0x03, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x50, 0xCA, 0x03, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0xA0, 0x8C, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0xF0, 0xD2, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x40, 0x19, 0x01, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0xE0, 0xA5, 0x01, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0xD0, 0x78, 0x02, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0xC0, 0x4B, 0x03, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0xA0, 0xF1, 0x04, 0x00],
+                            },
+                        ]
+                    },
+                    {
+                        name: "Skip Tutorial",
+                        patches: [{ offset: 0xE170A, off: [0x0F, 0x87], on: [0x90, 0xE9] }],
+                    },
+                    {
+                        name: "Skip 'NOW DATA INITIALIZING'",
+                        danger: "Useful for testing only",
+                        patches: [{ offset: 0x3458E, off: [0x0F, 0x84, 0x74, 0x01, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                ]),
+            ]);
+            new PatchContainer([
+                new Patcher("boot.dll", "2024-08-07", [
+                    {
+                        name: "Prevent CACHE/ and TMP/ folders creation",
+                        tooltip: "in F:/ drive or contents/.",
+                        patches: [{ offset: 0x1109, off: [0x33, 0xD2, 0x48, 0x8B, 0xCB, 0xFF, 0x15, 0x4C, 0xC3, 0x00, 0x00, 0x33, 0xD2, 0x48, 0x8B, 0xCF, 0xFF, 0x15, 0x41, 0xC3, 0x00, 0x00, 0x33, 0xD2, 0x48, 0x8B, 0xCE, 0xFF, 0x15, 0x36, 0xC3, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                ]),
+            ]);
+            new PatchContainer([
+                new Patcher("libshare-pj.dll", "2024-08-07", [
+                    {
+                        name: "Increase Buffers for Omnimix",
+                        patches: [
+                            { offset: 0x4C53E, off: [0x04], on: [0x14] }, // phrase data
+                            { offset: 0x5094B, off: [0x38, 0x8D, 0x6F], on: [0x78, 0xCF, 0x7E] }, // seq data
+                            { offset: 0x50957, off: [0x38, 0x8D, 0x6F], on: [0x78, 0xCF, 0x7E] }, // seq data
+                        ]
+                    },
+                    {
+                        name: "Uncap FPS",
+                        danger: "Fixes 58FPS on Win10/11. Set your monitor to 60FPS in windowed mode unless you also have 120FPS patches",
+                        patches: [
+                            { offset: 0x3DE71, off: [0x73], on: [0xEB] },
+                            { offset: 0x3DE3D, off: [0x73], on: [0xEB] },
+                        ]
+                    },
+                ]),
+            ]);
+        });
+    </script>
+  </head>
+  <body>
+    <h1>GITADORA GALAXY WAVE DLL Modder</h1>
+  </body>
+</html>

@@ -753,6 +753,38 @@
                         ],
                     },
                     {
+                        type : "union",
+                        name : "Fullscreen FPS Target",
+                        danger: "Experimental: fast animations and menu scrolling",
+                        offset : 0x1809,
+                        patches : [
+                            {
+                                name : "60 FPS",
+                                patch : [0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "120 FPS",
+                                patch : [0x78, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "144 FPS",
+                                patch : [0x90, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "165 FPS",
+                                patch : [0xA5, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "240 FPS",
+                                patch : [0xF0, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "360 FPS",
+                                patch : [0x68, 0x01, 0x00, 0x00],
+                            },
+                        ]
+                    },
+                    {
                         name: "OmniMIX",
                         tooltip: "Enable OmniMIX support",
                         patches: [

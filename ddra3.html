@@ -619,7 +619,7 @@
                     {
                         type: "union",
                         name: "Mode Layout",
-                        tooltip: "Changes resolution based on sceen type, among other things",
+                        tooltip: "Changes resolution based on screen type, among other things",
                         offset: 0x6AD44,
                         patches :[
                             {
@@ -651,9 +651,42 @@
                     {
                         type: "union",
                         name: "Mode Layout",
-                        tooltip: "Changes resolution based on sceen type, among other things",
+                        tooltip: "Changes resolution based on screen type, among other things",
                         offset: 0x7E219,
                         patches :[
+                            {
+                                name : "0 - SD",
+                                patch : [0x00],
+                            },
+                            {
+                                name : "1 - SD",
+                                patch : [0x01],
+                            },
+                            {
+                                name : "2 - HD (Default)",
+                                patch : [0x02],
+                            },
+                            {
+                                name : "3 - HD",
+                                patch : [0x03],
+                            },
+                            {
+                                name : "4 - HD (Gold)",
+                                tooltip : "Required for enabling BPL BATTLE MODE under certain network conditions",
+                                patch : [0x04],
+                            },
+                        ]
+                    },
+                ]),
+            ]);
+            new PatchContainer([
+                new Patcher("arkmdxp4.dll", "2024-04-02 (MDX-003)", [
+                    {
+                        type: "union",
+                        name: "Mode Layout",
+                        tooltip: "Changes resolution type based on screen type, among other things. Please note that cabinet lights will break!",
+                        offset: 0x7E219,
+                        patches: [
                             {
                                 name : "0 - SD",
                                 patch : [0x00],
@@ -675,9 +708,10 @@
                                 patch : [0x04],
                             },
                         ]
-                    },
-                ]),
-            ]);
+
+                    }
+                ])
+            ])
         });
     </script>
   </head>

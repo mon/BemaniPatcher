@@ -331,6 +331,7 @@ input[type=radio] {
     cursor: pointer;
     display: inline-block;
 }
+
 .patchPreviewLabel {
     cursor: pointer;
 }
@@ -356,48 +357,152 @@ input[type=checkbox]:checked ~ ul > li.patch-off {
     display: list-item;
 }
 @media (prefers-color-scheme: dark) {
-  body {
-    background: #1d1e1f;
-	color: #fff;
-  }
-  .gameicon, .patchContainer {
+	body {
+		background: #1d1e1f;
+		color: #fff;
+	}
+	.gameicon,
+	.patchContainer {
 		background-color: #2e2e2e;
-  }
-  label.gameicon {
-	  background: #303025;
-  }
-  .subsection {
-    background-color: #464646;
-  }
-  .success {
-    color: green;
-  }
+	}
+	label.gameicon {
+		background: #303025;
+	}
+	.subsection {
+		background-color: #464646;
+	}
+	.success {
+		color: green;
+	}
 }
 @media (prefers-color-scheme: light) {
-  body {
-    background: #e2e1e0;
-	color: #000;
-  }
-  .gameicon, .patchContainer {
+	body {
+		background: #e2e1e0;
+		color: #000;
+	}
+	.gameicon,
+	.patchContainer {
 		background-color: white;
-  }
-  label.gameicon {
-	  background: #fffcf0;
-  }
-  .subsection {
-    background-color: #a2a2a2;
-  }
+	}
+	label.gameicon {
+		background: #fffcf0;
+	}
+	.subsection {
+		background-color: #a2a2a2;
+	}
 }
 .image-wrapper {
-    position: relative;
+	position: relative;
 }
 .image-hover {
-    position: absolute;
-    top: 0;
-    left: 1;
-    opacity: 0;
-    transition: opacity 0.5s ease-out;
+	position: absolute;
+	top: 0;
+	left: 1;
+	opacity: 0;
+	transition: opacity 0.5s ease-out;
 }
 .image-hover:hover {
-    opacity: 1;
+	opacity: 1;
+}
+
+.top-message {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 29px;
+	text-align: center;
+	margin-bottom: 26px;
+	color: rgb(190, 149, 27);
+    user-select: none;
+}
+
+.JSONSpan{
+    padding: 0px 4px 0px 4px;
+    background-color: rgba(190, 149, 27, 0.412);
+    transition: 0.15s;
+    cursor: pointer;
+    text-decoration: underline;
+    border-radius: 6px;
+}
+.JSONSpan:hover{
+    filter: brightness(120%);
+}
+.JSONSpan:active{
+    filter: brightness(130%);
+}
+
+.tool-toggle1,
+.tool-toggle2 {
+	position: relative;
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	margin-right: 5px;
+	border-radius: 50%;
+	border: 2px solid #000000;
+	transition: 0.11s all linear;
+}
+.tool-toggle1:checked {
+	background-color: blue;
+	box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.528),
+		0px 0px 3px rgba(0, 0, 0, 0.436);
+}
+.tool-toggle2:checked {
+	background-color: red;
+	box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.528),
+	    0px 0px 3px rgba(0, 0, 0, 0.436);
+}
+.toggle-text1 {
+	margin-left: 15px;
+	margin-right: 120px;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 20px;
+	font-weight: 600;
+}
+.toggle-text2 {
+	margin-left: 15px;
+	margin-right: 0px;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 20px;
+	font-weight: 600;
+}
+.dropdownMenu {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+.dropdownTitle {
+	margin-right: 180px;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 20px;
+	font-weight: 600;
+}
+.dropdownOptions {
+	height: 30px;
+	color: rgb(255, 255, 255);
+	background-color: hsl(60, 1%, 50%);
+	text-align: 'center';
+	font-weight: 600;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 10px;
+	outline: none; /* This avoids black borders from appearing when a choice is made*/
+}
+.JSON {
+	display: block;
+	margin: auto;
+	text-align: center;
+	color: white;
+	background-color: rgb(255, 200, 0);
+	border-radius: 5px;
+	transition: 0.15s;
+}
+.JSON:hover:enabled {
+	background-color: rgb(255, 200, 0);
+
+	filter: brightness(109%);
+}
+.JSON:active:enabled {
+	transition: 0.02s;
+	filter: brightness(116%);
 }

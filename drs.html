@@ -168,6 +168,37 @@
                 }
               ]
             }
+          ]),
+          new Patcher('superstep.dll', '2024-11-26', [
+            {
+              name: 'Timer Freeze',
+              patches: [
+                {
+                  offset: 0x37ca2a,
+                  off: [0x89, 0x43, 0x0c],
+                  on: [0x90, 0x90, 0x90]
+                }
+              ]
+            },
+            {
+              name: 'Song Unlock',
+              patches: [
+                { offset: 0x815648, off: [0x74], on: [0xeb] },
+                { offset: 0x815678, off: [0x00], on: [0x01] },
+                { offset: 0x816d89, off: [0x75, 0x07], on: [0x90, 0x90] },
+                { offset: 0x816d8e, off: [0x00], on: [0x03] },
+                { offset: 0x961065, off: [0x66], on: [0x62] } // bestival lmfao
+              ]
+            },
+            {
+              name: 'Hide Bottom Text',
+              tooltip: 'Such as EVENT MODE, PASELI, COIN, CREDIT',
+              patches: [
+                { offset: 0x7da323, off: [0x0f, 0x84], on: [0x90, 0xe9] },
+                { offset: 0x7da5ab, off: [0x74, 0x4f], on: [0x90, 0x90] },
+                { offset: 0x7da5b0, off: [0x0f, 0x84], on: [0x90, 0xe9] }
+              ]
+            }
           ])
         ])
       })

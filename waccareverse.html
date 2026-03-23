@@ -3,66 +3,106 @@
 
 <head>
     <meta charset='utf-8'>
-    <title>WACCA REVERSE Modder</title>
+    <title>WACCA Reverse Modder</title>
     <link rel="stylesheet" href="css/style.css" />
     <script type="text/javascript" src="js/dllpatcher.js"></script>
     <script type="text/javascript">
         window.addEventListener("load", function() {
             new PatchContainer([
-                new Patcher('Mercury-Win64-Shipping.exe', "3.07.01", [{
-                    name: 'Fully disable lockout',
-                    tooltip: "closing time patch for「このマシンは本日の稼働を終了しました。改めてご来店ください。」 ",
-                    patches: [{
-                        offset: 0x4EF970,
-                        off: [0xE8, 0x2B, 0x5A, 0xE4, 0xFF, 0x45, 0x33, 0xC0, 0x41, 0x8D, 0x50, 0x04, 0x48, 0x8B, 0xCB, 0xE8, 0x0C, 0xAC, 0xED, 0xFF, 0x84, 0xC0, 0x75, 0x12, 0xBA, 0x06],
-                        on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0xBA, 0x00]
-                    }, {
-                        offset: 0x4EF9A6,
-                        off: [0xBA, 0x02],
-                        on: [0xBA, 0x00]
-                    }, {
-                        offset: 0x4EF9F2,
-                        off: [0x48, 0x8D, 0x55, 0x20, 0x48],
-                        on: [0xE9, 0x79, 0xFF, 0xFF, 0xFF]
-                    }, ]
-                }, {
-                    name: 'Force Engine locale (ignore router country language)',
-                    patches: [{
-                        offset: 0x558154,
-                        off: [0x74, 0x07],
-                        on: [0x90, 0x90]
-                    }, ]
-                }, {
-                    name: 'Allow using CHN region (don\'t change to HKG)',
-                    patches: [{
-                        offset: 0x1F2B0B7,
-                        off: [0x75],
-                        on: [0xEB]
-                    }, ]
-                }, {
-                    name: 'Force enable Hidden Luin title screen',
-                    patches: [{
-                        offset: 0x4F0FFA,
-                        off: [0x74],
-                        on: [0xEB]
-                    }, ]
-                }, ]),
-                new Patcher('Mercury-Win64-Shipping.exe', "3.10.00", [{
-                    name: 'Fully disable lockout',
-                    tooltip: "closing time patch for「このマシンは本日の稼働を終了しました。改めてご来店ください。」 ",
-                    patches: [{
-                        offset: 0x4E0897,
-                        off: [0xFF, 0xE1, 0x48, 0x8D, 0x55, 0x20, 0x48, 0x8B, 0xCF, 0xE8, 0x3B, 0x87, 0xE4, 0xFF, 0x45, 0x33, 0xC0, 0x41, 0x8D, 0x50],
-                        on: [0xBA, 0x00, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xCB, 0xE8, 0x0C, 0xCB, 0xFF, 0xFF, 0xE9, 0xE7, 0x01, 0x00, 0x00, 0x90, 0x90]
-                    }, ]
-                }, ]),
+                new Patcher('Mercury-Win64-Shipping.exe', "3.07.01", [
+                    {
+                        name: 'Fully disable closing time lockout',
+                        tooltip: "Disables the 「このマシンは本日の稼働を終了しました。改めてご来店ください。」 message at closing time. You should probably disable the closing time in the test menu instead.",
+                        patches: [
+                            {
+                                offset: 0x4EF970,
+                                off: [0xE8, 0x2B, 0x5A, 0xE4, 0xFF, 0x45, 0x33, 0xC0, 0x41, 0x8D, 0x50, 0x04, 0x48, 0x8B, 0xCB, 0xE8, 0x0C, 0xAC, 0xED, 0xFF, 0x84, 0xC0, 0x75, 0x12, 0xBA, 0x06],
+                                on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0xBA, 0x00]
+                            },
+                            {offset: 0x4EF9A6, off: [0xBA, 0x02], on: [0xBA, 0x00]},
+                            {offset: 0x4EF9F2, off: [0x48, 0x8D, 0x55, 0x20, 0x48], on: [0xE9, 0x79, 0xFF, 0xFF, 0xFF]},
+                        ]
+                    },
+                    {
+                        name: 'Force Engine locale (ignore router country language)',
+                        patches: [
+                            {offset : 0x558154, off: [0x74, 0x07], on : [0x90, 0x90]},
+                        ]
+                    },
+                    {
+                        name: 'Allow using CHN region (don\'t change to HKG)',
+                        patches: [
+                            {offset : 0x1F2B0B7, off: [0x75], on : [0xEB]},
+                        ]
+                    },
+                    {
+                        name: 'Force enable Hidden Luin title screen',
+                        patches: [
+                            {offset : 0x4F0FFA, off: [0x74], on : [0xEB]},
+                        ]
+                    },
+                    {
+                        name: 'Fix 14+ sorting',
+                        tooltip: 'Fix crash when song difficulty is 14.6-14.9',
+                        patches: [
+                            {offset : 0x248C8F8, off: [0xFF, 0xFF, 0xFF, 0xFF], on: [0x20, 0x00, 0x00, 0x00]},
+                        ]
+                    },
+                    {
+                        name: 'Fix bingo crashes at page 255',
+                        patches: [
+                            // Fix stupid uint8_t usage in the func signature
+                            {offset: 0x331524, off: [0x0f, 0xb6, 0xda], on: [0x89, 0xd3, 0x90]},
+                            {offset: 0x331545, off: [0x80, 0xfb, 0x01], on: [0x83, 0xfb, 0x01]},
+                            {offset: 0x331633, off: [0x80, 0xfb, 0x02], on: [0x83, 0xfb, 0x02]},
+                            {offset: 0x331854, off: [0x0f, 0xb6, 0xc3], on: [0x89, 0xd8, 0x90]},
+                            {offset: 0x3329a8, off: [0x0f, 0xb6, 0xea], on: [0x89, 0xd5, 0x90]},
+                            {offset: 0x332a42, off: [0x44, 0x0f, 0xb6, 0xc5], on: [0x41, 0x89, 0xe8, 0x90]},
+                            {offset: 0x332ac8, off: [0x0f, 0xb6, 0xea], on: [0x89, 0xd5, 0x90]},
+                            {offset: 0x332b3a, off: [0x40, 0x84, 0xed], on: [0x85, 0xed, 0x90]},
+                            {offset: 0x332b74, off: [0x40, 0x0f, 0xb6, 0xcd], on: [0x89, 0xe9, 0x90, 0x90]},
+                            {offset: 0x3a1050, off: [0x0f, 0xb6, 0x91, 0x60, 0x03, 0x00, 0x00], on: [0x8b, 0x91, 0x60, 0x03, 0x00, 0x00, 0x90]},
+                            {offset: 0x3a23ce, off: [0x0f, 0xb6, 0x97, 0x60, 0x03, 0x00, 0x00], on: [0x8b, 0x97, 0x60, 0x03, 0x00, 0x00, 0x90]},
+                            {offset: 0x3a24ac, off: [0x0f, 0xb6, 0x97, 0x60, 0x03, 0x00, 0x00], on: [0x8b, 0x97, 0x60, 0x03, 0x00, 0x00, 0x90]},
+                            {offset: 0x3a2584, off: [0x41, 0x0f, 0xb6, 0x17], on: [0x41, 0x8b, 0x17, 0x90]},
+                        ]
+                    },
+                    {
+                        name: 'Fix bingo mirror play condition',
+                        patches: [
+                            // Don't use shared conditional jump with another condition if enabled, switch to a jge
+                            {offset: 0x549025, off: [0xe9, 0xd8, 0xfb, 0xff, 0xff], on: [0xe9, 0xea, 0x00, 0x00, 0x00]},
+                            {offset: 0x549114, off: [0xcc, 0xcc, 0xcc, 0xcc, 0xcc, 0xcc, 0xcc, 0xcc, 0xcc, 0xcc, 0xcc], on: [0x0f, 0x8d, 0xed, 0xfa, 0xff, 0xff, 0xe9, 0xe5, 0xfa, 0xff, 0xff]}
+                        ]
+                    }
+                ]),
+                new Patcher('Mercury-Win64-Shipping.exe', "3.10.00", [
+                    {
+                        name: 'Fully disable closing time lockout',
+                        tooltip: "Disables the 「このマシンは本日の稼働を終了しました。改めてご来店ください。」 message at closing time. You should probably disable the closing time in the test menu instead.",
+                        patches: [
+                            {
+                                offset: 0x4E0897,
+                                off: [0xFF, 0xE1, 0x48, 0x8D, 0x55, 0x20, 0x48, 0x8B, 0xCF, 0xE8, 0x3B, 0x87, 0xE4, 0xFF, 0x45, 0x33, 0xC0, 0x41, 0x8D, 0x50],
+                                on: [0xBA, 0x00, 0x00, 0x00, 0x00, 0x48, 0x8B, 0xCB, 0xE8, 0x0C, 0xCB, 0xFF, 0xFF, 0xE9, 0xE7, 0x01, 0x00, 0x00, 0x90, 0x90]
+                            },
+                        ]
+                    },
+                    {
+                        name: 'Fix 14+ sorting',
+                        tooltip: 'Fix crash when song difficulty is 14.6-14.9',
+                        patches: [
+                            {offset : 0x2480938, off: [0xFF, 0xFF, 0xFF, 0xFF], on: [0x1D, 0x00, 0x00, 0x00]},
+                        ]
+                    },
+                ]),
             ]);
         });
     </script>
 </head>
 
 <body>
-    <h1>WACCA REVERSE Modder</h1>
+    <h1>WACCA Reverse Modder</h1>
 </body>
 
 </html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8'>
+    <title>WACCA Lily Modder</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function() {
+            new PatchContainer([
+                new Patcher('Mercury-Win64-Shipping.exe', "2.04.00", [
+                    {
+                        name: 'Fully disable closing time lockout',
+                        tooltip: "Disables the 「このマシンは本日の稼働を終了しました。改めてご来店ください。」 message at closing time. You should probably disable the closing time in the test menu instead.",
+                        patches: [
+                            {
+                                offset : 0x4AAEE0,
+                                off: [0xE8, 0x6B, 0x90, 0xE6, 0xFF, 0x45, 0x33, 0xC0, 0x33, 0xD2, 0x48, 0x8B, 0xCB, 0xE8, 0xDE, 0x34, 0xEF, 0xFF, 0x84, 0xC0, 0x75, 0x12, 0xBA, 0x06],
+                                on : [0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0xBA, 0x00]
+                            },
+                            {offset : 0x4AAF14, off: [0xBA, 0x02], on : [0xBA, 0x00]},
+                            {offset : 0x4AAF60, off: [0x48, 0x8D, 0x55, 0x20, 0x48], on : [0xE9, 0x79, 0xFF, 0xFF, 0xFF]},
+                        ]
+                    },
+                    {
+                        name: 'Force Engine locale (ignore router country language)',
+                        patches: [
+                            {offset : 0x50DBE4, off: [0x74, 0x07], on : [0x90, 0x90]},
+                        ]
+                    },
+                    {
+                        name: 'Allow using CHN region (don\'t change to HKG)',
+                        patches: [
+                            {offset : 0x1ECB377, off: [0x75], on : [0xEB]},
+                        ]
+                    },
+                    {
+                        name: 'Fix 14+ sorting',
+                        tooltip: 'Fix crash when song difficulty is 14.6-14.9',
+                        patches: [
+                            {offset : 0x23F79E0, off: [0xFF, 0xFF, 0xFF, 0xFF], on: [0x1F, 0x00, 0x00, 0x00]},
+                        ]
+                    }
+                ]),
+            ]);
+        });
+    </script>
+</head>
+
+<body>
+    <h1>WACCA Lily Modder</h1>
+</body>
+
+</html>

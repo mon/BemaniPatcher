@@ -24,6 +24,13 @@
                         ]
                     },
                     {
+                        // Always return 0 from the func checking the daily reboot hour (defaults to rebooting at 5 AM JST)
+                        name: 'Disable automatic game reboot',
+                        patches: [
+                            {offset: 0x31D62F, off: [0x48, 0xc1, 0xe8, 0x3f], on: [0x30, 0xc0, 0x90, 0x90]}
+                        ]
+                    },
+                    {
                         name: 'Force Engine locale (ignore router country language)',
                         patches: [
                             {offset : 0x529A64, off: [0x74, 0x07], on : [0x90, 0x90]},

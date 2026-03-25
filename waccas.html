@@ -17,6 +17,13 @@
                         ]
                     },
                     {
+                        // Always return 0 from the func checking the daily reboot hour (defaults to rebooting at 5 AM JST)
+                        name: 'Disable automatic game reboot',
+                        patches: [
+                            {offset: 0x367D7F, off: [0x48, 0xc1, 0xe8, 0x3f], on: [0x30, 0xc0, 0x90, 0x90]}
+                        ]
+                    },
+                    {
                         name: 'Allow using CHN region (don\'t change to HKG)',
                         patches: [
                             {offset : 0x32CA147, off: [0x75], on : [0xEB]},

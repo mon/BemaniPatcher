@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SDVX VII DLL Modder</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/dllpatcher.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            new PatchContainer([
+                new Patcher("soundvoltex.dll", "2026-02-03", [
+                    {
+                        type : "union",
+                        name : "Audio Mode",
+                        offset : 0x5D1F27,
+                        patches : [
+                            {
+                                name : "ASIO 8ch (Default)",
+                                patch : [0x2B],
+                            },
+                            {
+                                name : "ASIO 2ch",
+                                patch : [0x2A],
+                            },
+                            {
+                                name : "Shared Mode WASAPI 32bit 48kHz 2ch",
+                                patch : [0x00],
+                            },
+                            {
+                                name : "Exclusive Mode WASAPI 16bit 44.1kHz 2ch",
+                                patch : [0x02],
+                            },
+                            {
+                                name : "Exclusive Mode WASAPI 24bit 44.1kHz 2ch",
+                                patch : [0x04],
+                            },
+                            {
+                                name : "Exclusive Mode WASAPI 24bit 44.1kHz 6ch",
+                                patch : [0x0E],
+                            },
+                        ],
+                    },
+                    {
+                        name: "Unscramble Touch Screen Keypad",
+                        patches: [{ offset: 0x4EFF2D, off: [0xE8, 0x4E, 0x10, 0x00, 0x00], on: [0xB8, 0x01, 0x00, 0x00, 0x00] }],
+                    },
+                    {
+                        name: "Premium Free Timer Freeze",
+                        tooltip : "Note: this freezes the Premium timer, but songs get auto selected after around 45 seconds. Might be better to user a high P-time length instead",
+                        patches: [
+                            { offset: 0x4A7015, off: [0x0F, 0x85], on: [0x90, 0xE9] },
+                            { offset: 0x4759E3, off: [0x0F, 0x84], on: [0x90, 0xE9] },
+                            { offset: 0x364810, off: [0x75], on: [0xEB] },
+                        ],
+                    },
+                    {
+                        type : "union",
+                        name : "Premium Time Length",
+                        tooltip : "Time at which the Premium timer starts. If you have it frozen, that'll be the time shown at all times",
+                        offset : 0x48E1AE,
+                        patches : [
+                            {
+                                name : "00:00",
+                                patch : [0xAA, 0xB9, 0x65, 0x00, 0x00, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "00:01",
+                                patch : [0x00, 0xCA, 0x9A, 0x3B, 0x00, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "04:20",
+                                patch : [0x00, 0x28, 0x35, 0x89, 0x3C, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "07:27",
+                                patch : [0x00, 0xB6, 0x46, 0x13, 0x68, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "13:37",
+                                patch : [0x00, 0xAA, 0xFE, 0x38, 0xBE, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "57:30",
+                                patch : [0x00, 0x44, 0x06, 0x44, 0x23, 0x03, 0x00, 0x00],
+                            },
+                            {
+                                name : "69:00",
+                                patch : [0x00, 0xB8, 0x3A, 0xEB, 0xC3, 0x03, 0x00, 0x00],
+                            },
+                            {
+                                name : "10 Minutes",
+                                patch : [0x00, 0x70, 0xC9, 0xB2, 0x8B, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "15 Minutes",
+                                patch : [0x00, 0x28, 0x2E, 0x8C, 0xD1, 0x00, 0x00, 0x00],
+                            },
+                            {
+                                name : "20 Minutes",
+                                patch : [0x00, 0xE0, 0x92, 0x65, 0x17, 0x01, 0x00, 0x00],
+                            },
+                            {
+                                name : "30 Minutes",
+                                patch : [0x00, 0x50, 0x5C, 0x18, 0xA3, 0x01, 0x00, 0x00],
+                            },
+                            {
+                                name : "45 Minutes",
+                                patch : [0x00, 0x78, 0x8A, 0xA4, 0x74, 0x02, 0x00, 0x00],
+                            },
+                            {
+                                name : "60 Minutes",
+                                patch : [0x00, 0xA0, 0xB8, 0x30, 0x46, 0x03, 0x00, 0x00],
+                            },
+                            {
+                                name : "90 Minutes",
+                                patch : [0x00, 0xF0, 0x14, 0x49, 0xE9, 0x04, 0x00, 0x00],
+                            },
+                        ],
+                    },
+                    {
+                        name: "Uncensor All Jackets",
+                        patches: [{ offset: 0x89F258, off: [0x61], on: [0x75] }],
+                    },
+                    {
+                        name: "Disable Subscreen in Valkyrie Mode",
+                        danger: "ONLY for Valkyrie (G spec). Consider using spice2x's '-sdvxnosub' option instead.",
+                        patches: [{ offset: 0x54773E, off: [0x83, 0xBD, 0xB8, 0x00, 0x00, 0x00, 0x02, 0x41, 0x0F, 0x93, 0xC6, 0x44, 0x88, 0x74, 0x24, 0x51], on: [0x41, 0xB6, 0x00, 0x44, 0x88, 0x74, 0x24, 0x51, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90] }],
+                    },
+                    {
+                        name: "Valkyrie Mode 60Hz",
+                        danger: "ONLY for Valkyrie (G Spec). Might require 'Force BIO2 (KFC) IO in Valkyrie mode' to work.",
+                        patches: [
+                            { offset: 0x3A4D2D, off: [0x74], on: [0x75] },
+                            { offset: 0x547D7B, off: [0x74], on: [0x75] },
+                            { offset: 0x5486A0, off: [0x74], on: [0x75] },
+                        ],
+                    },
+                    {
+                        name: "Force BIO2 (KFC) IO in Valkyrie Mode",
+                        danger: "Can be useful for arcade cabinets. If you don't know why you need this, ignore it.",
+                        patches: [{ offset: 0x592775, off: [0x87, 0x05], on: [0xA7, 0x0C] }],
+                    },
+                    {
+                        name: "Force Enable Headphones",
+                        tooltip: "Assumes headphones are always connected, allowing for volume control. Useful for cabinets.",
+                        patches: [{ offset: 0x5BCEE6, off: [0x0F, 0x10, 0x06, 0x0F, 0x11, 0x47, 0x60], on: [0xC7, 0x47, 0x60, 0x01, 0x00, 0x00, 0x00] }],
+                    },
+                ]),
+            ]);
+        });
+    </script>
+  </head>
+  <body>
+    <h1>SDVX VII DLL Modder</h1>
+  </body>
+</html>

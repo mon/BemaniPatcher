@@ -1653,6 +1653,10 @@
                             },
                         ],
                     },
+                    {
+                        name: "SELECT MUSIC - don't loop song preview",
+                        patches: [{offset: 0x1B69B7, off: [0x02], on: [0x00]}]
+                    },
                 ]),
             ]);
         });

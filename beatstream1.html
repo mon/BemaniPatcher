@@ -22,6 +22,42 @@
                                 on: [0xBB, 0x00, 0x00, 0x00, 0x00, 0xE9, 0xAE, 0x01, 0x00, 0x00]
                             }]
                         },
+						{
+                            name: "Shorter Monitor Check",
+                            patches: [
+                                {
+                                    offset: 0x1D760E,
+                                    off: [0x1E],
+                                    on: [0x03]
+                                }
+                            ]
+                        },
+						{
+                            name: "Force windowed mode", //Created by HiLord
+                            tooltip: "Makes the game launch in windowed mode *with both screens* as separate windows",
+                            patches: [
+                                {
+                                    offset: 0x1DB194,
+                                    off: [0x74],
+                                    on: [0xEB]
+                                },
+                                {
+                                    offset: 0x1DB626,
+                                    off: [0x74],
+                                    on: [0x75]
+                                },
+                                {
+                                    offset: 0x1DB6E5,
+                                    off: [0x75],
+                                    on: [0xEB]
+                                },
+                                {
+                                    offset: 0x1DD092,
+                                    off: [0x94],
+                                    on: [0x95]
+                                }
+                            ]
+                        },
                     ]),
                 ]);
             });

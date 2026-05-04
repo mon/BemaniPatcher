@@ -31,7 +31,7 @@
                             }]
                         },
                         {
-                            name: "Increase hi-speed range to 1.0-2.5",
+                            name: "Change Hi-Speed range to 1.0 ~ 2.5",
                             patches: [
                                 {
                                     offset: 0xA36AA0, //Packed single-precision floats
@@ -110,7 +110,33 @@
                                     on: [0xE8, 0x67, 0xC5, 0xE1, 0xFF, 0x83, 0xB8, 0x8C, 0x01, 0x00, 0x00, 0x01, 0x75, 0x43, 0xC6, 0x87, 0x80, 0x00, 0x00, 0x00, 0x01, 0xEB, 0x3A, 0x90]
                                 }
                             ]
-                        }
+                        },
+						{
+                            name: "Force windowed mode", //Created by HiLord
+                            tooltip: "Makes the game launch in windowed mode *with both screens* as separate windows",
+                            patches: [
+                                {
+                                    offset: 0x1DA014,
+                                    off: [0x74],
+                                    on: [0xEB]
+                                },
+                                {
+                                    offset: 0x1DA443,
+                                    off: [0x74],
+                                    on: [0x75]
+                                },
+                                {
+                                    offset: 0x1DA4F6,
+                                    off: [0x75],
+                                    on: [0xEB]
+                                },
+                                {
+                                    offset: 0x1DB94F,
+                                    off: [0x94],
+                                    on: [0x95]
+                                }
+                            ]
+                        },
                     ]),
                 ]);
             });

@@ -198,6 +198,81 @@
                 { offset: 0x7da5ab, off: [0x74, 0x4f], on: [0x90, 0x90] },
                 { offset: 0x7da5b0, off: [0x0f, 0x84], on: [0x90, 0xe9] }
               ]
+            },
+            {
+              type: "union",
+              name: 'Change number of Light stages (Boot)',
+              danger: 'If set to 4 or 5, graphics must be sideloaded to make the stage number show correctly',
+              offset: 0x7D1872,
+              patches: [
+                {
+                  name: "1 Stage",
+                  patch: [0xC7, 0x43, 0x04, 0x01, 0x00, 0x00, 0x00, 0xC7, 0x43, 0x08, 0x01, 0x00, 0x00, 0x00, 0xEB, 0x15]
+                },
+                {
+                  name: "2 Stages (Default; Will verify NVRAM data)",
+                  patch: [0x33, 0xD2, 0x4C, 0x8D, 0x43, 0x04, 0x0F, 0x1F, 0x84, 0x00, 0x00, 0x00, 0x00, 0x00, 0x41, 0x8B]
+                },
+                {
+                  name: "3 Stages",
+                  patch: [0xC7, 0x43, 0x04, 0x03, 0x00, 0x00, 0x00, 0xC7, 0x43, 0x08, 0x03, 0x00, 0x00, 0x00, 0xEB, 0x15]
+                },
+                {
+                  name: "4 Stages",
+                  patch: [0xC7, 0x43, 0x04, 0x04, 0x00, 0x00, 0x00, 0xC7, 0x43, 0x08, 0x04, 0x00, 0x00, 0x00, 0xEB, 0x15]
+                },
+                {
+                  name: "5 Stages",
+                  patch: [0xC7, 0x43, 0x04, 0x05, 0x00, 0x00, 0x00, 0xC7, 0x43, 0x08, 0x05, 0x00, 0x00, 0x00, 0xEB, 0x15]
+                }
+              ]
+            },
+            {
+              type: "union",
+              name: 'Change number of Light stages (Factory Reset)',
+              danger: 'If set to 4 or 5, graphics must be sideloaded to make the stage number show correctly',
+              offset: 0x7D1EF0,
+              patches: [
+                {
+                  name: "1 Stage",
+                  patch: [0x01, 0x00, 0x00, 0x00, 0xC7, 0x41, 0x08, 0x01]
+                },
+                {
+                  name: "2 Stages (Default)",
+                  patch: [0x02, 0x00, 0x00, 0x00, 0xC7, 0x41, 0x08, 0x02]
+                },
+                {
+                  name: "3 Stages",
+                  patch: [0x03, 0x00, 0x00, 0x00, 0xC7, 0x41, 0x08, 0x03]
+                },
+                {
+                  name: "4 Stages",
+                  patch: [0x04, 0x00, 0x00, 0x00, 0xC7, 0x41, 0x08, 0x04]
+                },
+                {
+                  name: "5 Stages",
+                  patch: [0x05, 0x00, 0x00, 0x00, 0xC7, 0x41, 0x08, 0x05]
+                }
+              ]
+            },
+            {
+              name: 'Hide "Play Twice" Message',
+              tooltip: 'Hide message during play-mode select stating "you can play the dance game twice" in Light mode. Intended for use when changing the number of Light stages.',
+              patches: [
+                { offset: 0x738869, off: [0xE8, 0x32, 0xF3, 0x0C, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90] }
+              ]
+            },
+            {
+              name: 'Force Japanese Announcer (Menus)',
+              patches: [
+                { offset: 0x98F7D9, off: [0x5F, 0x65, 0x2E, 0x73, 0x33, 0x70], on: [0x2E, 0x73, 0x33, 0x70, 0x00, 0x00] }
+              ]
+            },
+            {
+              name: 'Force Japanese Announcer (How to Play; Lessons)',
+              patches: [
+                { offset: 0x98F7B6, off: [0x5F, 0x65, 0x2E, 0x73, 0x33, 0x70], on: [0x2E, 0x73, 0x33, 0x70, 0x00, 0x00] }
+              ]
             }
           ])
         ])

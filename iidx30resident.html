@@ -800,6 +800,46 @@
                     {
                         name: "Unscramble touch screen keypad in TDJ",
                         patches: [{ offset: 0x719F35, off: [0x4D, 0x03, 0xC8, 0x49, 0xF7, 0xF1], on: [0xba, 0x0c, 0x00, 0x00, 0x00, 0x90]}],
+                    },
+                    {
+                        name: "TDJonLDJ",
+                        tooltip: "Lets you run TDJ mode on legacy cabinets",
+                        danger: "FOR CABS ONLY",
+                        patches: [
+							{ offset: 0x7A4D1D, off: [0x8E], on: [0x8F] },
+                            { offset: 0x7A8982, off: [0x7E], on: [0x7F] },
+                            { offset: 0x683E6C, off: [0x75], on: [0x74] },
+                            { offset: 0x7A2F2B, off: [0x02], on: [0x03] },
+                            { offset: 0x7A8EBB, off: [0x44], on: [0x45] },
+                            { offset: 0x7A8F18, off: [0x75], on: [0x74] },
+                            { offset: 0x6506F6, off: [0x84], on: [0x85] },
+                            { offset: 0x7A8537, off: [0x7E], on: [0x7F] },
+                            { offset: 0x7A83B7, off: [0x7E], on: [0x7F] },
+                            { offset: 0x7A841F, off: [0x7E], on: [0x7F] },
+                            { offset: 0x7A8682, off: [0x7E], on: [0x7F] },
+                            { offset: 0x7A2C61, off: [0x84], on: [0x8F] },
+                            { offset: 0x7A34EA, off: [0x75], on: [0x74] }
+                      ]
+                    },
+                    {
+                        name: "Stock LDJ 120Hz Light Speed",
+                        danger: "Halves most light rates to stock-like behaviour. Should be used along with LDJ 120Hz edits or TDJonLDJ",
+                        patches: [
+							{ offset: 0x616625, off: [0x78], on: [0xf0] },
+                            { offset: 0x6272C9, off: [0x78], on: [0xf0] },
+                            { offset: 0x61661D, off: [0x4F], on: [0x4D] },
+                            { offset: 0x41096E, off: [0xCC, 0xCC], on: [0xD1, 0xF9] },
+                            { offset: 0x682B6E, off: [0x8B, 0x0D, 0xD0, 0xB6, 0x36, 0x06], on: [0xB9, 0x20, 0x00, 0x00, 0x00, 0x90] },
+                            { offset: 0x616A72, off: [0x6A], on: [0x67] },
+                            { offset: 0x6165DD, off: [0xCC, 0xCC, 0xCC], on: [0x8B, 0x71, 0x3C] },
+                            { offset: 0x616641, off: [0x8B, 0x4B, 0x3C], on: [0xD1, 0xFE, 0x90] },
+                            { offset: 0x61664A, off: [0xE9, 0x03, 0xD1], on: [0xEE, 0x01, 0xF2] },
+                            { offset: 0x61665A, off: [0x2B, 0xC8], on: [0x29, 0xC6] },
+                            { offset: 0x61665D, off: [0xF9], on: [0xFE] },
+                            { offset: 0x683BA7, off: [0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC], on: [0x44, 0x8B, 0x49, 0x18, 0x41, 0xD1, 0xF9, 0xEB, 0x10] },
+                            { offset: 0x683BDD, off: [0x44, 0x8B, 0x43, 0x18], on: [0x45, 0x8B, 0xC1, 0x90] },
+                            { offset: 0x683E4A, off: [0x72], on: [0x59] }
+                        ]
                     }
                 ]),
                 new Patcher("bm2dx.dll", "2023-09-05 (LDJ-012)", [

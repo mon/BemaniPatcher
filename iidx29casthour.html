@@ -3807,6 +3807,46 @@
                             { offset: 0x662131, off: [0xE8, 0x03], on: [0x01, 0x00] },
                         ]
                     },
+                    {
+                        name: "TDJonLDJ",
+                        tooltip: "Lets you run TDJ mode on legacy cabinets",
+                        danger: "FOR CABS ONLY",
+                        patches: [
+							{ offset: 0x66E105, off: [0x84], on: [0x85] },
+                            { offset: 0x671D1E, off: [0x74], on: [0x75] },
+                            { offset: 0x55792C, off: [0x75], on: [0x74] },
+                            { offset: 0x66C351, off: [0x75], on: [0x74] },
+                            { offset: 0x67225B, off: [0x44], on: [0x45] },
+                            { offset: 0x6722AD, off: [0x75], on: [0x74] },
+                            { offset: 0x5259D7, off: [0x85], on: [0x84] },
+                            { offset: 0x671905, off: [0x74], on: [0x75] },
+                            { offset: 0x671795, off: [0x74], on: [0x75] },
+                            { offset: 0x6717FB, off: [0x74], on: [0x75] },
+                            { offset: 0x671A3D, off: [0x74], on: [0x75] },
+                            { offset: 0x66C091, off: [0x75], on: [0x74] },
+                            { offset: 0x66C8DF, off: [0x75], on: [0x74] }
+                      ]
+                    },
+                    {
+                        name: "Stock LDJ 120Hz Light Speed",
+                        danger: "Halves most light rates to stock-like behaviour. Should be used along with LDJ 120Hz edits or TDJonLDJ",
+                        patches: [
+							{ offset: 0x4E3786, off: [0x78], on: [0xf0] },
+                            { offset: 0x4FE549, off: [0x78], on: [0xf0] },
+                            { offset: 0x4E377E, off: [0x5e], on: [0x5c] },
+                            { offset: 0x3361DE, off: [0xCC, 0xCC], on: [0xD1, 0xF9] },
+                            { offset: 0x55662E, off: [0x8B, 0x0D, 0x10, 0xD8, 0x2A, 0x06], on: [0xB9, 0x20, 0x00, 0x00, 0x00, 0x90] },
+                            { offset: 0x4E3BE2, off: [0x5A], on: [0x57] },
+                            { offset: 0x4E373D, off: [0xCC, 0xCC, 0xCC], on: [0x8B, 0x71, 0x3C] },
+                            { offset: 0x4E37A2, off: [0x8B, 0x4B, 0x3C], on: [0xD1, 0xFE, 0x90] },
+                            { offset: 0x4E37AB, off: [0xE9, 0x03, 0xD1], on: [0xEE, 0x01, 0xF2] },
+                            { offset: 0x4E37BB, off: [0x2B, 0xC8], on: [0x29, 0xC6] },
+                            { offset: 0x4E37BE, off: [0xF9], on: [0xFE] },
+                            { offset: 0x557667, off: [0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC], on: [0x44, 0x8B, 0x49, 0x18, 0x41, 0xD1, 0xF9, 0xEB, 0x10] },
+                            { offset: 0x55769D, off: [0x44, 0x8B, 0x43, 0x18], on: [0x45, 0x8B, 0xC1, 0x90] },
+                            { offset: 0x55790A, off: [0x72], on: [0x59] }
+                        ]
+                    }
                 ]),
             ]);
         });

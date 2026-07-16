@@ -234,6 +234,26 @@
                         patches: [{ offset: 0x9D1AC7, off: [0x03], on: [0x02] }],
                     },
                     {
+                        name: "TDJonLDJ",
+                        tooltip: "Lets you run TDJ mode on legacy cabinets",
+                        danger: "FOR CABS ONLY",
+                        patches: [
+							{ offset: 0x9EF1FD, off: [0x8E], on: [0x8F] },
+                            { offset: 0x9F2E62, off: [0x7E], on: [0x7F] },
+                            { offset: 0x90B3BC, off: [0x75], on: [0x74] },
+                            { offset: 0x9ED440, off: [0x02], on: [0x03] },
+                            { offset: 0x9F34EB, off: [0x44], on: [0x45] },
+                            { offset: 0x9F353D, off: [0x75], on: [0x74] },
+                            { offset: 0x8D4F68, off: [0x02], on: [0x03] },
+                            { offset: 0x9F2A16, off: [0x02], on: [0x03] },
+                            { offset: 0x9F2896, off: [0x02], on: [0x03] },
+                            { offset: 0x9F28FE, off: [0x02], on: [0x03] },
+                            { offset: 0x9F2B61, off: [0x02], on: [0x03] },
+                            { offset: 0x9ED180, off: [0x02], on: [0x03] },
+                            { offset: 0x9ED9CE, off: [0x02], on: [0x03] }
+                      ]
+                    },
+                    {
                         name: "Stock LDJ 120Hz Light Speed",
                         danger: "Halves most light rates to stock-like behaviour. Should be used along with LDJ 120Hz edits",
                         patches: [

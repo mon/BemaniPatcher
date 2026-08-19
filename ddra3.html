@@ -594,6 +594,18 @@
                         ]
                     },
                     {
+                        name: "Force Enable BPL Battle Mode P4IO JFA 64-bit White Cab",
+                        tooltip: "Visual assets are missing, but you can press 1 on mode select and it works (if connected)",
+                        danger: "Requires the corresponding arkmdxp4.dll patch to also be enabled",
+                        patches: [
+                            { offset: 0x8EB40, off: [0x75, 0x07], on: [0x90, 0x90] },
+                            { offset: 0x8EBA7, off: [0x75, 0x07], on: [0x90, 0x90] },
+                            { offset: 0x859, off: [0x75, 0x05], on: [0x90, 0x90] },
+                            { offset: 0x92D, off: [0x0F, 0x85, 0x89, 0x00, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] },
+                            { offset: 0x116534, off: [0x0F, 0x87, 0x72, 0x03, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] },
+                        ]
+                    },
+                    {
                         name: "OmniMIX",
                         tooltip: "v1.2",
                         danger: "Convert .m2v movies to .wmv, or default background stages show",
@@ -709,6 +721,15 @@
                             },
                         ]
 
+                    },
+                    {
+                        name: "Force Enable BPL Battle Mode P4IO JFA 64-bit White Cab",
+                        tooltip: "Visual assets are missing, but you can press 1 on mode select and it works (if connected)",
+                        danger: "Requires the corresponding gamemdx.dll patch to also be enabled",
+                        patches: [
+                            { offset: 0x1BCE4, off: [0x0F, 0x85, 0xE1, 0x02, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] },
+                            { offset: 0x4F7B, off: [0x0F, 0x85, 0xCB, 0x00, 0x00, 0x00], on: [0x90, 0x90, 0x90, 0x90, 0x90, 0x90] },
+                        ]
                     }
                 ])
             ])

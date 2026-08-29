@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
     <meta charset='utf-8'>
-    <title>Love Plus Colorful Clip</title>
+    <title>Love Plus Arcade Colorful Clip</title>
     <link rel='stylesheet' href='css/style.css'>
     <script type='text/javascript' src='js/dllpatcher.js'></script>
     <script type='text/javascript'>
@@ -10,11 +10,17 @@
         new PatchContainer([
         new Patcher('lpac.dll', "2012-10-01", [
           {
-              name: 'Higher res eagate photo uploads',
+              name: 'Higher Resolution EAGate Photo Uploads',
               tooltip: 'Increases the resolution from 270x480 to 720x1280',
               patches: [
                   {offset : 0x108597, off: [0x68, 0xE0, 0x01, 0x00, 0x00, 0x68, 0x0E, 0x01], on : [0x68, 0x00, 0x05, 0x00, 0x00, 0x68, 0xD0, 0x02]},
                   {offset : 0x1085DE, off: [0x74], on : [0xEB]},
+              ]
+          },
+          {
+              name: 'Timer Freeze',
+              patches: [
+                  {offset: 0xCDC66, off: [0x8D, 0x41, 0xFF], on: [0x8B, 0xC1, 0x90]}
               ]
           },
         ])
@@ -23,6 +29,6 @@
     </script>
 </head>
 <body>
-<h1>Love Plus Colorful Clip</h1>
+<h1>Love Plus Arcade Colorful Clip</h1>
 </body>
 </html>
